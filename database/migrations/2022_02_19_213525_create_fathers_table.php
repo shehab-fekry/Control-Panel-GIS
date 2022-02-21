@@ -15,10 +15,15 @@ class CreateFathersTable extends Migration
     {
         Schema::create('fathers', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('name', 30);
-            $table->integer('trip_id')->unsigned();
+            $table->boolean('confirmed')->default(false);
+            $table->string('mobileNumber', 15);
+            $table->integer('trip_id')->unsigned()->nullable();
             $table->integer('status')->default(0);
-            $table->double('long');
+            $table->string('region',60);
+            $table->double('lng');
             $table->double('lit');
             $table->timestamps();
         });
