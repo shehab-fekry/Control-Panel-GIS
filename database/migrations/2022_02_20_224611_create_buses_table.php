@@ -15,6 +15,10 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
+            $table->string('licensePlate', 10)->unique();
+            $table->string('model',20)->nullable();
+            $table->string('color',10)->nullable();
+            $table->integer('driver_id')->unsigned();
             $table->timestamps();
         });
     }
