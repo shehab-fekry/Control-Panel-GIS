@@ -42,9 +42,9 @@
                             <label class="col-md-4 col-form-label text-md-end"></label>
                             <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
                             @if ($errors->has('g-recaptcha-response'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                            </span>
+                            <div class="col-md-6  text-md-end ">
+                                <strong class="text-danger">Plesse Fill Out This Field</strong>
+                            </div>
                         @endif
                         </div>
 

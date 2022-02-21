@@ -70,7 +70,7 @@
 
 
     {{-- Footer Section --}}
-    <br>
+    {{-- <br>
     <div class="countainer-fluid bg-dark text-light mt-4">
         <div class="row">
             <div class="col ms-5">
@@ -82,7 +82,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
     <script src="{{ asset("js/bootstrap.bundle.js") }}"></script>
 </body>
 
