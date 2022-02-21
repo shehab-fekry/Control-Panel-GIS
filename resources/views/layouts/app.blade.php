@@ -7,6 +7,8 @@
     <title> @yield('title', "Bus Tracking System") </title>
     <link rel="stylesheet" href="{{ asset("css/bootstrap.css") }}">
     <link rel="stylesheet" href="{{ asset("css/all.min.css") }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {!! ReCaptcha::htmlScriptTagJsApi() !!}
 </head>
 
 <body>
