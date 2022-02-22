@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController;
 
-class FatherController extends Controller
+class FatherController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +16,7 @@ class FatherController extends Controller
      */
     public function index()
     {
+
         //
     }
 

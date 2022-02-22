@@ -40,6 +40,22 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'father' => [
+            'driver' => 'session',
+            'provider' => 'fathers',
+        ],
+        'api-fathers' => [
+            'driver' => 'token',
+            'provider' => 'fathers',
+        ],
+        'driver' => [
+            'driver' => 'session',
+            'provider' => 'drivers',
+        ],
+        'api-drivers' => [
+            'driver' => 'passport',
+            'provider' => 'drivers',
+        ],
     ],
 
     /*
@@ -63,6 +79,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'fathers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Father::class,
+        ],
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Driver::class,
         ],
 
         // 'users' => [
@@ -89,6 +113,18 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'fathers' => [
+            'provider' => 'fathers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'drivers' => [
+            'provider' => 'drivers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
