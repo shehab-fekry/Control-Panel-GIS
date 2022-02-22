@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Child;
+use App\Models\Father;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController;
 
-class ChildController extends BaseController
+class FatherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,33 +15,23 @@ class ChildController extends BaseController
      */
     public function index()
     {
+
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store()
     {
-        Child::create([
-            'name'=>'ebrahim',
-            'father_id'=>1,
-            'status'=>true
-
-
+        Father::create([
+            'name'=>'osama',
+            'trip_id'=>1,
+            'long'=>15.326,
+            'lit'=>16.369
 
         ]);
     }
@@ -49,10 +39,10 @@ class ChildController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Child  $child
+     * @param  \App\Models\Father  $father
      * @return \Illuminate\Http\Response
      */
-    public function show(Child $child)
+    public function show(Father $father)
     {
         //
     }
@@ -60,10 +50,10 @@ class ChildController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Child  $child
+     * @param  \App\Models\Father  $father
      * @return \Illuminate\Http\Response
      */
-    public function edit(Child $child)
+    public function edit(Father $father)
     {
         //
     }
@@ -72,10 +62,10 @@ class ChildController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Child  $child
+     * @param  \App\Models\Father  $father
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Child $child)
+    public function update(Request $request, Father $father)
     {
         //
     }
@@ -83,10 +73,10 @@ class ChildController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Child  $child
+     * @param  \App\Models\Father  $father
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Child $child)
+    public function destroy(Father $father)
     {
         //
     }

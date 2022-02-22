@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Child;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController;
 
-class ChildController extends BaseController
+class ChildController extends Controller
 {
     /**
      * Display a listing of the resource.
