@@ -21,6 +21,7 @@ class CreateDriversTable extends Migration
             $table->string('licenseNumber',20)->unique();
             $table->boolean('confirmed')->default(false);
             $table->string('mobileNumber', 15);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

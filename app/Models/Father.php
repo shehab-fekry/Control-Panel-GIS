@@ -14,6 +14,11 @@ class Father extends Authenticatable
     protected $fillable=[
         'name','email','password','confirmed','mobileNumber','trip_id','status','region','lng','lit'
     ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+
+    ];
 
     public function trip()
     {

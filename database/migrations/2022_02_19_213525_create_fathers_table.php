@@ -25,6 +25,7 @@ class CreateFathersTable extends Migration
             $table->string('region',60);
             $table->double('lng');
             $table->double('lit');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

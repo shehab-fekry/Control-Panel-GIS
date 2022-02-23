@@ -1,84 +1,68 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\FatherResource;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class FatherController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function show()
     {
 
-        //
+        $id=Auth::guard("api-fathers")->id();
+        $father=Father::where("id",$id)->get();
+
+
+        return $this->sendResponse(FatherResource::collection($father),'fathers retrived successfully');
+
+
     }
 
 
-    public function create()
-    {
-        //
-    }
 
-    public function store()
+    public function update(Request $request,)
     {
-        Father::create([
-            'name'=>'osama',
-            'trip_id'=>1,
-            'long'=>15.326,
-            'lit'=>16.369
+        $id=Auth::guard('api-fathers')->id();
+        $father=Father::get()->find($id);
+
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required','string', 'max:30',],
+            'mobileNumber'=>['required',],
+            'region' => ['required','string',],
+            'lng' => ['required','numeric'],
+            'lit' => ['required','numeric'],
+            'email' => ['required','string', 'email', 'max:255',Rule::unique('fathers')->ignore($id),],
 
         ]);
-    }
+        if($validator->fails()){
+            return $this->sendError('please validate errors',$validator->errors());
+        }
+        $father->name=$input['name'];
+        $father->email=$input['email'];
+        $father->mobileNumber=$input['mobileNumber'];
+        $father->region=$input['region'];
+        $father->lng=$input['lng'];
+        $father->lit=$input['lit'];
+        $father->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Father $father)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Father $father)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Father $father)
-    {
-        //
-    }
+        return $this-> sendResponse(new fatherResource($father),'father information updated successfully');}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Father $father)
+
+    public function destroy()
     {
-        //
+
+
     }
 }

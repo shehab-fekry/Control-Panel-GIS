@@ -11,13 +11,14 @@ class Driver extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $fillable=[
-        'name'
+       'email','name','password','licenseNumber','confirmed','mobileNumber'
     ];
-    /**
-     * Get the user associated with the Driver
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+
+    ];
+
     public function trip()
     {
         return $this->hasOne(Trip::class);
