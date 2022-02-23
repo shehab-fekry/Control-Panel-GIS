@@ -45,7 +45,7 @@ return [
             'provider' => 'fathers',
         ],
         'api-fathers' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'fathers',
         ],
         'driver' => [

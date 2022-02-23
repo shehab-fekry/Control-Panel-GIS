@@ -17,6 +17,25 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post("register","API\FatherAuthController@register");
 
-Route::post("login","API\FatherAuthController@login");
+////////////////////////////////Fathers routes///////////////////////////////////
+///Auth///
+
+Route::post("father/register","API\AuthController@fatherRegister");
+Route::post("father/login","API\AuthController@fatherLogin");
+///fathers operations with middleware/////
+Route::middleware('auth:api-fathers')->group(function(){
+
+Route::get("father/show","API\FatherController@show");
+Route::put("father/update","API\FatherController@update");
+
+    });
+////////////////////////////////Drivers routes//////////////////////////////////
+///Auth///
+Route::post("driver/register","API\AuthController@driverRegister");
+Route::post("driver/login","API\AuthController@driverLogin");
+///Drivers operations with middleware/////
+Route::middleware('auth:api-Drivers')->group(function(){
+
+
+    });
