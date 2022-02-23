@@ -25,8 +25,8 @@ class AuthController extends BaseController
             'password' => ['required', 'string', 'min:8','confirmed'],
             'mobileNumber'=>['required'],
             'region' => ['required', 'string'],
-            'lng' => ['required'],
-            'lit' => ['required'],
+            'lng' => ['required','numeric'],
+            'lit' => ['required','numeric'],
 
         ]);
         if($validator->fails()){
