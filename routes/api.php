@@ -28,6 +28,8 @@ Route::middleware('auth:api-fathers')->group(function(){
 
 Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
+Route::get("father/delete","API\FatherController@destroy");
+Route::get("father/showTrip","API\FatherController@showTrip");
 
     });
 ////////////////////////////////Drivers routes//////////////////////////////////
