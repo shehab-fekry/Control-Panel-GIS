@@ -5,79 +5,85 @@ namespace App\Http\Controllers;
 use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class FatherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
-        //
+        $father  = Father::latest()->paginate(7);
+        return view("father.index",compact("father"));
     }
 
 
     public function create()
     {
-        //
+        // return Father::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+        return view("father.create");
     }
 
-    public function store()
+    public function store(Request  $data)
     {
-        Father::create([
-            'name'=>'osama',
-            'trip_id'=>1,
-            'long'=>15.326,
-            'lit'=>16.369
-
+        $data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'm_number' => ['required', 'string', 'max:20'],
+            'trip_id' => ['required', 'int', 'max:10'],
+            'status' => ['required', 'int', 'max:20'],
+            'region' => ['string', 'max:20'],
         ]);
+ 
+        $row = new Father();
+        $row->name = $data->input('name');
+        $row->email = $data->input('email');
+        $row->password = $data->input(Hash::make($data['password']));
+        $row->mobileNumber = $data->input('m_number');
+        $row->trip_id = $data->input('trip_id');
+        $row->status = $data->input('status');
+        $row->region = $data->input('region');
+        $row->region = $data->input('lng');
+        $row->region = $data->input('lit');
+        $row->save();
+        return redirect()->route("Father.index")
+        ->with('success','prodect added successfuly');
+
+ 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Father $father)
     {
-        //
+        return view("father.show",compact('father'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Father $father)
     {
-        //
+        return view("father.edit",compact('father'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Father $father)
     {
-        //
+        $father->update($request->all());
+        return redirect()->route("father.index")->with('success','father updated successfuly');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Father  $father
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Father $father)
     {
-        //
+        $father->delete();
+        // $children=Child::where($father)->get();
+        // if(count($children)>0){
+        //   $children->delete();
+        // }
+        return redirect()->route("father.index")->with('success','father deleted successfuly');
     }
 }
