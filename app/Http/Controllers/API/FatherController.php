@@ -98,18 +98,14 @@ class FatherController extends BaseController
     public function destroy()
     {
         $id=Auth::guard('api-fathers')->id();
-
-
         $children=Child::where('father_id',$id)->get();
-
         if(count($children)>0){
           $children->delete();
         }
         Father::find($id)->delete();
 
-
-
-
-
+        return $this-> sendResponse("you are logged out",'Account deleted successfully');
     }
+
+
 }
