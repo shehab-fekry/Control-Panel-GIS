@@ -20,11 +20,6 @@ class FatherController extends Controller
 
     public function create()
     {
-        // return Father::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        // ]);
         return view("father.create");
     }
 

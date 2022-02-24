@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label  class="form-label">password</label>
-                    <input type="text" name="password" value="{{$father->password}}" class="form-control">
+                    <input type="password" name="password" value="" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
                     <label  class="form-label">mobileNumber</label>
