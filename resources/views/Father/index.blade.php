@@ -33,7 +33,7 @@
                         <tr>
                             <th scope="col">id</th>
                             <th scope="col">name</th>
-                            <th scope="col">password</th>
+                            {{-- <th scope="col">password</th> --}}
                             <th scope="col ">mobileNumber</th>
                             <th scope="col ">trip_id</th>
                             <th scope="col ">status</th>
@@ -49,7 +49,7 @@
                         <tr>
                             <th scope="row">{{$parent->id}}</th>
                             <td>{{$parent->name}}</td>
-                            <td>{{$parent->password}}</td>
+                            {{-- <td>{{$parent->password}}</td> --}}
                             <td>{{$parent->mobileNumber}}</td>
                             <td>{{$parent->trip_id}}</td>
                             <td>{{$parent->status}}</td>

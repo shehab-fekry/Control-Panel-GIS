@@ -35,24 +35,26 @@ class FatherController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'm_number' => ['required', 'string', 'max:20'],
-            'trip_id' => ['required', 'int', 'max:10'],
+            'trip_id' => ['required', 'int', 'max:20'],
             'status' => ['required', 'int', 'max:20'],
             'region' => ['string', 'max:20'],
+            'lng' => ['string', 'max:20'],
+            'lit' => ['string', 'max:20'],
         ]);
- 
-        $row = new Father();
-        $row->name = $data->input('name');
-        $row->email = $data->input('email');
-        $row->password = $data->input(Hash::make($data['password']));
-        $row->mobileNumber = $data->input('m_number');
-        $row->trip_id = $data->input('trip_id');
-        $row->status = $data->input('status');
-        $row->region = $data->input('region');
-        $row->region = $data->input('lng');
-        $row->region = $data->input('lit');
-        $row->save();
-        return redirect()->route("Father.index")
-        ->with('success','prodect added successfuly');
+        Father::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'mobileNumber' => $data['m_number'],
+            'trip_id' => $data['trip_id'],
+            'status' => $data['status'],
+            'region' => $data['region'],
+            'lng' => $data['lng'],
+            'lit' => $data['lit'],
+        ]);
+
+        return redirect()->route("father.index")
+        ->with('success','Father added successfuly');
 
  
     }
