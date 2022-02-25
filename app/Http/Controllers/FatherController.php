@@ -27,7 +27,7 @@ class FatherController extends Controller
     {
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'm_number' => ['required', 'string', 'max:20'],
             'trip_id' => ['required', 'int', 'max:20'],

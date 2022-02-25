@@ -16,7 +16,7 @@
 
                     {{-- {{ __('You are logged in!') }} --}}
                     <a type="button" href="{{route('father.index')}}" class="btn btn-primary">Father</a>
-                    <a type="button" class="btn btn-secondary">Secondary</a>
+                    <a type="button" href="{{route('child.index')}}" class="btn btn-secondary">chilld</a>
                     <a type="button" class="btn btn-success">Success</a>
                     <a type="button" class="btn btn-danger">Danger</a>
                     <a type="button" class="btn btn-warning">Warning</a>

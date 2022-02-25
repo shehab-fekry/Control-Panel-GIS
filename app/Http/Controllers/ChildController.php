@@ -4,89 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Models\Child;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 class ChildController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
-        //
+       
+        $child  = Child::latest()->paginate(7);
+        return view("child.index",compact("child"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view("child.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-        Child::create([
-            'name'=>'ebrahim',
-            'father_id'=>1,
-            'status'=>true
+   
 
-
-
+    public function store(Request  $data)
+    { 
+        $data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'string', 'email', 'max:255', 'unique:children'],
+            'father_id' => ['required', 'string', 'max:20'],
         ]);
+        Child::create([
+            'name' => $data['name'],
+            'status' => $data['status'],
+            'father_id' => $data['father_id'],
+        ]);
+
+        return redirect()->route("father.child")
+        ->with('success','child added successfuly');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Child  $child
-     * @return \Illuminate\Http\Response
-     */
     public function show(Child $child)
     {
-        //
+        return view("child.edit",compact('child'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Child  $child
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Child $child)
     {
-        //
+        return view("child.edit",compact('child'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Child  $child
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Child $child)
     {
-        //
+        $child->update($request->all());
+        return redirect()->route("child.index")->with('success','child updated successfuly');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Child  $child
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Child $child)
     {
-        //
+        $child->delete();
+        return redirect()->route("child.index")->with('success','child deleted successfuly');
     }
 }
