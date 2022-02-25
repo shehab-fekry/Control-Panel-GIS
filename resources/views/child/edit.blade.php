@@ -9,48 +9,27 @@
                     <div class="col">
                 <div class="card ">
                 <div class="card-body ">
-                 <h4>edit:  {{$father->name}}</h4> 
+                 <h4>edit:  {{$child->name}}</h4> 
                 </div>
               </div></div>
                 </div>
             </div>
 
-            <form action="{{route('father.update',$father->id)}}" method="POST" class="row g-3">
+            <form action="{{route('child.update',$child->id)}}" method="POST" class="row g-3">
                  @csrf
                 @method('PUT')
                 <div class="col-md-6 form-group">
                     <label class="form-label">Name</label>
-                    <input type="text" name="name" value="{{$father->name}}" class="form-control">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label  class="form-label">password</label>
-                    <input type="password" name="password" value="" class="form-control">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label  class="form-label">mobileNumber</label>
-                    <input type="text" name="mobileNumber" value="{{$father->mobileNumber}}" class="form-control">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label  class="form-label">trip_id</label>
-                    <input type="text" name="trip_id" value="{{$father->trip_id}}" class="form-control">
+                    <input type="text" name="name" value="{{$child->name}}" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
                     <label  class="form-label">status</label>
-                    <input type="text" name="status" value="{{$father->status}}" class="form-control">
+                    <input type="text" name="status" value="{{$child->status}}" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label  class="form-label">region</label>
-                    <input type="text" name="region" value="{{$father->region}}" class="form-control">
+                    <label  class="form-label">father_id</label>
+                    <input type="text" name="father_id" value="{{$child->father_id}}" class="form-control">
                 </div>
-                <div class="col-md-6 form-group">
-                    <label  class="form-label">lng</label>
-                    <input type="text" name="lng" value="{{$father->lng}}" class="form-control">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label  class="form-label">lit</label>
-                    <input type="text" name="lit" value="{{$father->lit}}" class="form-control">
-                </div>
-               
                 <div class="col-12 form-group">
                     <button type="submit"  class="btn btn-primary">Update</button>
                 </div>

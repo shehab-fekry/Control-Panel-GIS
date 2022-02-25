@@ -42,7 +42,7 @@ class ChildController extends Controller
 
     public function show(Child $child)
     {
-        return view("child.edit",compact('child'));
+        return view("child.show",compact('child'));
 
     }
 

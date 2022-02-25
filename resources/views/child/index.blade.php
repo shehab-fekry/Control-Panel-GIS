@@ -6,7 +6,7 @@
 
     <div class="p-1 mb-4 bg-light ">
         <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Father</h1>
+            <h1 class="display-5 fw-bold">childs</h1>
             <p class="col-md-8 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae debitis quas consectetur animi cumque. Reiciendis odio nulla assumenda quod similique?</p>
             <a href="{{route('child.create')}}" class="btn btn-primary btn-lg" type="button">Create</a>
         </div>
@@ -33,29 +33,27 @@
                         <tr>
                             <th scope="col">id</th>
                             <th scope="col">name</th>
-                            <th scope="col ">mobileNumber</th>
-                            <th scope="col ">trip_id</th>
                             <th scope="col ">status</th>
+                            <th scope="col ">father_id</th>
                             <th scope="col ">Operations</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($child as $child )
+                        @foreach ($child as $childs )
                         <tr>
-                            <th scope="row">{{$parent->id}}</th>
-                            <td>{{$child->name}}</td>
-                            <td>{{$child->mobileNumber}}</td>
-                            <td>{{$child->trip_id}}</td>
-                            <td>{{$child->status}}</td>
+                            <th scope="row">{{$childs->id}}</th>
+                            <td>{{$childs->name}}</td>
+                            <td>{{$childs->status}}</td>
+                            <td>{{$childs->father_id}}</td>
                             <td>
                                 <div class="row">
-                                    <div class="col-sm"> <a href="{{route('father.edit',$parent->id)}}"
+                                    <div class="col-sm"> <a href="{{route('child.edit',$childs->id)}}"
                                             class="btn btn-success  ">Edit</a></div>
-                                    <div class="col-sm"> <a href="{{route('father.show',$parent->id)}}"
+                                    <div class="col-sm"> <a href="{{route('child.show',$childs->id)}}"
                                             class="btn btn-primary">Show</a></div>
                                     <div class="col-sm">
-                                        <form action="{{route('father.destroy',$parent->id)}}" method="POST">
+                                        <form action="{{route('child.destroy',$childs->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -69,7 +67,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $father->links()!!}
+                {!! $child->links()!!}
             </div>
         </div>
     </div>
