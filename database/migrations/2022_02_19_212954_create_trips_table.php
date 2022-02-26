@@ -15,7 +15,6 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->integer('driver_id')->unsigned();
             $table->string('geofence', 20);
             $table->integer('status')->default(0);
             $table->timestamps();

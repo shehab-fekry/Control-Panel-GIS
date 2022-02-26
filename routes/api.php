@@ -18,18 +18,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-////////////////////////////////Fathers routes///////////////////////////////////
-///Auth///
+////////////////////////////////Fathers Apllication routes///////////////////////////////////
 
+///Auth///
 Route::post("father/register","API\AuthController@fatherRegister");
 Route::post("father/login","API\AuthController@fatherLogin");
 ///fathers operations with middleware/////
 Route::middleware('auth:api-fathers')->group(function(){
-
 Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
-Route::get("father/delete","API\FatherController@destroy");
+Route::delete("father/delete","API\FatherController@destroy");
 Route::get("father/showTrip","API\FatherController@showTrip");
+////////child operations//////////////
+Route::get("childrens","API\ChildController@index");
+Route::post("child/create","API\ChildController@store");
+Route::get("child/{id}","API\ChildController@show");
+Route::put("child/update/{id}","API\ChildController@update");
+Route::put("child/updateStatus/{id}","API\ChildController@updateChildStatus");
+Route::delete("child/{id}","API\ChildController@destroy");
 
     });
 ////////////////////////////////Drivers routes//////////////////////////////////
@@ -37,7 +43,10 @@ Route::get("father/showTrip","API\FatherController@showTrip");
 Route::post("driver/register","API\AuthController@driverRegister");
 Route::post("driver/login","API\AuthController@driverLogin");
 ///Drivers operations with middleware/////
-Route::middleware('auth:api-Drivers')->group(function(){
-
+Route::middleware('auth:api-drivers')->group(function(){
+    Route::get("driver/show","API\DriverController@show");
+    Route::put("driver/update","API\DriverController@update");
+    Route::delete("driver/delete","API\DriverController@Destroy");
+    Route::get("driver/showTrip","API\DriverController@showTrip");
 
     });

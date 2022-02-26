@@ -1,82 +1,60 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Driver;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Father;
+use App\Models\Child;
+use App\Models\Trip;
+use App\Http\Resources\DriverResource;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DriverController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show()
     {
-        //
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::where('id',$id)->get();
+        return $this->sendResponse(DriverResource::collection($driver),'driver information retrived successfully');
     }
 
-
-    public function create()
+    public function update(Request $request)
     {
-        //
+        $id=Auth::guard('api-drivers')->id();
+        $driver=driver::get()->find($id);
+
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required','string', 'max:30',],
+            'mobileNumber'=>['required',],
+            'licenseNumber'=>['required',],
+            'email' => ['required','string', 'email', 'max:255',Rule::unique('drivers')->ignore($id),],
+
+        ]);
+        if($validator->fails()){
+            return $this->sendError('please validate errors',$validator->errors());
+        }
+        $driver->name=$input['name'];
+        $driver->email=$input['email'];
+        $driver->mobileNumber=$input['mobileNumber'];
+        $driver->licenseNumber=$input['licenseNumber'];
+        $driver->save();
+
+
+
+        return $this-> sendResponse(new driverResource($driver),'driver information updated successfully');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Driver $driver)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Driver $driver)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Driver $driver)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Driver $driver)
     {
-        //
+        $id=Auth::guard('api-drivers')->id();
+       Driver::find($id)->delete();
+
+        return $this-> sendResponse("you are logged out",'Account deleted successfully');
     }
 }

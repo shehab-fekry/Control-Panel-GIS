@@ -14,7 +14,7 @@ class Trip extends Model
 
     public function driver()
     {
-        return $this->belongsTo(Driver::class);
+        return $this->hasOne(Driver::class);
     }
 
     public function father()
