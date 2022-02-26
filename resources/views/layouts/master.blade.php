@@ -497,13 +497,45 @@
                             <a href="{{route('father.index')}}">
                                 <i class="metismenu-icon pe-7s-rocket"></i>
                                 Fathers
+                                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                             </a>
+                            <ul>
+                                <li>
+                                    <a href="{{route('father.index')}}">
+                                        <i class="metismenu-icon"></i>
+                                        show Fathers
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a href="{{route('father.create')}}">
+                                        <i class="metismenu-icon"></i>
+                                        Add new Father
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{route('child.index')}}">
                                 <i class="metismenu-icon pe-7s-display2"></i>
                                 childs
+                                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                             </a>
+                            <ul>
+                                <li>
+                                    <a href="{{route('child.index')}}">
+                                        <i class="metismenu-icon"></i>
+                                        show childs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="elements-buttons-standard.html">
+                                        <i class="metismenu-icon"></i>
+                                        Add new child 
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             
