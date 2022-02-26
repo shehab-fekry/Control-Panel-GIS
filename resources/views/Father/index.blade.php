@@ -1,7 +1,10 @@
 @extends('Father.layout')
 
 @section('content')
-<div class="container py-4">
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="row">
+            {{-- <div class="container py-4">
 
 
     <div class="p-1 mb-4 bg-light ">
@@ -11,45 +14,64 @@
             <a href="{{route('father.create')}}" class="btn btn-primary btn-lg" type="button">Create</a>
         </div>
     </div>
-<div class="continer">
-    @if ($message = Session::get('success'))
-      <div class="row">
-        <div class="col">
-        </div>
-        <div class="alert alert-success" role="alert">
-          {{$message}}
-        </div>
-        </div>  
-    @endif
-    
-    </div>
-</div>
-
-    <div class="container">
+    <div class="continer">
+        @if ($message = Session::get('success'))
         <div class="row">
             <div class="col">
-                <table class="table">
+            </div>
+            <div class="alert alert-success" role="alert">
+                {{$message}}
+            </div>
+        </div>
+        @endif
+
+    </div>
+</div> --}}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3 class="m-0 text-dark">Fathers Info
+                </h3>
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Fathers Info</li>
+                </ol>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- Main content -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table id="driverslisttbl" class="table card-table table-vcenter text-nowrap">
                     <thead>
                         <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">name</th>
-                            {{-- <th scope="col">password</th> --}}
-                            <th scope="col ">mobileNumber</th>
-                            <th scope="col ">trip_id</th>
-                            <th scope="col ">status</th>
-                            <th scope="col ">region</th>
-                            <th scope="col ">lng</th>
-                            <th scope="col ">lit</th>
-                            <th scope="col ">Operations</th>
+                            <th scope="row" class="w-1">id</th>
+                            <th scope="row">name</th>
+                            <th scope="row">mobileNumber</th>
+                            <th scope="row">trip_id</th>
+                            <th scope="row">status</th>
+                            <th scope="row">region</th>
+                            <th scope="row">lng</th>
+                            <th scope="row">lit</th>
+                            <th scope="row">Action</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($father as $parent )
+                        @foreach($father as $parent )
                         <tr>
                             <th scope="row">{{$parent->id}}</th>
                             <td>{{$parent->name}}</td>
-                            {{-- <td>{{$parent->password}}</td> --}}
                             <td>{{$parent->mobileNumber}}</td>
                             <td>{{$parent->trip_id}}</td>
                             <td>{{$parent->status}}</td>
@@ -59,7 +81,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-sm"> <a href="{{route('father.edit',$parent->id)}}"
-                                            class="btn btn-success  ">Edit</a></div>
+                                            class="btn fa fa-edit "></a></div>
                                     <div class="col-sm"> <a href="{{route('father.show',$parent->id)}}"
                                             class="btn btn-primary">Show</a></div>
                                     <div class="col-sm">
@@ -70,8 +92,6 @@
                                         </form>
                                     </div>
                                 </div>
-
-
                             </td>
                         </tr>
                         @endforeach
@@ -81,4 +101,12 @@
             </div>
         </div>
     </div>
-    @endsection
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+@endsection
