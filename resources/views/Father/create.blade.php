@@ -59,7 +59,7 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group"><label for="password"
                                         class="">{{ __('Password') }}</label><input name="password" id="password"
-                                        placeholder="password placeholder" type="password"
+                                        placeholder="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
 
@@ -76,7 +76,7 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group"><label for="password-confirm"
                                         class="">{{ __('password-confirm') }}</label><input name="password-confirm" id="password-confirm"
-                                        placeholder="password placeholder" type="password"
+                                        placeholder="password " type="password"
                                         class="form-control" name="password_confirmation"
                                         required autocomplete="new-password">
 
@@ -84,34 +84,64 @@
                             </div>
                         </div>
 
-                        <div class="position-relative form-group"><label for="exampleAddress"
-                                class="">Address</label><input name="address" id="exampleAddress"
-                                placeholder="1234 Main St" type="text" class="form-control"></div>
-                        <div class="position-relative form-group"><label for="exampleAddress2" class="">Address
-                                2</label><input name="address2" id="exampleAddress2"
-                                placeholder="Apartment, studio, or floor" type="text" class="form-control">
+                        <div class="position-relative form-group"><label for="m_number"
+                            class="">{{ __('m_number') }}</label><input name="m_number" id="password"
+                            placeholder="mobile Number" type="m_number"
+                            class="form-control @error('m_number') is-invalid @enderror" name="m_number"
+                            required autocomplete="m_number">
+                    </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="position-relative form-group"><label for="trip_id"
+                                    class="">{{ __('Trip id') }}</label><input name="trip_id" id="trip_id"
+                                    placeholder="trip_id " type="text"
+                                    class="form-control" name="trip_id"
+                                    required autocomplete="trip_id">
+
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="position-relative form-group"><label for="status"
+                                    class="">{{ __('status') }}</label><input name="status" id="status"
+                                    placeholder="status" type="text"
+                                    class="form-control" name="status"
+                                    required autocomplete="status">
+
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="position-relative form-group"><label for="region"
+                                    class="">{{ __('region') }}</label><input name="region" id="region"
+                                    placeholder="region" type="text"
+                                    class="form-control" name="region"
+                                    required autocomplete="region">
+
+                            </div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="position-relative form-group"><label for="exampleCity"
-                                        class="">City</label><input name="city" id="exampleCity" type="text"
-                                        class="form-control"></div>
+                                <div class="position-relative form-group"><label for="lng"
+                                    class="">{{ __('lng ') }}</label><input name="lng" id="lng"
+                                    placeholder="lng " type="text"
+                                    class="form-control" name="lng"
+                                    required autocomplete="lng">
+
                             </div>
-                            <div class="col-md-4">
-                                <div class="position-relative form-group"><label for="exampleState"
-                                        class="">State</label><input name="state" id="exampleState" type="text"
-                                        class="form-control"></div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="position-relative form-group"><label for="exampleZip"
-                                        class="">Zip</label><input name="zip" id="exampleZip" type="text"
-                                        class="form-control"></div>
+                            
+                            <div class="col-md-6">
+                                <div class="position-relative form-group"><label for="lit"
+                                    class="">{{ __('lit') }}</label><input name="lit" id="lit"
+                                    placeholder="lit" type="text"
+                                    class="form-control" name="lit"
+                                    required autocomplete="lit">
+
+                            </div>
                             </div>
                         </div>
-                        <div class="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox"
-                                class="form-check-input"><label for="exampleCheck" class="form-check-label">Check me
-                                out</label></div>
-                        <button class="mt-2 btn btn-primary">Sign in</button>
+                        <button class="mt-2 btn btn-primary">ADD</button>
                     </form>
                 </div>
             </div>
