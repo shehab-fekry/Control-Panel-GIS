@@ -20,3 +20,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('father',FatherController::class)->middleware('verified');
 
 Route::resource('child',ChildController::class)->middleware('verified');
+
+Route::get('dashboard', function () {
+    return view('dashboard/charts-chartjs');
+});

@@ -7,6 +7,7 @@
     <title> @yield('title', "Bus Tracking System") </title>
     <link rel="stylesheet" href="{{ asset("css/bootstrap.css") }}">
     <link rel="stylesheet" href="{{ asset("css/all.min.css") }}">
+    <link href="{{ asset("main.css") }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     {!! ReCaptcha::htmlScriptTagJsApi() !!}
 </head>
@@ -68,21 +69,6 @@
 
     @yield("content")
 
-
-    {{-- Footer Section --}}
-    {{-- <br>
-    <div class="countainer-fluid bg-dark text-light mt-4">
-        <div class="row">
-            <div class="col ms-5">
-                <h5>Social media</h5>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Tweter</li>
-                    <li>insta</li>
-                </ul>
-            </div>
-        </div>
-    </div> --}}
     <script src="{{ asset("js/bootstrap.bundle.js") }}"></script>
 </body>
 
