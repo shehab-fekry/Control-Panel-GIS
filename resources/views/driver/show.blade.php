@@ -14,36 +14,31 @@
               </div></div>
                 </div>
             </div>
-                <div class="col-md-6 form-group " >mobileNumber: 
-                    <label class="form-label">{{$father->mobileNumber}}</label>
+                <div class="col-md-6 form-group " >email: 
+                    <label class="form-label">{{$driver->email}}</label>
                 </div>
-                <div class="col-md-6 form-group"> trip_id: 
-                    <label  class="form-label">{{$father->trip_id}}</label>
+                <div class="col-md-6 form-group"> licenseNumber: 
+                    <label  class="form-label">{{$driver->licenseNumber}}</label>
                 </div>
                 <div class="col-md-6 form-group"> status: 
-                    <label  class="form-label">{{$father->status}}</label>
+                    <label  class="form-label">{{$driver->confirmed}}</label>
                 </div>
                 <div class="col-md-6 form-group"> region:
-                    <label  class="form-label">{{$father->region}}</label>
-                </div>
-                <div class="col-md-6 form-group"> lng: 
-                    <label  class="form-label">{{$father->lng}}</label>
-                </div>
-                <div class="col-md-6 form-group"> lit: 
-                    <label  class="form-label">{{$father->lit}}</label>
+                    <label  class="form-label">{{$driver->mobileNumber}}</label>
                 </div>
                 <div class="col-md-6 form-group"> created_at: 
-                    <label  class="form-label">{{$father->created_at}}</label>
+                    <label  class="form-label">{{$driver->created_at}}</label>
                 </div>
                 <div class="col-md-6 form-group">updated_at: 
-                    <label  class="form-label">{{$father->updated_at}}</label>
+                    <label  class="form-label">{{$driver->updated_at}}</label>
                 </div>
                 <div class="col-md-6 form-group">
-                    {{$father->details}}
+                    {{$driver->details}}
                 </div>
                 <div class="col-md-6 form-group">
-                <a  href="{{route('father.index') }}" class="btn btn-danger">Return home</a>
+                <a  href="{{route('driver.index') }}" class="btn btn-danger">Return home</a>
                 </div>
+
 
         </div>
     </div>

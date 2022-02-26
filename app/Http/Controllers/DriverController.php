@@ -1,81 +1,68 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $driver  = Driver::latest()->paginate(7);
+        return view("driver.index",compact("driver"));
     }
 
  
     public function create()
     {
-        //
+        return view("driver.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $data)
     {
-        //
+        $data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
+            'confirmed' => ['required', 'int', 'max:20'],
+            'mobileNumber' => ['required', 'string', 'max:20'],
+        ]);
+        Driver::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'licenseNumber' => $data['licenseNumber'],
+            'confirmed' => $data['confirmed'],
+            'mobileNumber' => $data['mobileNumber'],
+        ]);
+
+        return redirect()->route("driver.index")
+        ->with('success','driver added successfuly');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
     public function show(Driver $driver)
     {
-        //
+        return view("driver.show",compact('driver'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Driver $driver)
     {
-        //
+        return view("driver.edit",compact('driver'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, Driver $driver)
     {
-        //
+        $driver->update($request->all());
+        return redirect()->route("driver.index")->with('success','driver updated successfuly');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Driver $driver)
     {
-        //
+        $driver->delete();
+        return redirect()->route("driver.index")->with('success','driver deleted successfuly');
     }
 }

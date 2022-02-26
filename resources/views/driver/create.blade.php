@@ -201,53 +201,29 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="m_number" class="col-md-4 col-form-label text-md-end">{{ __('m_number') }}</label>
+                <label for="mobileNumber" class="col-md-4 col-form-label text-md-end">{{ __('mobileNumber') }}</label>
 
                 <div class="col-md-6">
-                    <input id="m_number" type="text" class="form-control @error('m_number') is-invalid @enderror"
-                        name="m_number" required>
+                    <input id="mobileNumber" type="text" class="form-control @error('mobileNumber') is-invalid @enderror"
+                        name="mobileNumber" required>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="trip_id" class="col-md-4 col-form-label text-md-end">{{ __('trip id') }}</label>
+                <label for="confirmed" class="col-md-4 col-form-label text-md-end">{{ __('confirmed') }}</label>
 
                 <div class="col-md-6">
-                    <input id="trip_id" type="text" class="form-control @error('trip_id') is-invalid @enderror"
-                        name="trip_id" required>
+                    <input id="confirmed" type="text" class="form-control @error('confirmed') is-invalid @enderror"
+                        name="confirmed" required>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('status') }}</label>
+                <label for="licenseNumber" class="col-md-4 col-form-label text-md-end">{{ __('licenseNumber') }}</label>
 
                 <div class="col-md-6">
-                    <input id="status" type="text" class="form-control @error('status') is-invalid @enderror"
-                        name="status" required>
+                    <input id="licenseNumber" type="text" class="form-control @error('licenseNumber') is-invalid @enderror"
+                        name="licenseNumber" required>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="region" class="col-md-4 col-form-label text-md-end">{{ __('region') }}</label>
-
-                <div class="col-md-6">
-                    <input id="region" type="text" class="form-control @error('region') is-invalid @enderror"
-                        name="region">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="lng" class="col-md-4 col-form-label text-md-end">{{ __('lng') }}</label>
-
-                <div class="col-md-6">
-                    <input id="lng" type="text" class="form-control @error('lng') is-invalid @enderror" name="lng">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="lit" class="col-md-4 col-form-label text-md-end">{{ __('lit') }}</label>
-
-                <div class="col-md-6">
-                    <input id="lit" type="text" class="form-control @error('lit') is-invalid @enderror" name="lit">
-                </div>
-            </div>
-
-
             <div class="col-12 form-group">
                 <button type="submit" class="btn btn-primary">Add</button>
             </div>
