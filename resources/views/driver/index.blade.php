@@ -79,14 +79,14 @@
                             <td>
                                 <div class="row">
                                     <div class="col-sm"> <a href="{{route('driver.edit',$drivers->id)}}"
-                                            class="btn fa fa-edit "></a></div>
+                                            class="btn fa fa-lg  fa-edit "></a></div>
                                     <div class="col-sm"> <a href="{{route('driver.show',$drivers->id)}}"
-                                            class="btn btn-primary">Show</a></div>
+                                            class="btn fas fa-lg fa-eye"  style="color:green"></a></div>
                                     <div class="col-sm">
                                         <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn fa-lg far fa-trash-alt" style="color:Red"></button>
                                         </form>
                                     </div>
                                 </div>

@@ -415,14 +415,14 @@
                     <ul class="vertical-nav-menu">
                         <li class="app-sidebar__heading">Home</li>
                         <li>
-                            <a href="{{route('home')}}" class="mm-active">
+                            <a href="{{route('home')}}" class="@yield('active1','mm-active')">
                                 <i class="metismenu-icon pe-7s-rocket"></i>
                                 Home
                             </a>
                         </li>
                         <li class="app-sidebar__heading">UI Components</li>
                         <li>
-                            <a href="{{route('father.index')}}">
+                            <a href="{{route('father.index')}}" class="@yield('active1')">
                                 <i class="metismenu-icon pe-7s-rocket"></i>
                                 Fathers
                                 <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -445,7 +445,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{route('child.index')}}">
+                            <a href="{{route('child.index')}}"  class="@yield('active1')">
                                 <i class="metismenu-icon pe-7s-display2"></i>
                                 childs
                                 <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -466,7 +466,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{route('driver.index')}}">
+                            <a href="{{route('driver.index')}}"  class="@yield('active1')">
                                 <i class="metismenu-icon pe-7s-display2"></i>
                                 drivers
                                 <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>

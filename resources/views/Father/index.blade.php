@@ -51,7 +51,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body p-0">
-            <div class="table-responsive">
+            <div class="table">
                 <table id="driverslisttbl" class="table card-table table-vcenter text-nowrap">
                     <thead>
                         <tr>
@@ -81,14 +81,14 @@
                             <td>
                                 <div class="row">
                                     <div class="col-sm"> <a href="{{route('father.edit',$parent->id)}}"
-                                            class="btn fa fa-edit "></a></div>
+                                        class="btn fa fa-lg  fa-edit "></a></div>
                                     <div class="col-sm"> <a href="{{route('father.show',$parent->id)}}"
-                                            class="btn btn-primary">Show</a></div>
+                                        class="btn fas fa-lg fa-eye"  style="color:green"></a></div>
                                     <div class="col-sm">
                                         <form action="{{route('father.destroy',$parent->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit"class="btn fa-lg far fa-trash-alt" style="color:Red"></button>
                                         </form>
                                     </div>
                                 </div>
