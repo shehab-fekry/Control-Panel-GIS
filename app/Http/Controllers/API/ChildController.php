@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Child;
 use Illuminate\Http\Request;
@@ -9,6 +9,8 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\ChildResource;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Father;
+
+
 class ChildController extends BaseController
 {
 
@@ -17,7 +19,7 @@ class ChildController extends BaseController
         $id=Auth::guard('api-fathers')->id();
 
             $id=Auth::id();
-            $children=Child::where("user_id",$id)->get();
+            $children=Child::where("father_id",$id)->get();
             $input=$children->all();
 
             if(empty($input)){
@@ -41,18 +43,19 @@ class ChildController extends BaseController
         }
         $input['father_id']=$id;
         $child=Child::create($input);
-        return $this->sendResponse(new ChildResource($child),'child added successfully');
+        $child->get();
+        return $this->sendResponse($child,'child added successfully');
 
     }
     public function show($id)
     {
         $fid=Auth::guard('api-fathers')->id();
         $child=Child::find($id);
-        if($child->father_id!=$fid){
-            return $this->sendError('please validate errors',"you are not authorized to do this action");
-        }
-        elseif(empty($child)){//is_null()
+        if(is_null($child)){//is_null()
             return $this->sendError('child not exists');
+
+        }elseif($child->father_id!==$fid){
+            return $this->sendError('please validate errors',"you are not authorized to do this action");
         }
          return $this->sendResponse(new childResource($child),'child retrived successfully');
 
@@ -63,7 +66,8 @@ class ChildController extends BaseController
     public function update(Request $request,$id)
     {
         $child=Child::get()->find($id);
-        if(Auth::guard('api-fathers')->id()!=$child->parent_id){
+
+        if(Auth::guard('api-fathers')->id()!==$child->father_id){
         return $this->sendError('please validate errors',"you are not authorized to do this action");
         }
         $input=$request->all();
@@ -83,15 +87,19 @@ class ChildController extends BaseController
         $fid=Auth::guard('api-fathers')->id();
         $father=Father::find($fid);
         $child=Child::get()->find($id);
-        if(Auth::guard('api-fathers')->id()!=$child->parent_id){
+        if(Auth::guard('api-fathers')->id()!==$child->father_id){
             return $this->sendError('please validate errors',"you are not authorized to do this action");
         }elseif($child->status==false){
             $child->status=true;
-            $father->status=$father->staus+1;
+            $father->status=$father->status+1;
+            $child->save();
+            $father->save();
             return $this-> sendResponse(new ChildResource($child),'child status updated to true successfully');
          }else{
             $child->status=false;
-            $father->status=$father->staus-1;
+            $father->status=$father->status-1;
+            $child->save();
+            $father->save();
             return $this-> sendResponse(new ChildResource($child),'child status updated to false successfully');
          }
 
@@ -101,9 +109,14 @@ class ChildController extends BaseController
     public function destroy($id)
     {
         $fid=Auth::guard('api-fathers')->id();
+        $father=Father::find($fid);
         $child=Child::get()->find($id);
-        if($fid!=$child->parent_id){
+        if($fid!=$child->father_id){
             return $this->sendError('please validate errors',"you are not authorized to do this action");
+        }
+        if($child->status==true){
+            $father->status=$father->status-1;
+            $father->save();
         }
         $child->delete();
         return $this-> sendResponse(new ChildResource($child),'child information deleted successfully');

@@ -15,12 +15,12 @@ class Driver extends Authenticatable
     ];
     protected $hidden = [
         'password',
-        'remember_token',
+        'api_token',
 
     ];
 
     public function trip()
     {
-        return $this->hasOne(Trip::class);
+        return $this->belongsTo(Trip::class);
     }
 }

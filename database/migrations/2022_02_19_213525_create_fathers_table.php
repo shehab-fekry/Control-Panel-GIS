@@ -25,7 +25,7 @@ class CreateFathersTable extends Migration
             $table->string('region',60);
             $table->double('lng');
             $table->double('lit');
-            $table->rememberToken();
+            $table->longText('api_token')->nullable();
             $table->timestamps();
         });
     }
