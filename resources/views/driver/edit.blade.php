@@ -1,4 +1,4 @@
-@extends('Father.layout')
+@extends('driver.layout')
 
 @section('content')
 <div class="app-main__outer">

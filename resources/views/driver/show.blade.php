@@ -1,4 +1,4 @@
-@extends('Father.layout')
+@extends('driver.layout')
 
 @section('content')
 <div class="app-main__outer">
@@ -9,7 +9,7 @@
                     <div class="col">
                 <div class="card ">
                 <div class="card-body bg-warning">
-                 <h4>Show  {{$father->name}}</h4> 
+                 <h4>Show  {{$driver->name}}</h4> 
                 </div>
               </div></div>
                 </div>

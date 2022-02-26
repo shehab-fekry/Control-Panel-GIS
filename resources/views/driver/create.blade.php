@@ -1,4 +1,4 @@
-@extends('Father.layout')
+@extends('driver.layout')
 
 @section('content')
 <div class="app-main__outer">
@@ -8,14 +8,14 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h3 class="m-0 text-dark">Add new father
+                            <h3 class="m-0 text-dark">Add new driver
                             </h3>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Add new father</li>
+                                <li class="breadcrumb-item active">Add new driver</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -149,7 +149,7 @@
                 </div>
             </div> --}}
             
-            <form action="{{route('father.store')}}" method="POST" class="row g-3">
+            <form action="{{route('driver.store')}}" method="POST" class="row g-3">
             @csrf
 
             <div class="row mb-3">

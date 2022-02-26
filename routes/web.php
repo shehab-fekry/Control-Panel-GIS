@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
@@ -21,6 +22,4 @@ Route::resource('father',FatherController::class)->middleware('verified');
 
 Route::resource('child',ChildController::class)->middleware('verified');
 
-Route::get('dashboard', function () {
-    return view('dashboard/charts-chartjs');
-});
+Route::resource('driver',DriverController::class)->middleware('verified');
