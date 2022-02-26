@@ -74,17 +74,11 @@
 
                             </div>
                             <div class="col-md-6">
-                                <div class="position-relative form-group"><label for="password"
-                                        class="">{{ __('Password') }}</label><input name="password" id="password"
+                                <div class="position-relative form-group"><label for="password-confirm"
+                                        class="">{{ __('password-confirm') }}</label><input name="password-confirm" id="password-confirm"
                                         placeholder="password placeholder" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        class="form-control" name="password_confirmation"
                                         required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
 
                                 </div>
                             </div>
