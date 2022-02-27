@@ -45,7 +45,7 @@ class AuthController extends BaseController
             config(['auth.guards.api.provider' => 'api-fathers']);
 
             $id =Auth::guard('father')->id();
-            $father=Father::where('id',$id)->get();
+            $father=Father::find($id);
 
             $success['token']=$father->createToken('ahmed')->accessToken;
             $father->api_token=$success['token'];
@@ -94,7 +94,7 @@ class AuthController extends BaseController
         if(Auth()->guard('driver')->attempt(['email'=>$request->email,'password'=>$request->password])){
             config(['auth.guards.api.provider' => 'api-drivers']);
             $id =Auth::guard('driver')->id();
-            $driver=Driver::where('id',$id)->get();
+            $driver=Driver::find($id);
             $success['token']=$driver->createToken('driver')->accessToken;
             $driver->api_token=$success['token'];
             $driver->save();
