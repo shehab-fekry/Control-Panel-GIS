@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Events\showTrip;
+use App\Events\notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,10 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::get("driver/show","API\DriverController@show");
     Route::put("driver/update","API\DriverController@update");
     Route::delete("driver/delete","API\DriverController@Destroy");
-    Route::get("driver/showTrip","API\DriverController@showTrip");
+///trip operations///////
+    Route::put("changeLocation",function($data){
+        event(new showTrip($data));
+    });
+    Route::get('trip/start',"API\TripController@start");
 
     });

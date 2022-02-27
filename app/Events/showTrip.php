@@ -10,18 +10,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class showTrip
+class showTrip implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public $lng,$lit,$trip_id;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->lng=$data['lng'];
+        $this->lit=$data['lit'];
     }
 
     /**
@@ -31,6 +28,11 @@ class showTrip
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('trip.'.$this->trip_id);
     }
+    public function broadcastAs()
+    {
+        return 'AhmedElgizawy';
+    }
+
 }
