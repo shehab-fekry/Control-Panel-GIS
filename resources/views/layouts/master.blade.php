@@ -458,7 +458,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="elements-buttons-standard.html">
+                                    <a href="{{route('child.create')}}">
                                         <i class="metismenu-icon"></i>
                                         Add new child 
                                     </a>
@@ -482,6 +482,27 @@
                                     <a href="{{route('driver.create')}}">
                                         <i class="metismenu-icon"></i>
                                         Add new driver 
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{route('vehicle.index')}}"  class="@yield('active1')">
+                                <i class="metismenu-icon pe-7s-display2"></i>
+                                vehicles
+                                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="{{route('vehicle.index')}}">
+                                        <i class="metismenu-icon"></i>
+                                        show vehicles
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('vehicle.create')}}">
+                                        <i class="metismenu-icon"></i>
+                                        Add new vehicle 
                                     </a>
                                 </li>
                             </ul>

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Models\Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 class ChildController extends Controller
 {
   
@@ -36,7 +37,7 @@ class ChildController extends Controller
             'father_id' => $data['father_id'],
         ]);
 
-        return redirect()->route("father.child")
+        return redirect()->route("child.index")
         ->with('success','child added successfuly');
     }
 

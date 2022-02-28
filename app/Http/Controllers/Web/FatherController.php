@@ -1,7 +1,6 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Web;
+use App\Http\Controllers\Controller;
 use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
