@@ -1,9 +1,19 @@
 @extends('driver.layout')
 
 @section('content')
+
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="row">
+            @if ($message = Session::get('error'))
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="alert alert-success" role="alert">
+        {{$message}}
+      </div>
+      </div>  
+  @endif
             <div class="continer pt-5">
                 <div class="row">
                     <div class="col">

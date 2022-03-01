@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Web;
 
 use App\Models\Child;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
+
 class ChildController extends Controller
 {
   
@@ -28,8 +31,8 @@ class ChildController extends Controller
     { 
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'string', 'email', 'max:255', 'unique:children'],
-            'father_id' => ['required', 'string', 'max:20'],
+            'status' => ['required', 'string', 'email', 'max:255'],
+            'father_id' => ['required', 'string', 'max:20', 'unique:children'],
         ]);
         Child::create([
             'name' => $data['name'],
@@ -55,7 +58,20 @@ class ChildController extends Controller
 
     public function update(Request $request, Child $child)
     {
-        $child->update($request->all());
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'string', 'email', 'max:255'],
+            'father_id' => ['required', 'string', 'max:20'],
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+     
+        $child->name=$input['name'];
+        $child->status=$input['status'];
+        $child->father_id=$input['father_id'];
+        $child->save();
         return redirect()->route("child.index")->with('success','child updated successfuly');
     }
 

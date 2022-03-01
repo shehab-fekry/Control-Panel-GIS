@@ -8,6 +8,15 @@
                 <div class="row">
                     <div class="col">
                 <div class="card ">
+                    @if ($message = Session::get('error'))
+                    <div class="row">
+                      <div class="col">
+                      </div>
+                      <div class="alert alert-success" role="alert">
+                        {{$message}}
+                      </div>
+                      </div>  
+                  @endif
                 <div class="card-body ">
                  <h4>edit:  {{$vehicle->licensePlate}}</h4> 
                 </div>
