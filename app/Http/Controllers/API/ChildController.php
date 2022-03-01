@@ -19,27 +19,31 @@ class ChildController extends BaseController
         $id=Auth::guard('api-fathers')->id();
 
             $id=Auth::id();
-            $children=Child::where("father_id",$id)->get();
+            $children=Child::where("father_id",$id)->where("confirmed",true)->get();
+            $count=Child::where("father_id",$id)->where("confirmed",false)->count();
             $input=$children->all();
 
             if(empty($input)){
-              return $this->sendError('please validate errors',"you are not have any childrens");
+              return $this->sendError('please validate errors',"you have ".$count." chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
             }
             else{
-
-              return $this-> sendResponse(ChildResource::collection($input),'your childrens retrived successfully');
+              return $this-> sendResponse(ChildResource::collection($input),'you have '.$count.' chidrens waiting to confirm from admin');
 
             }
     }
     public function store(Request $request)
     {
         $id=Auth::guard('api-fathers')->id();
+        $father=Father::find($id);
         $input=$request->all();
         $validator= Validator::make($input, [
             'name' => ['required', 'string', 'max:30'],
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
+        }elseif($father->confirmed==false){
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
         }
         $input['father_id']=$id;
         $child=Child::create($input);
@@ -87,7 +91,16 @@ class ChildController extends BaseController
         $fid=Auth::guard('api-fathers')->id();
         $father=Father::find($fid);
         $child=Child::get()->find($id);
-        if(Auth::guard('api-fathers')->id()!==$child->father_id){
+        if($father->confirmed==false){
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($child->confirmed==false){
+            return $this->sendError('please validate errors','your child do not confirmed yet please contact with one of school admins');
+        }
+        elseif($father->trip_id==null){
+
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+        }elseif(Auth::guard('api-fathers')->id()!==$child->father_id){
             return $this->sendError('please validate errors',"you are not authorized to do this action");
         }elseif($child->status==false){
             $child->status=true;
@@ -102,9 +115,6 @@ class ChildController extends BaseController
             $father->save();
             return $this-> sendResponse(new ChildResource($child),'child status updated to false successfully');
          }
-
-
-
     }
     public function destroy($id)
     {
@@ -121,6 +131,4 @@ class ChildController extends BaseController
         $child->delete();
         return $this-> sendResponse(new ChildResource($child),'child information deleted successfully');
     }
-
-
 }
