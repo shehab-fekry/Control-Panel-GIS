@@ -2,15 +2,18 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class DriverController extends Controller
 {
 
     public function index()
     {
-        $driver  = Driver::latest()->paginate(7);
+        $driver  = Driver::latest()->paginate(5);
         return view("driver.index",compact("driver"));
     }
 
@@ -56,7 +59,24 @@ class DriverController extends Controller
   
     public function update(Request $request, Driver $driver)
     {
-        $driver->update($request->all());
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
+            'password' => ['required', 'string', 'min:8'],
+            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
+            'confirmed' => ['required', 'int', 'max:20'],
+            'mobileNumber' => ['required', 'string', 'max:20'],
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+     
+        $driver->email=$input['email'];
+        $driver->password=Hash::make($input['password']);
+        $driver->mobileNumber=$input['mobileNumber'];
+        $driver->licenseNumber=$input['licenseNumber'];
+        $driver->confirmed=$input['confirmed'];
+        $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
     }
 

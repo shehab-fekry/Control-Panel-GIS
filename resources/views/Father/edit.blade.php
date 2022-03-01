@@ -7,6 +7,15 @@
             <div class="continer pt-5">
                 <div class="row">
                     <div class="col">
+                        @if ($message = Session::get('error'))
+                        <div class="row">
+                          <div class="col">
+                          </div>
+                          <div class="alert alert-success" role="alert">
+                            {{$message}}
+                          </div>
+                          </div>  
+                      @endif
                 <div class="card ">
                 <div class="card-body ">
                  <h4>edit:  {{$father->name}}</h4> 
@@ -23,8 +32,12 @@
                     <input type="text" name="name" value="{{$father->name}}" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
+                    <label class="form-label">email</label>
+                    <input type="text" name="email" value="{{$father->email}}" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
                     <label  class="form-label">password</label>
-                    <input type="password" name="password"  value="{{$father->password}}"  value="" class="form-control">
+                    <input type="password" name="password"  value=""  value="" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
                     <label  class="form-label">mobileNumber</label>
