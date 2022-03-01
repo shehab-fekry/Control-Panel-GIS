@@ -31,6 +31,7 @@ Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
 Route::delete("father/delete","API\FatherController@destroy");
 
+
 Route::get("father/showTrip","API\FatherController@showTrip");
 ////////child operations//////////////
 

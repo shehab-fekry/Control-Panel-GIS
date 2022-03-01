@@ -103,6 +103,7 @@ class ChildController extends BaseController
         }elseif(Auth::guard('api-fathers')->id()!==$child->father_id){
             return $this->sendError('please validate errors',"you are not authorized to do this action");
         }elseif($child->status==false){
+            
             $child->status=true;
             $father->status=$father->status+1;
             $child->save();
