@@ -46,15 +46,52 @@ class TripController extends BaseController
         }
         return $this-> sendResponse($data,'father information updated successfully');
     }
-    public function delivered($id){
-        $trip=Trip::find($id);
+    public function delivered(){
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::get()->find($id);
+        $trip=Trip::get()->find($driver->trip_id);
+        if($trip->status==0){
+            return $this->sendError('please validate errors','the trip is not started yet please start trip first');
+        }elseif($trip->status==2){
+            return $this->sendError('please validate errors','the trip is alredy delivered to school');
+        }elseif($trip->status==3){
+            return $this->sendError('please validate errors','the trip is backing to home');
+        }
+        $trip->status=2;
+        $trip->save();
+        return $this-> sendResponse("",'the trip is delivered to school succefully you could start the back trip at any time');
     }
-    public function backHome($id){
-        $trip=Trip::find($id);
+    public function backHome(){
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::get()->find($id);
+        $trip=Trip::get()->find($driver->trip_id);
+        if($trip->status==0){
+            return $this->sendError('please validate errors','the trip is not started yet please start trip first');
+        }elseif($trip->status==1){
+            return $this->sendError('please validate errors','the trip is not delivered to school yet');
+        }elseif($trip->status==3){
+            return $this->sendError('please validate errors','the trip is alredy backing from school');
+        }
+        $trip->status=3;
+        $trip->save();
+        return $this-> sendResponse("",'the trip is backing to home');
+    }
 
-    }
+
     public function end($id){
-        $trip=Trip::find($id);
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::get()->find($id);
+        $trip=Trip::get()->find($driver->trip_id);
+        if($trip->status==0){
+            return $this->sendError('please validate errors','the trip is alredy ended');
+        }elseif($trip->status==1){
+            return $this->sendError('please validate errors','the trip is not delivered to school yet');
+        }elseif($trip->status==2){
+            return $this->sendError('please validate errors','the trip is delivered to school you need to start the back trip first');
+        }
+        $trip->status=0;
+        $trip->save();
+        return $this-> sendResponse("",'the trip is ended successfully');
 
     }
 

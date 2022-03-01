@@ -30,8 +30,10 @@ Route::middleware('auth:api-fathers')->group(function(){
 Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
 Route::delete("father/delete","API\FatherController@destroy");
+
 Route::get("father/showTrip","API\FatherController@showTrip");
 ////////child operations//////////////
+
 Route::get("childrens","API\ChildController@index");
 Route::post("child/create","API\ChildController@store");
 Route::get("child/{id}","API\ChildController@show");
