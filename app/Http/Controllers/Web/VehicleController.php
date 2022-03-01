@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class VehicleController extends Controller
 {
@@ -85,7 +87,22 @@ class VehicleController extends Controller
      */
     public function update(Request $request, vehicle $vehicle)
     {
-        $vehicle->update($request->all());
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'licensePlate' => ['required', 'string', 'max:10',Rule::unique('vehicles')->ignore($vehicle->id)],
+            'model' => ['string', 'max:20'],
+            'driver_id' => ['string', 'max:20',Rule::unique('vehicles')->ignore($vehicle->id)],
+            'color' => ['string', 'max:20'],
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+     
+        $vehicle->licensePlate=$input['licensePlate'];
+        $vehicle->model=$input['model'];
+        $vehicle->driver_id=$input['driver_id'];
+        $vehicle->color=$input['color'];
+        $vehicle->save();
         return redirect()->route("vehicle.index")->with('success','vehicle updated successfuly');
     }
 

@@ -5,6 +5,9 @@ use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class FatherController extends Controller
 {
@@ -66,12 +69,36 @@ class FatherController extends Controller
     }
 
 
-    public function update(Request $request, Father $father)
+public function update(Request $request, Father $father)
     {
-        $father->update($request->all());
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required', 'string', 'min:8'],
+            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],
+            'password' => ['required', 'string', 'min:8'],
+            'mobileNumber' => ['required', 'string', 'max:25' , 'min:5'],
+            'trip_id' => ['int', 'max:20'],
+            'status' => [ 'string', 'max:20'],
+            'region' => ['string', 'max:20'],
+            'lng' => [ 'string', 'max:20'],
+            'lit' => [ 'string', 'max:20'],
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+     
+        $father->name=$input['name'];
+        $father->email=$input['email'];
+        $father->trip_id=$input['trip_id'];
+        $father->password=Hash::make($input['password']);
+        $father->mobileNumber=$input['mobileNumber'];
+        $father->status=$input['status'];
+        $father->region=$input['region'];
+        $father->lng=$input['lng'];
+        $father->lit=$input['lit'];
+        $father->save();
         return redirect()->route("father.index")->with('success','father updated successfuly');
     }
-
 
     public function destroy(Father $father)
     {
