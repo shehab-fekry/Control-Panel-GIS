@@ -12,7 +12,7 @@ class Father extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $fillable=[
-        'name','email','password','confirmed','mobileNumber','trip_id','status','region','lng','lit','photo'
+        'name','email','password','confirmed','mobileNumber','trip_id','status','region','lng','lit','image_path'
     ];
     protected $hidden = [
         'password',

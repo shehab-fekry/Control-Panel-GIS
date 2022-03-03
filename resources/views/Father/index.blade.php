@@ -57,6 +57,7 @@
                         <tr>
                             <th scope="row" class="w-1">id</th>
                             <th scope="row">name</th>
+                            <th scope="row">photo</th>
                             <th scope="row">mobileNumber</th>
                             <th scope="row">trip_id</th>
                             <th scope="row">status</th>
@@ -72,6 +73,9 @@
                         <tr>
                             <th scope="row">{{$parent->id}}</th>
                             <td>{{$parent->name}}</td>
+                            <td>
+                                <img src="{{asset('upload/father/'.$parent->image_path)}}" width="10%" alt="" srcset="">
+                            </td>
                             <td>{{$parent->mobileNumber}}</td>
                             <td>{{$parent->trip_id}}</td>
                             <td>{{$parent->status}}</td>
