@@ -37,8 +37,25 @@ class FatherController extends Controller
             'region' => ['string', 'max:20'],
             'lng' => ['string', 'max:20'],
             'lit' => ['string', 'max:20'],
-            'image'=>'required|image'
+            'image'=> ['image']
         ]);
+        if ($request->image == Null){
+            Father::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'mobileNumber' => $request->input('m_number'),
+                'trip_id' => $request->input('trip_id'),
+                'status' => $request->input('status'),
+                'region' => $request->input('region'),
+                'lng' => $request->input('lng'),
+                'lit' => $request->input('lit'),
+                'image_path' => 'parent.png'
+            ]);
+            return redirect()->route("father.index")
+            ->with('success','Father added successfuly');
+        }
+     else 
         $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
         $request->image->move(public_path('upload\father'),$newPhotoName);
      
@@ -53,7 +70,6 @@ class FatherController extends Controller
             'lng' => $request->input('lng'),
             'lit' => $request->input('lit'),
             'image_path' => $newPhotoName
-            // 'photo'=>'uploads/fathers/'.$new_photo
         ]);
 
         return redirect()->route("father.index")

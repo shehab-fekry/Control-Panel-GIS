@@ -11,7 +11,7 @@ class Driver extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $fillable=[
-       'email','name','password','licenseNumber','confirmed','mobileNumber'
+       'email','name','password','licenseNumber','confirmed','mobileNumber','image_path'
     ];
     protected $hidden = [
         'password',

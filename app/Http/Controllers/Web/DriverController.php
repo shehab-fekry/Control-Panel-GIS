@@ -32,7 +32,24 @@ class DriverController extends Controller
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'confirmed' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
+            'image'=>'image'
         ]);
+        if ($data->image == Null){
+            Driver::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'licenseNumber' => $data['licenseNumber'],
+                'confirmed' => $data['confirmed'],
+                'mobileNumber' => $data['mobileNumber'],
+                'image_path' => 'driver.png'
+            ]);
+            return redirect()->route("driver.index")
+            ->with('success','driver added successfuly');
+        }
+     else   
+         $newPhotoName=time() . '-' . $data->name  .'.' .  $data->image->extension();
+         $data->image->move(public_path('upload\driver'),$newPhotoName);
         Driver::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -40,6 +57,7 @@ class DriverController extends Controller
             'licenseNumber' => $data['licenseNumber'],
             'confirmed' => $data['confirmed'],
             'mobileNumber' => $data['mobileNumber'],
+            'image_path' => $newPhotoName
         ]);
 
         return redirect()->route("driver.index")

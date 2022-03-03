@@ -57,6 +57,7 @@
                         <tr>
                             <th scope="row" class="w-1">id</th>
                             <th scope="row">name</th>
+                            <th scope="row">photo</th>
                             <th scope="row">email</th>
                             <th scope="row">licenseNumber</th>
                             <th scope="row">confirmed</th>
@@ -70,6 +71,9 @@
                         <tr>
                             <th scope="row">{{$drivers->id}}</th>
                             <td>{{$drivers->name}}</td>
+                            <td>
+                                <img src="{{asset('upload/driver/'.$drivers->image_path)}}" width="10%" alt="" srcset="">
+                            </td>
                             <td>{{$drivers->email}}</td>
                             <td>{{$drivers->licenseNumber}}</td>
                             <td><span class="badge <?php echo ($drivers['confirmed']=='1') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($drivers['confirmed']=='1') ? 'YES' : 'NO'; ?></span>  
