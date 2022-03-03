@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 
 class TripController extends BaseController
 {
