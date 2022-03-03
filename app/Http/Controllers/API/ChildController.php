@@ -17,19 +17,17 @@ class ChildController extends BaseController
     public function index()
     {
         $id=Auth::guard('api-fathers')->id();
-
-            $id=Auth::id();
-            $children=Child::where("father_id",$id)->where("confirmed",true)->get();
-            $count=Child::where("father_id",$id)->where("confirmed",false)->count();
-            $input=$children->all();
-
-            if(empty($input)){
-              return $this->sendError('please validate errors',"you have ".$count." chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
-            }
-            else{
-              return $this-> sendResponse(ChildResource::collection($input),'you have '.$count.' chidrens waiting to confirm from admin');
-
-            }
+        $id=Auth::id();
+        $children=Child::where("father_id",$id)->where("confirmed",true)->get();
+        $count=Child::where("father_id",$id)->where("confirmed",false)->count();
+        $input=$children->all();
+        if(empty($input)){
+            return $this->sendError('please validate errors',"you have ".$count." chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
+        }
+        else
+        {
+            return $this-> sendResponse(ChildResource::collection($input),'you have '.$count.' chidrens waiting to confirm from admin');
+        }
     }
     public function store(Request $request)
     {
@@ -38,7 +36,12 @@ class ChildController extends BaseController
         $input=$request->all();
         $validator= Validator::make($input, [
             'name' => ['required', 'string', 'max:30'],
+            'photo'=>['required|image']
         ]);
+        $photo=$request->photo;//file
+        $new_photo=time().$photo->getClientOriginalName();//string
+        $photo->move('uploads/children/',$new_photo);
+        $input['photo']="uploads/children/".$new_photo;
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }elseif($father->confirmed==false){

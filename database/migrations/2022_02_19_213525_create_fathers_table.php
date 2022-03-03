@@ -25,6 +25,7 @@ class CreateFathersTable extends Migration
             $table->string('region',60);
             $table->double('lng');
             $table->double('lit');
+            $table->string('photo')->nullable();
             $table->longText('api_token')->nullable();
             $table->timestamps();
         });
