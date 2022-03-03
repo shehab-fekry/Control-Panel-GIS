@@ -29,6 +29,10 @@
                  @csrf
                 @method('PUT')
                 <div class="col-md-6 form-group">
+                    <label class="form-label">name</label>
+                    <input type="text" name="name" value="{{$driver->name}}" class="form-control">
+                </div>
+                <div class="col-md-6 form-group">
                     <label class="form-label">email</label>
                     <input type="text" name="email" value="{{$driver->email}}" class="form-control">
                 </div>

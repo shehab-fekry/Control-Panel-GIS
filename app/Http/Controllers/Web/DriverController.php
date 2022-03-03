@@ -61,6 +61,7 @@ class DriverController extends Controller
     {
         $input=$request->all();
         $validator=Validator::make($input,[
+            'name' => ['required', 'string', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
             'password' => ['required', 'string', 'min:8'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
@@ -71,6 +72,7 @@ class DriverController extends Controller
             return redirect()->back()->with('error',$validator->errors());
         }
      
+        $driver->name=$input['name'];
         $driver->email=$input['email'];
         $driver->password=Hash::make($input['password']);
         $driver->mobileNumber=$input['mobileNumber'];
