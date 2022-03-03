@@ -27,7 +27,8 @@ class FatherController extends Controller
 
     public function store(Request  $data)
     {
-        $data->validate([
+
+       $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -37,7 +38,13 @@ class FatherController extends Controller
             'region' => ['string', 'max:20'],
             'lng' => ['string', 'max:20'],
             'lit' => ['string', 'max:20'],
+            'photo'=>'required|image'
         ]);
+
+
+        $photo=$data->photo;//file
+        $new_photo=time().$photo->getClientOriginalName();//string
+        $photo->move('uploads/fathers/',$new_photo);
         Father::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -48,12 +55,13 @@ class FatherController extends Controller
             'region' => $data['region'],
             'lng' => $data['lng'],
             'lit' => $data['lit'],
+            'photo'=>'uploads/fathers/'.$new_photo
         ]);
 
         return redirect()->route("father.index")
         ->with('success','Father added successfuly');
 
- 
+
     }
 
 
@@ -86,7 +94,7 @@ public function update(Request $request, Father $father)
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-     
+
         $father->name=$input['name'];
         $father->email=$input['email'];
         $father->trip_id=$input['trip_id'];
