@@ -1,48 +1,101 @@
-@extends('driver.layout')
+<%- contentFor('body') %>
 
-@section('content')
-<div class="app-main__outer">
-    <div class="app-main__inner">
-        <div class="row">
-            {{-- <div class="container py-4">
-
-
-    <div class="p-1 mb-4 bg-light ">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Father</h1>
-            <p class="col-md-8 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae debitis quas consectetur animi cumque. Reiciendis odio nulla assumenda quod similique?</p>
-            <a href="{{route('father.create')}}" class="btn btn-primary btn-lg" type="button">Create</a>
+<div class="container">
+           
+    <div class="box">
+        <div class="links">
+            <span class="icon">
+                <span></span>
+                <span></span>
+                <span></span>                             
+            </span>
+            <ul>
+                <li><a href="#TRIP 1">TRIP 1</a></li>
+                <li><a href="#TRIP 2">TRIP 2</a></li>
+                <li><a href="#TRIP 3">TRIP 3</a></li>
+                <li> <a href="#TRIP 4">TRIP 4</a></li>
+            </ul>
+            </div> 
+        <div class="thump">
+          
+         <img src="https://media.istockphoto.com/vectors/young-male-worker-avatar-flat-illustration-police-man-bus-driver-vector-id1166844534?k=20&m=1166844534&s=612x612&w=0&h=HMbuCf3Bu5HSHsk6r663jDrrrTBD76LiwriQoq2yzXo=" alt="">
+          
         </div>
+            <div class="text">
+                <h4>captain ahmed</h4>
+                <p>  iam driving bus 1 in trip numper 1 and my phone is 01113334444
+                </p>  
+                <div class="but">
+                    <a href=""><button class="b">UPDATE</button></a>
+                               <button class="b">DELETE</button>
+                               <button class="b">ASSIGN</button>
+                 </div>
+             </div>
+
     </div>
-    <div class="continer">
-        @if ($message = Session::get('success'))
-        <div class="row">
-            <div class="col">
+    
+        <div class="box">
+            <div class="links">
+                <span class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>                             
+                </span>
+                <ul>
+                    <li><a href="#TRIP 1">TRIP 1</a></li>
+                    <li><a href="#TRIP 2">TRIP 2</a></li>
+                    <li><a href="#TRIP 3">TRIP 3</a></li>
+                    <li> <a href="#TRIP 4">TRIP 4</a></li>
+                </ul>
+            </div> 
+            <div class="thump">
+                <img src="https://media.istockphoto.com/vectors/young-male-worker-avatar-flat-illustration-driver-taxi-driver-vector-id1166844536?k=20&m=1166844536&s=612x612&w=0&h=iVRkI4CeiNq8IUNhM5Jt005xGaUUEm3RXwm7L8SX7EQ=" alt="">
+               
             </div>
-            <div class="alert alert-success" role="alert">
-                {{$message}}
-            </div>
+                <div class="text">
+                    <h4> captain gamal </h4>
+                    <p>  iam driving bus 2 in trip numper 4 and my phone is 01112234555
+                    </p>
+                    <div class="but">
+                        <a href=""><button class="b">UPDATE</button></a>
+                                   <button class="b">DELETE</button>
+                                   <button class="b">ASSIGN</button>
+                     </div>
+                </div>
+           
         </div>
-        @endif
+             
+        <div class="box">
+            <div class="links">
+                <span class="icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>                             
+                </span>
+                <ul>
+                    <li><a href="#TRIP 1">TRIP 1</a></li>
+                    <li><a href="#TRIP 2">TRIP 2</a></li>
+                    <li><a href="#TRIP 3">TRIP 3</a></li>
+                    <li> <a href="#TRIP 4">TRIP 4</a></li>
+                </ul>
+            </div> 
+                <div class="thump">
+                     <img src="https://media.istockphoto.com/vectors/young-male-worker-avatar-flat-illustration-driver-taxi-driver-vector-id1166844459?k=20&m=1166844459&s=612x612&w=0&h=-xp3jP-nNCcxyE3LXmTsadSHyIaFzDOcJV6gZ4_Cg80=" alt="">
+                
+                </div>
+                    <div class="text">
+                        <h4>captain hisham</h4>
+                        <p>  iam driving bus 3 in trip numper 2 and my phone is 01113378955
+                        </p>
+                        <div class="but">
+                            <a href=""><button class="b">UPDATE</button></a>
+                                       <button class="b">DELETE</button>
+                                       <button class="b">ASSIGN</button>
+                        </div>
 
-    </div>
-</div> --}}
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h3 class="m-0 text-dark">drivers Info
-                </h3>
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">drivers Info</li>
-                </ol>
-            </div>
-            <!-- /.col -->
+                    </div>
         </div>
+
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
@@ -101,14 +154,42 @@
                 </table>
                 {!! $driver->links()!!}
             </div>
-        </div>
-    </div>
-</div>
 
+        </div>
+     </div>                       
+     </div> 
+      <div class="box">
+          <div class="links">
+        <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>                             
+        </span>
+        <ul>
+            <li><a href="#TRIP 1">TRIP 1</a></li>
+            <li><a href="#TRIP 2">TRIP 2</a></li>
+            <li><a href="#TRIP 3">TRIP 3</a></li>
+            <li> <a href="#TRIP 4">TRIP 4</a></li>
+        </ul>
+          </div> 
+    <div class="thump">
+      
+     <img src="https://media.istockphoto.com/vectors/young-male-worker-avatar-flat-illustration-police-man-bus-driver-vector-id1166844534?k=20&m=1166844534&s=612x612&w=0&h=HMbuCf3Bu5HSHsk6r663jDrrrTBD76LiwriQoq2yzXo=" alt="">
+       
+    </div>
+        <div class="text">
+            <h4>captain ahmed</h4>
+            <p>  iam driving bus 1 in trip numper 1 and my phone is 01113334444
+            </p>  
+            <div class="but">
+                <a href=""><button class="b">UPDATE</button></a>
+                           <button class="b">DELETE</button>
+                           <button class="b">ASSIGN</button>
+            </div>
+        </div>
+
+      </div>
+        <button class="g"> 
+            <i class="fa fa-plus-circle" style="font-size:80px;color:#252C4B"></i>
+        </button>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-@endsection
