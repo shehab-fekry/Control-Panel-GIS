@@ -56,6 +56,6 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::put("changeLocation",function($data){
         event(new showTrip($data));
     });
-    Route::get('trip/start',"API\TripController@start");
+    Route::post('trip/start',"API\TripController@start");
 
     });

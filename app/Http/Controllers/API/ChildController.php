@@ -36,12 +36,12 @@ class ChildController extends BaseController
         $input=$request->all();
         $validator= Validator::make($input, [
             'name' => ['required', 'string', 'max:30'],
-            'photo'=>['required|image']
+            // 'photo'=>['required|image']
         ]);
-        $photo=$request->photo;//file
-        $new_photo=time().$photo->getClientOriginalName();//string
-        $photo->move('uploads/children/',$new_photo);
-        $input['photo']="uploads/children/".$new_photo;
+        // $photo=$request->photo;//file
+        // $new_photo=time().$photo->getClientOriginalName();//string
+        // $photo->move('uploads/children/',$new_photo);
+        // $input['photo']="uploads/children/".$new_photo;
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }elseif($father->confirmed==false){
