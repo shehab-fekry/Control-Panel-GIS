@@ -27,13 +27,18 @@ class AuthController extends BaseController
             'region' => ['required', 'string'],
             'lng' => ['required'],
             'lit' => ['required'],
+            // "photo"=>['required|image']
 
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
-
+        // $photo=$request->photo;
+        // $new_photo=time().$photo->getClientOriginalName();
+        // $photo->move('uploads/fathers/',$new_photo);
+        // $input['photo']=$new_photo;
         $input['password']=Hash::make($input['password']);
+
         $father=Father::create($input);
 
         $success['name']=$father->name;
@@ -77,12 +82,15 @@ class AuthController extends BaseController
             'password' => ['required', 'string', 'min:8','confirmed'],
             'mobileNumber'=>['required'],
             'licenseNumber' => ['required'],
-
+            // 'photo'=>['required|image']
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
-
+        // $photo=$request->photo;
+        // $new_photo=time().$photo->getClientOriginalName();
+        // $photo->move('uploads/drivers/',$new_photo);
+        // $input['photo']=$new_photo;
         $input['password']=Hash::make($input['password']);
         $driver=Driver::create($input);
         // $token=$driver->createToken('PassportExample@Section.io')->accessToken;;

@@ -4,6 +4,15 @@
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="row">
+            @if ($message = Session::get('error'))
+            <div class="row">
+              <div class="col">
+              </div>
+              <div class="alert alert-success" role="alert">
+                {{$message}}
+              </div>
+              </div>
+          @endif
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -133,7 +142,7 @@
 
                             </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="position-relative form-group"><label for="lit"
                                     class="">{{ __('lit') }}</label><input name="lit" id="lit"
@@ -148,8 +157,8 @@
                     </form>
                 </div>
             </div> --}}
-            
-            <form action="{{route('father.store')}}" method="POST" class="row g-3">
+
+            <form action="{{route('father.store')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
 
             <div class="row mb-3">
@@ -216,6 +225,14 @@
                         name="trip_id" required>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('image') }}</label>
+
+                <div class="col-md-6">
+                    <input class="form-control" name="image" type="file" >
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('status') }}</label>
 

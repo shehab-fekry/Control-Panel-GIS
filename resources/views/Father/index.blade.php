@@ -35,64 +35,61 @@
                     </div>
 
             </div>
-                <div class="box">
-                    <div class="links">
-                        <span class="icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>                             
-                        </span>
-                        <ul>
-                            <li><a href="#TRIP 1">TRIP 1</a></li>
-                            <li><a href="#TRIP 2">TRIP 2</a></li>
-                            <li><a href="#TRIP 3">TRIP 3</a></li>
-                            <li> <a href="#TRIP 4">TRIP 4</a></li>
-                        </ul>
-                        </div> 
-                    <div class="thump">
-                        <img src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg" >
-                       
-                </div>
-                        <div class="text">
-                            <h4>taher ali</h4>
-                            <p>  mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                            </p>
-                            <div class="but">
-                                <a href=""><button class="b">UPDATE</button></a>
-                                           <button class="b">DELETE</button>
-                                           <button class="b">ASSIGN</button>
-           </div>
-                        </div>
-                   
-                    </div>
-                     
-                <div class="box">
-                    <div class="links">
-                        <span class="icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>                             
-                        </span>
-                        <ul>
-                            <li><a href="#TRIP 1">TRIP 1</a></li>
-                            <li><a href="#TRIP 2">TRIP 2</a></li>
-                            <li><a href="#TRIP 3">TRIP 3</a></li>
-                            <li> <a href="#TRIP 4">TRIP 4</a></li>
-                        </ul>
-                        </div> 
-                    <div class="thump">
-                        <img src="https://cdn1.vectorstock.com/i/1000x1000/32/10/young-man-avatar-character-vector-14213210.jpg" >
-                       
 
-                        </div>
-                            <div class="text">
-                                <h4>amr adel</h4>
-                                <p>  mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                                </p>
-                                <div class="but">
-                                    <a href=""><button class="b">UPDATE</button></a>
-                                               <button class="b">DELETE</button>
-                                               <button class="b">ASSIGN</button>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- Main content -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table">
+                <table id="driverslisttbl" class="table card-table table-vcenter text-nowrap">
+                    <thead>
+                        <tr>
+                            <th scope="row" class="w-1">id</th>
+                            <th scope="row">name</th>
+                            <th scope="row">photo</th>
+                            <th scope="row">mobileNumber</th>
+                            <th scope="row">trip_id</th>
+                            <th scope="row">status</th>
+                            <th scope="row">region</th>
+                            <th scope="row">lng</th>
+                            <th scope="row">lit</th>
+                            <th scope="row">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($father as $parent )
+                        <tr>
+                            <th scope="row">{{$parent->id}}</th>
+                            <td>{{$parent->name}}</td>
+                            <td>
+                                <img src="{{asset('upload/father/'.$parent->image_path)}}" width="10%" alt="" srcset="">
+                            </td>
+                            <td>{{$parent->mobileNumber}}</td>
+                            <td>{{$parent->trip_id}}</td>
+                            <td>{{$parent->status}}</td>
+                            <td>{{$parent->region}}</td>
+                            <td>{{$parent->lng}}</td>
+                            <td>{{$parent->lit}}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm"> <a href="{{route('father.edit',$parent->id)}}"
+                                        class="btn fa fa-lg  fa-edit "></a></div>
+                                    <div class="col-sm"> <a href="{{route('father.show',$parent->id)}}"
+                                        class="btn fas fa-lg fa-eye"  style="color:green"></a></div>
+                                    <div class="col-sm">
+                                        <form action="{{route('father.destroy',$parent->id)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"class="btn fa-lg far fa-trash-alt" style="color:Red"></button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,6 @@ class FatherController extends Controller
 
     public function index()
     {
-
         $father  = Father::latest()->paginate(7);
         return view("father.index",compact("father"));
     }
@@ -25,9 +24,10 @@ class FatherController extends Controller
         return view("father.create");
     }
 
-    public function store(Request  $data)
+    public function store(Request  $request)
     {
-        $data->validate([
+    //    $test=$request->file('image')->getClientMimeType();
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -37,23 +37,45 @@ class FatherController extends Controller
             'region' => ['string', 'max:20'],
             'lng' => ['string', 'max:20'],
             'lit' => ['string', 'max:20'],
+            'image'=> ['image']
         ]);
+        if ($request->image == Null){
+            Father::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'mobileNumber' => $request->input('m_number'),
+                'trip_id' => $request->input('trip_id'),
+                'status' => $request->input('status'),
+                'region' => $request->input('region'),
+                'lng' => $request->input('lng'),
+                'lit' => $request->input('lit'),
+                'image_path' => 'parent.png'
+            ]);
+            return redirect()->route("father.index")
+            ->with('success','Father added successfuly');
+        }
+     else 
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
+        $request->image->move(public_path('upload\father'),$newPhotoName);
+     
         Father::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'mobileNumber' => $data['m_number'],
-            'trip_id' => $data['trip_id'],
-            'status' => $data['status'],
-            'region' => $data['region'],
-            'lng' => $data['lng'],
-            'lit' => $data['lit'],
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'mobileNumber' => $request->input('m_number'),
+            'trip_id' => $request->input('trip_id'),
+            'status' => $request->input('status'),
+            'region' => $request->input('region'),
+            'lng' => $request->input('lng'),
+            'lit' => $request->input('lit'),
+            'image_path' => $newPhotoName
         ]);
 
         return redirect()->route("father.index")
         ->with('success','Father added successfuly');
 
- 
+
     }
 
 
@@ -86,7 +108,7 @@ public function update(Request $request, Father $father)
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-     
+
         $father->name=$input['name'];
         $father->email=$input['email'];
         $father->trip_id=$input['trip_id'];
