@@ -1,0 +1,105 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Cera Round Pro', sans-serif;
+    background-color: #f8f8f8;
+}
+
+.sign_wrapper{
+    position: fixed;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.card{
+    height: 35%;
+    width: 35%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 0px 10px #ccc;
+    border-radius: 20px;
+}
+
+.card_head{
+    height: 20%;
+    width: 70%;
+    padding: 15px;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+.card_head label{
+    font-size: 30px;
+    font-weight: 800;
+    opacity: 0.9;
+    color: #384850;
+}
+
+.postForm{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+.main_container{
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    
+}
+
+#email{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.input_container{
+    display: flex;
+    flex-flow: row;
+    align-items:center;
+    width: 100%;
+    border: none;
+    background-color:unset; 
+}
+
+.input_container img{
+    width:20px;
+    margin-right: 3px;
+}
+
+.input_container .input_field{
+    padding: 10px;
+    width:100%;
+    border: none;
+    background-color: unset;
+    outline: none;
+}
+
+.submit {
+    width: 70%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: medium;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    background-color: #ffc107;
+    border-radius: 10px;
+}
+
+.submit:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #ffc107;
+}
