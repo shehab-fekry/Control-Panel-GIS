@@ -149,7 +149,7 @@
                 </div>
             </div> --}}
             
-            <form action="{{route('driver.store')}}" method="POST" class="row g-3">
+            <form action="{{route('driver.store')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
 
             <div class="row mb-3">
@@ -198,6 +198,13 @@
                 <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                         required autocomplete="new-password">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('image') }}</label>
+
+                <div class="col-md-6">
+                    <input class="form-control" name="image" type="file" >
                 </div>
             </div>
             <div class="row mb-3">

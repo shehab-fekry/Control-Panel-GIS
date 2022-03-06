@@ -15,10 +15,11 @@ class CreateDriversTable extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->string('name',30);
+            $table->string('image_path')->nullable();
             $table->integer('trip_id')->unsigned()->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('name',30);
             $table->string('licenseNumber',20)->unique();
             $table->boolean('confirmed')->default(false);
             $table->string('mobileNumber', 15);
