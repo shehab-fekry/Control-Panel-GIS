@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <link rel="icon" href="../Public/assets/school-bus.png">
+    <link rel="stylesheet" href="../Public/css/forgetPass.css">
+    <!--   Fonts   -->
+    <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
+</head>
+
+<body>
+    <div class="sign_wrapper">
+            <div class="svg">
+                <img src="../Public/assets/forgetPass.svg" width="500" height="500" alt="">
+            </div>
+            <div class="card">
+                <div class="card_head">
+                    <label> RESET PASSWORD</label>
+                </div>
+                <form class="postForm" action="/dash/resetPassword" method="POST">
+                    <div class="main_container">
+                        <div class="input_container">
+                            <div><img src="../Public/assets/email.png"></div>
+                            <input class="input_field" id="email" type="email" value="" placeholder="Example@gmail.com">
+                        </div>
+                        <!-- message -->
+                        <div id="emailInvalid"></div>
+                    </div>
+                    <button class="submit" type="submit">Reset</button>
+                </form>
+            </div>
+    </div>
+    <script></script>
+</body>
+</html>
