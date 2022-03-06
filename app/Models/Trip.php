@@ -9,7 +9,7 @@ class Trip extends Model
 {
     use HasFactory;
     protected $fillable=[
-'driver_id','status'
+'driver_id','status','geofence','school_id'
     ];
 
     public function driver()
