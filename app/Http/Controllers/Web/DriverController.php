@@ -31,6 +31,8 @@ class DriverController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'confirmed' => ['required', 'int', 'max:20'],
+            'trip_id' => ['required', 'int', 'max:20'],
+            'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
             'image'=>'image'
         ]);
@@ -42,6 +44,8 @@ class DriverController extends Controller
                 'licenseNumber' => $data['licenseNumber'],
                 'confirmed' => $data['confirmed'],
                 'mobileNumber' => $data['mobileNumber'],
+                'trip_id' => $data['trip_id'],
+                'school_id' => $data['school_id'],
                 'image_path' => 'driver.png'
             ]);
             return redirect()->route("driver.index")
@@ -57,6 +61,8 @@ class DriverController extends Controller
             'licenseNumber' => $data['licenseNumber'],
             'confirmed' => $data['confirmed'],
             'mobileNumber' => $data['mobileNumber'],
+            'trip_id' => $data['trip_id'],
+            'school_id' => $data['school_id'],
             'image_path' => $newPhotoName
         ]);
 
@@ -84,6 +90,8 @@ class DriverController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'confirmed' => ['required', 'int', 'max:20'],
+            'trip_id' => ['required', 'int', 'max:20'],
+            'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
         ]);
         if($validator->fails()){
@@ -96,6 +104,8 @@ class DriverController extends Controller
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
         $driver->confirmed=$input['confirmed'];
+        $driver->trip_id=$input['trip_id'];
+        $driver->school_id=$input['school_id'];
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
     }

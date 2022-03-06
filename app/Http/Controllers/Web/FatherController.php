@@ -33,6 +33,7 @@ class FatherController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'm_number' => ['required', 'string', 'max:20'],
             'trip_id' => ['required', 'int', 'max:20'],
+            'school_id' => ['required', 'int', 'max:20'],
             'status' => ['required', 'int', 'max:20'],
             'region' => ['string', 'max:20'],
             'lng' => ['string', 'max:20'],
@@ -46,6 +47,7 @@ class FatherController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'mobileNumber' => $request->input('m_number'),
                 'trip_id' => $request->input('trip_id'),
+                'school_id' => $request->input('school_id'),
                 'status' => $request->input('status'),
                 'region' => $request->input('region'),
                 'lng' => $request->input('lng'),
@@ -65,6 +67,7 @@ class FatherController extends Controller
             'password' => Hash::make($request->input('password')),
             'mobileNumber' => $request->input('m_number'),
             'trip_id' => $request->input('trip_id'),
+            'school_id' => $request->input('school_id'),
             'status' => $request->input('status'),
             'region' => $request->input('region'),
             'lng' => $request->input('lng'),
@@ -100,6 +103,7 @@ public function update(Request $request, Father $father)
             'password' => ['required', 'string', 'min:8'],
             'mobileNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'trip_id' => ['int', 'max:20'],
+            'school_id' => ['required', 'int', 'max:20'],
             'status' => [ 'string', 'max:20'],
             'region' => ['string', 'max:20'],
             'lng' => [ 'string', 'max:20'],
@@ -112,6 +116,7 @@ public function update(Request $request, Father $father)
         $father->name=$input['name'];
         $father->email=$input['email'];
         $father->trip_id=$input['trip_id'];
+        $father->trip_id=$input['school_id'];
         $father->password=Hash::make($input['password']);
         $father->mobileNumber=$input['mobileNumber'];
         $father->status=$input['status'];
