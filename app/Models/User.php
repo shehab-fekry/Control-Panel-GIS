@@ -19,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'school_id',
         'email',
         'password',
         'image_path'
@@ -32,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
-       
+
     ];
 
     /**
@@ -45,4 +46,13 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $table = 'admins';
+    /**
+     * Get the school that owns the admin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

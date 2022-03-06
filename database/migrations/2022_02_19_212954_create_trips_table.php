@@ -13,8 +13,10 @@ class CreateTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table)
+        {
             $table->id();
+            $table->integer('school_id')->unsigned();
             $table->string('geofence', 20);
             $table->integer('status')->default(0);
             $table->timestamps();

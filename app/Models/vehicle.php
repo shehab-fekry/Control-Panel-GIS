@@ -9,7 +9,7 @@ class vehicle extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'licensePlate','model','color','driver_id','model'
+        'licensePlate','model','color','driver_id','model','school_id'
     ];
     public function driver()
     {
