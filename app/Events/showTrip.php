@@ -32,7 +32,7 @@ class showTrip implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'AhmedElgizawy';
+        return 'Gizawy';
     }
 
 }

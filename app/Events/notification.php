@@ -10,18 +10,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class notification
+class notification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    protected $message,$id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct($data)
     {
-        //
+        $this->message=$data->message;
+        $this->id=$data->id;
+
     }
 
     /**
@@ -31,6 +35,11 @@ class notification
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('trip_notify.'.$this->id);
+    }  public function broadcastAs()
+    {
+        return 'Gizawy2';
     }
+
+
 }
