@@ -33,14 +33,10 @@ class TripController extends BaseController
         $data=array();
          $request_lat=deg2rad($request->lit);
          $request_lon=deg2rad($request->lng);
-
-
         foreach($fathers as $father)
         {
             $father_lat=deg2rad($father->lit);
             $father_lon=deg2rad($father->lng);
-
-
             $count=1;
             $children=Child::where("father_id",$father->id)->where('status',true)->get();
             $data[$father->name]=array();
@@ -49,7 +45,7 @@ class TripController extends BaseController
             $val = pow(sin($li/2),2)+cos($request_lat)*cos($father_lat)*pow(sin($ln/2),2);
             $res = 2 * asin(sqrt($val));
             $radius = 6371;
-            $distance=($res*$radius);
+            $distance=($res*$radius)*1000;
             $data[$father->name]+=array('distance'=>$distance);
             $data[$father->name]+=array('lng'=>$father->lng);
             $data[$father->name]+=array('lit'=>$father->lit);
