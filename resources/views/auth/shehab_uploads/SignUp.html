@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <%= pageTitle %>
+        Sign Up
     </title>
     <link rel="icon" href="../Public/assets/school-bus.png">
     <link rel="stylesheet" href="../Public/css/SignUp.css">
@@ -14,9 +14,12 @@
 </head>
 
 <body>
+    <!-- <div class="nav">
+        <div class="title">SchoolBusTracking</div>
+    </div> -->
     <div class="sign_wrapper">
             <div class="svg">
-                <img src="../Public/assets/register.svg" width="500" height="500" alt="">
+                <img src="../Public/assets/registerDark.svg" width="500" height="500" alt="">
             </div>
             <div class="card">
                 <div class="card_head">
@@ -63,6 +66,7 @@
                         <!-- message -->
                         <div id="confPassInvalid"></div>
                     </div>
+                    <div class="captcha">Captcha</div>
                     <button class="submit" type="submit">SIGN UP</button>
                 </form>
             </div>
@@ -103,7 +107,7 @@
             // only one @
             // only one .
             const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
-            const confirmPasswordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
+            // const confirmPasswordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
             // letters (capital or small), digits, special characters
             // at least one digit
             // at least one special character
@@ -137,7 +141,7 @@
 
             if(passwordCheck.test(password))
             {
-                document.getElementById('username').style.borderBottom = '2px solid limegreen'
+                document.getElementById('password').style.borderBottom = '2px solid limegreen'
                 document.getElementById('passInvalid').innerHTML 
                 = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
             } else {
@@ -146,19 +150,19 @@
                 = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
             }
 
-            if(passwordCheck.test(password) && (password === confirmPassword))
+            if(password === confirmPassword && confirmPassword !=='')
             {
-                document.getElementById('username').style.borderBottom = '2px solid limegreen'
+                document.getElementById('confPassword').style.borderBottom = '2px solid limegreen'
                 document.getElementById('confPassInvalid').innerHTML 
                 = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
             } else {
                 document.getElementById('confPassword').style.borderBottom = '2px solid red'
                 document.getElementById('confPassInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
+                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Passwords don\'t match</div>'
             }
 
-            return nameCheck.test(username) && emailCheck.test(email)
-            && passwordCheck.test(password) && (passwordCheck.test(password) && (password === confirmPassword))
+            return nameCheck.test(username) && emailCheck.test(email) && passwordCheck.test(password) 
+            && password === confirmPassword
         }
     </script>
 </body>
