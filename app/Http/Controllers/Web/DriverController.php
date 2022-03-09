@@ -4,7 +4,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
+use App\Models\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 
@@ -13,11 +15,15 @@ class DriverController extends Controller
 
     public function index()
     {
-        $driver  = Driver::latest()->paginate(5);
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return view("school.create");
+        }
+        $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
         return view("driver.index",compact("driver"));
     }
 
- 
+
     public function create()
     {
         return view("driver.create");
@@ -25,6 +31,7 @@ class DriverController extends Controller
 
     public function store(Request $data)
     {
+        $admin=Auth::user();
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
@@ -42,12 +49,13 @@ class DriverController extends Controller
                 'licenseNumber' => $data['licenseNumber'],
                 'confirmed' => $data['confirmed'],
                 'mobileNumber' => $data['mobileNumber'],
-                'image_path' => 'driver.png'
+                'image_path' => 'driver.png',
+                'school_id'=>$admin->school_id,
             ]);
             return redirect()->route("driver.index")
             ->with('success','driver added successfuly');
         }
-     else   
+     else
          $newPhotoName=time() . '-' . $data->name  .'.' .  $data->image->extension();
          $data->image->move(public_path('upload\driver'),$newPhotoName);
         Driver::create([
@@ -72,9 +80,11 @@ class DriverController extends Controller
 
     public function edit(Driver $driver)
     {
-        return view("driver.edit",compact('driver'));
+        $admin=Auth::user();
+        $trips=Trip::where("school_id",$admin->school_id)->get();
+        return view("driver.edit",compact('driver'))->with('trips',$trips);
     }
-  
+
     public function update(Request $request, Driver $driver)
     {
         $input=$request->all();
@@ -89,7 +99,7 @@ class DriverController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-     
+
         $driver->name=$input['name'];
         $driver->email=$input['email'];
         $driver->password=Hash::make($input['password']);

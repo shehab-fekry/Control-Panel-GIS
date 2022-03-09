@@ -19,7 +19,6 @@ class CreateChildrenTable extends Migration
             $table->string('image_path')->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('status')->default(false);
-            $table->string('photo')->nullable();
             $table->integer('father_id')->unsigned();
             $table->timestamps();
         });

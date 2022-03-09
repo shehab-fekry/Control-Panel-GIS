@@ -4,46 +4,43 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Father;
 use App\Models\Trip;
+use App\Models\vehicle;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class TripController extends Controller
 {
-    public function start($id){
-        $trip=Trip::find($id);
-        $parents=Father::where('trip_id',$id)->where('status','>',0)->get();
-
-       echo ($parents);
-
-
-
-
-    }
-    public function delivered($id){
-        $trip=Trip::find($id);
-
-    }
-    public function backHome($id){
-        $trip=Trip::find($id);
-
-    }
-    public function end($id){
-        $trip=Trip::find($id);
-
-    }
-
-  public function store()
+    public function index()
     {
-        Trip::create([
-            'driver_id'=>1,
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return view("school.create");
+        }
+        $vehicles=vehicle::where('school_id',$admin->school_id)->get();
+        return view("vehicle.index",compact("vehicles"));
+
+    }
+
+  public function store(request $data)
+    {
+        $admin=Auth::user();
+
+
+        $data->validate([
+            'geofence' => ['required', 'string'],
         ]);
+        Trip::create([
+            'geofence' => $data['geofence'],
+            'school_id' => $admin->school_id,
+
+        ]);
+
+        return redirect()->route("child.index")
+        ->with('success','trip added successfuly');
     }
 
 
 
-    // public function index()
-    // {
 
-    // }
 
 
     // public function create()
