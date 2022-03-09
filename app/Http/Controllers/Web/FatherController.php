@@ -3,7 +3,9 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Child;
 use App\Models\Father;
+use App\Models\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -14,8 +16,12 @@ class FatherController extends Controller
 
     public function index()
     {
-        $father  = Father::latest()->paginate(7);
-        return view("father.index",compact("father"));
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return view("school.create");
+        }
+        $fathers = Father::where("school_id",$admin->school_id)->latest()->paginate(7);
+        return view("father.index",compact("fathers"));
     }
 
 
@@ -26,6 +32,7 @@ class FatherController extends Controller
 
     public function store(Request  $request)
     {
+        $admin=Auth::user();
     //    $test=$request->file('image')->getClientMimeType();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -52,15 +59,16 @@ class FatherController extends Controller
                 'region' => $request->input('region'),
                 'lng' => $request->input('lng'),
                 'lit' => $request->input('lit'),
-                'image_path' => 'parent.png'
+                'image_path' => 'parent.png',
+                'school_id'=>$admin->school_id
             ]);
             return redirect()->route("father.index")
             ->with('success','Father added successfuly');
         }
-     else 
+     else
         $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
         $request->image->move(public_path('upload\father'),$newPhotoName);
-     
+
         Father::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -90,7 +98,9 @@ class FatherController extends Controller
 
     public function edit(Father $father)
     {
-        return view("father.edit",compact('father'));
+        $admin=Auth::user();
+        $trips=Trip::where("school_id",$admin->school_id);
+        return view("father.edit",compact('father'))->with('trips',$trips);
     }
 
 

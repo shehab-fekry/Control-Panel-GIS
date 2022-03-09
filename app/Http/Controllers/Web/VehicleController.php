@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -16,8 +17,12 @@ class VehicleController extends Controller
      */
     public function index()
     {
-         
-        $vehicle = vehicle::latest()->paginate(7);
+
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return view("school.create");
+        }
+        $vehicle = vehicle::where('school_id',$admin->school_id)->latest()->paginate(7);
         return view("vehicle.index",compact("vehicle"));
     }
 
@@ -97,7 +102,7 @@ class VehicleController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-     
+
         $vehicle->licensePlate=$input['licensePlate'];
         $vehicle->model=$input['model'];
         $vehicle->driver_id=$input['driver_id'];

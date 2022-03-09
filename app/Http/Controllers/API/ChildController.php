@@ -9,7 +9,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\ChildResource;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Father;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class ChildController extends BaseController
 {
@@ -17,16 +17,17 @@ class ChildController extends BaseController
     public function index()
     {
         $id=Auth::guard('api-fathers')->id();
-        $id=Auth::id();
         $children=Child::where("father_id",$id)->where("confirmed",true)->get();
-        $count=Child::where("father_id",$id)->where("confirmed",false)->count();
+        $childrenCount=Child::where("father_id",$id)->withCount([ 'children' => function (Builder $query) {
+            $query->where('confirmed',false);
+        }])->get();
         $input=$children->all();
         if(empty($input)){
-            return $this->sendError('please validate errors',"you have ".$count." chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
+            return $this->sendError('please validate errors',"you have chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
         }
         else
         {
-            return $this-> sendResponse(ChildResource::collection($input),'you have '.$count.' chidrens waiting to confirm from admin');
+            return $this-> sendResponse(ChildResource::collection($input),'you have  chidrens waiting to confirm from admin');
         }
     }
     public function store(Request $request)

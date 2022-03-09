@@ -12,7 +12,7 @@ use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-
+use App\Models\School;
 class AuthController extends BaseController
 {
 
@@ -24,10 +24,11 @@ class AuthController extends BaseController
             'email' => ['required', 'string', 'email', 'max:255',"unique:fathers"],
             'password' => ['required', 'string', 'min:8','confirmed'],
             'mobileNumber'=>['required'],
+            'code'=>['required','string','exists:schools,code'],
             'region' => ['required', 'string'],
             'lng' => ['required'],
             'lit' => ['required'],
-            // "photo"=>['required|image']
+            //"photo"=>['required|image']
 
         ]);
         if($validator->fails()){
@@ -37,10 +38,10 @@ class AuthController extends BaseController
         // $new_photo=time().$photo->getClientOriginalName();
         // $photo->move('uploads/fathers/',$new_photo);
         // $input['photo']=$new_photo;
+        $school=School::where('code',$request->code)->get();
+        $input['school_id']=$school->id;
         $input['password']=Hash::make($input['password']);
-
         $father=Father::create($input);
-
         $success['name']=$father->name;
         return $this-> sendResponse('no data','father registered successfully');
     }
@@ -82,11 +83,14 @@ class AuthController extends BaseController
             'password' => ['required', 'string', 'min:8','confirmed'],
             'mobileNumber'=>['required'],
             'licenseNumber' => ['required'],
+            'code'=>['required','string','exists:schools,code'],
             // 'photo'=>['required|image']
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
+        $school=School::where('code',$request->code)->get();
+        $input['school_id']=$school->id;
         // $photo=$request->photo;
         // $new_photo=time().$photo->getClientOriginalName();
         // $photo->move('uploads/drivers/',$new_photo);

@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class ChildController extends Controller
 {
 
-    public function index()
+    public function index($id)
     {
-
-        $child  = Child::latest()->paginate(7);
+        $child  = Child::where('father_id',$id)->latest()->paginate(7);
         return view("child.index",compact("child"));
     }
 
@@ -29,6 +29,7 @@ class ChildController extends Controller
 
     public function store(Request  $data)
     {
+        $admin=Auth::user();
 
         $data->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -44,7 +45,8 @@ class ChildController extends Controller
             'name' => $data['name'],
             'status' => $data['status'],
             'father_id' => $data['father_id'],
-            'photo'=>"uploads/children/".$new_photo
+            'photo'=>"uploads/children/".$new_photo,
+            'school_id'=>$admin->school_id
         ]);
 
         return redirect()->route("child.index")
@@ -68,7 +70,6 @@ class ChildController extends Controller
         $input=$request->all();
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
-
             'status' => ['required', 'string', 'email', 'max:255'],
             'father_id' => ['required', 'string', 'max:20'],
         ]);
