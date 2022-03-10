@@ -82,15 +82,16 @@ class AuthController extends BaseController
             'email' => ['required', 'string', 'email', 'max:255','unique:drivers',],
             'password' => ['required', 'string', 'min:8','confirmed'],
             'mobileNumber'=>['required'],
-            'licenseNumber' => ['required'],
+            'licenseNumber' => ['required',"unique:drivers,licenseNumber"],
             'code'=>['required','string','exists:schools,code'],
             // 'photo'=>['required|image']
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
-        $school=School::where('code',$request->code)->get();
-        $input['school_id']=$school->id;
+        $school=School::where('code',$request->code)->first();
+
+         $input['school_id']=$school->id;
         // $photo=$request->photo;
         // $new_photo=time().$photo->getClientOriginalName();
         // $photo->move('uploads/drivers/',$new_photo);
@@ -99,7 +100,8 @@ class AuthController extends BaseController
         $driver=Driver::create($input);
         // $token=$driver->createToken('PassportExample@Section.io')->accessToken;;
         $success['name']=$driver->name;
-        return $this-> sendResponse("no data",'driver registered successfully');
+        $success['SchoolName']=$school->name;
+        return $this-> sendResponse($success,'driver registered successfully');
     }
     public function driverLogin(Request $request){
 
@@ -111,7 +113,7 @@ class AuthController extends BaseController
             $driver->api_token=$success['token'];
             $driver->save();
 
-            $success['name']=$driver->name;
+            $success['driver']=$driver;
             return $this-> sendResponse($success,'driver login successfully');
         }
         else{
