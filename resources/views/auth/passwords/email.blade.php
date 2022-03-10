@@ -1,47 +1,52 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        email
+    </title>
+    <link rel="icon" href="{{ asset("assets/school-bus.png")}}">
+    <link rel="stylesheet" href="{{ asset("css/forgetPassword.css")}}">
+    <!--   Fonts   -->
+    <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
+</head>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<body>
+    <div class="sign_wrapper">
+        
+        <div class="svg">
+            <img src="{{ asset("assets/forgetPassDark.svg")}}" width="500" height="500" alt="">
+        </div>
+        <div class="card">
+            <div class="card_head">
+                <label> RESET PASSWORD</label>
             </div>
+            @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
+            <form class="postForm" method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <div class="main_container">
+                    <div class="input_container">
+                        <div><img src="{{ asset("assets/email.png")}}"></div>
+                        <input id="email" type="email" class="input_field @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                            placeholder="Example@gmail.com">
+                    </div>
+                    <!-- message -->
+                    @error('email')
+                    <div id="emailInvalid">{{ $message }}</div>
+                    @enderror
+
+                </div>
+                <button class="submit" type="submit">{{ __('Send Password Reset Link') }}</button>
+            </form>
         </div>
     </div>
-</div>
-@endsection
+    <script></script>
+</body>
+
+</html>
