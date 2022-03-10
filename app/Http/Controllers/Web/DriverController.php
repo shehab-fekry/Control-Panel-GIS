@@ -23,7 +23,6 @@ class DriverController extends Controller
         return view("driver.index",compact("driver"));
     }
 
-
     public function create()
     {
         return view("driver.create");
@@ -91,7 +90,7 @@ class DriverController extends Controller
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
-            'password' => ['required', 'string', 'min:8'],
+            // 'password' => ['required', 'string', 'min:8'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'confirmed' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
@@ -102,12 +101,33 @@ class DriverController extends Controller
 
         $driver->name=$input['name'];
         $driver->email=$input['email'];
-        $driver->password=Hash::make($input['password']);
+        // $driver->password=Hash::make($input['password']);
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
         $driver->confirmed=$input['confirmed'];
+
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
+    }
+    public function AssignDriverToTrip(Request $request, Driver $driver){
+        $driver->trip_id=$request->trip_id;
+        $driver->save();
+        return redirect()->route("driver.index")->with('success','driver assigned to trip successfuly');
+    }
+    public function passwordReset(Request $request, Driver $driver)
+    {
+        $input=$request->all();
+        $validator=Validator::make($input,[
+
+            'password' => ['required', 'string', 'min:8'],
+
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+        $driver->trip_id=$request->trip_id;
+        $driver->save();
+        return redirect()->route("driver.index")->with('success','driver assigned to trip successfuly');
     }
 
     public function destroy(Driver $driver)
@@ -115,4 +135,6 @@ class DriverController extends Controller
         $driver->delete();
         return redirect()->route("driver.index")->with('success','driver deleted successfuly');
     }
+
 }
+
