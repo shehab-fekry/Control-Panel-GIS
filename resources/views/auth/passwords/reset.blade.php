@@ -1,18 +1,119 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+       reset
+    </title>
+    <link rel="icon" href="{{ asset("assets/school-bus.png")}}">
+    <link rel="stylesheet" href="{{ asset("css/newPassword.css")}}">
+    <!--   Fonts   -->
+    <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
+    <!--  eye icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+</head>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<body>
+    <div class="sign_wrapper">
+            <div class="svg">
+                <img src="{{ asset("assets/ConfirmedDark.svg")}}" width="500" height="500" alt="">
+            </div>
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card_head">
+                    <label> NEW PASSWORD</label>
+                </div>
+                <form onsubmit="return validation()" class="postForm" method="POST" action="{{ route('password.update') }}">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input id="email" type="hidden" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                    <div class="main_container">
+                        <div class="input_container">
+                            <div><img src="{{ asset('assets/lock.png') }}"></div>
+                            <input id="password" type="password" class="input_field @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                            <i class="bi bi-eye-slash" onclick="togglePass(this)"></i>
+                        </div>
+                        <!-- message -->
+                        @error('password')
+                        <div id="passInvalid">{{ $message }}</div>
+                         @enderror
+                        
+                    </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+                    <div class="main_container">
+                        <div class="input_container">
+                            <div><img src="{{ asset('assets/lock.png') }}"></div>
+                            <input class="input_field" id="confPassword" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                            <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
+                        </div>
+                    </div>
+                    <button class="submit" type="submit">CHANGE</button>
+                </form>
+            </div>
+    </div>
+    <script>
+        togglePass = (element) =>{
+            let pass = document.getElementById("password");
+            
+            // change input type
+            let type = pass.getAttribute("type") === "password" ? "text" : "password"
+            pass.setAttribute("type", type)
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+            // toggle between bi-eye and bi-eye-slash
+            element.classList.toggle("bi-eye");
+        }
 
+        toggleConf = (element) =>{
+            let confPass = document.getElementById("confPassword");
+            
+            // change input type
+            let type = confPass.getAttribute("type") === "password" ? "text" : "password"
+            confPass.setAttribute("type", type)
+
+            // toggle between bi-eye and bi-eye-slash
+            element.classList.toggle("bi-eye");
+        }
+
+
+        validation = () => {
+            const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
+            // letters (capital or small), digits, special characters
+            // at least one digit
+            // at least one special character
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confPassword').value;
+
+            if(passwordCheck.test(password))
+            {
+                document.getElementById('password').style.borderBottom = '2px solid limegreen'
+                document.getElementById('passInvalid').innerHTML 
+                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+            } else {
+                document.getElementById('password').style.borderBottom = '2px solid red'
+                document.getElementById('passInvalid').innerHTML 
+                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
+            }
+
+            if(password === confirmPassword && confirmPassword !=='')
+            {
+                document.getElementById('confPassword').style.borderBottom = '2px solid limegreen'
+                document.getElementById('confPassInvalid').innerHTML 
+                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+            } else {
+                document.getElementById('confPassword').style.borderBottom = '2px solid red'
+                document.getElementById('confPassInvalid').innerHTML 
+                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Passwords don\'t match</div>'
+            }
+
+            return passwordCheck.test(password) && password === confirmPassword
+        }
+    </script>
+</body>
+</html>
+
+
+
+{{--                      
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -25,41 +126,5 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
