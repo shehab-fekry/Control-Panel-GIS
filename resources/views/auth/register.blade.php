@@ -30,18 +30,17 @@
                         <button class="toggle">SIGN IN</button>
                     </form>
                 </div>
-                <form onsubmit="return validation()" class="postForm"  action="{{ route('register') }}"method="POST">
+                <form onsubmit="validation()" class="postForm"  action="{{ route('register') }}"  method="POST">
                     @csrf
                     <div class="main_container">
                         <div class="input_container">
                             <div><img src="{{ asset("assets/user.png")}}"></div>
                             <input placeholder="Name" id="username" type="text" class="input_field @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         </div>
-
                         <!-- message -->
                         @error('name')
-                        <div id="nameInvalid">{{ $message }}</div>
-                         @enderror
+                        <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div>
+                        @enderror
                        
                     </div>
 
@@ -52,7 +51,7 @@
                         </div>
                         <!-- message -->
                         @error('email')
-                        <div id="emailInvalid">{{ $message }}</div>
+                        <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div>
                         @enderror
                         
                     </div>
@@ -65,7 +64,8 @@
                         </div>
                         <!-- message -->
                         @error('password')
-                        <div id="passInvalid">{{ $message }}</div>
+                        <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div>
+                        {{-- <div id="passInvalid">{{ $message }}</div> --}}
                         @enderror
                     </div>
 
@@ -75,8 +75,6 @@
                             <input class="input_field" id="confPassword"  type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
                         </div>
-                        <!-- message -->
-                        <div id="confPassInvalid"></div>
                     </div>
                     
                     <div class="form-group row">
@@ -84,7 +82,8 @@
                         <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
                         @if ($errors->has('g-recaptcha-response'))
                         <div class="col-md-6  text-md-end ">
-                            <strong class="text-danger">Plesse Fill Out This Field</strong>
+                            <div style="font-size:12px; color:red;">Plesse Fill Out This Field</div>
+                            {{-- <strong class="text-danger">Plesse Fill Out This Field</strong> --}}
                         </div>
                     @endif
                     </div>
@@ -118,74 +117,74 @@
         }
 
 
-        validation = () =>{
-            const nameCheck = /^[A-Za-z. ]{5,20}$/
-            // letters (capital or small), dott, space
-            // min 5 inputs
-            // max 20 input
-            const emailCheck = /^[A-Za-z0-9_.-]{3,}@{1}[A-Za-z]{3,}.{1}[A-Za-z.]{3,}$/
-            // letters (capital or small), digits, underscore, dott, dash
-            // min 3 inputs
-            // only one @
-            // only one .
-            const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
-            // const confirmPasswordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
-            // letters (capital or small), digits, special characters
-            // at least one digit
-            // at least one special character
+        // validation = () =>{
+        //     const nameCheck = /^[A-Za-z. ]{5,20}$/
+        //     // letters (capital or small), dott, space
+        //     // min 5 inputs
+        //     // max 20 input
+        //     const emailCheck = /^[A-Za-z0-9_.-]{3,}@{1}[A-Za-z]{3,}.{1}[A-Za-z.]{3,}$/
+        //     // letters (capital or small), digits, underscore, dott, dash
+        //     // min 3 inputs
+        //     // only one @
+        //     // only one .
+        //     const passwordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
+        //     // const confirmPasswordCheck = /^(?=.*[0-9])(?=.*[!@#$%&*])[A-Za-z0-9!@#$%^&*]{8,20}$/
+        //     // letters (capital or small), digits, special characters
+        //     // at least one digit
+        //     // at least one special character
 
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confPassword').value;
+        //     const username = document.getElementById('username').value;
+        //     const email = document.getElementById('email').value;
+        //     const password = document.getElementById('password').value;
+        //     const confirmPassword = document.getElementById('confPassword').value;
 
-            if(nameCheck.test(username))
-            {
-                document.getElementById('username').style.borderBottom = '2px solid limegreen'
-                document.getElementById('nameInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
-            } else {
-                document.getElementById('username').style.borderBottom = '2px solid red'
-                document.getElementById('nameInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
-            }
+        //     if(nameCheck.test(username))
+        //     {
+        //         document.getElementById('username').style.borderBottom = '2px solid limegreen'
+        //         document.getElementById('nameInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+        //     } else {
+        //         document.getElementById('username').style.borderBottom = '2px solid red'
+        //         document.getElementById('nameInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
+        //     }
 
-            if(emailCheck.test(email))
-            {
-                document.getElementById('email').style.borderBottom = '2px solid limegreen'
-                document.getElementById('emailInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
-            } else {
-                document.getElementById('email').style.borderBottom = '2px solid red'
-                document.getElementById('emailInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
-            }
+        //     if(emailCheck.test(email))
+        //     {
+        //         document.getElementById('email').style.borderBottom = '2px solid limegreen'
+        //         document.getElementById('emailInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+        //     } else {
+        //         document.getElementById('email').style.borderBottom = '2px solid red'
+        //         document.getElementById('emailInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
+        //     }
 
-            if(passwordCheck.test(password))
-            {
-                document.getElementById('password').style.borderBottom = '2px solid limegreen'
-                document.getElementById('passInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
-            } else {
-                document.getElementById('password').style.borderBottom = '2px solid red'
-                document.getElementById('passInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
-            }
+        //     if(passwordCheck.test(password))
+        //     {
+        //         document.getElementById('password').style.borderBottom = '2px solid limegreen'
+        //         document.getElementById('passInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+        //     } else {
+        //         document.getElementById('password').style.borderBottom = '2px solid red'
+        //         document.getElementById('passInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Invalid Input</div>'
+        //     }
 
-            if(password === confirmPassword && confirmPassword !=='')
-            {
-                document.getElementById('confPassword').style.borderBottom = '2px solid limegreen'
-                document.getElementById('confPassInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
-            } else {
-                document.getElementById('confPassword').style.borderBottom = '2px solid red'
-                document.getElementById('confPassInvalid').innerHTML 
-                = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Passwords don\'t match</div>'
-            }
+        //     if(password === confirmPassword && confirmPassword !=='')
+        //     {
+        //         document.getElementById('confPassword').style.borderBottom = '2px solid limegreen'
+        //         document.getElementById('confPassInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:limegreen; margin-left:21px">Looks good!</div>'
+        //     } else {
+        //         document.getElementById('confPassword').style.borderBottom = '2px solid red'
+        //         document.getElementById('confPassInvalid').innerHTML 
+        //         = '<div style="padding:2px; font-size:12px; color:red; margin-left:21px">Passwords don\'t match</div>'
+        //     }
 
-            return nameCheck.test(username) && emailCheck.test(email) && passwordCheck.test(password) 
-            && password === confirmPassword
-        }
+        //     return nameCheck.test(username) && emailCheck.test(email) && passwordCheck.test(password) 
+        //     && password === confirmPassword
+        // }
     </script>
 </body>
 </html>

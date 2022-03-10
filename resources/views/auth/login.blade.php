@@ -39,9 +39,7 @@
                         </div>
                         <!-- message --> 
                          @error('email') 
-                        <div id="emailInvalid" >
-                            {{ $message }}
-                        </div>
+                         <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -53,9 +51,7 @@
                         </div>
                         <!-- message -->
                         @error('password')
-                        <div id="passInvalid"> 
-                            <strong>{{ $message }}</strong>
-                        </div>
+                        <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div> 
                         @enderror
                         
                     </div>
@@ -65,7 +61,7 @@
                         <div class="col-md-6"> {!! htmlFormSnippet() !!} </div>
                         @if ($errors->has('g-recaptcha-response'))
                         <div class="col-md-6  text-md-end ">
-                            <strong class="text-danger">Plesse Fill Out This Field</strong>
+                         <div style="padding:2px; font-size:12px; color:red;">Plesse Fill Out This Field</div>
                         </div>
                     @endif
                     </div>

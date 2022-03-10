@@ -23,7 +23,7 @@
                 <label> RESET PASSWORD</label>
             </div>
             @if (session('status'))
-        <div class="alert alert-success" role="alert">
+        <div>
             {{ session('status') }}
         </div>
         @endif
