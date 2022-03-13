@@ -1,0 +1,80 @@
+.headingDriver::before{
+    content: 'Add Driver';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingUpdateParent::before{
+    content: 'Update Parent';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingProfileDriver::before{
+    content: 'Profile Driver';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingProfileParent::before{
+    content: 'Profile Parent';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingParent::before{
+    content: 'Add Parent';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+
+@media only screen and (min-width:500px) and (max-width: 765px) {
+    .headingParent::before{
+        margin-top: -40px;
+    }
+}
+
+
+.headingUpdateDriver::before{
+    content: 'Update Driver';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
