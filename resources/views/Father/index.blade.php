@@ -1,54 +1,57 @@
 @extends('Father.layout')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
 <div class="app-main__outer">
     <div class="app-main__inner">
-        <div class="container"> 
-        @foreach($fathers as $parent )
-
-            <div class="box">
-                <div class="links">
-                    <span class="icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>                             
-                    </span>
-                    <ul>
-                        <li><a href="#TRIP 1">TRIP 1</a></li>
-                        <li><a href="#TRIP 2">TRIP 2</a></li>
-                        <li><a href="#TRIP 3">TRIP 3</a></li>
-                        <li> <a href="#TRIP 4">TRIP 4</a></li>
-                    </ul>
-                </div> 
-                   
-                <div class="thump">
-
-                    <img src="{{$parent->image_path}}" >
-
-                </div>
-             
-                    <div class="text">
-                        <h4>{{$parent->name}}</h4>
-                        <p> mobile: {{$parent->mobileNumber}} <br> email : {{$parent->email}}
-                        </p>  
-
-                        <div class="but">
-                            <a href=""><button class="b">UPDATE</button></a>
-                                       <button class="b">DELETE</button>
-                                       <button class="b">ASSIGN</button>
-                         </div>
-                         
-                    </div>
-                    </div>
         
+            <div class="row">
+                @foreach($fathers as $parent )
+                <div class="col-md-4">
+               
+
+                    <div class="card user-card" >  
+                        <div class="card-header">
+                            <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                            <div class="user-image">
+                                <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
+                            </div>
+                            <h6 class="f-w-600 m-t-25 m-b-10">{{$parent->name}}</h6>
+                            {{-- <p class="text-muted">Active | Male | Born 23.05.1992</p> --}}
+                            <hr>
+                            <p class="text-muted m-t-15">Mobile Number: {{$parent->mobileNumber}}</p>
+                            <p class="text-muted m-t-15">Email: {{$parent->email}}</p>
+                            
+                            {{-- <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
+                            <hr>
+                            <div class="row">
+
+                            <div class="col">
+                                <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
+                             </div>
+
+                                <div class="col">
+                                <button type="submit" class="btn btn-primary">ASSIGN</button>
+                             </div>
+
+                            <div class="col">
+                                <form action="{{route('father.destroy',$parent->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">DELETE</button> 
+                                </form> 
+                             </div>
+                             </div>
+                        </div>
+                    </div>
+            </div>
             @endforeach
-           
-            <button class="g"> 
-                 <i class="fa fa-plus-circle" style="font-size:80px;color:#252C4B "></i>
 
-             </button>
-
-     </div>
+            </div>
+        
      </div>
 </div>  
 @endsection

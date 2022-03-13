@@ -33,19 +33,19 @@ class FatherController extends Controller
 
     public function store(Request  $request)
     {
-        $admin=Auth::user();
+        // $admin=Auth::user();
     //    $test=$request->file('image')->getClientMimeType();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'm_number' => ['required', 'string', 'max:20'],
-            'trip_id' => ['required', 'int', 'max:20'],
-            'school_id' => ['required', 'int', 'max:20'],
-            'status' => ['required', 'int', 'max:20'],
-            'region' => ['string', 'max:20'],
-            'lng' => ['string', 'max:20'],
-            'lit' => ['string', 'max:20'],
+            // 'trip_id' => ['required', 'int', 'max:20'],
+            // 'school_id' => ['required', 'int', 'max:20'],
+            // 'status' => ['required', 'int', 'max:20'],
+            // 'region' => ['string', 'max:20'],
+            // 'lng' => ['string', 'max:20'],
+            // 'lit' => ['string', 'max:20'],
             'image'=> ['image']
         ]);
         if ($request->image == Null){
@@ -54,14 +54,14 @@ class FatherController extends Controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
                 'mobileNumber' => $request->input('m_number'),
-                'trip_id' => $request->input('trip_id'),
-                'school_id' => $request->input('school_id'),
-                'status' => $request->input('status'),
-                'region' => $request->input('region'),
-                'lng' => $request->input('lng'),
-                'lit' => $request->input('lit'),
+                // 'trip_id' => $request->input('trip_id'),
+                // 'school_id' => $request->input('school_id'),
+                // 'status' => $request->input('status'),
+                // 'region' => $request->input('region'),
+                // 'lng' => $request->input('lng'),
+                // 'lit' => $request->input('lit'),
                 'image_path' => 'parent.png',
-                'school_id'=>$admin->school_id
+                // 'school_id'=>$admin->school_id
             ]);
             return redirect()->route("father.index")
             ->with('success','Father added successfuly');
@@ -75,12 +75,12 @@ class FatherController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'mobileNumber' => $request->input('m_number'),
-            'trip_id' => $request->input('trip_id'),
-            'school_id' => $request->input('school_id'),
-            'status' => $request->input('status'),
-            'region' => $request->input('region'),
-            'lng' => $request->input('lng'),
-            'lit' => $request->input('lit'),
+            // 'trip_id' => $request->input('trip_id'),
+            // 'school_id' => $request->input('school_id'),
+            // 'status' => $request->input('status'),
+            // 'region' => $request->input('region'),
+            // 'lng' => $request->input('lng'),
+            // 'lit' => $request->input('lit'),
             'image_path' => $newPhotoName
         ]);
 

@@ -16,7 +16,8 @@ class CreateFathersTable extends Migration
         Schema::create('fathers', function (Blueprint $table) {
             $table->id();
             $table->integer('trip_id')->unsigned()->nullable();
-            $table->integer('school_id')->unsigned();
+            // $table->integer('school_id')->unsigned();
+            $table->integer('school_id')->nullable();
             $table->string('name', 30);
             $table->string('email')->unique();
             $table->string('password');

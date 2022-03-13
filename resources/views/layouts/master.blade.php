@@ -7,7 +7,9 @@
     <title> @yield('title', "Bus Tracking System") </title>
     <link rel="stylesheet" href="{{ asset("css/bootstrap.css") }}">
     <link rel="stylesheet" href="{{ asset("css/all.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("index.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/Parents.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/parentDriver.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/Drivers.css") }}">
     <link href="{{ asset("main.css") }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     {!! ReCaptcha::htmlScriptTagJsApi() !!}
