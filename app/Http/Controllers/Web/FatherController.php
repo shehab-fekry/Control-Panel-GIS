@@ -16,11 +16,12 @@ class FatherController extends Controller
 
     public function index()
     {
-        $admin=Auth::user();
-        if($admin->school_id==null){
-            return view("school.create");
-        }
-        $fathers = Father::where("school_id",$admin->school_id)->latest()->paginate(7);
+        // $admin=Auth::user();
+        // if($admin->school_id==null){
+        //     return view("school.create");
+        // }
+        // $fathers = Father::where("school_id",$admin->school_id)->latest()->paginate(7);
+        $fathers = Father::latest()->paginate(7);
         return view("father.index",compact("fathers"));
     }
 
