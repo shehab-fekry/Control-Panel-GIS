@@ -15,11 +15,12 @@ class DriverController extends Controller
 
     public function index()
     {
-        $admin=Auth::user();
-        if($admin->school_id==null){
-            return view("school.create");
-        }
-        $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
+        // $admin=Auth::user();
+        // if($admin->school_id==null){
+        //     return view("school.create");
+        // }
+        // $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
+        $driver = Driver::latest()->paginate(7);
         return view("driver.index",compact("driver"));
     }
 
