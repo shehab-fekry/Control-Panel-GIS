@@ -1,0 +1,89 @@
+.editTrips-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.table{
+    max-height: 75%;
+    /* height: 95%; */
+}
+ 
+.table::before{
+    content: 'Trips'; 
+    width:150px;
+}
+
+.table .head_data{
+  width: 20%;
+}
+
+.tdata{
+  vertical-align: middle;
+  text-align: center;
+  width: 20%;
+  padding: 5px;
+}
+
+.table .tdata-btns
+{
+  width: 40%;
+}
+
+/* .table .head_data{
+    padding-top: 15px;
+} */
+
+.editTrip{
+    display: flex;
+    flex-flow: row;
+    height: 70px;
+    max-height: 10%;
+    width: 90%;
+    font-weight: 500;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    color: #384850;
+    /* border-top: 20px solid #FFC107; */
+  }
+  
+  .editTrip::before{
+    content: attr(data-before);
+    position:absolute ;
+    z-index: 1;
+    margin-top: -25px;
+    margin-left: 10px;
+    width:200px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #384850;
+    background-color: unset;
+    text-shadow: 0px 0px 5px #ccc;
+  }
+
+
+  .editTripForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .editTripForm input{
+    width: 80%;
+    border: none;
+    height: 100%;
+    outline: none;
+    background-color: #fcfcfc;
+    font-size: 15px;
+  }
+
+  .btnHover:hover{
+    color: white;
+    box-shadow: 0px 0px 2px #ffc107;
+  }

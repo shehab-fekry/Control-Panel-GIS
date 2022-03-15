@@ -1,0 +1,391 @@
+.tracking-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+
+  /* ------------------------------- Map divs and styling -------------------------------- */
+
+.map-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 100%;
+}
+  
+  .map{
+    height: 35%;
+    width: 90%;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+  }
+
+  .map::before{
+    content: 'Map';
+    position:absolute ;
+    z-index: 1;
+    margin-top: -28px;
+    margin-left: 10px;
+    width:100px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #384850;
+    background-color: unset;
+    text-shadow: 0px 0px 5px #ccc;
+  }
+  
+  .status{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 75px;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: white;
+    left: calc(50% - 35px);
+  }
+  
+  .school {
+    width: 50px;
+    height: 50px;
+    background-image: url('../assets/school2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .pickPoint {
+    width: 50px;
+    height: 50px;
+    background-image: url('../assets/graduation-hat.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .currentStep{
+    width: 20px;
+    height: 20px;
+    /* background-color: #FFC107; */
+    background-color: #ff9807;
+    border-radius: 50%;
+    /* background-image: url(../assets/school-bus.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; */
+
+  }
+
+  .currentStep:before{
+    content: '';
+    display: block;
+    position: relative;
+    /* background-color: rgba(	255, 193, 7, 0.5); */
+    background-color: rgba(255, 152, 7, 0.5);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: live 1s ease-in-out infinite;
+  }
+
+  @keyframes live {
+    0% {
+    transform: scale(1,1);
+    background-color: rgba(#FFC107,1);
+    }
+    100% {
+    transform: scale(2,2);
+    background-color: rgba(#FFC107,0);
+    }
+  }
+  
+  .prevStep{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FDBF00 ;
+    border: 2px solid #384850;
+  }
+  
+
+  /* ------------------------------ Table styling -------------------------------- */
+
+  .table{
+    display: block;
+    display: flex;
+    flex-flow: column;
+    max-height: 40%;
+    width: 90%;
+    font-weight: 500;
+    overflow-y: scroll;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    color: #384850;
+  }
+  
+  .table {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+  }
+  
+  .table::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+  
+  .table::before{
+    content: 'Trips';
+    position:absolute ;
+    z-index: 2;
+    margin-top: -27px;
+    margin-left: 10px;
+    width:100px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #384850;
+    background-color: unset;
+    text-shadow: 0px 0px 10px #ccc;
+  }
+
+  .table .head_row{
+    top: 0px;
+    position: sticky;
+    z-index: 1;
+  }
+  
+  .table .head_data{
+    padding: 10px;
+    height: 100%;
+    width: 25%;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 800;
+    font-size: 16px;
+    background-color: #FFC107;
+    color: #384850;
+  }
+  
+  .table .roow{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 0px;
+  }
+  
+  .roow:hover{
+    background-color: rgba(255, 196, 0, 0.3);
+  }
+  .roow:hover .btn, .roow.hover .btn { background: #f8f8f8}
+  
+  .tdata{
+    vertical-align: middle;
+    text-align: center;
+    width: 25%;
+    padding: 5px;
+  }
+  
+  
+
+  /* ------------------------------ Live button -------------------------------- */
+  
+  .trackingBtn{
+    display: inline-block;
+    /* padding: 10px 10px; */
+    margin: 5px 0px;
+    font-weight: 700;
+    background-color: white !important;
+    color: #384850 !important;
+    border-radius: 50px !important;
+    border: 2px solid rgb(255, 196, 0, 0.3) !important;
+  }
+  
+  span.live-off{
+    display: inline-block;
+    position: relative;
+    top: calc(50% - 5px);
+    background-color: #FFC107;
+    width: 10px;
+    height: 10px;
+    margin-left: 7px;
+    border-radius: 50%;
+  }
+  
+  span.live-on{
+    display: inline-block;
+    position: relative;
+    top: calc(50% - 5px);
+    background-color: #FFC107;
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    border-radius: 50%;
+    }
+  
+    span.live-on:before{
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: rgba(	255, 193, 7, 0.5);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: live 1s ease-in-out infinite;
+    }
+  
+  @keyframes live {
+    0% {
+      transform: scale(1,1);
+      background-color: rgba(#FFC107,1);
+    }
+    100% {
+      transform: scale(2,2);
+      background-color: rgba(#FFC107,0);
+    }
+  }
+
+  .btnHover:hover{
+    color: white;
+    box-shadow: 0px 0px 2px #ffc107;
+  }
+
+  .createTrip{
+    display: flex;
+    flex-flow: row;
+    height: 70px;
+    max-height: 10%;
+    width: 90%;
+    font-weight: 500;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    color: #384850;
+    /* border-top: 20px solid #FFC107; */
+  }
+  
+  .createTrip::before{
+    content: 'Create Trip';
+    position:absolute ;
+    z-index: 1;
+    margin-top: -25px;
+    margin-left: 10px;
+    width:200px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #384850;
+    background-color: unset;
+    text-shadow: 0px 0px 5px #ccc;
+  }
+
+
+  .createTripForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .createTripForm input{
+    width: 80%;
+    border: none;
+    height: 100%;
+    outline: none;
+    background-color: #fcfcfc;
+    font-size: 15px;
+  }
+
+
+
+  
+  
+
+  
+  @media only screen and (min-width: 500px) and (max-width:619px){
+    .trackingBtn{
+      width:80px;
+      padding: 0px;
+      font-size: 12px;
+    }
+
+    .trackingBtn img{
+      width: 17px;
+      height: 17px;
+    }
+
+    span.live-on{
+      margin-left: 5px;
+      }
+
+    .status{
+      height: 25px;
+      width: 60px;
+      font-size: 10px;
+    }
+    
+    .tdata{
+      font-size: 12px;
+    }
+  }
+
+
+  @media only screen and (min-width: 620px) {
+    .trackingBtn{
+      width:90px;
+      font-size: 12px;
+    }
+
+    .trackingBtn img{
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn_live .text{
+      display: inline-block;
+    }
+
+    .status{
+      height: 25px;
+      width: 65px;
+      font-size: 12px;
+    }
+    
+    .tdata{
+      font-size: 13px;
+    }
+  }
+
+
+  @media only screen and (min-width: 750px) {
+    .trackingBtn{
+      width:100px;
+      font-size: 14px;
+    }
+
+    .trackingBtn img{
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn_live .text{
+      display: inline-block;
+    }
+
+    .status{
+      height: 25px;
+      width: 75px;
+      font-size: 15px;
+    }
+    
+    .tdata{
+      font-size: 14px;
+    }
+  }

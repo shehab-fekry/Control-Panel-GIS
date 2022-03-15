@@ -1,0 +1,238 @@
+.schools_wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+  /* -------------------------------------------- Join School Card ------------------------------------------- */
+
+
+.joinSchool{
+  /* border: 1px solid black; */
+  width: 50%;
+  padding: 10px;
+  box-shadow: 0px 0px 5px #ccc;
+  border-radius: 20px;
+  background-color: #fcfcfc;
+}
+
+.joinSchool-title{
+  font-size: 20px;
+  font-weight: 700;
+  padding-left: 15px;
+  color: #384850;
+  /* border: 1px solid rgb(77, 77, 230); */
+}
+
+/* .createSchool::before{
+  content: 'Add School';
+  position:absolute;
+  z-index: 2;
+  margin-top: -32px;
+  margin-left: 10px;
+  width:200px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #384850;
+  background-color: unset;
+  text-shadow: 0px 0px 5px #ccc;
+} */
+
+.joinShoolForm{
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  /* border: 1px solid rgb(77, 77, 230); */
+
+}
+
+.joinShoolForm .inputPart{
+    width: 75%;
+    height: 50%;
+    /* border: 1px solid rgb(77, 77, 230); */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.joinShoolForm .inputPart input{
+    width: 95%;
+    height: 40%;
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    padding-left: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 15px;
+  
+  }
+  
+.joinShoolForm .submitPart{
+  width: 25%;
+  /* border: 1px solid rgb(25, 25, 37); */
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* -------------------------------------------- Create School Card ------------------------------------------- */
+
+
+.createSchool{
+  /* border: 1px solid black; */
+  width: 90%;
+  padding: 10px;
+  box-shadow: 0px 0px 5px #ccc;
+  border-radius: 20px;
+  background-color: #fcfcfc;
+}
+
+.createSchool-title{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 15px;
+    color: #384850;
+    /* border: 1px solid rgb(77, 77, 230); */
+}
+
+/* .createSchool::before{
+  content: 'Add School';
+  position:absolute;
+  z-index: 2;
+  margin-top: -32px;
+  margin-left: 10px;
+  width:200px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #384850;
+  background-color: unset;
+  text-shadow: 0px 0px 5px #ccc;
+} */
+
+
+form{
+  display: inline-block;
+}
+
+.createShoolForm{
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  /* border: 1px solid rgb(77, 77, 230); */
+
+}
+
+.createShoolForm .inputPart{
+    width: 75%;
+    height: 50%;
+    /* border: 1px solid rgb(77, 77, 230); */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.inputPart input{
+    width: 40%;
+    height: 40%;
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    padding-left: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+   
+.createShoolForm .submitPart{
+  width: 25%;
+  /* border: 1px solid rgb(25, 25, 37); */
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ------------------------------------------------- School Card ----------------------------------------------- */
+
+
+.btnColor {
+  background-color: #384850;
+  border: none;
+  color: white;
+}
+
+.btnColor:hover{
+  color: white;
+  box-shadow: 0px 0px 2px #ffc107;
+}
+
+.red{
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 0px;
+  width: 90px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13px;
+  /* border-radius: unset; */
+}
+
+.red:hover{
+  color: white;
+}
+
+.card{
+  height: 300px;
+  box-shadow: 0px 0px 5px #ccc;
+  border-radius: 20px;
+  background-color: #fcfcfc;
+}
+
+.card-title{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  color: #384850;
+  height: 10%;
+  padding-left: 15px;
+  /* border: 1px solid black; */
+}
+
+.card-code{
+  padding-left: 15px;
+  font-size: 15px;
+  color: #aaa;
+}
+
+.card-subtitle{
+  color: #ffc107;
+  height: 10%;
+  padding-left: 15px;
+  /* border: 1px solid black; */
+}
+
+.card-map{
+  height: 55%;
+  /* border: 1px solid black; */
+  border: 1px solid black;
+}
+
+.card-foot{
+  height: 20%;
+  padding-left: 15px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+}
