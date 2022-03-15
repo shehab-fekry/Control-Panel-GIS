@@ -1,0 +1,173 @@
+
+.statistics{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    /* border: 1px solid red; */
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+.drivers, .buses, .parents, .children{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 80px;
+}
+
+.number{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 30%;
+    height: 70%;
+    text-shadow: 0px 0px 2px #ccc;
+    color: #ffc107;
+    font-size: 35px;
+    font-weight: 800;
+    /* border: 1px solid black; */
+}
+
+#plus{
+    color: #252C4B;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    min-width: 60%;
+    height: 70%;
+    /* border: 1px solid black; */
+}
+
+.label .head{
+    height: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    color: #252C4B;
+    /* border: 1px solid black; */
+}
+
+.label .sublabel{
+    height: 50%;
+    font-size: 15px;
+    color: #252C4B;
+    font-weight: 400;
+    /* border: 1px solid black; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 500px) and (max-width:614px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 40px;
+        height: 70%;
+        font-size: 20px;
+        font-weight: 800;
+        /* border: 1px solid black; */
+    }
+    
+    .label{
+        /* border: 1px solid black; */
+        padding-top: 10px;
+    }
+    
+    .label .head{
+        /* height: 50%; */
+        font-size: 8px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        /* height: 50%; */
+        font-size: 6px;
+        /* border: 1px solid black; */
+    }
+}
+
+
+@media only screen and (min-width: 615px) and (max-width:749px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 40px;
+        height: 70%;
+        font-size: 25px;
+        font-weight: 800;
+        /* border: 1px solid black; */
+    }
+    
+    .label{
+        /* border: 1px solid black; */
+        padding-top: 10px;
+    }
+    
+    .label .head{
+        /* height: 50%; */
+        font-size: 12px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        /* height: 50%; */
+        font-size: 9px;
+        /* border: 1px solid black; */
+    }
+}
+
+
+@media only screen and (min-width: 750px) and (max-width:1000px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 40px;
+        height: 70%;
+        font-size: 30px;
+        font-weight: 800;
+        /* border: 1px solid black; */
+    }
+    
+    .label .head{
+        height: 50%;
+        font-size: 15px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        height: 50%;
+        font-size: 12px;
+        /* border: 1px solid black; */
+    }
+}

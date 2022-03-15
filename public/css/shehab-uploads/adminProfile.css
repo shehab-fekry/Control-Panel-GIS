@@ -1,0 +1,40 @@
+.profile-page {
+    padding: 15px;
+    width: 90%;
+    margin:100px auto ;
+}
+.profile-page .btn-info:hover{
+    background-color: #ffc107;
+    border-color: #e6b00e;
+}
+.profile-page .card-body {
+    padding: 20px;
+    height: 350px;
+}
+.profile-right .row{
+    padding: 13px 0;
+}
+.card-body h6{
+    font-size: 18px;
+}
+.card-body .text-secondary{
+    font-size: 15px;
+}
+.card-body h4{
+    font-size: 22px;
+}
+.card-body p{
+    font-size: 15px;
+} 
+.profile-right .row:hover{
+    background-color: rgba(255, 196, 0, 0.3);
+ }
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.profile-page hr {
+    margin: -2px;
+    border-width: 1px;
+
+}

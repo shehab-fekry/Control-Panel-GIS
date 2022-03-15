@@ -1,0 +1,72 @@
+body{
+    font-family: 'Cera Round Pro', sans-serif;
+    background-color: #EEE;
+}
+.homepage .home-container{
+    padding: 40px;
+    margin:0 35px;
+}
+
+.home-design{
+    margin: 00px 0;
+}
+
+.homepage .info_section{
+    width: 100%;
+    margin: 40px 0 0 0;
+}
+
+.homepage .statistics{
+    background-color: rgba(231, 231, 231, 0);
+    box-shadow: none;
+}
+.home-left-side{
+    font-weight: 900;
+    margin-top: 30px;
+    width:65%;
+}
+
+.home-left-side h1{
+    font-family: fantasy;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
+
+}
+.home-left-side .start-btn{
+    background-color: #ffc107;
+    color: #FFF;
+    border: 2px solid #ffc107;
+    padding: 11px 50px ;
+    font-weight: bold;
+    border-radius: 200px;
+    margin: 20px 0;
+}
+.home-right-side {
+    width: 35%;
+}
+.home-right-side img{
+    width: 100%;
+}
+
+.homepage .pre-typing{
+    font-size: 30px;
+    color: #384850;
+    font-weight: bold;
+}
+
+.homepage .home-type{
+    font-weight: 700;
+    font-size: 22px;
+    color: #222;
+}
+
+.homepage .drivers,.homepage  .buses,.homepage  .parents,.homepage  .children{
+    width: 23%;
+    border: 4px solid #384850;
+    margin: 0 20px;
+    height: 90px;
+}
+/* .homepage .label .head{
+    font-size: 25px;
+    height: 55%;
+} */
