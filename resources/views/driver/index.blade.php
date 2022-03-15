@@ -2,9 +2,6 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
-<div class="app-main__outer">
-    <div class="app-main__inner">
-        
             <div class="row">
                 @foreach($driver as $drivers )
                 <div class="col-md-4">
@@ -52,6 +49,4 @@
 
             </div>
         
-     </div>
-</div>  
 @endsection

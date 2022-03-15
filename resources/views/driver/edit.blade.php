@@ -1,8 +1,7 @@
 @extends('driver.layout')
 
 @section('content')
-<div class="app-main__outer">
-    <div class="app-main__inner">
+
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class=" mb-4 ">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
@@ -37,10 +36,12 @@
                             <div class="col-md-6"><label class="labels">Email</label><input type="text" name="email" class="form-control"  value="{{$driver->email}}"></div>
                             <div class="col-md-6"><label class="labels">Trip</label><input type="text"  name="trip_id" class="form-control" value="{{$driver->trip_id}}" ></div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Password</label><input type="Password" name="password" class="form-control"  value=""></div>
-                            <div class="col-md-6"><label class="labels">Confirm Password</label><input type="Password"  name="password" class="form-control" value="" ></div>
-                        </div>
+                        {{-- <div class="row mt-2"> --}}
+                            {{-- <div class="col-md-6"> --}}
+                                {{-- <label class="labels">Password</label> --}}
+                                {{-- <input type="hidden" name="password" class="form-control"  value="{{$driver->password}}"></div> --}}
+                            {{-- <div class="col-md-6"><label class="labels">Confirm Password</label><input type="Password"  name="password" class="form-control" value="" ></div> --}}
+                        {{-- </div> --}}
                        
                         <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
@@ -51,8 +52,4 @@
                
             </div>
         </div>
-        </div>
-        </div>
-
-
 @endsection

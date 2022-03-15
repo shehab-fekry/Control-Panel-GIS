@@ -1,8 +1,6 @@
 @extends('driver.layout')
 
 @section('content')
-<div class="app-main__outer">
-    <div class="app-main__inner">
 
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class=" mb-4 ">
         <ol class="breadcrumb">
@@ -77,7 +75,7 @@
                   <p class="mb-0">School</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$driver->school_id}}</p>
+                  <p class="text-muted mb-0">{{ $schools }} {{$driver->school_id}} </p>
                 </div>
               </div>
               <hr>
@@ -100,6 +98,5 @@
       </div>
       </div>
       </div>
-      </div>
-      </div>
+
       @endsection

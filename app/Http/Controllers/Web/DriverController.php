@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
+use App\Models\School;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,12 +16,13 @@ class DriverController extends Controller
 
     public function index()
     {
-        // $admin=Auth::user();
-        // if($admin->school_id==null){
-        //     return view("school.create");
-        // }
-        // $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
-        $driver = Driver::latest()->paginate(7);
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
+            return view("school.create");
+        }
+        $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
+      
         return view("driver.index",compact("driver"));
     }
 
@@ -81,7 +83,9 @@ class DriverController extends Controller
 
     public function show(Driver $driver)
     {
-        return view("driver.show",compact('driver'));
+        $admin=Auth::user()->school_id;
+        $school=School::where("id",$admin)->select('name')->get();
+        return view("driver.show",compact('driver'))->with('schools' ,$school);
     }
 
 
@@ -98,9 +102,9 @@ class DriverController extends Controller
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
-            'password' => ['required', 'string', 'min:8'],
+            // 'password' => ['required', 'string', 'min:8'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
-            'confirmed' => ['required', 'int', 'max:20'],
+            // 'confirmed' => ['required', 'int', 'max:20'],
             'trip_id' => ['required', 'int', 'max:20'],
             'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
@@ -111,10 +115,10 @@ class DriverController extends Controller
 
         $driver->name=$input['name'];
         $driver->email=$input['email'];
-        $driver->password=Hash::make($input['password']);
+        // $driver->password=Hash::make($input['password']);
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
-        $driver->confirmed=$input['confirmed'];
+        // $driver->confirmed=$input['confirmed'];
         $driver->trip_id=$input['trip_id'];
         $driver->school_id=$input['school_id'];
         $driver->save();
