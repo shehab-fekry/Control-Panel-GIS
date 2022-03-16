@@ -21,13 +21,14 @@
                             <div class="col-md-6"><label class="labels">Name</label><input type="text" name="name" class="form-control" placeholder="name" value="{{$father->name}}"></div>
                             <div class="col-md-6"><label class="labels">email</label><input type="text"  name="email" class="form-control" value="{{$father->email}}" placeholder="example@example.com"></div>
                         </div>
-                        <div class="row mt-2">
+                        {{-- <div class="row mt-2">
                             <div class="col-md-6"><label class="labels">password</label><input type="text" name="password" class="form-control"  value=""></div>
                             <div class="col-md-6"><label class="labels">confirm-password</label><input type="text"  name="password" class="form-control" value="" ></div>
-                        </div>
+                        </div> --}}
                         <div class="row mt-3">
                             {{-- <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
                             <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div> --}}
+                            <div class="col-md-12"><label class="labels">mobileNumber</label><input type="text" class="form-control"  name="mobileNumber"  value="{{$father->mobileNumber}}"></div>
                             <div class="col-md-12"><label class="labels">Number Of childern</label><input type="text" class="form-control" name="status"  placeholder="enter address line 2" value="{{$father->status}}"></div>
                             <div class="col-md-12"><label class="labels">Trip</label><input type="text" class="form-control"  name="trip_id"  value="{{$father->trip_id}}"></div>
                         </div>

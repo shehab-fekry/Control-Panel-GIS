@@ -1,11 +1,11 @@
 @extends('Father.layout')
 
 @section('content')
-<div class="app-main__outer">
-    <div class="app-main__inner">
+
       <div class="content-header">
         
     </div>
+ 
       {{-- <section class="vh-100 gradient-custom" style="border-radius: 20px; border: none; "> --}}
         {{-- <div class=" py-5 h-100"  style="background: url(k.jfif); background-size: cover;"> --}}
           {{-- <div class="row justify-content-center align-items-center "  > --}}
@@ -18,20 +18,20 @@
                         <div class="col-md-6 mb-4">
         
                           <div class="form-outline">
-                            <label class="form-label" for="Name">Name</label>
+                            <label class="form-label" for="name">{{ __('Name') }}</label>
       
-                            <input type="text" id="Name" class="form-control form-control-lg  @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name') }}" required autocomplete="name" autofocus  />
+                            <input type="text" id="name" class="form-control form-control-lg  @error('name') is-invalid @enderror" name="name"
+                            value="{{ old('name') }}" required autocomplete="name" autofocus  >
                           </div>
         
                         </div>
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <label class="form-label" for="emailAddress">Email</label>
+                            <label class="form-label" for="email">{{ __('Email') }}</label>
       
-                            <input type="email" id="emailAddress" class="form-control form-control-lg @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" required autocomplete="email" />
+                            <input type="email" id="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" >
                           </div>
                           @error('email')
                           <span class="invalid-feedback" role="alert">
@@ -45,7 +45,7 @@
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <label class="form-label" for="emailAddress">password</label>
+                            <label class="form-label" for="password">password</label>
       
                             <input type="password" id="password" class="form-control form-control-lg  @error('password') is-invalid @enderror"
                             name="password" required autocomplete="new-password" />
@@ -118,8 +118,11 @@
           {{-- </div> --}}
         {{-- </section> --}}
                     {{-- </div> --}}
-
-    </div>
-</div>
+                    @if ($message = Session::get('error'))
+                      <div class="alert alert-success" role="alert">
+                        {{$message}}
+                      </div>
+                      
+                  @endif
 
 @endsection

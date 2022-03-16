@@ -2,9 +2,8 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
-<div class="app-main__outer">
-    <div class="app-main__inner">
-        
+<div class="profile-page">
+
             <div class="row">
                 @foreach($fathers as $parent )
                 <div class="col-md-4">
@@ -52,6 +51,6 @@
 
             </div>
         
-     </div>
+   
 </div>  
 @endsection
