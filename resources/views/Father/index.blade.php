@@ -1,4 +1,4 @@
-@extends('Father.layout')
+@extends('layouts.master')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">

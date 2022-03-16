@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\vehicle;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -18,11 +19,11 @@ class VehicleController extends Controller
     public function index()
     {
 
-        $admin=Auth::user();
-        if($admin->school_id==null){
+        $admin=Auth::user()->school_id;
+        if($admin==null){
             return view("school.create");
         }
-        $vehicle = vehicle::where('school_id',$admin->school_id)->latest()->paginate(7);
+        $vehicle = vehicle::where('school_id',$admin)->latest()->paginate(7);
         return view("vehicle.index",compact("vehicle"));
     }
 
@@ -33,7 +34,12 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view("vehicle.create");
+        $admin=Auth::user();
+        $driver=Driver::where("school_id",$admin->school_id)->get();
+        $selectedID = 2;
+        return view("vehicle.create")
+        ->with('driver',$driver);
+        
     }
 
     /**
@@ -44,6 +50,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'licensePlate' => ['required', 'string', 'max:10', 'unique:vehicles'],
             'model' => ['string', 'max:20'],
@@ -80,7 +87,9 @@ class VehicleController extends Controller
      */
     public function edit(vehicle $vehicle)
     {
-        return view("vehicle.edit",compact('vehicle'));
+        $admin=Auth::user();
+        $driver=Driver::where("school_id",$admin->school_id)->get();
+        return view("vehicle.edit",compact('vehicle'))->with('driver',$driver);
     }
 
     /**
@@ -96,7 +105,7 @@ class VehicleController extends Controller
         $validator=Validator::make($input,[
             'licensePlate' => ['required', 'string', 'max:10',Rule::unique('vehicles')->ignore($vehicle->id)],
             'model' => ['string', 'max:20'],
-            'driver_id' => ['string', 'max:20',Rule::unique('vehicles')->ignore($vehicle->id)],
+            // 'driver_id' => ['string', 'max:20',Rule::unique('vehicles')->ignore($vehicle->id)],
             'color' => ['string', 'max:20'],
         ]);
         if($validator->fails()){
@@ -105,7 +114,7 @@ class VehicleController extends Controller
 
         $vehicle->licensePlate=$input['licensePlate'];
         $vehicle->model=$input['model'];
-        $vehicle->driver_id=$input['driver_id'];
+        // $vehicle->driver_id=$input['driver_id'];
         $vehicle->color=$input['color'];
         $vehicle->save();
         return redirect()->route("vehicle.index")->with('success','vehicle updated successfuly');

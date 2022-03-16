@@ -116,8 +116,8 @@
                 <i class="fa fa-bus"></i> &nbsp;Vehicles </li>  
                 <div class="collapse" id="dashboard-collapse-vehicles">
                   <ul class="btn-toggle-nav list-unstyled">
-                    <li><a href="#" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Vehicles</a></li>
-                    <li><a href="#" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;Add Vehicle</a></li>
+                    <li><a href="{{route('vehicle.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Vehicles</a></li>
+                    <li><a href="{{route('vehicle.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;Add Vehicle</a></li>
                   </ul>
                 </div>
             </a>

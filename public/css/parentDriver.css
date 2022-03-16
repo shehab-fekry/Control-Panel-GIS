@@ -16,7 +16,7 @@
     background-color: unset;
     color: #384850;
     position: absolute;
-    margin-top: -70px;
+    margin-top: -55px;
     font-size: 28px;
     font-weight: 900;
     text-shadow: 0px 0px 5px #ccc;
@@ -28,7 +28,7 @@
     background-color: unset;
     color: #384850;
     position: absolute;
-    margin-top: -70px;
+    margin-top: -55px;
     font-size: 28px;
     font-weight: 900;
     text-shadow: 0px 0px 5px #ccc;
@@ -40,7 +40,7 @@
     background-color: unset;
     color: #384850;
     position: absolute;
-    margin-top: -70px;
+    margin-top: -55px;
     font-size: 28px;
     font-weight: 900;
     text-shadow: 0px 0px 5px #ccc;
@@ -72,8 +72,31 @@
     background-color: unset;
     color: #384850;
     position: absolute;
-    margin-top: -15px;
-    margin-left: 50px;
+    margin-top: -55px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingvehicle::before{
+    content: 'Add Vehicle';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -75px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc;
+
+}
+.headingProfilevehicle::before{
+    content: 'Profile Vehicle';
+
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -55px;
     font-size: 28px;
     font-weight: 900;
     text-shadow: 0px 0px 5px #ccc;
