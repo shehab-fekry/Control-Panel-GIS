@@ -26,7 +26,6 @@ class DriverController extends Controller
         return view("driver.index",compact("driver"));
     }
 
-
     public function create()
     {
         return view("driver.create");
@@ -118,11 +117,34 @@ class DriverController extends Controller
         // $driver->password=Hash::make($input['password']);
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
+
         // $driver->confirmed=$input['confirmed'];
+
         $driver->trip_id=$input['trip_id'];
         $driver->school_id=$input['school_id'];
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
+    }
+    public function AssignDriverToTrip(Request $request, Driver $driver){
+        $driver->trip_id=$request->trip_id;
+        $driver->save();
+        return redirect()->route("driver.index")->with('success','driver assigned to trip successfuly');
+    }
+    public function passwordReset(Request $request, Driver $driver)
+    {
+        $input=$request->all();
+        $validator=Validator::make($input,[
+
+            'password' => ['required', 'string', 'min:8','confirmed','regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'],
+
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+
+        $driver->password=Hash::make($request->password);
+        $driver->save();
+        return redirect()->route("driver.index")->with('success',"driver's password updated successfuly");
     }
 
     public function destroy(Driver $driver)
@@ -130,4 +152,6 @@ class DriverController extends Controller
         $driver->delete();
         return redirect()->route("driver.index")->with('success','driver deleted successfuly');
     }
+
 }
+
