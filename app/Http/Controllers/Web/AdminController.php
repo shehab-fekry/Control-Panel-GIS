@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -58,9 +60,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $admin)
     {
-        //
+        // $admin=Auth::user();
+        // $trips=Trip::where("school_id",$admin->school_id)->get();
+        return view("admin.edit",compact('admin'));
     }
 
     /**
@@ -70,9 +74,25 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,User $users)
     {
-        //
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required', 'string', 'min:2'],
+            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($users->id)],
+            'school_id' => ['required', 'string', 'max:25' , 'min:5'],
+            'image'=>'image'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+
+        $users->name=$input['name'];
+        $users->email=$input['email'];
+        $users->mobileNumber=$input['school_id'];
+        $users->licenseNumber=$input['image'];
+        $users->save();
+        return redirect()->route("admin.index")->with('success','admin updated successfuly');
     }
 
     /**
