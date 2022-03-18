@@ -16,18 +16,20 @@ class CreateFathersTable extends Migration
         Schema::create('fathers', function (Blueprint $table) {
             $table->id();
             $table->integer('trip_id')->unsigned()->nullable();
-            $table->integer('school_id')->unsigned();
+            // $table->integer('school_id')->unsigned();
+            $table->integer('school_id')->nullable();
             $table->string('name', 30);
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image_path')->nullable();
             $table->boolean('confirmed')->default(false);
+
             $table->string('mobileNumber', 11);
 
             $table->integer('status')->default(0);
-            $table->string('region',60);
-            $table->double('lng');
-            $table->double('lit');
+            $table->string('region',60)->nullable();
+            $table->double('lng')->nullable();
+            $table->double('lit')->nullable();
             $table->longText('api_token')->nullable();
             $table->timestamps();
         });

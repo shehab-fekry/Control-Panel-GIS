@@ -1,0 +1,325 @@
+.home_wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #eee;
+}
+
+.info_section{
+    height: 50%;
+    width: 90%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+.info_section .typing{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 0px 5px #ccc;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    /* border: 1px solid black; */
+} 
+
+
+/* ------------------------------ Typed.js animation -------------------------------- */
+
+
+.info_section .typing .text{
+    font-size: 20px;
+    font-weight: 900;
+    color: #384850;
+    /* text-shadow: 0px 0px 5px #ccc; */
+}
+
+/* .info_section .typing .subtext{
+    color: #ffc107;
+    display: inline-block;
+}  */
+
+.cursor::after {
+		content: '|';
+		display: inline;
+		animation: blink 0.7s infinite;
+	}
+
+
+/*Removes cursor that comes with typed.js*/
+.typed-cursor{
+   opacity: 0;
+	display: none;
+}
+/*Custom cursor animation*/
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+} 
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+
+/* ------------------------------ Statistics -------------------------------- */
+
+
+.info_section .statistics{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    /* border: 1px solid red; */
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+.drivers, .buses, .parents, .children{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 80px;
+    padding-left: 5px;
+}
+
+.number{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 30%;
+    height: 70%;
+    text-shadow: 0px 0px 2px #ccc;
+    color: #ffc107;
+    font-size: 35px;
+    font-weight: 800;
+    padding-left: 5px;
+    /* border: 1px solid black; */
+}
+
+#plus{
+    color: #252C4B;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    
+    min-width: 60%;
+    height: 65%;
+    /* border: 1px solid black; */
+}
+
+.label .head{
+    height: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    color: #252C4B;
+    /* border: 1px solid black; */
+}
+
+.label .sublabel{
+    height: 50%;
+    font-size: 15px;
+    color: #252C4B;
+    font-weight: 400;
+    /* border: 1px solid black; */
+}
+
+
+/* -------------------------------------- Chart.js ------------------------------------- */
+
+.charts_section{
+    width: 90%;
+    display: flex;
+    flex-flow: row;
+    justify-content:space-between;
+    align-items: center;
+    height: 50%;
+    /* border: 1px solid black; */
+}
+
+.charts_section .card{
+    width: 440px;
+    border: none;
+    box-shadow: 0px 0px 5px #ccc;
+    color: #384850;
+    border-radius: 20px;
+    background-color: #fcfcfc;
+}
+
+.card .card-title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #252C4B;
+}
+
+
+
+@media only screen and (min-width: 500px) and (max-width:614px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+        padding: 0px;
+    }
+    
+    .number{
+        width: 30px;
+        height: 70%;
+        font-size: 15px;
+        font-weight: 800;
+        /* border: 1px solid black; */
+    }
+    
+    .label{
+        /* border: 1px solid black; */
+        padding-top: 10px;
+        height: 50%;
+    }
+    
+    .label .head{
+        /* height: 50%; */
+        font-size: 8px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        /* height: 50%; */
+        font-size: 6px;
+        /* border: 1px solid black; */
+    }
+}
+
+
+@media only screen and (min-width: 615px) and (max-width:749px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 40px;
+        height: 70%;
+        font-size: 20px;
+        font-weight: 800;
+        /* border: 1px solid black; */
+    }
+    
+    .label{
+        /* border: 1px solid black; */
+        padding-top: 10px;
+        height: 60%;
+    }
+    
+    .label .head{
+        /* height: 50%; */
+        font-size: 12px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        /* height: 50%; */
+        font-size: 9px;
+        /* border: 1px solid black; */
+    }
+}
+
+
+@media only screen and (min-width: 750px) and (max-width:1000px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 35px;
+        height: 70%;
+        font-size: 25px;
+        font-weight: 800;
+        padding-right: 7px;
+        /* border: 1px solid black; */
+    }
+
+    .label{
+        padding-top: 10px;
+        height: 60%;
+        justify-content: center;
+    }
+    
+    .label .head{
+        height: 50%;
+        font-size: 13px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        height: 50%;
+        font-size: 10px;
+        /* border: 1px solid black; */
+    }
+}
+
+@media only screen and (min-width: 1001px)
+{
+    .drivers, .buses, .parents, .children{
+        width: 25%;
+        height: 80px;
+    }
+    
+    .number{
+        width: 35px;
+        height: 70%;
+        font-size: 35px;
+        font-weight: 800;
+        padding-right: 10px;
+        /* border: 1px solid black; */
+    }
+
+    .label{
+        /* padding-top: 10px; */
+        height: 65%;
+        justify-content: center;
+    }
+    
+    .label .head{
+        height: 60%;
+        font-size: 21px;
+        font-weight: 700;
+        /* border: 1px solid black; */
+    }
+    
+    .label .sublabel{
+        height: 50%;
+        font-size: 15px;
+        /* border: 1px solid black; */
+    }
+}
+
+

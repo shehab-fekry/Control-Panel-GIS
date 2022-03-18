@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Sign In
+    </title>
+    <link rel="icon" href="../Public/assets/school-bus.png">
+    <link rel="stylesheet" href="../Public/css/SignIn.css">
+    <!--   Fonts   -->
+    <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
+    <!--  eye icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav_leftside">
+            <a href="/dash">
+                <div class="return">
+                    <img src="/Public/assets/arrowDark.png" width="40px" height="40px">
+                </div>
+            </a>
+            <div class="title">SchoolBusTracking</div>
+        </div>
+        <!-- <div class="paths">
+            <a href=""><div>Sign In</div></a>
+        </div> -->
+    </div>
+    <div class="sign_wrapper">
+            <div class="svg">
+                <img src="../Public/assets/sginIn.svg" width="500" height="500" alt="">
+            </div>
+            <div class="card">
+                <div class="card_head">
+                    <label> WELCOME</label>
+                    <form class="getForm" action="/dash/signup" method="GET">
+                        <button class="toggle">JOIN US</button>
+                    </form>
+                </div>
+                <form class="postForm" action="/dash/landing" method="GET">
+                    <div class="main_container">
+                        <div class="input_container">
+                            <div><img src="../Public/assets/email.png"></div>
+                            <input class="input_field" id="email" type="email" value="" placeholder="Example@gmail.com">
+                        </div>
+                        <!-- message -->
+                        <div id="emailInvalid"></div>
+                    </div>
+
+                    <div class="main_container">
+                        <div class="input_container">
+                            <div><img src="../Public/assets/lock.png"></div>
+                            <input class="input_field" id="password" type="password" value="" placeholder="Password">
+                            <i class="bi bi-eye-slash" onclick="toggle(this)"></i>
+                        </div>
+                        <!-- message -->
+                        <div id="passInvalid"></div>
+                    </div>
+
+                    <div class="other_input">
+                        <div class="remember">
+                            <input class="checkbox" type="checkbox" id="remember" name="remember" value="yes">
+                            <label for="remember">Remember Me</label>    
+                        </div>
+                        <div class="forget">
+                            <a href="/dash/forgetPassword">Forget Password?</a>
+                        </div>
+                    </div>
+                    <button class="submit" type="submit">SIGN IN</button>
+                </form>
+            </div>
+    </div>
+    <script>
+        
+        toggle = (eye) =>{
+            let pass = document.getElementById("password");
+            
+            // change input type
+            let type = pass.getAttribute("type") === "password" ? "text" : "password"
+            pass.setAttribute("type", type)
+            
+            // toggle between bi-eye and bi-eye-slash
+            eye.classList.toggle("bi-eye");
+        }
+    </script>
+</body>
+</html>

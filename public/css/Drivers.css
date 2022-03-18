@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    
+}
+.plus{
+    width: 70px;
+    height: 70px;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px #ccc;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.plus:hover{
+    box-shadow: 0px 0px 10px #ccc;
+    cursor: pointer;
+}
+
+.plus::before{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    margin-left: 30px;
+    margin-top: 10px;
+    border-radius: 50px;
+    background-color: #384850;
+    box-shadow: 0px 0px 2px #384850;
+}
+
+.plus::after{
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
+    border-radius: 50px;
+    background-color: #384850;
+    box-shadow: 0px 0px 2px #384850;
+}
+
+.container{
+    overflow: scroll;
+    background-color: #fafafa;
+    max-width: 1000px;
+    /* min-height: 1vh;  */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    /* height: 100%; */
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px #ccc;
+}
+.container {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+  }
+  
+  .container::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+
+.box{
+    max-width: 500px;
+    min-height: 250px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 25%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    
+
+} 
+
+.box:hover{
+    background-color: rgba(255, 255, 255, 0.822);
+    border: rgb(241, 241, 241);
+    box-shadow: 5px;
+  }
+  
+  .box .links { position: relative;  
+} 
+
+.box .links :hover.icon span:nth-child(2) {width: 100%;}
+
+.box .links .icon{width: 30px;
+                     display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+                    margin-left: 150px;} 
+
+ .box .links .icon span{ background-color: black;
+                              margin-bottom: 5px;
+                              height: 2px;
+                              }
+
+ .box .links .icon span:first-child{ 
+          width: 100%;
+ } 
+ .box .links .icon span:nth-child(2){
+  
+          width: 60%;
+          transition: 0.3s;
+}
+.box .links .icon span:last-child{
+ 
+          width: 100%;}
+ .box .links ul{
+list-style: none;
+margin: 0;
+padding: 0;
+background-color: #cdd0d1;
+position: absolute;
+right: 0;
+min-width: 100px;
+top: calc(100% + 15px);
+display: none;
+z-index: 1;
+border-radius: 7px;
+  }
+   .box .links ul::before {
+     content: "";
+     border-width: 10px;
+     border-style: solid;
+border-color: transparent transparent #cdd0d1 transparent;
+position: absolute;
+right: 5px;
+top: -20px; 
+  }
+  .box .links ul li a {
+    display: block;
+    padding: 7px;
+    text-decoration: none;
+    color: #333;
+    transition: 00.3s;
+  }
+  .box .links:hover ul{
+    display: block;
+  }
+  .box .links ul li a:hover{
+    padding-left: 25px;
+  }
+
+  .box .links ul li:not(:last-child) a {
+   border-bottom: 1px solid #ddd;
+  }
+.box .thump {
+    max-width: 100px;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    float: left;
+    shape-outside: circle();
+    margin-right: 20px;
+}
+.thump img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+.thump .but button {
+    width: 40px;
+    height: 30px;
+    display: inline-block;
+    line-height: 20px;
+    color: rgba(39, 16, 16, 0); 
+    font-size: xx-small;
+    
+}
+.but{
+    height: 10%;
+    bottom: 20%;
+}
+.b{
+    background: #384850;
+    color: #f8f8f8;
+    width: 56px;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: x-small;
+    height: 30px;
+    border: none;
+    font-weight: 700;
+
+}
+.b:hover{
+    background: #546068;  
+}
+
+.box .text{
+    padding-top: 0px;
+} 
+.box .text h4 {
+    text-transform: uppercase;
+    
+    padding: auto; 
+    padding-top: 70%;
+}
+.box .text p {
+    margin: 15px 0;
+    padding-bottom: 5%;
+}
+

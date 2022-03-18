@@ -16,11 +16,12 @@ class FatherController extends Controller
 
     public function index()
     {
-        $admin=Auth::user();
-        if($admin->school_id==null){
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
             return view("school.create");
         }
-        $fathers = Father::where("school_id",$admin->school_id)->latest()->paginate(7);
+        $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
         return view("father.index",compact("fathers"));
     }
 
@@ -32,19 +33,19 @@ class FatherController extends Controller
 
     public function store(Request  $request)
     {
-        $admin=Auth::user();
+        // $admin=Auth::user();
     //    $test=$request->file('image')->getClientMimeType();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'm_number' => ['required', 'string', 'max:20'],
-            'trip_id' => ['required', 'int', 'max:20'],
+            // 'trip_id' => ['required', 'int', 'max:20'],
             'school_id' => ['required', 'int', 'max:20'],
-            'status' => ['required', 'int', 'max:20'],
-            'region' => ['string', 'max:20'],
-            'lng' => ['string', 'max:20'],
-            'lit' => ['string', 'max:20'],
+            // 'status' => ['required', 'int', 'max:20'],
+            // 'region' => ['string', 'max:20'],
+            // 'lng' => ['string', 'max:20'],
+            // 'lit' => ['string', 'max:20'],
             'image'=> ['image']
         ]);
         if ($request->image == Null){
@@ -53,14 +54,14 @@ class FatherController extends Controller
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
                 'mobileNumber' => $request->input('m_number'),
-                'trip_id' => $request->input('trip_id'),
-                'school_id' => $request->input('school_id'),
-                'status' => $request->input('status'),
-                'region' => $request->input('region'),
-                'lng' => $request->input('lng'),
-                'lit' => $request->input('lit'),
+                // 'trip_id' => $request->input('trip_id'),
+                // 'school_id' => $request->input('school_id'),
+                // 'status' => $request->input('status'),
+                // 'region' => $request->input('region'),
+                // 'lng' => $request->input('lng'),
+                // 'lit' => $request->input('lit'),
                 'image_path' => 'parent.png',
-                'school_id'=>$admin->school_id
+                'school_id'=>Auth::user()->school_id
             ]);
             return redirect()->route("father.index")
             ->with('success','Father added successfuly');
@@ -74,12 +75,12 @@ class FatherController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'mobileNumber' => $request->input('m_number'),
-            'trip_id' => $request->input('trip_id'),
-            'school_id' => $request->input('school_id'),
-            'status' => $request->input('status'),
-            'region' => $request->input('region'),
-            'lng' => $request->input('lng'),
-            'lit' => $request->input('lit'),
+            // 'trip_id' => $request->input('trip_id'),
+            'school_id' => Auth::user()->school_id,
+            // 'status' => $request->input('status'),
+            // 'region' => $request->input('region'),
+            // 'lng' => $request->input('lng'),
+            // 'lit' => $request->input('lit'),
             'image_path' => $newPhotoName
         ]);
 
@@ -111,13 +112,14 @@ public function update(Request $request, Father $father)
             'name' => ['required', 'string', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],
             //'password' => ['required', 'string', 'min:8'],
+
             'mobileNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'trip_id' => ['int', 'max:20'],
-            'school_id' => ['required', 'int', 'max:20'],
-            'status' => [ 'string', 'max:20'],
-            'region' => ['string', 'max:20'],
-            'lng' => [ 'string', 'max:20'],
-            'lit' => [ 'string', 'max:20'],
+            // 'school_id' => ['required', 'int', 'max:20'],
+            // 'status' => [ 'string', 'max:20'],
+            // 'region' => ['string', 'max:20'],
+            // 'lng' => [ 'string', 'max:20'],
+            // 'lit' => [ 'string', 'max:20'],
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
@@ -126,13 +128,15 @@ public function update(Request $request, Father $father)
         $father->name=$input['name'];
         $father->email=$input['email'];
         $father->trip_id=$input['trip_id'];
-        $father->trip_id=$input['school_id'];
-        //$father->password=Hash::make($input['password']);
+
+        // $father->trip_id=$input['school_id'];
+        // $father->password=Hash::make($input['password']);
+
         $father->mobileNumber=$input['mobileNumber'];
         $father->status=$input['status'];
-        $father->region=$input['region'];
-        $father->lng=$input['lng'];
-        $father->lit=$input['lit'];
+        // $father->region=$input['region'];
+        // $father->lng=$input['lng'];
+        // $father->lit=$input['lit'];
         $father->save();
         return redirect()->route("father.index")->with('success','father updated successfuly');
     }

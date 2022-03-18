@@ -1,196 +1,56 @@
-<%- contentFor('body') %>
-      
-        <div class="container"> 
-            
-            <div class="box">
-                <div class="links">
-                    <span class="icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>                             
-                    </span>
-                    <ul>
-                        <li><a href="#TRIP 1">TRIP 1</a></li>
-                        <li><a href="#TRIP 2">TRIP 2</a></li>
-                        <li><a href="#TRIP 3">TRIP 3</a></li>
-                        <li> <a href="#TRIP 4">TRIP 4</a></li>
-                    </ul>
-                    </div> 
-                <div class="thump">
-                     
-                    <img src="https://image.shutterstock.com/image-vector/young-man-avatar-character-260nw-661669825.jpg" alt="gamal">
-                    
-                </div>
-                    <div class="text">
-                        <h4>gamal ahmed</h4>
-                        <p> mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                        </p>  
-                       
-                        <div class="but">
-                            <a href=""><button class="b">UPDATE</button></a>
-                                       <button class="b">DELETE</button>
-                                       <button class="b">ASSIGN</button>
-                         </div>
-                  
+@extends('layouts.master')
+
+@section('content')
+<link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
+<div class="profile-page">
+
+            <div class="row">
+                @foreach($fathers as $parent )
+                <div class="col-md-4">
+               
+
+                    <div class="card user-card" >  
+                        <div class="card-header">
+                            <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                            <div class="user-image">
+                                <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
+                            </div>
+                            <h6 class="f-w-600 m-t-25 m-b-10">{{$parent->name}}</h6>
+                            {{-- <p class="text-muted">Active | Male | Born 23.05.1992</p> --}}
+                            <hr>
+                            <p class="text-muted m-t-15">Mobile Number: {{$parent->mobileNumber}}</p>
+                            <p class="text-muted m-t-15">Email: {{$parent->email}}</p>
+                            
+                            {{-- <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
+                            <hr>
+                            <div class="row">
+
+                            <div class="col">
+                                <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
+                             </div>
+
+                                <div class="col">
+                                <button type="submit" class="btn btn-primary">ASSIGN</button>
+                             </div>
+
+                            <div class="col">
+                                <form action="{{route('father.destroy',$parent->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">DELETE</button> 
+                                </form> 
+                             </div>
+                             </div>
+                        </div>
                     </div>
+            </div>
+            @endforeach
 
             </div>
-
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- Main content -->
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-body p-0">
-            <div class="table">
-                <table id="driverslisttbl" class="table card-table table-vcenter text-nowrap">
-                    <thead>
-                        <tr>
-                            <th scope="row" class="w-1">id</th>
-                            <th scope="row">name</th>
-                            <th scope="row">photo</th>
-                            <th scope="row">mobileNumber</th>
-                            <th scope="row">trip_id</th>
-                            <th scope="row">status</th>
-                            <th scope="row">region</th>
-                            <th scope="row">lng</th>
-                            <th scope="row">lit</th>
-                            <th scope="row">Action</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($father as $parent )
-                        <tr>
-                            <th scope="row">{{$parent->id}}</th>
-                            <td>{{$parent->name}}</td>
-                            <td>
-                                <img src="{{asset('upload/father/'.$parent->image_path)}}" width="10%" alt="" srcset="">
-                            </td>
-                            <td>{{$parent->mobileNumber}}</td>
-                            <td>{{$parent->trip_id}}</td>
-                            <td>{{$parent->status}}</td>
-                            <td>{{$parent->region}}</td>
-                            <td>{{$parent->lng}}</td>
-                            <td>{{$parent->lit}}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm"> <a href="{{route('father.edit',$parent->id)}}"
-                                        class="btn fa fa-lg  fa-edit "></a></div>
-                                    <div class="col-sm"> <a href="{{route('father.show',$parent->id)}}"
-                                        class="btn fas fa-lg fa-eye"  style="color:green"></a></div>
-                                    <div class="col-sm">
-                                        <form action="{{route('father.destroy',$parent->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"class="btn fa-lg far fa-trash-alt" style="color:Red"></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                           
-                        <div class="box">
-                            <div class="links">
-                                <span class="icon">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>                             
-                                </span>
-                                <ul>
-                                    <li><a href="#TRIP 1">TRIP 1</a></li>
-                                    <li><a href="#TRIP 2">TRIP 2</a></li>
-                                    <li><a href="#TRIP 3">TRIP 3</a></li>
-                                    <li> <a href="#TRIP 4">TRIP 4</a></li>
-                                </ul>
-                                </div> 
-                            <div class="thump">
-                                <img src="https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg" >
-                          
-                               
-                        </div>  
-                                <div class="text">
-                                    <h4>tarek ahmed</h4>
-                                    <p>  mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                                    </p>
-                                    <div class="but">
-                                        <a href=""><button class="b">UPDATE</button></a>
-                                                   <button class="b">DELETE</button>
-                                                   <button class="b">ASSIGN</button>
-                   </div>
-                            </div>                       
-                     </div>    
-                            <div class="box">
-                                <div class="links">
-                                    <span class="icon">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>                             
-                                    </span>
-                                    <ul>
-                                        <li><a href="#TRIP 1">TRIP 1</a></li>
-                                        <li><a href="#TRIP 2">TRIP 2</a></li>
-                                        <li><a href="#TRIP 3">TRIP 3</a></li>
-                                        <li> <a href="#TRIP 4">TRIP 4</a></li>
-                                    </ul>
-                                    </div> 
-                                <div class="thump">
-                                    <img src="https://cdn3.vectorstock.com/i/1000x1000/26/07/girl-icon-woman-avatar-face-icon-cartoon-style-vector-24742607.jpg" >
-                                  
-                            </div> 
-                                    <div class="text">
-                                        <h4>tia ali</h4>
-                                        <p> mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                                        </p>
-                                        <div class="but">
-                                            <a href=""><button class="b">UPDATE</button></a>
-                                                       <button class="b">DELETE</button>
-                                                       <button class="b">ASSIGN</button>
-                                   </div>  
-                                
-                                </div>
-                            
-                            </div>     
-                                <div class="box">
-                                    <div class="links">
-                                        <span class="icon">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>                             
-                                        </span>
-                                        <ul>
-                                            <li><a href="#TRIP 1">TRIP 1</a></li>
-                                            <li><a href="#TRIP 2">TRIP 2</a></li>
-                                            <li><a href="#TRIP 3">TRIP 3</a></li>
-                                            <li> <a href="#TRIP 4">TRIP 4</a></li>
-                                        </ul>
-                                        </div> 
-                                    <div class="thump">
-                                        <img src="https://media.istockphoto.com/vectors/young-arabic-business-woman-wearing-hijab-vector-id917649844?b=1&k=20&m=917649844&s=612x612&w=0&h=qpsWT672fVVtKmGFkyZ27-BjnGL7wHiESGj0dWB1TX0=">
-                                      
-                                </div>
-                                        <div class="text">
-                                            <h4>soha ahmed</h4>
-                                            <p> mobile: 01000220020 <br> email : gamalahmed2@yahoo
-                                            </p>
-                                            
-                                            <div class="but">
-                                               
-                                                <a href=""><button class="b">UPDATE</button></a>
-                                                           <button class="b">DELETE</button> 
-                                                           <button class="b">ASSIGN</button>
-                                        </div>
-                    
-                                    </div>
-                                    <button class="g"> 
-                                          <i class="fa fa-plus-circle" style="font-size:80px;color:#252C4B "></i>
-
-                                    </button>
-                                
-                                </div>
-        </div>  
-         
+        
+   
+</div>  
+@endsection

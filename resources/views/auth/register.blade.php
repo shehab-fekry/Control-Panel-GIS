@@ -5,7 +5,7 @@
     <title>
         Sign Up
     </title>
-    <link rel="icon" href="{{ asset("assets/school-bus.png")}}">
+    <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
     <link rel="stylesheet" href="{{ asset("css/SignUp.css")}}">
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
@@ -21,7 +21,7 @@
     </div> -->
     <div class="sign_wrapper">
             <div class="svg">
-                <img src="{{ asset("assets/registerDark.svg")}}" width="500" height="500" alt="">
+                <img src="{{ asset("assets/images/registerDark.svg")}}" width="500" height="500" alt="">
             </div>
             <div class="card">
                 <div class="card_head">
@@ -34,7 +34,7 @@
                     @csrf
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset("assets/user.png")}}"></div>
+                            <div><img src="{{ asset("assets/images/user.png")}}"></div>
                             <input placeholder="Name" id="username" type="text" class="input_field @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         </div>
                         <!-- message -->
@@ -46,7 +46,7 @@
 
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset("assets/email.png")}}"></div>
+                            <div><img src="{{ asset("assets/images/email.png")}}"></div>
                             <input id="email" type="email" class="input_field @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Example@gmail.com">
                         </div>
                         <!-- message -->
@@ -58,7 +58,7 @@
 
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset("assets/lock.png")}}"></div>
+                            <div><img src="{{ asset("assets/images/lock.png")}}"></div>
                             <input id="password" type="password" class="input_field form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
                             <i class="bi bi-eye-slash" onclick="togglePass(this)"></i>
                         </div>
@@ -71,7 +71,7 @@
 
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset("assets/lock.png")}}"></div>
+                            <div><img src="{{ asset("assets/images/lock.png")}}"></div>
                             <input class="input_field" id="confPassword"  type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
                         </div>

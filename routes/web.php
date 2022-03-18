@@ -5,9 +5,12 @@ use Web\FatherController;
 use Web\ChildController;
 use Web\VehicleController;
 use Web\BusController;
+use Web\AdminController;
+use Web\SchoolController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +29,13 @@ Auth::routes(['verify'=>true]);
 
 // Route For home 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+
+
+// Route For Admin 
+Route::resource('admin',AdminController::class)->middleware('verified');
+
+// Route For Admin 
+Route::resource('school',SchoolController::class)->middleware('verified');
 
 
 // Route For father 
@@ -52,7 +62,27 @@ Route::resource('bus',BusController::class)->middleware('verified');
 // Route::delete("bus.delete","Web\BusController@Destroy")->middleware('verified');
 
 
+Route::get('send-mail', function () {
 
+    // Email data details
+    $details = [
+        'title' => 'Email to Multiple Users',
+        'body' => 'This is sample content we have added for this test mail sending to multiple users.'
+    ];
+
+    // Email to users
+    $users=User::get();
+    // $users = [
+    //     "hossam.anber6@gmail.com",
+    //     "m.3nber@gmail.com"
+    // ]; 
+
+    foreach ($users as $user) { // sending mail to users.
+
+        Mail::to($user->email)->send(new \App\Mail\MyTestMail($details));
+    }
+    return redirect()->route("home")->with('success','Email is Sent, please check your inbox.');
+})->middleware('verified');
 
 
 // Last Route For error
