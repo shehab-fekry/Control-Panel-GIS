@@ -23,9 +23,7 @@ class CreateFathersTable extends Migration
             $table->string('password');
             $table->string('image_path')->nullable();
             $table->boolean('confirmed')->default(false);
-
             $table->string('mobileNumber', 11);
-
             $table->integer('status')->default(0);
             $table->string('region',60)->nullable();
             $table->double('lng')->nullable();
