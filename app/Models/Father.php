@@ -29,4 +29,9 @@ class Father extends Authenticatable
     {
         return $this->hasMany(Child::class);
     }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }
