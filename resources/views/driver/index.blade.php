@@ -5,7 +5,7 @@
             <div class="row">
                 @foreach($driver as $drivers )
                 <div class="col-md-4">
-               
+                
 
                     <div class="card user-card" >  
                         <div class="card-header">
@@ -46,7 +46,11 @@
                     </div>
             </div>
             @endforeach
-
+            @if (session('success'))
+            <div class="alert alert-danger" role="alert">
+           {{ session('success') }}
+           </div>
+            @endif
             </div>
         
 @endsection

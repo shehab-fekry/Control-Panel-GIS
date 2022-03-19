@@ -13,10 +13,10 @@ class TripController extends Controller
     {
         $admin=Auth::user();
         if($admin->school_id==null){
-            return view("school.create");
+            return view("school.index");
         }
-        $vehicles=vehicle::where('school_id',$admin->school_id)->get();
-        return view("vehicle.index",compact("vehicles"));
+        $trips=Trip::where('school_id',$admin->school_id)->get();
+        return view("trip.index",compact("trips"));
 
     }
 

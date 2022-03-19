@@ -80,15 +80,15 @@
             <a href="{{route('home')}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard</li>
             </a>
-            <a href="{{route('school.show', Auth::user()->school_id)}}">     
+            <a href="{{route('school.index', Auth::user()->school_id)}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-university" aria-hidden="true"></i> &nbsp; School</li>
             </a>
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-trips" aria-expanded="false">
                 <i class="fa fa-subway"></i> &nbsp;Trips </li>
                 <div class="collapse" id="dashboard-collapse-trips">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="/dash/tracking" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
-                        <li><a href="/dash/editTrips" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
                     </ul>
                 </div>
             </a>

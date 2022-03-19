@@ -19,7 +19,7 @@ class DriverController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.create");
+            return view("school.index");
         }
         $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
       
@@ -28,6 +28,11 @@ class DriverController extends Controller
 
     public function create()
     {
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
+            return view("school.index");
+        }
         return view("driver.create");
     }
 

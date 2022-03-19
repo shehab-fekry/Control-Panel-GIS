@@ -19,7 +19,7 @@ class FatherController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.create");
+            return view("school.index");
         }
         $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
         return view("father.index",compact("fathers"));
@@ -28,6 +28,11 @@ class FatherController extends Controller
 
     public function create()
     {
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
+            return view("school.index");
+        }
         return view("father.create");
     }
 
