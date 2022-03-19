@@ -12,6 +12,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-right headingUpdateDriver"></h4>
         </div>
+
         <div class="container bg-white">
             
             <div class="row  mt-5">
@@ -26,14 +27,14 @@
 
                         <div class="row mt-2">
                             <div class="col-md-6"><label class="labels">Name</label><input type="text" name="name" class="form-control" placeholder="name" value="{{$driver->name}}"></div>
-                            <div class="col-md-6"><label class="labels">License Number</label><input type="text"  name="licenseNumber" class="form-control" value="{{$driver->licenseNumber}}" placeholder="example@example.com"></div>
+                            <div class="col-md-6"><label class="labels">License Number</label><input name="licenseNumber" type="text"  class="form-control" value="{{$driver->licenseNumber}}" placeholder="example@example.com"></div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6"><label class="labels">Mobile</label><input type="text" name="mobileNumber" class="form-control"  value="{{$driver->mobileNumber}}"></div>
                             <div class="col-md-6"><label class="labels">School</label><input type="text"  name="school_id" class="form-control" value="{{$driver->school_id}}" ></div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Email</label><input type="text" name="email" class="form-control"  value="{{$driver->email}}"></div>
+                            <div class="col-md-6"><label class="labels  @error('email') is-invalid @enderror">Email</label><input type="text" name="email" class="form-control"  value="{{$driver->email}}"></div>
                             <div class="col-md-6"><label class="labels">Trip</label><input type="text"  name="trip_id" class="form-control" value="{{$driver->trip_id}}" ></div>
                         </div>
                         {{-- <div class="row mt-2"> --}}
@@ -46,7 +47,11 @@
                         <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
                         </div>
-                    
+                     @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                
                 </div>
                
