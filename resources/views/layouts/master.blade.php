@@ -72,7 +72,7 @@
             </div>
 
             <div class="sidebar-user">
-                <img src="upload/admin/{{Auth::user()->image_path}}"  class="sidebar-img">
+                <img src="{{asset('upload/admin/'.Auth::user()->image_path)}} "  class="sidebar-img">
                 <h2>   {{ Auth::user()->name }} </h3>
                 <h4> School Manager </h4>
                
@@ -83,15 +83,15 @@
             <a href="{{route('home')}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard</li>
             </a>
-            <a href="{{route('school.show', Auth::user()->school_id)}}">     
+            <a href="{{route('school.index', Auth::user()->school_id)}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-university" aria-hidden="true"></i> &nbsp; School</li>
             </a>
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-trips" aria-expanded="false">
                 <i class="fa fa-subway"></i> &nbsp;Trips </li>
                 <div class="collapse" id="dashboard-collapse-trips">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="/dash/tracking" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
-                        <li><a href="/dash/editTrips" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
                     </ul>
                 </div>
             </a>
@@ -131,7 +131,7 @@
                 <div class="collapse" id="dashboard-collapse-profile">
                   <ul class="btn-toggle-nav list-unstyled">
                     <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Admin Profile</a></li>
-                    <li><a href="#" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
+                    <li><a href="{{route('admin.edit',Auth::user()->id)}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
                          class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}

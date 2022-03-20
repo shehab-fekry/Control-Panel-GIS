@@ -17,17 +17,18 @@ class ChildController extends BaseController
     public function index()
     {
         $id=Auth::guard('api-fathers')->id();
-        $children=Child::where("father_id",$id)->where("confirmed",true)->get();
-        $childrenCount=Child::where("father_id",$id)->withCount([ 'children' => function (Builder $query) {
+        $father=Father::find($id)->withCount([ 'children' => function (Builder $query) {
             $query->where('confirmed',false);
         }])->get();
+        $children=Child::where("father_id",$id)->where("confirmed",true)->get();
+
         $input=$children->all();
         if(empty($input)){
-            return $this->sendError('please validate errors',"you have chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
+            return $this->sendError('please validate errors',"you have".$father[0]->children_count." chidrens waiting to confirm from admin you are not have any childrens confirmed yet");
         }
         else
         {
-            return $this-> sendResponse(ChildResource::collection($input),'you have  chidrens waiting to confirm from admin');
+            return $this-> sendResponse(ChildResource::collection($input),'you have '.$father[0]->children_count.'  chidrens waiting to confirm from admin');
         }
     }
     public function store(Request $request)

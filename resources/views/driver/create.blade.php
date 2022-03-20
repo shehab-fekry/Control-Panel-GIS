@@ -72,10 +72,10 @@
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <label class="form-label" for="m_number">Phone Number</label>
+                            <label class="form-label" for="mobileNumber">Phone Number</label>
       
-                            <input type="text" id="m_number" class="form-control form-control-lg  @error('m_number') is-invalid @enderror"
-                            name="m_number" required />
+                            <input type="text" id="mobileNumber" class="form-control form-control-lg  @error('mobileNumber') is-invalid @enderror"
+                            name="mobileNumber" required />
                           </div>
         
                         </div>
@@ -83,19 +83,34 @@
                         <div class="col-md-6 mb-4 d-flex align-items-center">
         
                           <div class="form-outline datepicker w-100">
-                            <label for="file"  class="form-label">Photo</label>
+                            <label for="licenseNumber"  class="form-label">licenseNumber</label>
       
                             <input
-                              type="file" name="image"
+                              type="text" name="licenseNumber"
                               class="form-control form-control-lg"
-                              id="image"
+                              id="licenseNumber"
                             />
                           </div>
         
                         </div>
                        
                       </div>
+                     <div class="row">
+                      <div class="col-md-12 mb-4 d-flex align-items-center">
         
+                        <div class="form-outline datepicker w-100">
+                          <label for="image"  class="form-label">Photo</label>
+    
+                          <input
+                            type="file" name="image"
+                            class="form-control form-control-lg"
+                            id="image"
+                          />
+                        </div>
+      
+                      </div>
+
+                     </div>
                      
         
                       <div class="row">
@@ -119,6 +134,11 @@
         {{-- </section> --}}
                     {{-- </div> --}}
 
+                    @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
     </div>
 </div>
 

@@ -1,36 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="find.css">
-    <link rel="stylesheet" href="Drivers.css">
-    <link rel="stylesheet" href="Findex.css">
-    <link rel="stylesheet" href="parentDriver.css">
-    <link rel="stylesheet" href="Parents.css">
-    <link rel="stylesheet" href="all.min.css">
-</head>
-<body>
-    
+@extends('layouts.master')
+
+@section('content')
 
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="container bg-white">
             <div class="row ">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/admin/'.Auth::user()->image_path)}} " alt="{{asset('upload/nophoto.svg')}}" onerror="this.src='{{asset('upload/nophoto.svg')}}';" ><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
                 </div>
                 <div class="col">
                     <div>
                         <div class="d-flex justify-content-between align-items-center" >
                             
                         </div>
-                        <form action="" method="POST" class="row g-3">
-                          
+                    
+                     <form action="{{route('admin.update',$admin->id)}}" method="POST" class="row g-3" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
                             <div class="row">
                                 <div class="col-md-12 mb-4">
@@ -38,8 +25,8 @@
                                   <div class="form-outline">
                                     <label class="form-label" for="License Plate">Name</label>
               
-                                    <input type="text" id="License late" class="form-control form-control-lg
-                                    value="Name" required autocomplete="Name" autofocus  />
+                                    <input type="text" id="License late" name="name" class="form-control form-control-lg"
+                                     required autocomplete="Name" autofocus value="{{ $admin->name }} " />
                                   </div>
                 
                                 </div>
@@ -48,15 +35,19 @@
                                 <div class="col-md-12 mb-4 pb-2">
                 
                                   <div class="form-outline">
-                                    <label class="form-label" for="Model">Email</label>
+                                    <label class="form-label" for="email">Email</label>
               
                                     <input type="text" id="emailAddress" class="form-control form-control-lg "
-                                    name="Email" required autocomplete="Model" />
+                                    name="email" value="{{ $admin->email }}" required autocomplete="Model" />
                                   </div>
-                                  
-                                  <span class="invalid-feedback" role="alert">
+
+                      
+                                    <input type="hidden" id="emailAddress" class="form-control form-control-lg "
+                                    name="password" value="{{ $admin->password }}" required autocomplete="Model" />
+                                 
+                                  {{-- <span class="invalid-feedback" role="alert">
                                       <strong></strong>
-                                  </span>
+                                  </span> --}}
                                 
                                 </div>
                             </div>
@@ -65,13 +56,13 @@
                                 <div class="col-md-12 mb-4 pb-2">
                 
                                   <div class="form-outline">
-                                    <label class="form-label" for="emailAddress">School Name</label>
+                                    <label class="form-label" for="school_id">School Name</label>
               
                                     <input type="text" id="color" class="form-control form-control-lg "
-                                    name="School Name" required autocomplete="School Name" />
-                                   <span class="invalid-feedback" role="alert">
+                                    name="school_id" value="{{ $admin->school_id }}" required autocomplete="School Name" />
+                                   {{-- <span class="invalid-feedback" role="alert">
                                    <strong></strong>
-                                   </span>
+                                   </span> --}}
                                   </div>
                 
                                 </div>
@@ -89,8 +80,8 @@
                                   <div class="form-outline datepicker w-100">
                                     
               
-                                    <input type="file" name="file" id="file" class="inputfile" />
-                                                <label for="file" style="margin-left: -1px; margin-top: -10px;">Choose a file</label>
+                                    <input type="file" name="image_path" id="file" class="inputfile" />
+                                                {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
                                   </div>
                 
                                 </div>
@@ -111,7 +102,4 @@
             </div>
         </div>
         </div>
-      
-<script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection

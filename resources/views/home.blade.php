@@ -9,7 +9,6 @@
                 <span class="cursor type"></span>
             </div>
         </div>
-
         <div class="statistics">
             <div class="drivers" >
                 <div class="number">
