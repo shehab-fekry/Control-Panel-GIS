@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
 <div class="profile-page">
 
@@ -50,7 +51,33 @@
             @endforeach
 
             </div>
+            <!-- <button>Show Alert</button> -->
+      <div class="alert hide">
+         <span class="fas fa-exclamation-circle"></span>
+         <span class="msg">Warning: This is a warning alert!</span>
+         <div class="close-btn">
+            <span class="fas fa-times"></span>
+         </div>
+      </div>
+      <script>
+        //  $('button').click(function(){
+        //    $('.alert').addClass("show");
+        //    $('.alert').removeClass("hide");
+        //    $('.alert').addClass("showAlert");
+         document.addEventListener("DOMContentLoaded", function() {
+          $('.alert').addClass("show");
+          $('.alert').removeClass("hide");
+          $('.alert').addClass("showAlert");
+           setTimeout(function(){
+             $('.alert').removeClass("show");
+             $('.alert').addClass("hide");
+           },5000);
+         });
+         $('.close-btn').click(function(){
+           $('.alert').removeClass("show");
+           $('.alert').addClass("hide");
+         });
+      </script>
         
-   
 </div>  
 @endsection
