@@ -1,6 +1,7 @@
 @extends('Father.layout')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
 
       <div class="content-header">
         
@@ -72,10 +73,10 @@
                         <div class="col-md-6 mb-4 pb-2">
         
                           <div class="form-outline">
-                            <label class="form-label" for="m_number">Phone Number</label>
+                            <label class="form-label" for="mobileNumber">Phone Number</label>
       
-                            <input type="text" id="m_number" class="form-control form-control-lg  @error('m_number') is-invalid @enderror"
-                            name="m_number" required />
+                            <input type="text" id="mobileNumber" class="form-control form-control-lg  @error('mobileNumber') is-invalid @enderror"
+                            name="mobileNumber" required />
                           </div>
         
                         </div>
@@ -83,7 +84,7 @@
                         <div class="col-md-6 mb-4 d-flex align-items-center">
         
                           <div class="form-outline datepicker w-100">
-                            <label for="file"  class="form-label">Photo</label>
+                            <label for="image"  class="form-label">Photo</label>
       
                             <input
                               type="file" name="image"
@@ -118,11 +119,37 @@
           {{-- </div> --}}
         {{-- </section> --}}
                     {{-- </div> --}}
-                    @if ($message = Session::get('error'))
-                      <div class="alert alert-success" role="alert">
-                        {{$message}}
-                      </div>
-                      
-                  @endif
+                  {{-- alert from backend --}}
+            <!-- <button>Show Alert</button> -->
+            @if ($message = Session::get('error'))
+            @foreach($message as $messages)
+            <div class="alert hide">
+              <span class="fas fa-exclamation-circle"></span>
+              <span class="msg">Warning:  {{$messages}}</span>
+              <div class="close-btn">
+                 <span class="fas fa-times"></span>
+              </div>
+           </div>
+           @endforeach
 
+           @endif
+           <script>
+             //  $('button').click(function(){
+             //    $('.alert').addClass("show");
+             //    $('.alert').removeClass("hide");
+             //    $('.alert').addClass("showAlert");
+              document.addEventListener("DOMContentLoaded", function() {
+               $('.alert').addClass("show");
+               $('.alert').removeClass("hide");
+               $('.alert').addClass("showAlert");
+                setTimeout(function(){
+                  $('.alert').removeClass("show");
+                  $('.alert').addClass("hide");
+                },5000);
+              });
+              $('.close-btn').click(function(){
+                $('.alert').removeClass("show");
+                $('.alert').addClass("hide");
+              });
+           </script>
 @endsection

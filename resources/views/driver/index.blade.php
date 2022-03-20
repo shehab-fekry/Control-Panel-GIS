@@ -46,11 +46,33 @@
                     </div>
             </div>
             @endforeach
-            @if (session('success'))
-            <div class="alert alert-danger" role="alert">
-           {{ session('success') }}
-           </div>
-            @endif
             </div>
+                        <!-- <button>Show Alert</button> -->
+         @if (session('success'))
+            <div class="alert hide">
+           <span class="fas fa-exclamation-circle"></span>
+           <span class="msg">Warning:{{ session('success') }}
+           </span>
+           <div class="close-btn">
+           <span class="fas fa-times"></span>
+           </div>
+           </div>
+        @endif
+
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+         $('.alert').addClass("show");
+         $('.alert').removeClass("hide");
+         $('.alert').addClass("showAlert");
+          setTimeout(function(){
+            $('.alert').removeClass("show");
+            $('.alert').addClass("hide");
+          },5000);
+        });
+        $('.close-btn').click(function(){
+          $('.alert').removeClass("show");
+          $('.alert').addClass("hide");
+        });
+     </script>
         
 @endsection
