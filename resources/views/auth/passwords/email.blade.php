@@ -6,7 +6,7 @@
     <title>
         email
     </title>
-    <link rel="icon" href="{{ asset("assets/school-bus.png")}}">
+    <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
     <link rel="stylesheet" href="{{ asset("css/forgetPassword.css")}}">
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
@@ -16,7 +16,7 @@
     <div class="sign_wrapper">
         
         <div class="svg">
-            <img src="{{ asset("assets/forgetPassDark.svg")}}" width="500" height="500" alt="">
+            <img src="{{ asset("assets/images/forgetPassDark.svg")}}" width="500" height="500" alt="">
         </div>
         <div class="card">
             <div class="card_head">
@@ -31,7 +31,7 @@
                 @csrf
                 <div class="main_container">
                     <div class="input_container">
-                        <div><img src="{{ asset("assets/email.png")}}"></div>
+                        <div><img src="{{ asset("assets/images/email.png")}}"></div>
                         <input id="email" type="email" class="input_field @error('email') is-invalid @enderror"
                             name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
                             placeholder="Example@gmail.com">

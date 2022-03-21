@@ -48,7 +48,7 @@ Route::resource('father',FatherController::class)->middleware('verified');
 
 // // Add child 
 // Route::post("father.store_Child","web\FatherController@store_Child")->middleware('verified');
-Route::post('someurl', 'FatherController@store_Child');
+// Route::post('someurl', 'FatherController@store_Child');
 
 
 // Route For child 

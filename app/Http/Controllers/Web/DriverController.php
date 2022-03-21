@@ -109,7 +109,7 @@ class DriverController extends Controller
     public function show(Driver $driver)
     {
         $admin=Auth::user()->school_id;
-        $school=School::where("id",$admin)->select('name')->get();
+        $school=School::where("id",$admin)->first();
         return view("driver.show",compact('driver'))->with('schools' ,$school);
     }
 

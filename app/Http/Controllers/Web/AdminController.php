@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\School;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,8 +19,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $admin=Auth::user()->school_id;
+        $school=School::where("id",$admin)->first();
         $admin = User::latest();
-        return view("admin.index",compact("admin"));
+        return view("admin.index",compact("admin"))->with('schools' ,$school);
     }
 
     /**
@@ -74,10 +77,10 @@ class AdminController extends Controller
      */
     public function update(Request $request,User $users)
     {
-        $input=$request->all();
+        $input=$request->all(); 
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'min:2'],
-            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($users->id)],
+            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('admins')->ignore($users->id)],
             'school_id' => ['required', 'string', 'max:25' ],
             // 'image_path'=>'image'
         ]);

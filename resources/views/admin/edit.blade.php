@@ -26,7 +26,7 @@
                                     <label class="form-label" for="License Plate">Name</label>
 
                                     <input type="text" id="License late" name="name" class="form-control form-control-lg"
-                                     required autocomplete="Name" autofocus value="{{ $admin->name }} " />
+                                     required autocomplete="name" autofocus value="{{ $admin->name }} " />
                                   </div>
 
                                 </div>
@@ -86,7 +86,7 @@
 
                                     
               
-                                    <input type="file" name="image_path" id="file" class="inputfile" />
+                                    {{-- <input type="file" name="image_path" id="file" class="inputfile" /> --}}
                                                 {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
 
                                   </div>
@@ -102,6 +102,12 @@
                         <div class="form-outline datepicker w-100" style="margin-left: 5px;"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
                         </div>
+                        @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+               
                     </div>
 
                 </div>

@@ -57,7 +57,7 @@
                 <h6 class="mb-0">School Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ Auth::user()->school_id }} 
+                {{ $schools->name  }} 
               </div>
             </div>
             <hr>
