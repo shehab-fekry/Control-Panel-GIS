@@ -7,14 +7,27 @@ body
   background-color:#141019;
   background: radial-gradient(at 50% -20%, #ffc107, #3a2c00) fixed;
 }
+.btn-404{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #FFF;
+    color:#000;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 200px;
+    cursor: pointer;
 
+}
 
 #handboy
 {
    animation: swing ease-in-out 1.3s infinite alternate;
     transform-origin: 98% 98%;
     transform-box: fill-box;
-    
+
 }
 
 
@@ -30,14 +43,14 @@ body
     animation: swinghair ease-in-out 1.3s infinite alternate;
    transform-origin: 60% 0%;
     transform-box: fill-box;
-  
+
 }
 
 #zero
 {
   transform-origin:bottom;
   transform-box:fill-box;
-  
+
 }
 
 /*************swing************/
@@ -58,9 +71,11 @@ body
 <body>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-12 mt-5 mb-5">
-          <svg width="100%" height="auto" viewBox="0 0 636 324" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 mt-5 mb-5">
+            <a href="#"><button class="btn-404">🡸 Go Back</button></a>
+            <svg width="100%" height="auto" viewBox="0 0 636 324" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="OBJECTS">
               <g id="Group">
               <path id="Vector" d="M101.3 255.2C101.3 255.2 111.1 272.6 181.8 280.5C252.5 288.4 288.2 314.9 333.1 322.8C378 330.7 433.6 278.5 481.8 286.5C530 294.4 588.2 264.2 592.8 255.2H101.3Z" fill="#2F1829"/>
@@ -374,6 +389,7 @@ body
           </svg>
     </div>
   </div>
+
 </div>
 
 
