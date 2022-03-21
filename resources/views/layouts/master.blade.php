@@ -5,8 +5,11 @@
     <title>
         
     </title>
+    
     <link rel="icon" href="{{ asset("assets/images/tracking.svg") }}">
     <!-- bootstarp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -80,15 +83,15 @@
             <a href="{{route('home')}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard</li>
             </a>
-            <a href="{{route('school.show', Auth::user()->school_id)}}">     
+            <a href="{{route('school.index', Auth::user()->school_id)}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-university" aria-hidden="true"></i> &nbsp; School</li>
             </a>
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-trips" aria-expanded="false">
                 <i class="fa fa-subway"></i> &nbsp;Trips </li>
                 <div class="collapse" id="dashboard-collapse-trips">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="/dash/tracking" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
-                        <li><a href="/dash/editTrips" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
                     </ul>
                 </div>
             </a>
@@ -156,5 +159,7 @@
     <!-- index.js  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ asset("js/index.js") }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
 </html> 

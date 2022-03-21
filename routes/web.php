@@ -1,5 +1,6 @@
 <?php
 
+use Web\TripController;
 use Web\DriverController;
 use Web\FatherController;
 use Web\ChildController;
@@ -34,12 +35,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route For Admin 
 Route::resource('admin',AdminController::class)->middleware('verified');
 
-// Route For Admin 
+// Route For school 
 Route::resource('school',SchoolController::class)->middleware('verified');
+
+
+// Route For trip 
+Route::resource('trip',TripController::class )->middleware('verified');
 
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
+
+// // Add child 
+// Route::post("father.store_Child","web\FatherController@store_Child")->middleware('verified');
+Route::post('someurl', 'FatherController@store_Child');
 
 
 // Route For child 

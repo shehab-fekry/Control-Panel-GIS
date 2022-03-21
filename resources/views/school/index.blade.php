@@ -22,15 +22,17 @@
 
     <div class="createSchool">
         <div class="createSchool-title">Add New School</div>
-        <form  class="createShoolForm"  action="/dash/data" method="POST">
+        <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
+            @csrf
             <div class="inputPart">
-                <input id="SchoolName" type="text" name="schoolName" placeholder="School Name">
-                <input id="schoolLevel" type="text" name="school-level" placeholder="School level">
-                <div id="location" class="btn red" onclick="getLocation()">Location</div>
-                <input type="hidden" name="location" id="hiddenInput" value="">
+                <input id="SchoolName" type="text" name="name" placeholder="School Name">
+                {{-- <input id="schoolLevel" type="text" name="code" placeholder="School level"> --}}
+                {{-- <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div> --}}
+                {{-- <input type="hidden" name="location" id="hiddenInput" value=""> --}}
             </div>
             <div class="submitPart">
-                <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
+                <button class="btn trackingBtn btnColor" id="submit"  type="submit">Create</button>
+                {{-- <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button> --}}
             </div>
         </form>
     </div>
@@ -50,12 +52,16 @@
             </form>
           </div>
         </div>
+       
+        {{-- @if (session('code'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('code') }}
+        </div>
+        @endif --}}
       </div>
 
-    
-
     <!-- tracking.js  -->
-    <script src="/Public/js/school.js"></script>
+    <script src=" {{ asset("js/school.js") }}"></script>
     <script>
         getLocation = () => {
                 navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
@@ -87,4 +93,10 @@
             }
     </script>
 </div>
+
+@if (session('error'))
+<div class="alert alert-danger" role="alert">
+    {{ session('error') }}
+</div>
+@endif
 @endsection

@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\School;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class SchoolController extends Controller
 {
@@ -23,9 +25,20 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        $admin=Auth::user();
+        // if($admin->school_id==null){
+        //     return view("school.create");
+        // }
+        $school=School::where('id',$admin->school_id);
+        return view("school.index",compact('school'));
+        // /////////////////////////////////////////////////////////////////
+    }
+
     public function create()
     {
-
+     
     }
 
     /**
@@ -34,9 +47,37 @@ class SchoolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $data)
     {
-        //
+          $admin=Auth::user();
+        // if($admin->school_id==null){
+        //     return view("school.create");
+        // }
+        // $school=School::where('id',$admin->school_id);
+        // return view("school.index",compact('school'));
+        // /////////////////////////////////////////////////////////////////
+        $code = Str::random(3) .substr( time() , 6, 9);
+        $input=$data->all();
+        $validator=Validator::make($input,[
+            // 'code' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string',  'max:255'],
+        ]);
+        
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+         School::create([
+            // 'code' => $data['code'],
+            'code' => $code,
+            'name' => $data['name'] ,
+            'lng' => '4565',
+            'lit' => '44563',
+        ]);
+
+        // $school=School::where('id',$admin->school_id);
+        // return view("school.index",compact('school'))->with('success','driver added successfuly');
+        return view("school.index")->with('success','school added successfuly')
+        ->with('code','Your code is ');
     }
 
     /**
@@ -49,7 +90,7 @@ class SchoolController extends Controller
     {
         $admin=Auth::user();
         if($admin->school_id==null){
-            return view("school.create");
+            return view("school.index");
         }
         $school=School::where('id',$admin->school_id);
         return view("school.show",compact('school'));

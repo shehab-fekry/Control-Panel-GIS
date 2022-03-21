@@ -6,6 +6,7 @@ use App\Models\driver;
 use App\Models\father;
 use App\Models\child;
 use App\Models\vehicle;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
@@ -29,10 +30,11 @@ class HomeController extends Controller
 
     public function index()
     {
+        $admin=Auth::user()->school_id;
         return view('home')
-        ->with('countdriver',  Driver::count())
-        ->with('countfather',  father::count())
+        ->with('countdriver',  Driver::where("school_id",$admin)->count())
+        ->with('countfather',  father::where("school_id",$admin)->count())
         ->with('countchild',   child::count())
-        ->with('countvehicle', vehicle::count());
+        ->with('countvehicle', vehicle::where("school_id",$admin)->count());
     }
 }

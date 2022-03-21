@@ -35,11 +35,18 @@
                                 <div class="col-md-12 mb-4 pb-2">
 
                                   <div class="form-outline">
-                                    <label class="form-label" for="Model">Email</label>
 
+                                    <label class="form-label" for="email">Email</label>
+              
                                     <input type="text" id="emailAddress" class="form-control form-control-lg "
                                     name="email" value="{{ $admin->email }}" required autocomplete="Model" />
                                   </div>
+
+
+                      
+                                    <input type="hidden" id="emailAddress" class="form-control form-control-lg "
+                                    name="password" value="{{ $admin->password }}" required autocomplete="Model" />
+                                 
 
                                   {{-- <span class="invalid-feedback" role="alert">
                                       <strong></strong>
@@ -52,7 +59,9 @@
                                 <div class="col-md-12 mb-4 pb-2">
 
                                   <div class="form-outline">
-                                    <label class="form-label" for="emailAddress">School Name</label>
+
+                                    <label class="form-label" for="school_id">School Name</label>
+              
 
                                     <input type="text" id="color" class="form-control form-control-lg "
                                     name="school_id" value="{{ $admin->school_id }}" required autocomplete="School Name" />
@@ -75,9 +84,11 @@
 
                                   <div class="form-outline datepicker w-100">
 
+                                    
+              
+                                    <input type="file" name="image_path" id="file" class="inputfile" />
+                                                {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
 
-                                    <input type="file" name="file" id="file" class="inputfile" />
-                                                <label for="file" style="margin-left: -1px; margin-top: -10px;">Choose a file</label>
                                   </div>
 
                                 </div>
