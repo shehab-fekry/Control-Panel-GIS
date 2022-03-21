@@ -2,12 +2,15 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
-            <div class="row">
+
+        <div class="bus-container">
+          <div class="row">
                 @foreach($driver as $drivers )
                 <div class="col-md-4">
-                
 
-                    <div class="card user-card" >  
+
+
+                    <div class="card user-card" >
                         <div class="card-header">
                             <a type="submit" class="btn btn-light" href="{{route('driver.show',$drivers->id)}}">Profile</a>
                         </div>
@@ -21,25 +24,25 @@
                             <hr>
                             <p class="text-muted m-t-15">Mobile Number: {{$drivers->mobileNumber}}</p>
                             <p class="text-muted m-t-15">Email: {{$drivers->email}}</p>
-                            
+
                             {{-- <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                             <hr>
                             <div class="row">
 
-                            <div class="col">
+                            <div class="col-sm-4">
                                 <a href="{{route('driver.edit',$drivers->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
                              </div>
 
-                                <div class="col">
-                                <button type="submit" class="btn btn-primary">ASSIGN</button>
-                             </div>
+                                <div class="col-sm-4">
+                                    <button type="submit" class="btn btn-primary">ASSIGN</button>
+                                </div>
 
-                            <div class="col">
+                            <div class="col-sm-4">
                                 <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">DELETE</button> 
-                                </form> 
+                                <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
                              </div>
                              </div>
                         </div>
@@ -47,6 +50,7 @@
             </div>
             @endforeach
             </div>
+
                         <!-- <button>Show Alert</button> -->
          @if (session('success'))
             <div class="alert hide">
@@ -75,4 +79,5 @@
         });
      </script>
         
+
 @endsection

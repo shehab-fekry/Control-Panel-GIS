@@ -3,14 +3,14 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
-<div class="profile-page">
+<div class="bus-container">
 
             <div class="row">
                 @foreach($fathers as $parent )
                 <div class="col-md-4">
-               
 
-                    <div class="card user-card" >  
+
+                    <div class="card user-card" >
                         <div class="card-header">
                             <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
                         </div>
@@ -24,25 +24,25 @@
                             <hr>
                             <p class="text-muted m-t-15">Mobile Number: {{$parent->mobileNumber}}</p>
                             <p class="text-muted m-t-15">Email: {{$parent->email}}</p>
-                            
+
                             {{-- <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                             <hr>
                             <div class="row">
 
-                            <div class="col">
+                            <div class="col-sm-4">
                                 <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
                              </div>
 
-                                <div class="col">
+                                <div class="col-sm-4">
                                 <button type="submit" class="btn btn-primary">ASSIGN</button>
                              </div>
 
-                            <div class="col">
+                            <div class="col-sm-4">
                                 <form action="{{route('father.destroy',$parent->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">DELETE</button> 
-                                </form> 
+                                <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
                              </div>
                              </div>
                         </div>
@@ -51,6 +51,7 @@
             @endforeach
 
             </div>
+
             <!-- <button>Show Alert</button> -->
       <div class="alert hide">
          <span class="fas fa-exclamation-circle"></span>
@@ -80,4 +81,5 @@
       </script>
         
 </div>  
+
 @endsection
