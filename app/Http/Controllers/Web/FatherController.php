@@ -19,7 +19,7 @@ class FatherController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
         $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
         return view("father.index",compact("fathers"));
@@ -31,7 +31,7 @@ class FatherController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
         return view("father.create");
     }
@@ -158,7 +158,7 @@ class FatherController extends Controller
 
 public function update(Request $request, Father $father)
     {
-        $input=$request->all();
+        $input=$request->all(); 
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],

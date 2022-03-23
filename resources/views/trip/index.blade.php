@@ -16,38 +16,48 @@
                 <div class="head_data">Route</div>
             </div>
     
-                
+                @foreach ($trips as $trip)
+                    
                 <div class="roow">
-                    <div class="tdata">1</div>
-                    <div class="tdata">shehab</div>
+                    <div class="tdata">{{$trip->id}}</div>
+                    <div class="tdata">{{$trip->geofence}}</div>
                     <div class="tdata">
                         <div class="status"
+                        {{$trip->status}}
                             style="">
                             active
                         </div>
                     </div>
                     <div class="tdata">
                         <button class="btn trackingBtn"
-                            onclick="initPreview()">
+                        onclick="initPreview(index)">
                             <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
                             Preview
                         </button>
                         <button class="btn trackingBtn btn_live"
-                            onclick="initTrack()">
+                        onclick="initTrack(index)">
                             <img src="{{ asset("assets/images/tracking.png") }}" width="25px" height="25px">
                             <div class="text">
                                 Live
-                            <span class=""></span>
+                                <span class=""></span>
                             </div>
                         </button>
                     </div>
                 </div>
-            
+                @endforeach
+
+           
+            <div class="">
+                {{ $trips->links() }}
+                {{-- <button>Previous</button>
+                <button>Next </button> --}}
+            </div>
         </div>
 
         <div class="createTrip">
-            <form class="createTripForm" action="">
-                <input oninput="verifyCreate()" id="location" type="text" placeholder="GeoFence Location">
+            <form action="{{route('trip.store')}}" method="POST" class="createTripForm" enctype="multipart/form-data">
+                @csrf
+                <input oninput="verifyCreate()" id="location" name="geofence" type="text" placeholder="GeoFence Location">
                 <button id="createTripSubmit" disabled="true" class="btn trackingBtn btnHover" type="submit">Create</button>
             </form>
         </div>

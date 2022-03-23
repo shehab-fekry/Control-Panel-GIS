@@ -15,9 +15,9 @@
 
                         </div>
 
-                     <form action="{{route('admin.update',$admin->id)}}" method="POST" class="row g-3" enctype="multipart/form-data">
+                     <form action="{{route('home')}}" method="POST" class="row g-3" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
+                               
 
                             <div class="row">
                                 <div class="col-md-12 mb-4">
@@ -86,7 +86,7 @@
 
                                     
               
-                                    {{-- <input type="file" name="image_path" id="file" class="inputfile" /> --}}
+                                    <input type="file" name="image_path" id="file" class="inputfile" />
                                                 {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
 
                                   </div>

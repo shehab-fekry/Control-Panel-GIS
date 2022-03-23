@@ -1,6 +1,9 @@
 
+@extends('layouts.master')
+
+@section('content')
 <head>
-    <link rel="stylesheet" href="/Public/css/editTrips.css">
+    <link rel="stylesheet" href="{{ asset("css/editTrips.css") }}">
 </head>
 <div class="editTrips-wrapper">
     <div class="table">
@@ -11,10 +14,11 @@
             <div class="head_data tdata-btns">Action</div>
         </div>
 
+        @foreach($trips as $trip )
         
             <div class="roow">
-                <div class="tdata">1</div>
-                <div class="tdata">shehab</div>
+                <div class="tdata">{{$trip->id}}</div>
+                <div class="tdata">{{$trip->geofence}}</div>
                 <div class="tdata">
                     <div class="status"
                         style="">
@@ -28,11 +32,16 @@
                     <button onclick="editTrip()" class="btn trackingBtn btn_live">
                         Edit
                     </button>
-                    <button class="btn trackingBtn">
-                        Delete
-                    </button>
+                    <form action="{{route('trip.destroy',$trip->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn trackingBtn">
+                            Delete
+                        </button>
+                    </form>
                 </div>
             </div>
+        @endforeach
         
     </div>
 
@@ -62,3 +71,4 @@
         }
     </script>
 </div>
+@endsection

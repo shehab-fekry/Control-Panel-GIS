@@ -14,12 +14,13 @@ use Illuminate\Validation\Rule;
 class DriverController extends Controller
 {
 
-    public function index()
+    public function index() 
     {
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.index");
+            return redirect()->route('school.index');
+
         }
         $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
       
@@ -31,7 +32,7 @@ class DriverController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
         return view("driver.create");
     }

@@ -82,22 +82,58 @@ class AdminController extends Controller
             'name' => ['required', 'string', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('admins')->ignore($users->id)],
             'school_id' => ['required', 'string', 'max:25' ],
-            // 'image_path'=>'image'
+            'image_path'=>'image'
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-        // $newPhotoName=time() . '-' . $users->name  .'.' .  $users->image->extension();
-        // $users->image->move(public_path('upload\admin'),$newPhotoName);
+        $newPhotoName=time() . '-' . $users->name  .'.' .  $users->image->extension();
+        $users->image->move(public_path('upload\admin'),$newPhotoName);
         $users->name=$input['name'];
         $users->email=$input['email'];
         $users->school_id=$input['school_id'];
         $users->password=$input['password'];
-        // $users->image_path= $newPhotoName;
+        $users->image_path= $newPhotoName;
         $users->save();
         return redirect()->route("admin.index")->with('success','admin updated successfuly');
     }
 
+    public function assignAdminToSchool(request $request, User $user)
+    {
+        // $input=$request->all(); 
+        // $validator=Validator::make($input,[
+        //     'code' => ['required', 'string','exists:schools,code'],
+        // ]);
+        // if($validator->fails()){
+        //     return redirect()->back()->with('error',$validator->errors());
+        // }
+        // $schools=School::where("code",$request->code);
+        // $user->school_id=$schools->id;
+        // // $user->email=$input['code'];
+        // $user->save();
+        // return redirect()->route("admin.index")->with('success','admin updated successfuly');
+        /////////////////////////////////////////////////////////
+        $admin=Auth::user();
+        $request->validate([
+            'code'=>['required','string','exists:schools,code']
+        ]);
+        $school=School::where("code",$request->code);
+        $admin->school_id=$school->id;
+        ////////////////////////////////////////////
+        // $admin=Auth::user();
+        // $input=$data->all(); 
+        // $validator=Validator::make($input,[
+        //     'code' => ['required', 'string','exists:schools,code'],
+        // ]);
+        
+        // if($validator->fails()){
+        //     return redirect()->back()->with('error',$validator->errors());
+        // }
+        // $school=School::where("code",$user->code);
+        // $admin->school_id=$school->id;
+        // // $user->save();
+        // return redirect()->route("school.index")->with('success','school updated successfuly');
+    }
     /**
      * Remove the specified resource from storage.
      *

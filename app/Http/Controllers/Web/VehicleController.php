@@ -21,7 +21,7 @@ class VehicleController extends Controller
 
         $admin=Auth::user()->school_id;
         if($admin==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
         $vehicle = vehicle::where('school_id',$admin)->latest()->paginate(7);
         return view("vehicle.index",compact("vehicle"));
@@ -37,7 +37,7 @@ class VehicleController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
         
         $admin=Auth::user();

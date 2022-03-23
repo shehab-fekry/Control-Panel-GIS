@@ -13,12 +13,23 @@ class TripController extends Controller
     {
         $admin=Auth::user();
         if($admin->school_id==null){
-            return view("school.index");
+            return redirect()->route('school.index');
         }
-        $trips=Trip::where('school_id',$admin->school_id)->get();
+        $trips=Trip::where('school_id',$admin->school_id)->latest()->paginate(3);
         return view("trip.index",compact("trips"));
 
     }
+    public function indexedit()
+    {
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return redirect()->route('school.index');
+        }
+        $trips=Trip::where('school_id',$admin->school_id)->get();
+        return view("trip.indextrip",compact("trips"));
+
+    }
+
 
   public function store(request $data)
     {
@@ -34,7 +45,7 @@ class TripController extends Controller
 
         ]);
 
-        return redirect()->route("child.index")
+        return redirect()->route("trip.index")
         ->with('success','trip added successfuly');
     }
 
@@ -58,10 +69,13 @@ class TripController extends Controller
     // }
 
 
-    // public function edit(Trip $trip)
-    // {
-    //     //
-    // }
+    public function edit(Trip $trip)
+    {
+        $admin=Auth::user();
+        // $trips=Trip::where("school_id",$admin->school_id)->get();
+        // return view("trip.edit",compact('trip'))->with('trips',$trips);
+        return view("trip.edit",compact('trip'));
+    }
 
 
     // public function update(Request $request, Trip $trip)
@@ -70,8 +84,9 @@ class TripController extends Controller
     // }
 
 
-    // public function destroy(Trip $trip)
-    // {
-    //     //
-    // }
+    public function destroy(Trip $trip)
+    {
+        $trip->delete();
+        return redirect()->route("trip.index")->with('success','trip deleted successfuly');
+    }
 }

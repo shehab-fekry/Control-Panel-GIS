@@ -18,7 +18,7 @@
                 <div class="headingParent card-body p-4 p-md-5" >
                     <form action="{{route('father.store')}}" method="POST" class="row g-3" enctype="multipart/form-data">
                       @csrf
-                      <div class="row">
+                      <div class="row"> 
                         <div class="col-md-6 mb-4">
 
                           <div class="form-outline">
