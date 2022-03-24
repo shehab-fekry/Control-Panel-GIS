@@ -5,7 +5,10 @@
     <title>
         
     </title>
-    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="icon" href="{{ asset("assets/images/tracking.svg") }}">
     <!-- bootstarp -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -22,6 +25,7 @@
     <link href="{{ asset("css/tracking.css") }}" rel="stylesheet">
     <link href="{{ asset("css/Drivers.css") }}" rel="stylesheet">
     <link href="{{ asset("css/Parents.css") }}" rel="stylesheet">
+    <link href="{{ asset("css/alerts.css") }}" rel="stylesheet">
     <link href="{{ asset("css/confirmEmail.css") }}" rel="stylesheet">
     <link href="{{ asset("css/home.css") }}" rel="stylesheet">
     <link href="{{ asset("css/adminProfile.css") }}" rel="stylesheet">
@@ -159,7 +163,7 @@
         <!-- content of other pages here... -->
         @yield("content")
     </div>
- 
+ <script src="{{ asset("js/alerts.js") }}"></script>
     <!-- index.js  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ asset("js/index.js") }}"></script>
