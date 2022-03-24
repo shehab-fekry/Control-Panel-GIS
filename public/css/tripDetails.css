@@ -1,0 +1,344 @@
+
+.tripDetails-wrapper{
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.btnColor {
+    background-color: #384850;
+    border: none;
+    color: white;
+}
+  
+.btnColor:hover{
+color: white;
+box-shadow: 0px 0px 2px #ffc107;
+}
+
+.red{
+background-color: #dc3545;
+color: white;
+padding: 5px 0px;
+width: 90px;
+border-radius: 20px;
+font-weight: 700;
+font-size: 13px;
+/* border-radius: unset; */
+}
+
+.red:hover{
+color: white;
+}
+  
+.card{
+height: 600px;
+box-shadow: 0px 0px 5px #ccc;
+border-radius: 20px;
+background-color: #fcfcfc;
+}
+
+.details-card-title{
+display: flex;
+flex-flow: row;
+align-items: center;
+color: #384850;
+height: 10%;
+padding-left: 15px;
+font-size: 25px;
+/* border: 1px solid black; */
+}
+  
+.card-code{
+    padding-left: 15px;
+    font-size: 20px;
+    color: #aaa;
+}
+
+.card-map{
+    height: 25%;
+    /* border: 1px solid black; */
+}
+
+.card-driver{
+    width: 100%;
+    height: 20%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-flow: row;
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.card-parents{
+    width: 100%;
+    height: 15%;
+    /* border: 1px solid #ffc107; */
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.card-childs{
+    width: 100%;
+    height: 20%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.driver-icon{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    border-right: 2px solid #384850;
+    color: #384850;
+    /* background-color: #ffc107; */
+    /* margin-right: -1px; */
+    /* border: 1px solid black; */
+}
+
+.parent-icon{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+    font-size: 15px;
+    font-weight: 500;
+    border-right: 2px solid #384850;
+    color: #384850;
+    /* border: 1px solid black; */
+}
+
+
+.child-icon{
+    position: sticky;
+    top: 0px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    border-right: 2px solid #384850;
+    color: #384850;
+    /* border: 1px solid black; */
+}
+
+.parent-icon img, .child-icon img, .driver-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.parent-names, .child-names, .driver-table{
+    height: 100%;
+    /* border: 1px solid blue; */
+    width: 90%;
+    /* display: flex;
+    align-items: center; */
+}
+
+.parent-names, .child-names{
+    overflow-y: scroll;
+    background-color: #f8f8f8;
+}
+
+.name-bubble{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px;
+    padding: 5.5px;
+    width: 18%;
+    border-radius: 50px;
+    /* border: 1px solid #ffc107; */
+    background-color: #384850;
+    color: #fcfcfc;
+    opacity: 0.8;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.driver-table{
+    display: flex;
+    flex-flow: column;
+    margin: 0px;
+    padding: 0px;
+    background-color: #f8f8f8;
+    /* border: 1px solid black; */
+}
+
+.driver-table-header{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    height: 30%;
+}
+
+.driver-table-header .driver-table-data{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #384850;
+    border-bottom: 2px solid #fcfcfc;
+    /* background-color: #384850; */
+}
+
+.driver-table-row{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
+.driver-table-row .driver-table-data{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #384850;
+}
+
+.driver-table-row .driver-table-data img{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+
+@media only screen and (min-width: 500px) and (max-width:614px){
+    .card{
+        height: 600px;
+        }
+        
+        .name-bubble{
+            width: 28%;
+            font-size: 10px;
+            /* border: 1px solid #ffc107; */
+        }
+        
+        .driver-table-header .driver-table-data{
+            font-size: 10px;
+        }
+        
+        .driver-table-row .driver-table-data{
+            font-size: 5px;
+            overflow: hidden;
+        }
+        
+        .driver-table-row .driver-table-data img{
+            width: 30px;
+            height: 30px;
+        }
+  }
+
+
+
+  @media only screen and (min-width: 615px) and (max-width:749px){
+    .card{
+        height: 600px;
+        }
+    
+    .name-bubble{
+        width: 29%;
+        font-size: 10px;
+        /* border: 1px solid #ffc107; */
+    }
+    
+    .driver-table-header .driver-table-data{
+        font-size: 11px;
+    }
+    
+    .driver-table-row .driver-table-data{
+        font-size: 8px;
+        overflow: hidden;
+    }
+    
+    .driver-table-row .driver-table-data img{
+        width: 32px;
+        height: 32px;
+    }
+  }
+
+
+  @media only screen and (min-width: 750px) and (max-width:1000px){
+    .card{
+        height: 600px;
+    }
+    
+    .name-bubble{
+        width: 30%;
+        font-size: 10px;
+        /* border: 1px solid #ffc107; */
+    }
+    
+    .driver-table-header .driver-table-data{
+        font-size: 12px;
+    }
+    
+    .driver-table-row .driver-table-data{
+        font-size: 8px;
+        overflow: hidden;
+    }
+    
+    .driver-table-row .driver-table-data img{
+        width: 33px;
+        height: 33px;
+    }
+  }
+
+
+  @media only screen and (min-width: 1001px) and (max-width:1100px){
+    .card{
+        height: 600px;
+    }
+    
+    .name-bubble{
+        width: 18%;
+        font-size: 10px;
+        /* border: 1px solid #ffc107; */
+    }
+    
+    .driver-table-header .driver-table-data{
+        font-size: 12px;
+    }
+    
+    .driver-table-row .driver-table-data{
+        font-size: 10px;
+        overflow: hidden;
+    }
+    
+    .driver-table-row .driver-table-data img{
+        width: 33px;
+        height: 33px;
+    }
+  }
