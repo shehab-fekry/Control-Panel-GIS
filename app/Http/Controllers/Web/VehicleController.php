@@ -50,24 +50,26 @@ class VehicleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        
+        $admin=Auth::user();
         $request->validate([
             'licensePlate' => ['required', 'string', 'max:10', 'unique:vehicles'],
             'model' => ['string', 'max:20'],
-            'driver_id' => ['string', 'max:20'],
+            'driver_id' => ['required','string', 'max:20'],
             'color' => ['string', 'max:20'],
         ]);
+        // dd($request['driver_id']);
         vehicle::create([
             'licensePlate' => $request['licensePlate'],
             'model' => $request['model'],
             'driver_id' => $request['driver_id'],
             'color' => $request['color'],
+            'school_id' => $admin->school_id,
         ]);
 
         return redirect()->route("vehicle.index")
@@ -81,8 +83,9 @@ class VehicleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(vehicle $vehicle)
-    {
-        return view("vehicle.show",compact('vehicle'));
+    { 
+        $driver=Driver::where("id",$vehicle->driver_id)->first();
+        return view("vehicle.show",compact('vehicle'))->with('driver',$driver);
     }
 
     /**
@@ -111,7 +114,7 @@ class VehicleController extends Controller
         $validator=Validator::make($input,[
             'licensePlate' => ['required', 'string', 'max:10',Rule::unique('vehicles')->ignore($vehicle->id)],
             'model' => ['string', 'max:20'],
-            // 'driver_id' => ['string', 'max:20',Rule::unique('vehicles')->ignore($vehicle->id)],
+            'driver_id' => ['string', 'max:20',Rule::unique('vehicles')->ignore($vehicle->id)],
             'color' => ['string', 'max:20'],
         ]);
         if($validator->fails()){
@@ -120,7 +123,7 @@ class VehicleController extends Controller
 
         $vehicle->licensePlate=$input['licensePlate'];
         $vehicle->model=$input['model'];
-        // $vehicle->driver_id=$input['driver_id'];
+        $vehicle->driver_id=$input['driver_id'];
         $vehicle->color=$input['color'];
         $vehicle->save();
         return redirect()->route("vehicle.index")->with('success','vehicle updated successfuly');

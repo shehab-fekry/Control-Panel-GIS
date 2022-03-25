@@ -25,7 +25,7 @@
             </div>
             @endif
 
-            <div class="createSchool">
+            <div class="createSchool"> 
                 <div class="createSchool-title">Add New School</div>
                 <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
                     @csrf
@@ -45,7 +45,7 @@
 
 
     
-    <div class="card" style="width: 90%;">
+      <div class="card" style="width: 90%;">
         <div class="card-body">
           <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
           <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6>
@@ -62,7 +62,7 @@
        
        
       </div>
-      @endif
+    @endif
     <!-- tracking.js  -->
     <script src=" {{ asset("js/school.js") }}"></script>
     <script>

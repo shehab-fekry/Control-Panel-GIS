@@ -52,7 +52,7 @@
             </div>
 
                         <!-- <button>Show Alert</button> -->
-         @if (session('success'))
+         @if (session('success')) 
             <div class="alert hide">
            <span class="fas fa-exclamation-circle"></span>
            <span class="msg">Warning:{{ session('success') }}

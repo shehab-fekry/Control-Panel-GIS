@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-
+ 
 class FatherController extends Controller
 {
 
@@ -42,7 +42,7 @@ class FatherController extends Controller
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
             'father_id' => ['required', 'string', 'max:255'],
-            'image'=>'image'
+            'image_path'=>'image'
         ]);
         
         if($validator->fails()){
@@ -50,18 +50,18 @@ class FatherController extends Controller
         }
 
         
-        if ($request->image == Null){
+        if ($request->image_path == Null){
             Child::create([
                 'name' => $request->input('name'),
                 'father_id' => $request->input('father_id'),
                 'image_path' => 'parent.png',
-            ]);
+            ]); 
             return redirect()->route("father.index")
-            ->with('success','Father added successfuly');
+            ->with('success','child added successfuly');
         }
      else
-        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
-        $request->image->move(public_path('upload\child'),$newPhotoName);
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image_path->extension();
+        $request->image_path->move(public_path('upload\child'),$newPhotoName);
 
         Child::create([
             'name' => $request->input('name'),
@@ -70,7 +70,7 @@ class FatherController extends Controller
         ]);
 
         return redirect()->route("father.index")
-        ->with('success','Father added successfuly');
+        ->with('success','child added successfuly');
     }
 
     public function store(Request  $request)

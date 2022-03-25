@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-use App\Models\Child;
+use App\Models\child;
 use App\Models\Father;
+use App\Models\Driver;
 use App\Models\Trip;
 use App\Models\vehicle;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class TripController extends Controller
     public function indexedit()
     {
         $admin=Auth::user();
-        if($admin->school_id==null){
+        if($admin->school_id==null){ 
             return redirect()->route('school.index');
         }
         $trips=Trip::where('school_id',$admin->school_id)->get();
@@ -113,10 +114,26 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
 
 
-    // public function show(Trip $trip)
-    // {
-    //     //
-    // }
+    public function show(Trip $trip)
+    {
+        // $childs=Child::get();
+        // return view("trip.show",compact('trip'))->with('trip',$childs);
+        $driver=Driver::where('trip_id',$trip->id)->get();
+        $father=father::where('trip_id',$trip->id)->get();
+
+
+        $fathers=father::where('trip_id',$trip->id)->get();
+        // $fathers=father::find($id);
+        // $fathers1= $fathers->select('id')->get() ;
+        // $child=child::where('father_id',$fathers1)->get();
+        // $school=School::where("code",$user->code);
+        // $admin->school_id=$school->id;
+        return view("trip.show",compact('trip'))->with([
+            'driver'=>$driver,
+            'father'=>$father,
+            // 'child'=>$child,
+        ]);
+    }
 
 
     public function edit(Trip $trip)
