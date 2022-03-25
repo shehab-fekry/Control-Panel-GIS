@@ -61,3 +61,6 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::post('trip/backHome',"API\TripController@backHome");
     Route::post('trip/end',"API\TripController@end");
     });
+
+    Route::post("trip/live/{id}","Web\TripController@live");
+
