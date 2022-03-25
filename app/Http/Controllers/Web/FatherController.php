@@ -19,7 +19,7 @@ class FatherController extends Controller
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.create");
+            return redirect()->route('school.index');
         }
         $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
         return view("father.index",compact("fathers"));
@@ -28,38 +28,90 @@ class FatherController extends Controller
 
     public function create()
     {
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
+            return redirect()->route('school.index');
+        }
         return view("father.create");
+    }
+
+    public function store_Child(Request  $request)
+    {
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'name' => ['required', 'string', 'max:255'],
+            'father_id' => ['required', 'string', 'max:255'],
+            'image'=>'image'
+        ]);
+        
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
+        }
+
+        
+        if ($request->image == Null){
+            Child::create([
+                'name' => $request->input('name'),
+                'father_id' => $request->input('father_id'),
+                'image_path' => 'parent.png',
+            ]);
+            return redirect()->route("father.index")
+            ->with('success','Father added successfuly');
+        }
+     else
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
+        $request->image->move(public_path('upload\child'),$newPhotoName);
+
+        Child::create([
+            'name' => $request->input('name'),
+            'father_id' => $request->input('father_id'),
+            'image_path' => $newPhotoName
+        ]);
+
+        return redirect()->route("father.index")
+        ->with('success','Father added successfuly');
     }
 
     public function store(Request  $request)
     {
         // $admin=Auth::user();
     //    $test=$request->file('image')->getClientMimeType();
-        $request->validate([
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'mobileNumber' => ['required', 'string', 'max:20'],
+        //     // 'trip_id' => ['required', 'int', 'max:20'],
+        //     // 'school_id' => ['required', 'int', 'max:20'],
+        //     // 'status' => ['required', 'int', 'max:20'],
+        //     // 'region' => ['string', 'max:20'],
+        //     // 'lng' => ['string', 'max:20'],
+        //     // 'lit' => ['string', 'max:20'],
+        //     'image'=> ['image']
+        // ]);
+
+        $input=$request->all();
+        $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'm_number' => ['required', 'string', 'max:20'],
-            // 'trip_id' => ['required', 'int', 'max:20'],
-            'school_id' => ['required', 'int', 'max:20'],
-            // 'status' => ['required', 'int', 'max:20'],
-            // 'region' => ['string', 'max:20'],
-            // 'lng' => ['string', 'max:20'],
-            // 'lit' => ['string', 'max:20'],
-            'image'=> ['image']
+            'mobileNumber' => ['required', 'string', 'max:20'],
+            'image'=>'image'
         ]);
+        
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
+        }
+
+        
         if ($request->image == Null){
             Father::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
-                'mobileNumber' => $request->input('m_number'),
-                // 'trip_id' => $request->input('trip_id'),
-                // 'school_id' => $request->input('school_id'),
-                // 'status' => $request->input('status'),
-                // 'region' => $request->input('region'),
-                // 'lng' => $request->input('lng'),
-                // 'lit' => $request->input('lit'),
+                'mobileNumber' => $request->input('mobileNumber'),
+                'school_id' => $request->input('school_id'),
                 'image_path' => 'parent.png',
                 'school_id'=>Auth::user()->school_id
             ]);
@@ -74,13 +126,8 @@ class FatherController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'mobileNumber' => $request->input('m_number'),
-            // 'trip_id' => $request->input('trip_id'),
+            'mobileNumber' => $request->input('mobileNumber'),
             'school_id' => Auth::user()->school_id,
-            // 'status' => $request->input('status'),
-            // 'region' => $request->input('region'),
-            // 'lng' => $request->input('lng'),
-            // 'lit' => $request->input('lit'),
             'image_path' => $newPhotoName
         ]);
 
@@ -92,8 +139,12 @@ class FatherController extends Controller
 
 
     public function show(Father $father)
-    {
-        return view("father.show",compact('father'));
+    {       
+        // $admin=Auth::user()->school_id;
+        // $father=Auth::user()->school_id;
+        // $childs=Child::latest();
+        $childs=Child::get();
+        return view("father.show",compact('father'))->with('childs',$childs);
     }
 
 
@@ -107,7 +158,7 @@ class FatherController extends Controller
 
 public function update(Request $request, Father $father)
     {
-        $input=$request->all();
+        $input=$request->all(); 
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],

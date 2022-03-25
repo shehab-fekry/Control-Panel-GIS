@@ -14,12 +14,13 @@ use Illuminate\Validation\Rule;
 class DriverController extends Controller
 {
 
-    public function index()
+    public function index() 
     {
         $admin=Auth::user()->school_id;
         
         if($admin ==null){
-            return view("school.create");
+            return redirect()->route('school.index');
+
         }
         $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
       
@@ -28,33 +29,59 @@ class DriverController extends Controller
 
     public function create()
     {
+        $admin=Auth::user()->school_id;
+        
+        if($admin ==null){
+            return redirect()->route('school.index');
+        }
         return view("driver.create");
     }
 
     public function store(Request $data)
     {
-        $admin=Auth::user();
-        $data->validate([
+
+        $input=$data->all();
+        $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
-            'confirmed' => ['required', 'int', 'max:20'],
-            'trip_id' => ['required', 'int', 'max:20'],
-            'school_id' => ['required', 'int', 'max:20'],
+            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5' , 'unique:drivers'],
+            // 'confirmed' => ['required', 'int', 'max:20'],
+            // 'trip_id' => ['required', 'int', 'max:20'],
+            // 'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
             'image'=>'image'
         ]);
+        
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors());
+        }
+
+
+
+    //     $admin=Auth::user();
+    //     $data->validate([
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //         'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
+    //         // 'confirmed' => ['required', 'int', 'max:20'],
+    //         // 'trip_id' => ['required', 'int', 'max:20'],
+    //         // 'school_id' => ['required', 'int', 'max:20'],
+    //         'mobileNumber' => ['required', 'string', 'max:20'],
+    //         'image'=>'image'
+    //     ]);
+
         if ($data->image == Null){
             Driver::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'licenseNumber' => $data['licenseNumber'],
-                'confirmed' => $data['confirmed'],
+                // 'confirmed' => $data['confirmed'],
                 'mobileNumber' => $data['mobileNumber'],
-                'trip_id' => $data['trip_id'],
-                'school_id' => $data['school_id'],
+                // 'trip_id' => $data['trip_id'],
+                'school_id' => Auth::user()->school_id,
                 'image_path' => 'driver.png'
 
             ]);
@@ -69,10 +96,10 @@ class DriverController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'licenseNumber' => $data['licenseNumber'],
-            'confirmed' => $data['confirmed'],
+            // 'confirmed' => $data['confirmed'],
             'mobileNumber' => $data['mobileNumber'],
-            'trip_id' => $data['trip_id'],
-            'school_id' => $data['school_id'],
+            // 'trip_id' => $data['trip_id'],
+            'school_id' =>  Auth::user()->school_id,
             'image_path' => $newPhotoName
         ]);
 
@@ -83,7 +110,7 @@ class DriverController extends Controller
     public function show(Driver $driver)
     {
         $admin=Auth::user()->school_id;
-        $school=School::where("id",$admin)->select('name')->get();
+        $school=School::where("id",$admin)->first();
         return view("driver.show",compact('driver'))->with('schools' ,$school);
     }
 

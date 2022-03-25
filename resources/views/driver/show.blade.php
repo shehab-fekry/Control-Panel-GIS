@@ -75,7 +75,7 @@
                   <p class="mb-0">School</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ $schools }} {{$driver->school_id}} </p>
+                  <p class="text-muted mb-0">{{ $schools->name }}  </p>
                 </div>
               </div>
               <hr>

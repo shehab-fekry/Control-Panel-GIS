@@ -57,7 +57,12 @@
                 <h6 class="mb-0">School Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ Auth::user()->school_id }} 
+                @if ($schools == Null)
+                  You don't join to  any school yet.
+                @else
+                {{ $schools->name  }} 
+                @endif
+                
               </div>
             </div>
             <hr>

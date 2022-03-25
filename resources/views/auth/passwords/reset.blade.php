@@ -5,7 +5,7 @@
     <title>
        reset
     </title>
-    <link rel="icon" href="{{ asset("assets/school-bus.png")}}">
+    <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
     <link rel="stylesheet" href="{{ asset("css/newPassword.css")}}">
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
@@ -16,7 +16,7 @@
 <body>
     <div class="sign_wrapper">
             <div class="svg">
-                <img src="{{ asset("assets/ConfirmedDark.svg")}}" width="500" height="500" alt="">
+                <img src="{{ asset("assets/images/ConfirmedDark.svg")}}" width="500" height="500" alt="">
             </div>
             <div class="card">
                 <div class="card_head">
@@ -28,7 +28,7 @@
                     <input id="email" type="hidden" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset('assets/lock.png') }}"></div>
+                            <div><img src="{{ asset('assets/images/lock.png') }}"></div>
                             <input id="password" type="password" class="input_field @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
                             <i class="bi bi-eye-slash" onclick="togglePass(this)"></i>
                         </div>
@@ -41,7 +41,7 @@
 
                     <div class="main_container">
                         <div class="input_container">
-                            <div><img src="{{ asset('assets/lock.png') }}"></div>
+                            <div><img src="{{ asset('assets/images/lock.png') }}"></div>
                             <input class="input_field" id="confPassword" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
                         </div>
