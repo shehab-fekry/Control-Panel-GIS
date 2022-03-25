@@ -55,12 +55,19 @@ class HomeController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-//////////////////////////////////////////////////////////////////////////
-
-        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
-        $admin->image->move(public_path('upload\admin'),$newPhotoName);
+        if ($request->image_path == Null){
         $admin->name=$input['name'];
-        $admin->email=$input['email'];
+        $admin->email=$input['email']; 
+        $admin->school_id=$input['school_id'];
+        $admin->save();
+        return redirect()->route("admin.index")->with('success','admin updated successfuly');
+        }
+     else
+        // dd($request->image_path);
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image_path->extension();
+        $request->image_path->move(public_path('upload\admin'),$newPhotoName);
+        $admin->name=$input['name'];
+        $admin->email=$input['email']; 
         $admin->school_id=$input['school_id'];
         $admin->image_path= $newPhotoName;
         $admin->save();

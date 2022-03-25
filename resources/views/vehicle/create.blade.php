@@ -65,17 +65,24 @@
                       </div>
                       <div class="row">
                         <div class="col-md-6 mb-4 pb-2">
-                            <div class="form-outline">
+                          <select class="form-select" aria-label="Default select example" name="driver_id">
+                          
+                            @foreach($driver as  $drivers )
+                                      <option value="{{$drivers->id}}">{{$drivers->name}}</option>
+                            @endforeach
+
+                          </select>
+                            {{-- <div class="form-outline">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                       Choose a Driver
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                       @foreach($driver as  $drivers )
-                                      <option class="dropdown-item"  value="{{$drivers->id}}" @if(old('drivers') ==$drivers->id) selected @endif>{{$drivers->name}}</option>
+                                      <option class="dropdown-item" value="{{$drivers->id}}" @if(old('drivers') ==$drivers->id) selected @endif>{{$drivers->name}}</option>
                                       @endforeach
                                     </ul>
                                   
-                              </div>
+                              </div> --}}
                      
         
                         </div>

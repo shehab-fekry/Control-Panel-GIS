@@ -53,7 +53,7 @@
             </div>
 
             <!-- <button>Show Alert</button> -->
-          <div class="alertw hide">
+          {{-- <div class="alertw hide">
          <span class="fas fa-exclamation-circle"></span>
          <span class="msg">Warning: This is a warning alert!</span>
          <div class="close-btn">
@@ -66,15 +66,16 @@
          <div class="close-btn">
             <span class="fas fa-times"></span>
          </div>
-         </div>
+         </div> --}}
+         @if (session('success'))
          <div class="alertg hide">
          <span class='fas fa-check-circle'></span>
-         <span class="msg">Warning: This is a warning alert!</span>
+         <span class="msg">{{ session('success') }}</span>
          <div class="close-btn">
             <span class="fas fa-times"></span>
          </div>
          </div>
-    
+         @endif    
         
 </div>  
 

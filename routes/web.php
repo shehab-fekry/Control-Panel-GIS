@@ -5,7 +5,6 @@ use Web\DriverController;
 use Web\FatherController;
 use Web\ChildController;
 use Web\VehicleController;
-use Web\BusController;
 use Web\AdminController;
 use Web\SchoolController;
 use App\Models\User;
@@ -53,13 +52,8 @@ Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
 
-// // Add child 
-// Route::post("father.store_Child","web\FatherController@store_Child")->middleware('verified');
-// Route::post('someurl', 'FatherController@store_Child');
-
-
-// Route For child 
-Route::resource('child',ChildController::class)->middleware('verified');
+// Add child 
+Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
 
 // Route For driver 
@@ -69,13 +63,6 @@ Route::resource('driver',DriverController::class)->middleware('verified');
 // Route For vehicle 
 Route::resource('vehicle',VehicleController::class)->middleware('verified');
 
-
-// Route For Bus 
-Route::resource('bus',BusController::class)->middleware('verified');
-// Route::get("bus.index","Web\BusController@index")->middleware('verified');
-// Route::get("bus.show","Web\BusController@show")->middleware('verified');
-// Route::put("bus.update","Web\BusController@update")->middleware('verified');
-// Route::delete("bus.delete","Web\BusController@Destroy")->middleware('verified');
 
 
 Route::get('send-mail', function () {

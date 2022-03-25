@@ -68,14 +68,13 @@
                       <div class="row">
                         <div class="col-md-6 mb-4 pb-2">
                             <div class="form-outline">
-                                    <button class="btn btn-secondary dropdown-toggle" name="driver_id" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Choose a Driver
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      @foreach($driver as $drivers )
-                                      <li><a class="dropdown-item" href="#" value="{{$drivers->id}}" >{{$drivers->name}}</a></li>
-                                      @endforeach
-                                    </ul>
+                              <select class="form-select" aria-label="Default select example" name="driver_id">
+                          
+                                @foreach($driver as  $drivers )
+                                          <option value="{{$drivers->id}}" @if( $drivers->id == $vehicle->driver_id) selected @endif>{{$drivers->name}}</option>
+                                @endforeach
+    
+                              </select>
                                   
                               </div>
                      
