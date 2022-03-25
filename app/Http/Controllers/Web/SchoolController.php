@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Web;
+
+use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\School;
@@ -21,11 +23,11 @@ class SchoolController extends Controller
         // $admin->school_id=$school->id;
         ////////////////////////////////////////////
         $admin=Auth::user();
-        $input=$data->all(); 
+        $input=$data->all();
         $validator=Validator::make($input,[
             'code' => ['required', 'string','exists:schools,code'],
         ]);
-        
+
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
@@ -56,7 +58,7 @@ class SchoolController extends Controller
 
     public function create()
     {
-     
+
     }
 
     /**
@@ -81,7 +83,7 @@ class SchoolController extends Controller
             'name' => ['required', 'string',  'max:255'],
             'location' => ['required', 'string'],
         ]);
-        
+
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
@@ -101,7 +103,7 @@ class SchoolController extends Controller
             'success'=>'school added successfuly',
             'code'=>'Your school code is ' . $code
         ]);
-       
+
     }
 
     /**
@@ -119,6 +121,17 @@ class SchoolController extends Controller
         $school=School::where('id',$admin->school_id);
         return view("school.show",compact('school'));
     }
+    public function showLocation()
+    {
+        $admin=Auth::user();
+        if($admin->school_id==null){
+            return view("school.index");
+        }
+        $school=School::where('id',$admin->school_id);
+        $location=[$school->lit,$school->lon];
+        return Basecontroller::sendResponse($location,'school location');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -141,20 +154,20 @@ class SchoolController extends Controller
     public function update(Request $request, School $School)
     {
         $admin=Auth::user();
-        $input=$request->all(); 
+        $input=$request->all();
         $validator=Validator::make($input,[
             'code' => ['required', 'string','exists:schools,code'],
         ]);
-        
+
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
         $School->code=$input['code'];
         // $school=School::where("code",$School->code);
         // $admin->school_id=$school->id;
-        $School->save(); 
+        $School->save();
         return redirect()->route("school.index")->with('success','school updated successfuly');
-    
+
     }
 
     /**
