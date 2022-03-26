@@ -1,16 +1,19 @@
 
+@extends('layouts.master')
 
-<head><link rel="stylesheet" href="/Public/css/tripDetails.css"></head>
+@section('content')
+
+<head><link rel="stylesheet" href="{{ asset("css/tripDetails.css") }}"></head>
 
 <div class="tripDetails-wrapper">
     <div class="card" style="width: 90%;">
         <div class="card-body">
-          <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#3</span></h5>
+          <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#{{$trip->id}}</span></h5>
           <div id="map" class="card-map mb-3"></div>
 
           <div class="card-driver mb-4">
             <div class="driver-icon">
-                <img src="/Public//assets/user.png">
+                <img src="{{ asset("assets/images/user.png") }}">
                 Driver
             </div>
             <div class="driver-table">
@@ -21,60 +24,43 @@
                 <div class="driver-table-data">License</div>
                 <div class="driver-table-data">Phone</div>
               </div>
+              @foreach ( $driver as $drivers)
               <div class="driver-table-row">
                 <div class="driver-table-data">
-                  <img src="/Public/assets/user.png">
+                  <img src="{{ asset("upload/driver/".$drivers->image_path) }}">
                 </div>
-                <div class="driver-table-data info">shehab fekry</div>
-                <div class="driver-table-data">shehabeddin99@gmail.com</div>
-                <div class="driver-table-data">#33121</div>
-                <div class="driver-table-data">01132445345</div>
+                    
+               
+                <div class="driver-table-data info">{{$drivers->name}}</div>
+                <div class="driver-table-data">{{$drivers->email}}</div>
+                <div class="driver-table-data">#{{$drivers->licenseNumber}}</div>
+                <div class="driver-table-data">{{$drivers->mobileNumber}}</div>
+
               </div>
+              @endforeach
             </div>  
           </div>
 
           <div class="card-parents mb-4">
               <div class="parent-icon">
-                  <img src="/Public//assets/user.png">
+                  <img src="{{ asset("assets/images/user.png") }}">
                   Parents
                 </div>
               <div class="parent-names">
-                  <div class="name-bubble">Samir</div>
-                  <div class="name-bubble">Samir</div>
-                  <div class="name-bubble">Samir</div>
+              @foreach ( $father as $fathers)
+                  <div class="name-bubble">{{$fathers->name}}</div>
+              @endforeach
               </div>
           </div>
 
           <div class="card-childs">
             <div class="child-icon">
-                <img src="/Public//assets/user.png">
+                <img src="{{ asset("assets/images/user.png") }}">
                 Children
             </div>
             <div class="child-names">
                 <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
-                <div class="name-bubble">ahmed</div>
+                
             </div>
           </div>
         </div>
@@ -248,3 +234,5 @@ optinmizeAPI = (wayPoints) => {
     return [curbString, wayPointString]
 }
 </script>
+
+@endsection

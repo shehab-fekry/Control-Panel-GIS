@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('content')
+@section('content') 
 <head>
     <link href="{{ asset("css/school.css") }}" rel="stylesheet">
 </head>
@@ -11,6 +11,7 @@
                 <div class="joinSchool-title">Join School</div>
                 <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
                         @csrf
+                        {{-- @method('PUT') --}}
                     <div class="inputPart">
                         <input oninput="verifyCode()" id="SchoolCode" type="text" name="code" placeholder="#Code">
                     </div>
@@ -25,18 +26,16 @@
             </div>
             @endif
 
-            <div class="createSchool">
+            <div class="createSchool"> 
                 <div class="createSchool-title">Add New School</div>
                 <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
                     @csrf
                     <div class="inputPart">
                         <input id="SchoolName" type="text" name="name" placeholder="School Name">
-                        <!-- {{-- <input id="schoolLevel" type="text" name="code" placeholder="School level"> --}} -->
                         <input type="hidden" name="location" id="hiddenInput" value="">
                         <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
                     </div>
                     <div class="submitPart">
-                        <!-- {{-- <button class="btn trackingBtn btnColor" id="submit"  type="submit">Create</button> --}} -->
                         <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
                     </div>
                 </form>
@@ -45,10 +44,10 @@
 
 
     
-    <div class="card" style="width: 90%;">
+      <div class="card" style="width: 90%;">
         <div class="card-body">
           <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
-          <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6>
+          <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
           <p class="card-map">MAP HERE</p>
           <div class="card-foot">
             <form action="" method="POST">

@@ -21,4 +21,9 @@ class Trip extends Model
     {
         return $this->hasMany(Father::class);
     }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

@@ -13,6 +13,19 @@
 </head>
 
 <body>
+    <div class="nav">
+        <div class="nav_leftside">
+            <a href="{{ route('home') }}">
+                <div class="return">
+                    <img src="{{ asset("assets/images/arrowDark.png") }}" width="40px" height="40px">
+                </div>
+            </a>
+            <div class="title">SchoolBusTracking</div>
+        </div>
+        <!-- <div class="paths">
+            <a href=""><div>Sign In</div></a>
+        </div> -->
+    </div>
     <div class="sign_wrapper">
         
         <div class="svg">

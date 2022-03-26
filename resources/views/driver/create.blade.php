@@ -1,4 +1,4 @@
-@extends('driver.layout')
+@extends('layouts.master')
 
 @section('content')
 <div class="app-main__outer bus-container">

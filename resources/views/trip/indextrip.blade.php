@@ -26,7 +26,7 @@
                     </div> 
                 </div>
                 <div class="tdata tdata-btns">
-                    <a href="" class="btn trackingBtn">
+                    <a href="{{route('trip.show',$trip->id)}}" class="btn trackingBtn">
                         Details
                     </a>
                     <button onclick="editTrip()" class="btn trackingBtn btn_live">

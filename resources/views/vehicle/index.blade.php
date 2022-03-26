@@ -24,7 +24,7 @@
                             <a type="submit" class="btn btn-light" href="{{route('vehicle.show',$vehicles->id)}}">Profile</a>
                         </div>
                         <div class="card-block">
-                            <div class="form-check form-switch" style="margin-top: -55px; margin-bottom: 20px; margin-left: 200px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                            {{-- <div class="form-check form-switch" style="margin-top: -55px; margin-bottom: 20px; margin-left: 200px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                             <h6 class="f-w-600 m-t-25 m-b-10"></h6>
                              <p class="text-muted">license plate: {{$vehicles->licensePlate}}</p>
                             <hr>
@@ -32,7 +32,7 @@
                             color: <input type="color" class="text-muted mb-0 " value="{{$vehicles->color}}" disabled>
 
 
-                            <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            {{-- <p class="m-t-15 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                             <hr>
                             <div class="row">
 
@@ -40,9 +40,9 @@
                                 <a href="{{route('vehicle.edit',$vehicles->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
                              </div>
 
-                                <div class="col-sm-4">
+                                {{-- <div class="col-sm-4">
                                 <button type="submit" class="btn btn-primary">ASSIGN</button>
-                             </div>
+                             </div> --}}
 
                             <div class="col-sm-4">
                                 <form action="{{route('vehicle.destroy',$vehicles->id)}}" method="POST">

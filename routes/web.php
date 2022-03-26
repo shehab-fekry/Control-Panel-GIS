@@ -5,7 +5,6 @@ use Web\DriverController;
 use Web\FatherController;
 use Web\ChildController;
 use Web\VehicleController;
-use Web\BusController;
 use Web\AdminController;
 use Web\SchoolController;
 use App\Models\User;
@@ -18,6 +17,9 @@ use Illuminate\Support\Facades\Mail;
 |--------------------------------------------------------------------------
 |
 */
+// Route::post("/assignAdminToSchool",function(){
+//     return 'hhhhha';
+// })->name('assignAdminToSchool');
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,14 +38,11 @@ Route::resource('admin',AdminController::class)->middleware('verified');
 
 // admin profile update
 Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
+// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
 
 // Route For school 
+// Route::post("school/assignAdminToSchool","web\SchoolController@assignAdminToSchool")->name('assignAdminToSchool')->middleware('verified');
 Route::resource('school',SchoolController::class)->middleware('verified');
-// Route::put("school/assignAdminToSchool/{admin}","web\SchoolController@assignAdminToSchool");
-// Route::get('admin/{id}', 'Web\AdminController@assignAdminToSchool')->name('admin.assignAdminToSchool');
-
-// assign adminn to school
-// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
 
 
 // Route For trip 
@@ -52,14 +51,9 @@ Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
-
-// // Add child 
-// Route::post("father.store_Child","web\FatherController@store_Child")->middleware('verified');
-// Route::post('someurl', 'FatherController@store_Child');
-
-
-// Route For child 
-Route::resource('child',ChildController::class)->middleware('verified');
+Route::get('changeStatus', 'FatherController@changeStatus');
+// Add child 
+Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
 
 // Route For driver 
@@ -69,13 +63,6 @@ Route::resource('driver',DriverController::class)->middleware('verified');
 // Route For vehicle 
 Route::resource('vehicle',VehicleController::class)->middleware('verified');
 
-
-// Route For Bus 
-Route::resource('bus',BusController::class)->middleware('verified');
-// Route::get("bus.index","Web\BusController@index")->middleware('verified');
-// Route::get("bus.show","Web\BusController@show")->middleware('verified');
-// Route::put("bus.update","Web\BusController@update")->middleware('verified');
-// Route::delete("bus.delete","Web\BusController@Destroy")->middleware('verified');
 
 
 Route::get('send-mail', function () {
