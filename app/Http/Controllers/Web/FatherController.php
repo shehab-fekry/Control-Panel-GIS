@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
- 
+  
 class FatherController extends Controller
 {
 
@@ -212,6 +212,17 @@ public function update(Request $request, Father $father)
         $father->save();
         return redirect()->route("father.index")->with('success',"father's password updated successfuly");
     }
+
+    public function changeStatus(Request $request)
+    {
+        $father = Father::find($request->id);
+        $father->confirmed = $request->confirmed;
+        $father->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
+
 
 
     public function destroy(Father $father)

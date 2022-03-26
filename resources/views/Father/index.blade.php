@@ -15,7 +15,9 @@
                             <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
                         </div>
                         <div class="card-block">
-                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                            <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> 
+                            {{-- <input data-id="{{$parent->id}}" class="toggle-class" type="checkbox" data-bs-onstyle="success" data-bs-offstyle="danger" data-bs-toggle="toggle" data-bs-on="Active" data-bs-off="InActive" {{ $parent->confirmed ? 'checked' : '' }}>
+                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                             <div class="user-image">
                                 <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
                             </div>
@@ -75,7 +77,28 @@
             <span class="fas fa-times"></span>
          </div>
          </div>
-         @endif    
+         @endif  
+
+
+         <script>
+              $(function() {
+    $('.toggle-class').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/changeStatus',
+            data: {'confirmed': confirmed, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+        });
+    })
+  })
+             
+        </script>  
         
 </div>  
 

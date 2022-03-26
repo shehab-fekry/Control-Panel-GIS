@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('content')
+@section('content') 
 <head>
     <link href="{{ asset("css/school.css") }}" rel="stylesheet">
 </head>
@@ -11,6 +11,7 @@
                 <div class="joinSchool-title">Join School</div>
                 <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
                         @csrf
+                        {{-- @method('PUT') --}}
                     <div class="inputPart">
                         <input oninput="verifyCode()" id="SchoolCode" type="text" name="code" placeholder="#Code">
                     </div>

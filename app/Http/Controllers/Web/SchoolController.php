@@ -13,15 +13,8 @@ use Illuminate\Support\Str;
 
 class SchoolController extends Controller
 {
-    public function assignAdminToSchool(request $data, User $user)
-    {
-        // $admin=Auth::user();
-        // $data->validate([
-        //     'code'=>['required','string','exists:schools,code']
-        // ]);
-        // $school=School::where("code",$data->code);
-        // $admin->school_id=$school->id;
-        ////////////////////////////////////////////
+    public function assignAdminToSchool(request $data)
+    { 
         $admin=Auth::user();
         $input=$data->all();
         $validator=Validator::make($input,[
@@ -31,9 +24,9 @@ class SchoolController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-        $school=School::where("code",$user->code);
+        $school=School::where("code",$data->code);
         $admin->school_id=$school->id;
-        // $user->save();
+        $admin->save();
         return redirect()->route("school.index")->with('success','school updated successfuly');
     }
 
@@ -45,15 +38,10 @@ class SchoolController extends Controller
     public function index()
     {
         $admin=Auth::user();
-        // if($admin->school_id==null){
-        //     return view("school.create");
-        // }
         $school=School::where('id',$admin->school_id)->first();
 
         return view("school.index",compact('school','admin'));
           $admin=Auth::user();
-
-        // /////////////////////////////////////////////////////////////////
     }
 
     public function create()
@@ -70,12 +58,6 @@ class SchoolController extends Controller
     public function store(Request $data)
     {
           $admin=Auth::user();
-        // if($admin->school_id==null){
-        //     return view("school.create");
-        // }
-        // $school=School::where('id',$admin->school_id);
-        // return view("school.index",compact('school'));
-        // /////////////////////////////////////////////////////////////////
         $code = Str::random(3) .substr( time() , 6, 9);
         $input=$data->all();
         $validator=Validator::make($input,[
@@ -87,15 +69,17 @@ class SchoolController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
-         School::create([
+        $school= School::create([
             // 'code' => $data['code'],
             'code' => $code,
             'name' => $data['name'] ,
             // 'lng' =>  $data['location'] ,
             $location= explode (",", $data['location'])  ,
-            'lng' =>$location[0],
-            'lit' =>$location[1],
+            'lng' =>$location[1],
+            'lit' =>$location[0],
         ]);
+        $admin->school_id = $school->id ;
+        $admin-> save();
 
         // $school=School::where('id',$admin->school_id);
         // return view("school.index",compact('school'))->with('success','driver added successfuly');

@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Mail;
 |--------------------------------------------------------------------------
 |
 */
+// Route::post("/assignAdminToSchool",function(){
+//     return 'hhhhha';
+// })->name('assignAdminToSchool');
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,14 +38,11 @@ Route::resource('admin',AdminController::class)->middleware('verified');
 
 // admin profile update
 Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
+// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
 
 // Route For school 
+// Route::post("school/assignAdminToSchool","web\SchoolController@assignAdminToSchool")->name('assignAdminToSchool')->middleware('verified');
 Route::resource('school',SchoolController::class)->middleware('verified');
-// Route::put("school/assignAdminToSchool/{admin}","web\SchoolController@assignAdminToSchool");
-// Route::get('admin/{id}', 'Web\AdminController@assignAdminToSchool')->name('admin.assignAdminToSchool');
-
-// assign adminn to school
-// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
 
 
 // Route For trip 
@@ -51,7 +51,7 @@ Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
-
+Route::get('changeStatus', 'FatherController@changeStatus');
 // Add child 
 Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
