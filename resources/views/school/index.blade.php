@@ -31,12 +31,12 @@
                     @csrf
                     <div class="inputPart">
                         <input id="SchoolName" type="text" name="name" placeholder="School Name">
-                        {{-- <input id="schoolLevel" type="text" name="code" placeholder="School level"> --}}
-                        <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
+                        <!-- {{-- <input id="schoolLevel" type="text" name="code" placeholder="School level"> --}} -->
                         <input type="hidden" name="location" id="hiddenInput" value="">
+                        <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
                     </div>
                     <div class="submitPart">
-                        {{-- <button class="btn trackingBtn btnColor" id="submit"  type="submit">Create</button> --}}
+                        <!-- {{-- <button class="btn trackingBtn btnColor" id="submit"  type="submit">Create</button> --}} -->
                         <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
                     </div>
                 </form>
@@ -59,10 +59,9 @@
             </form>
           </div>
         </div>
-       
-       
-      </div>
-      @endif
+    </div>
+    @endif
+
     <!-- tracking.js  -->
     <script src=" {{ asset("js/school.js") }}"></script>
     <script>
@@ -71,7 +70,7 @@
                     // console.log([latitude, longitude])
                     document.getElementById('hiddenInput').value = '' + [latitude, longitude]
                     document.getElementById('location').style.backgroundColor = 'green'
-                    document.getElementById('location').innerHTML = 'Verified'
+                    document.getElementById('location').innerHTML = 'Located'
                     document.getElementById('location').setAttribute('disabled', true)
 
                     let text1 = document.getElementById('SchoolName').value

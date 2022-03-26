@@ -32,7 +32,7 @@
                     <button onclick="editTrip()" class="btn trackingBtn btn_live">
                         Edit
                     </button>
-                    <form action="{{route('trip.destroy',$trip->id)}}" method="POST">
+                    <form style="display:inline-block; padding:0px; margin:0px" action="{{route('trip.destroy',$trip->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn trackingBtn">
