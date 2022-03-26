@@ -30,12 +30,12 @@
                     </div>
                     <div class="tdata">
                         <button class="btn trackingBtn"
-                        onclick="initPreview(index)">
+                        onclick="initPreview('{{$trip->id}}')">
                             <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
                             Preview
                         </button>
                         <button class="btn trackingBtn btn_live"
-                        onclick="initTrack(index)">
+                        onclick="initTrack('{{$trip->id}}')">
                             <img src="{{ asset("assets/images/tracking.png") }}" width="25px" height="25px">
                             <div class="text">
                                 Live

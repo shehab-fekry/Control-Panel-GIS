@@ -25,6 +25,7 @@ let state = {
 pusher = new Pusher('d363addb971561dc7e96', {cluster: 'eu'});
 
 const initTrack = (tripIndex) => {
+    console.log(tripIndex)
     fetch('trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
