@@ -62,6 +62,6 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::post('trip/end',"API\TripController@end");
     });
 
-    Route::post("trip/live/{id}","Web\TripController@live")->middleware('verified');
+    Route::post("trip/live/{id}","Web\TripController@live");
     Route::post("school/location","Web\SchoolController@showLocation")->middleware('verified');
 
