@@ -32,12 +32,10 @@
                     @csrf
                     <div class="inputPart">
                         <input id="SchoolName" type="text" name="name" placeholder="School Name">
-                        {{-- <input id="schoolLevel" type="text" name="code" placeholder="School level"> --}}
-                        <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
                         <input type="hidden" name="location" id="hiddenInput" value="">
+                        <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
                     </div>
                     <div class="submitPart">
-                        {{-- <button class="btn trackingBtn btnColor" id="submit"  type="submit">Create</button> --}}
                         <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
                     </div>
                 </form>
@@ -49,7 +47,7 @@
       <div class="card" style="width: 90%;">
         <div class="card-body">
           <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
-          <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6>
+          <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
           <p class="card-map">MAP HERE</p>
           <div class="card-foot">
             <form action="" method="POST">
@@ -60,10 +58,9 @@
             </form>
           </div>
         </div>
-       
-       
-      </div>
+    </div>
     @endif
+
     <!-- tracking.js  -->
     <script src=" {{ asset("js/school.js") }}"></script>
     <script>
@@ -72,7 +69,7 @@
                     // console.log([latitude, longitude])
                     document.getElementById('hiddenInput').value = '' + [latitude, longitude]
                     document.getElementById('location').style.backgroundColor = 'green'
-                    document.getElementById('location').innerHTML = 'Verified'
+                    document.getElementById('location').innerHTML = 'Located'
                     document.getElementById('location').setAttribute('disabled', true)
 
                     let text1 = document.getElementById('SchoolName').value

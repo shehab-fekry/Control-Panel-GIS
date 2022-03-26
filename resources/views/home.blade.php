@@ -42,7 +42,7 @@
                     <span id="plus">+</span><span class="counter" data-target="{{ $countchild }}">0</span>
                 </div>
                 <div class="label">
-                    <div class="head">Childrens</div>
+                    <div class="head">Children</div>
                     <div class="sublabel">Being Picked</div>
                 </div>
             </div>
