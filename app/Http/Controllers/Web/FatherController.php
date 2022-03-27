@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Child;
 use App\Models\Father;
+use App\Models\School;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -137,7 +138,7 @@ class FatherController extends Controller
 
     }
 
-
+ 
     public function show(Father $father)
     {       
         // $admin=Auth::user()->school_id;
@@ -173,7 +174,7 @@ public function update(Request $request, Father $father)
             // 'lit' => [ 'string', 'max:20'],
         ]);
         if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
 
         $father->name=$input['name'];
@@ -227,11 +228,10 @@ public function update(Request $request, Father $father)
 
     public function destroy(Father $father)
     {
+        $School = School::first();
+        $School->children()->delete();
+    
         $father->delete();
-        // $children=Child::where($father)->get();
-        // if(count($children)>0){
-        //   $children->delete();
-        // }
         return redirect()->route("father.index")->with('success','father deleted successfuly');
     }
 }

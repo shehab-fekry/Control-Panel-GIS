@@ -9,8 +9,11 @@
     @if ($school == NULL)
             <div class="joinSchool">
                 <div class="joinSchool-title">Join School</div>
-                <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
-                        @csrf
+                <form class="joinShoolForm"  action="{{route('school.assignAdminToSchool')}} " method="POST"  enctype="multipart/form-data">
+                    @csrf
+                    {{-- @method('PUT') --}}
+                {{-- <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
+                        @csrf --}}
                         {{-- @method('PUT') --}}
                     <div class="inputPart">
                         <input oninput="verifyCode()" id="SchoolCode" type="text" name="code" placeholder="#Code">
@@ -50,8 +53,17 @@
           <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
           <p class="card-map">MAP HERE</p>
           <div class="card-foot">
-            <form action="" method="POST">
-                <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">Delete</button>
+            {{-- <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">DELETE</button>
+            </form> --}}
+            <form action="{{route('school.destroy',$school->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
+                    Delete
+                </button>
             </form>
             <form action="" method="GET">
                 <button class="btn trackingBtn btnColor" type="submit" onclick="">Update</button>
@@ -94,6 +106,15 @@
             }
     </script>
 </div>
+@if (session('success'))
+<div class="alertg hide">
+<span class='fas fa-check-circle'></span>
+<span class="msg">{{ session('success') }}</span>
+<div class="close-btn">
+   <span class="fas fa-times"></span>
+</div>
+</div>
+@endif  
 
 @if (session('error'))
 <div class="alert alert-danger" role="alert">
