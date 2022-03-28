@@ -108,4 +108,15 @@
     </div>
 </div>
 </div>
+@if ($message= session('error'))
+  @foreach($message as $messages)
+    <div class="alertr hide">
+    <span class='fas fa-exclamation-triangle'></span>
+    <span class="msg">{{$messages}}</span>
+    <div class="close-btn">
+    <span class="fas fa-times"></span>
+    </div>
+    </div> 
+@endforeach
+@endif  
 @endsection

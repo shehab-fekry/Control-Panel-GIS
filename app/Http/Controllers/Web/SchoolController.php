@@ -191,4 +191,14 @@ class SchoolController extends Controller
         $admin->save();
         return redirect()->route("school.index")->with('success','school deleted successfuly');
     }
+
+    public function left()
+    {
+        $admin=Auth::user();
+
+        $admin->school_id = NULL;
+        
+        $admin->save();
+        return redirect()->route("school.index")->with('success','school Left successfuly');
+    }
 }

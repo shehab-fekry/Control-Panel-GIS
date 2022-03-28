@@ -128,7 +128,7 @@
                     <tr>
                       <th scope="row">{{$child->id}}</th>
                       <td>
-                        <img src="upload/child/{{$child->image_path	}}" width="30" class="user-img rounded-circle mr-2">
+                        <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2">
                       </td>
                       <td>{{$child->name}}</td>
                       <td>

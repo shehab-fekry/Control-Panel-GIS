@@ -50,7 +50,7 @@ class HomeController extends Controller
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  father::where("school_id",$admin)->count())
         ->with('countchild',   child::count())
-        ->with('countchild',   child::where("id",$School)->count())
+        ->with('countchild',   child::where("father_id",$School)->count())
         ->with('countvehicle', vehicle::where("school_id",$admin)->count());
     }
     public function profileUpdate(Request $request){

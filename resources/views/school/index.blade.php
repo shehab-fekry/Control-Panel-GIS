@@ -58,6 +58,12 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">DELETE</button>
             </form> --}}
+            <form action="{{route('school.left',$school->id)}}" method="POST">
+                @csrf
+                <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
+                    Left School
+                </button>
+            </form>
             <form action="{{route('school.destroy',$school->id)}}" method="POST">
                 @csrf
                 @method('DELETE')

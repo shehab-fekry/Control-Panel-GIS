@@ -59,8 +59,9 @@
                 Children
             </div>
             <div class="child-names">
-                <div class="name-bubble">ahmed</div>
-                
+                @foreach ( $child as $childs)
+                <div class="name-bubble">{{$childs}}</div>
+                @endforeach
             </div>
           </div>
         </div>

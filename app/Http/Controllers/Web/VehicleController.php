@@ -11,11 +11,7 @@ use Illuminate\Validation\Rule;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
@@ -27,11 +23,7 @@ class VehicleController extends Controller
         return view("vehicle.index",compact("vehicle"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $admin=Auth::user()->school_id;
@@ -48,12 +40,7 @@ class VehicleController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $admin=Auth::user();
@@ -63,7 +50,7 @@ class VehicleController extends Controller
             'driver_id' => ['required','string', 'max:20'],
             'color' => ['string', 'max:20'],
         ]);
-        // dd($request['driver_id']);
+       
         vehicle::create([
             'licensePlate' => $request['licensePlate'],
             'model' => $request['model'],
@@ -76,24 +63,14 @@ class VehicleController extends Controller
         ->with('success','vehicle added successfuly');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(vehicle $vehicle)
     { 
         $driver=Driver::where("id",$vehicle->driver_id)->first();
         return view("vehicle.show",compact('vehicle'))->with('driver',$driver);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(vehicle $vehicle)
     {
         $admin=Auth::user();
@@ -101,13 +78,7 @@ class VehicleController extends Controller
         return view("vehicle.edit",compact('vehicle'))->with('driver',$driver);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, vehicle $vehicle)
     {
         $input=$request->all();
@@ -118,7 +89,7 @@ class VehicleController extends Controller
             'color' => ['string', 'max:20'],
         ]);
         if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
 
         $vehicle->licensePlate=$input['licensePlate'];
@@ -129,12 +100,7 @@ class VehicleController extends Controller
         return redirect()->route("vehicle.index")->with('success','vehicle updated successfuly');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy(vehicle $vehicle)
     {
         $vehicle->delete();
