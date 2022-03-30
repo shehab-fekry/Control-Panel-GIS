@@ -36,8 +36,8 @@ Route::resource('admin',AdminController::class)->middleware('verified');
 
 // admin profile update
 Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
-Route::post('assignAdminToSchool', 'Web\SchoolController@assignAdminToSchool')->name('school.assignAdminToSchool');
-Route::post('left', 'Web\SchoolController@left')->name('school.left');
+Route::post('assignAdminToSchool', 'Web\SchoolController@assignAdminToSchool')->name('school.assignAdminToSchool')->middleware('verified');
+Route::post('left', 'Web\SchoolController@left')->name('school.left')->middleware('verified');
 
 
 // Route For school 

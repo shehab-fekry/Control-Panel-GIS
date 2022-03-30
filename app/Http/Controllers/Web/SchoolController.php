@@ -33,7 +33,7 @@ class SchoolController extends Controller
         $school=School::where("code",$data->code)->first();
         $admin->school_id=$school->id;
         $admin->save();
-        return redirect()->route("school.index")->with('success','school created successfuly');
+        return redirect()->route("home")->with('success','school joined successfuly');
     }
 
     /**
@@ -89,7 +89,7 @@ class SchoolController extends Controller
 
         // $school=School::where('id',$admin->school_id);
         // return view("school.index",compact('school'))->with('success','driver added successfuly');
-        return redirect()->route("school.index")->with([
+        return redirect()->route("home")->with([
             'success'=>'school added successfuly',
             'code'=>'Your school code is ' . $code
         ]);
@@ -111,14 +111,15 @@ class SchoolController extends Controller
         $school=School::where('id',$admin->school_id);
         return view("school.show",compact('school'));
     }
-    public function showLocation()
+    public function showLocation($id)
     {
-        $admin=Auth::user();
-        if($admin->school_id==null){
-            return view("school.index");
-        }
-        $school=School::where('id',$admin->school_id);
-        $location=[$school->lit,$school->lon];
+        // $admin=Auth::user();
+        // $admin=Auth::user();
+        // if($admin->school_id==null){
+        //     return view("school.index");
+        // }
+        $school=School::where('id',$id)->first();
+        $location=[$school->lng,$school->lit];
         return Basecontroller::sendResponse($location,'school location');
     }
 

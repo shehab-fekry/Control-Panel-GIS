@@ -57,7 +57,8 @@ class TripController extends Controller
 public function live($id){
 $trip =Trip::find($id)->first();
 if($trip->status==0){
-    return $this->sendError('please validate errors','the trip is not started yet');
+    return Basecontroller::sendResponse('please validate errors','the trip is not started yet');
+    // $this->sendError('please validate errors','the trip is not started yet');
 }
 $school=$trip->school()->first();
 

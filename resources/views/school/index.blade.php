@@ -51,7 +51,7 @@
         <div class="card-body">
           <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
           <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
-          <p class="card-map">MAP HERE</p>
+          <div class="card-map" id="map"></div>
           <div class="card-foot">
             {{-- <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
                 @csrf
@@ -110,8 +110,50 @@
                 else
                 document.getElementById('joinSubmit').disabled = false 
             }
+ 
+// let url = window.location.search
+//         let getQuery = url.split('?')[1] 
+//         let Query = getQuery.split('=')[1]
+//         console.log(Query)
+
+        let url = window.location.search
+        let tripId = url.split('?')[1]
+        console.log(tripId)
+
+        // let url = window.location.pathname
+        // let urlArray = url.split('/')
+        // let tripIndex = urlArray[urlArray.length-1]
+        
+        let map = {}
+        fetch('http://localhost:8000/api/school/location/' + tripId )
+        .then(schoolLocation => schoolLocation.json())
+        .then(schoolLocation => {
+            console.log(schoolLocation.data);
+
+            // Initializing the map 
+            mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlaGFiLWZla3J5IiwiYSI6ImNrejhva3M4czFmMW0ybnVzbDd3eXE5YmYifQ.bHRGTKh_1pdTl1RmsGmLSw';
+                map = new mapboxgl.Map({
+                container: document.getElementById('map'),
+                style: 'mapbox://styles/shehab-fekry/cl0e4k50n002p14si2n2ctxy9',
+                center: schoolLocation.data,
+                zoom: 13
+            });
+
+            // Adding controls
+            map.addControl(new mapboxgl.FullscreenControl());
+            map.addControl(new mapboxgl.NavigationControl());
+
+            // adding marker
+            let marker = document.createElement('div');
+            marker.classList = 'school';
+            new mapboxgl.Marker(marker).setLngLat(schoolLocation.data).addTo(map);
+        })
+
+
     </script>
 </div>
+
+
 @if (session('success'))
 <div class="alertg hide">
 <span class='fas fa-check-circle'></span>

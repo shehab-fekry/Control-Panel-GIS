@@ -1,7 +1,10 @@
 @extends('layouts.master')
 @section('active1','mm-actj')
 @section('content')
+<head>
 
+
+</head>
 <div class="home_wrapper">
     <div class="info_section">
         <div class="typing">
@@ -65,7 +68,15 @@
         </div>
     </div>
 </div>
-
+@if (session('success'))
+<div class="alertg hide">
+<span class='fas fa-check-circle'></span>
+<span class="msg">{{ session('success') }}</span>
+<div class="close-btn">
+   <span class="fas fa-times"></span>
+</div>
+</div>
+@endif  
 <!-- landingPage.js  -->
 <script src="{{ asset("js/landingPage.js") }}"></script>
         @endsection
