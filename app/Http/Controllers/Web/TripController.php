@@ -10,6 +10,8 @@ use App\Models\vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController;
+use App\Models\School;
+
 class TripController extends Controller
 {
     public function index()
@@ -55,7 +57,8 @@ class TripController extends Controller
 public function live($id){
 $trip =Trip::find($id)->first();
 if($trip->status==0){
-    return $this->sendError('please validate errors','the trip is not started yet');
+    return Basecontroller::sendResponse('please validate errors','the trip is not started yet');
+    // $this->sendError('please validate errors','the trip is not started yet');
 }
 $school=$trip->school()->first();
 
@@ -123,6 +126,10 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
 
         $fathers=father::where('trip_id',$trip->id)->get();
+
+        $child = School::first();
+        $child->children()->get();
+    
         // $fathers=father::find($id);
         // $fathers1= $fathers->select('id')->get() ;
         // $child=child::where('father_id',$fathers1)->get();
@@ -131,7 +138,7 @@ return Basecontroller::sendResponse($response,'father information updated succes
         return view("trip.show",compact('trip'))->with([
             'driver'=>$driver,
             'father'=>$father,
-            // 'child'=>$child,
+            'child'=>$child,
         ]);
     }
 

@@ -55,7 +55,7 @@
                     @enderror
 
                 </div>
-                <button class="submit" type="submit">{{ __('Send Password Reset Link') }}</button>
+                <button class="submit" type="submit">{{ __('Reset') }}</button>
             </form>
         </div>
     </div>

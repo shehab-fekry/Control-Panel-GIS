@@ -17,11 +17,11 @@
             
             <div class="row  mt-5">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div>
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/driver/'.$driver->image_path)}}"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div>
                 </div>
                 <div class="col">
                         
-                        <form action="{{route('driver.update',$driver->id)}}" method="POST" class="row g-3">
+                        <form action="{{route('driver.update',$driver->id)}}" method="POST" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -43,15 +43,38 @@
                                 {{-- <input type="hidden" name="password" class="form-control"  value="{{$driver->password}}"></div> --}}
                             {{-- <div class="col-md-6"><label class="labels">Confirm Password</label><input type="Password"  name="password" class="form-control" value="" ></div> --}}
                         {{-- </div> --}}
+                        <div class="row">
+                            <div class="col-md-12 mb-4 d-flex align-items-center">
+              
+                              <div class="form-outline datepicker w-100">
+                                <label for="image"  class="form-label">Photo</label>
+          
+                                <input
+                                  type="file" name="image"
+                                  class="form-control form-control-lg"
+                                  id="image"
+                                />
+                              </div>
+            
+                            </div>
+      
+                           </div>
                        
                         <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
                         </div>
-                     @if (session('error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                        @if ($message = Session::get('error'))
+                        @foreach($message as $messages)
+                        <div class="alertr hide">
+                          <span class='fas fa-exclamation-triangle'></span>
+                          <span class="msg">{{$messages}}</span>
+                          <div class="close-btn">
+                             <span class="fas fa-times"></span>
+                          </div>
+                          </div> 
+                        
+                       @endforeach
+                       @endif
                
                 </div>
                

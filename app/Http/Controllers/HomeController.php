@@ -36,11 +36,21 @@ class HomeController extends Controller
     public function index()
     {
         $admin=Auth::user()->school_id;
-        $father =father::where("school_id",$admin)->select('id')->get() ; 
+        // $School->children();
+        // $fathers =father::where("school_id",$admin)->first() ; 
+        // if ($admin == NULL) {
+        //     $father = 0 ; 
+        // } else {
+        //     $father =$fathers->id ; 
+        // }
+        $School = School::first();
+        $School->children()->get();
+       
         return view('home')
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  father::where("school_id",$admin)->count())
         ->with('countchild',   child::count())
+        ->with('countchild',   child::where("father_id",$School)->count())
         ->with('countvehicle', vehicle::where("school_id",$admin)->count());
     }
     public function profileUpdate(Request $request){
@@ -74,21 +84,5 @@ class HomeController extends Controller
         $admin->save();
         return redirect()->route("admin.index")->with('success','admin updated successfuly');
     }
-    public function assignAdminToSchool(request $data)
-    {
-        $admin=Auth::user();
-        $input=$data->all();
-        $validator=Validator::make($input,[
-            'code' => ['required', 'string','exists:schools,code'],
-        ]);
-
-        if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
-        }
-        $school=School::where("code",$data->code);
-        $admin->school_id=$school->id;
-        $admin->save();
-        return redirect()->route("school.index")->with('success','school updated successfuly');
-    }
-
+ 
 }

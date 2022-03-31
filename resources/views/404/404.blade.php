@@ -74,7 +74,7 @@ body
 
     <div class="row">
         <div class="col-sm-12 col-md-12 mt-5 mb-5">
-            <a href="#"><button class="btn-404">🡸 Go Back</button></a>
+            <a href="#"><a href="{{ route('home')}}" class="btn btn-404">🡸 Go Back</a></a>
             <svg width="100%" height="auto" viewBox="0 0 636 324" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="OBJECTS">
               <g id="Group">

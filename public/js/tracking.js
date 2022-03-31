@@ -25,19 +25,16 @@ let state = {
 pusher = new Pusher('d363addb971561dc7e96', {cluster: 'eu'});
 
 const initTrack = (tripIndex) => {
-    console.log(tripIndex)
-    fetch('trip/live/' + tripIndex)
+    fetch('http://localhost:8000/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
-        console.log(data)
-
         // Modifying data Object to the usable form
         let fathersArray = []
         let modifiedData = {}
-        Object.keys(data.fathers).forEach(key => {
-            fathersArray.push(data.fathers[key])
+        Object.keys(data.data.fathers).forEach(key => {
+            fathersArray.push(data.data.fathers[key])
         })
-        modifiedData.school = data.school
+        modifiedData.school = data.data.school
         modifiedData.fathers = fathersArray
 
 
@@ -213,17 +210,16 @@ const changeChannel = () => {
 // ----------------------------------------------- Preview -----------------------------------------------------
 
 const initPreview = (tripIndex) => {
-    fetch('/dash/wayPoints/' + tripIndex)
+    fetch('http://localhost:8000/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
-
         // Modifying data Object to the usable form
         let fathersArray = []
         let modifiedData = {}
-        Object.keys(data.fathers).forEach(key => {
-            fathersArray.push(data.fathers[key])
+        Object.keys(data.data.fathers).forEach(key => {
+            fathersArray.push(data.data.fathers[key])
         })
-        modifiedData.school = data.school
+        modifiedData.school = data.data.school
         modifiedData.fathers = fathersArray
 
         // changing flags

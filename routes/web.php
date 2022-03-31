@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Mail;
 |--------------------------------------------------------------------------
 |
 */
-// Route::post("/assignAdminToSchool",function(){
-//     return 'hhhhha';
-// })->name('assignAdminToSchool');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,10 +36,11 @@ Route::resource('admin',AdminController::class)->middleware('verified');
 
 // admin profile update
 Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
-// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
+Route::post('assignAdminToSchool', 'Web\SchoolController@assignAdminToSchool')->name('school.assignAdminToSchool')->middleware('verified');
+Route::post('left', 'Web\SchoolController@left')->name('school.left')->middleware('verified');
+
 
 // Route For school 
-// Route::post("school/assignAdminToSchool","web\SchoolController@assignAdminToSchool")->name('assignAdminToSchool')->middleware('verified');
 Route::resource('school',SchoolController::class)->middleware('verified');
 
 

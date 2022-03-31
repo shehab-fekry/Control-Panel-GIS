@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Child;
 use App\Models\Father;
+use App\Models\School;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,26 +76,10 @@ class FatherController extends Controller
 
     public function store(Request  $request)
     {
-        // $admin=Auth::user();
-    //    $test=$request->file('image')->getClientMimeType();
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //     'mobileNumber' => ['required', 'string', 'max:20'],
-        //     // 'trip_id' => ['required', 'int', 'max:20'],
-        //     // 'school_id' => ['required', 'int', 'max:20'],
-        //     // 'status' => ['required', 'int', 'max:20'],
-        //     // 'region' => ['string', 'max:20'],
-        //     // 'lng' => ['string', 'max:20'],
-        //     // 'lit' => ['string', 'max:20'],
-        //     'image'=> ['image']
-        // ]);
-
         $input=$request->all();
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:fathers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'mobileNumber' => ['required', 'string', 'max:20'],
             'image'=>'image'
@@ -103,7 +88,6 @@ class FatherController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
         }
-
         
         if ($request->image == Null){
             Father::create([
@@ -137,7 +121,7 @@ class FatherController extends Controller
 
     }
 
-
+ 
     public function show(Father $father)
     {       
         // $admin=Auth::user()->school_id;
@@ -166,6 +150,7 @@ public function update(Request $request, Father $father)
 
             'mobileNumber' => ['required', 'string', 'max:25' , 'min:5'],
             'trip_id' => ['int', 'max:20'],
+            'image'=>'image'
             // 'school_id' => ['required', 'int', 'max:20'],
             // 'status' => [ 'string', 'max:20'],
             // 'region' => ['string', 'max:20'],
@@ -173,9 +158,22 @@ public function update(Request $request, Father $father)
             // 'lit' => [ 'string', 'max:20'],
         ]);
         if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
+        if ($request->image == Null){
+            $father->name=$input['name'];
+            $father->email=$input['email'];
+            $father->trip_id=$input['trip_id'];
+            $father->mobileNumber=$input['mobileNumber'];
+            $father->status=$input['status'];
+            $father->image_path=$father->image_path;
+            $father->save();
+            return redirect()->route("father.index")->with('success','father updated successfuly');
 
+        }
+        else
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
+        $request->image->move(public_path('upload\father'),$newPhotoName);
         $father->name=$input['name'];
         $father->email=$input['email'];
         $father->trip_id=$input['trip_id'];
@@ -185,6 +183,7 @@ public function update(Request $request, Father $father)
 
         $father->mobileNumber=$input['mobileNumber'];
         $father->status=$input['status'];
+        $father->image_path=$newPhotoName;
         // $father->region=$input['region'];
         // $father->lng=$input['lng'];
         // $father->lit=$input['lit'];
@@ -227,11 +226,10 @@ public function update(Request $request, Father $father)
 
     public function destroy(Father $father)
     {
+        $School = School::first();
+        $School->children()->delete();
+    
         $father->delete();
-        // $children=Child::where($father)->get();
-        // if(count($children)>0){
-        //   $children->delete();
-        // }
         return redirect()->route("father.index")->with('success','father deleted successfuly');
     }
 }

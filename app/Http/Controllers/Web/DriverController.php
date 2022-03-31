@@ -54,23 +54,8 @@ class DriverController extends Controller
         ]);
         
         if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
-
-
-
-    //     $admin=Auth::user();
-    //     $data->validate([
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:drivers'],
-    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
-    //         'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
-    //         // 'confirmed' => ['required', 'int', 'max:20'],
-    //         // 'trip_id' => ['required', 'int', 'max:20'],
-    //         // 'school_id' => ['required', 'int', 'max:20'],
-    //         'mobileNumber' => ['required', 'string', 'max:20'],
-    //         'image'=>'image'
-    //     ]);
 
         if ($data->image == Null){
             Driver::create([
@@ -129,15 +114,35 @@ class DriverController extends Controller
             'name' => ['required', 'string', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
             // 'password' => ['required', 'string', 'min:8'],
-            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5'],
+            'licenseNumber' => ['required', 'string', 'max:25' , 'min:5',Rule::unique('drivers')->ignore($driver->id)],
             // 'confirmed' => ['required', 'int', 'max:20'],
             'trip_id' => ['required', 'int', 'max:20'],
             'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
+            'image'=>'image'
         ]);
         if($validator->fails()){
-            return redirect()->back()->with('error',$validator->errors());
+            return redirect()->back()->with('error',$validator->errors()->all());
         }
+        if ($request->image == Null){
+            $driver->name=$input['name'];
+            $driver->email=$input['email'];
+            // $driver->password=Hash::make($input['password']);
+            $driver->mobileNumber=$input['mobileNumber'];
+            $driver->licenseNumber=$input['licenseNumber'];
+    
+            // $driver->confirmed=$input['confirmed'];
+    
+            $driver->trip_id=$input['trip_id'];
+            $driver->school_id=$input['school_id'];
+            $driver->image_path=$driver->image_path;
+            $driver->save();
+            return redirect()->route("driver.index")->with('success','driver updated successfuly');
+
+        }
+        else
+        $newPhotoName=time() . '-' . $request->name  .'.' .  $request->image->extension();
+        $request->image->move(public_path('upload\driver'),$newPhotoName);
 
         $driver->name=$input['name'];
         $driver->email=$input['email'];
@@ -149,6 +154,7 @@ class DriverController extends Controller
 
         $driver->trip_id=$input['trip_id'];
         $driver->school_id=$input['school_id'];
+        $driver->image_path=$newPhotoName;
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
     }

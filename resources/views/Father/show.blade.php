@@ -96,7 +96,7 @@
            <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>    
            <form action="{{route('father.store_Child')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            {{-- @method('PUT') --}}
                     <label class="form-label" for="Name" >Name</label>
                     <input type="text" name="name" id="Name" class="form-control form-control-lg"  />
                     <input type="hidden" name="father_id" id="father_id" value="{{$father->id}}" class="form-control form-control-lg"  />
@@ -128,7 +128,7 @@
                     <tr>
                       <th scope="row">{{$child->id}}</th>
                       <td>
-                        <img src="upload/child/{{$child->image_path	}}" width="30" class="user-img rounded-circle mr-2">
+                        <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2">
                       </td>
                       <td>{{$child->name}}</td>
                       <td>
