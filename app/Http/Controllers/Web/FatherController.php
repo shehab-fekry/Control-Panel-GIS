@@ -70,7 +70,7 @@ class FatherController extends Controller
             'image_path' => $newPhotoName
         ]);
 
-        return redirect()->route("father.index")
+        return redirect()->back()
         ->with('success','child added successfuly');
     }
 

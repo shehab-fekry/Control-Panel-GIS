@@ -60,10 +60,10 @@
 
                                   <div class="form-outline">
 
-                                    <label class="form-label" for="school_id">School Name</label>
+                                    {{-- <label class="form-label" for="school_id">School Name</label> --}}
               
 
-                                    <input type="text" id="color" class="form-control form-control-lg "
+                                    <input type="hidden" type="text" id="color" class="form-control form-control-lg "
                                     name="school_id" value="{{ $admin->school_id }}" required autocomplete="School Name" />
                                    {{-- <span class="invalid-feedback" role="alert">
                                    <strong></strong>

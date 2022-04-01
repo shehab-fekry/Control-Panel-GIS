@@ -70,7 +70,9 @@
                   <p class="mb-0">status</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$father->status}}</p>
+                  <p class="text-muted mb-0">
+                    <span  class="badge <?php echo ($father['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($father['confirmed']=='1') ? 'confirmed' : 'Not confirmed'; ?></span> 
+                  </p>
                 </div>
               </div>
               <hr>
@@ -79,7 +81,7 @@
                   <p class="mb-0">Child</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"> two children</p>
+                  <p class="text-muted mb-0"> {{$father->status}} child</p>
                 </div>
               </div>
    
@@ -178,6 +180,14 @@
       
   </div>
 </div>
-     
+@if (session('success'))
+<div class="alertg hide">
+<span class='fas fa-check-circle'></span>
+<span class="msg">{{ session('success') }}</span>
+<div class="close-btn">
+   <span class="fas fa-times"></span>
+</div>
+</div>
+@endif  
 
 @endsection

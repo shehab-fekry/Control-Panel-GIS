@@ -96,7 +96,9 @@ class DriverController extends Controller
     {
         $admin=Auth::user()->school_id;
         $school=School::where("id",$admin)->first();
-        return view("driver.show",compact('driver'))->with('schools' ,$school);
+        $admin1=Auth::user();
+        $trips=Trip::where("school_id",$admin1->school_id)->get();
+        return view("driver.show",compact('driver'))->with('schools' ,$school)->with('trips' ,$trips);
     }
 
 

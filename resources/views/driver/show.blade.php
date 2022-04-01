@@ -84,7 +84,11 @@
                   <p class="mb-0">Trip</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"> {{$driver->trip_id}}</p>
+                  @foreach($trips as  $trip )
+                  @if( $trip->id == $driver->trip_id) 
+                  <p class="text-muted mb-0"> {{$trip->geofence}}</p>
+                  @endif
+                  @endforeach
                 </div>
               </div>
    
