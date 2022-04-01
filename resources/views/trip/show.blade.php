@@ -60,7 +60,7 @@
             </div>
             <div class="child-names">
                 @foreach ( $child as $childs)
-                <div class="name-bubble">{{$childs}}</div>
+                <div class="name-bubble">{{$childs->name}}</div>
                 @endforeach
             </div>
           </div>

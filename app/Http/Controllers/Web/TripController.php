@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController;
 use App\Models\School;
+use Illuminate\Database\Eloquent\Builder;
+
 use Illuminate\Support\Facades\Validator;
 
 class TripController extends Controller
@@ -21,7 +23,7 @@ class TripController extends Controller
         if($admin->school_id==null){
             return redirect()->route('school.index');
         }
-        $trips=Trip::where('school_id',$admin->school_id)->latest()->paginate(3);
+        $trips=Trip::where('school_id',$admin->school_id)->latest()->paginate(10);
         return view("trip.index",compact("trips"));
 
     }
@@ -120,20 +122,29 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
     public function show(Trip $trip)
     {
+
         // $childs=Child::get();
         // return view("trip.show",compact('trip'))->with('trip',$childs);
         $driver=Driver::where('trip_id',$trip->id)->get();
         $father=father::where('trip_id',$trip->id)->get();
 
+        $father1=father::where('trip_id',$trip->id)->first();
+        $child =$father1->child()->get();
+        // dd($child);
 
-        $fathers=father::where('trip_id',$trip->id)->get();
+        // $fathers=father::where('trip_id',$trip->id)->get();
 
-        $child = School::first();
-        $child->children()->get();
+        // $admin=Auth::user();
+        // $child = $admin->where('trip_id',$trip->id)->first();
+
+        // $child = School::first();
+        // $child->children()->get();
+        // dd($child->name);
     
         // $fathers=father::find($id);
-        // $fathers1= $fathers->select('id')->get() ;
-        // $child=child::where('father_id',$fathers1)->get();
+        // $fathers1 =father::where('trip_id',$trip->id)->get();
+        // $child =child::get();
+            // dd($child);
         // $school=School::where("code",$user->code);
         // $admin->school_id=$school->id;
         return view("trip.show",compact('trip'))->with([

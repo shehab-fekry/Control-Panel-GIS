@@ -59,6 +59,17 @@
                             </div>
       
                            </div>
+                           <div class="row mt-2">
+                            <select class="form-select" aria-label="Default select example" name="confirmed">
+                          
+                          
+                                        <option value="1"  @if( $father->confirmed == 1) selected @endif >Confirmed</option>
+                                        <option value="0"  @if( $father->confirmed == 0) selected @endif >Not Confirmed</option>
+                           
+   
+                            </select>
+                            {{-- <div class="col-md-6"><label class="labels">confirmed</label><input type="text" name="confirmed" class="form-control" placeholder="name" value="{{$driver->confirmed}}"></div> --}}
+                        </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
                         </div>

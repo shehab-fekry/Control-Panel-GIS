@@ -9,7 +9,7 @@ use App\Models\vehicle;
 use Illuminate\Validation\Rule;
 
 use App\Models\School;
-
+use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,17 +41,24 @@ class HomeController extends Controller
         // if ($admin == NULL) {
         //     $father = 0 ; 
         // } else {
-        //     $father =$fathers->id ; 
+        //     $father =$fathers->id ;  
         // }
-        $School = School::first();
-        $School->children()->get();
-       
+        $admin1=Auth::user();
+        $School = $admin1->school()->withCount([ 'children' ])->first();
+
+
+        // $School = School::first();
+        // $School->children()->get();
+
         return view('home')
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  father::where("school_id",$admin)->count())
-        ->with('countchild',   child::count())
-        ->with('countchild',   child::where("father_id",$School)->count())
-        ->with('countvehicle', vehicle::where("school_id",$admin)->count());
+        ->with('countchild',  $School->children_count)
+        ->with('countvehicle', vehicle::where("school_id",$admin)->count())
+        ->with('tripstop', Trip::where('status',0)->where('school_id',$admin)->count())
+        ->with('tripgs', Trip::where('status',1)->where('school_id',$admin)->count())
+        ->with('triprs', Trip::where('status',2)->where('school_id',$admin)->count())
+        ->with('triprb', Trip::where('status',3)->where('school_id',$admin)->count());
     }
     public function profileUpdate(Request $request){
         $admin=Auth::user();

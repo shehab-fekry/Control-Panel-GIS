@@ -20,8 +20,8 @@
                 <div class="tdata">{{$trip->id}}</div>
                 <div class="tdata">{{$trip->geofence}}</div>
                 <div class="tdata">
-                    <div class="status" style="<?php echo ($trip['status']=='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
-                        <?php echo ($trip['status']=='1') ? 'Active' : 'Inactive'; ?>
+                    <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
+                        <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
                     </div> 
                 </div>
                 <div class="tdata tdata-btns">
@@ -51,7 +51,7 @@
             <input  name="geofence" id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location"> 
             <input  id="hiddenTripId" type="hidden" name="tripId">
             <button id="editTripSubmit" class="btn trackingBtn btnHover" disabled="true" type="submit">Edit</button>
-        </form>
+            </form>
     </div>
 
     <script>

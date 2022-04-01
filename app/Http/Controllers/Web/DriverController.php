@@ -115,7 +115,7 @@ class DriverController extends Controller
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
             // 'password' => ['required', 'string', 'min:8'],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5',Rule::unique('drivers')->ignore($driver->id)],
-            // 'confirmed' => ['required', 'int', 'max:20'],
+            'confirmed' => ['required', 'int', 'max:20'],
             'trip_id' => ['required', 'int', 'max:20'],
             'school_id' => ['required', 'int', 'max:20'],
             'mobileNumber' => ['required', 'string', 'max:20'],
@@ -131,7 +131,7 @@ class DriverController extends Controller
             $driver->mobileNumber=$input['mobileNumber'];
             $driver->licenseNumber=$input['licenseNumber'];
     
-            // $driver->confirmed=$input['confirmed'];
+            $driver->confirmed=$input['confirmed'];
     
             $driver->trip_id=$input['trip_id'];
             $driver->school_id=$input['school_id'];
@@ -150,7 +150,7 @@ class DriverController extends Controller
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
 
-        // $driver->confirmed=$input['confirmed'];
+        $driver->confirmed=$input['confirmed'];
 
         $driver->trip_id=$input['trip_id'];
         $driver->school_id=$input['school_id'];

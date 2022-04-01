@@ -22,8 +22,8 @@
                     <div class="tdata">{{$trip->id}}</div>
                     <div class="tdata">{{$trip->geofence}}</div>
                     <div class="tdata">
-                        <div class="status" style="<?php echo ($trip['status']=='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
-                            <?php echo ($trip['status']=='1') ? 'Active' : 'Inactive'; ?>
+                        <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
+                            <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
                         </div> 
                     </div>
                     {{-- <%= driver.status ? '' : 'disabled' %> --}}
@@ -33,12 +33,12 @@
                             <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
                             Preview
                         </button>
-                        <button class="btn trackingBtn btn_live"  <?php echo ($trip['status']=='1') ? '' : 'disabled' ; ?>
+                        <button class="btn trackingBtn btn_live"  <?php echo ($trip['status']>='1') ? '' : 'disabled' ; ?>
                         onclick="initTrack('{{$trip->id}}')">
                             <img src="{{ asset("assets/images/tracking.png") }}" width="25px" height="25px">
                             <div class="text">
                                 Live
-                                <span class=" <?php echo ($trip['status']=='1') ? 'live-on' : 'live-off' ; ?> "></span>
+                                <span class=" <?php echo ($trip['status']>='1') ? 'live-on' : 'live-off' ; ?> "></span>
                             </div>
                         </button>
                     </div>

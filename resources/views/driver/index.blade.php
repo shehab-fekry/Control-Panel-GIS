@@ -15,8 +15,9 @@
                     <a type="submit" class="btn btn-light" href="{{route('driver.show',$drivers->id)}}">Profile</a>
                 </div>
                 <div class="card-block">
-                    <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input
-                            class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                    {{-- <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input
+                            class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
+                    <span  class="badge <?php echo ($drivers['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($drivers['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> 
                     <div class="user-image">
                         <img src="upload/driver/{{$drivers->image_path}}" class="img-radius" alt="User-Profile-Image">
                     </div>
