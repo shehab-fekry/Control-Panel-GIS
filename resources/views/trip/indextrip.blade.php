@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('content')
+@section('content') 
 <head>
     <link rel="stylesheet" href="{{ asset("css/editTrips.css") }}">
 </head>
@@ -45,8 +45,10 @@
     </div>
 
     <div id="editTrip" style="display: none;" class="editTrip" data-before="dfefae">
-        <form class="editTripForm" action="" method="">
-            <input  id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location">
+            <form class="editTripForm"  action="{{route('trip.update',$trip->id)}} " method="POST"  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+            <input  name="geofence" id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location"> 
             <input  id="hiddenTripId" type="hidden" name="tripId">
             <button id="editTripSubmit" class="btn trackingBtn btnHover" disabled="true" type="submit">Edit</button>
         </form>

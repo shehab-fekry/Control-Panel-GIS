@@ -30,7 +30,18 @@
                             <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div> --}}
                             <div class="col-md-12"><label class="labels">mobileNumber</label><input type="text" class="form-control"  name="mobileNumber"  value="{{$father->mobileNumber}}"></div>
                             <div class="col-md-12"><label class="labels">Number Of childern</label><input type="text" class="form-control" name="status"  placeholder="enter address line 2" value="{{$father->status}}"></div>
-                            <div class="col-md-12"><label class="labels">Trip</label><input type="text" class="form-control"  name="trip_id"  value="{{$father->trip_id}}"></div>
+                            <div class="col-md-12"><label class="labels">Trip</label>
+                                <select class="form-select" aria-label="Default select example" name="trip_id">
+                          
+                                    @foreach($trips as  $trip )
+                                              <option value="{{$trip->id}}"  @if( $trip->id == $father->trip_id) selected @endif >{{$trip->geofence}}</option>
+                                    @endforeach
+        
+                                  </select>
+
+                                {{-- <input type="text" class="form-control"  name="trip_id"  value="{{$father->trip_id}}"> --}}
+                            
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-4 d-flex align-items-center">

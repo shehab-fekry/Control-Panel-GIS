@@ -73,7 +73,7 @@ class VehicleController extends Controller
 
     public function edit(vehicle $vehicle)
     {
-        $admin=Auth::user();
+        $admin=Auth::user(); 
         $driver=Driver::where("school_id",$admin->school_id)->get();
         return view("vehicle.edit",compact('vehicle'))->with('driver',$driver);
     }

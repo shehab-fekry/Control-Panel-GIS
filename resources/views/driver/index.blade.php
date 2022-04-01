@@ -35,9 +35,9 @@
                                 class="btn btn-primary">UPDATE</a>
                         </div>
 
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
                             <button type="submit" class="btn btn-primary">ASSIGN</button>
-                        </div>
+                        </div> --}}
 
                         <div class="col-sm-4">
                             <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">

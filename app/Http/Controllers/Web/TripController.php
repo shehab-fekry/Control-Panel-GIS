@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController;
 use App\Models\School;
+use Illuminate\Support\Facades\Validator;
 
 class TripController extends Controller
 {
@@ -152,10 +153,21 @@ return Basecontroller::sendResponse($response,'father information updated succes
     }
 
 
-    // public function update(Request $request, Trip $trip)
-    // {
-    //     //
-    // }
+    public function update(Request $request, Trip $trip)
+    {
+        $input=$request->all(); 
+        $validator=Validator::make($input,[
+            'geofence' => ['required', 'string', 'min:3'],
+         
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
+        }
+       
+        $trip->geofence=$input['geofence'];
+        $trip->save();
+        return redirect()->route("trip.index")->with('success','trip updated successfuly');
+    }
 
 
     public function destroy(Trip $trip)

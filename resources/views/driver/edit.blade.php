@@ -35,7 +35,18 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6"><label class="labels  @error('email') is-invalid @enderror">Email</label><input type="text" name="email" class="form-control"  value="{{$driver->email}}"></div>
-                            <div class="col-md-6"><label class="labels">Trip</label><input type="text"  name="trip_id" class="form-control" value="{{$driver->trip_id}}" ></div>
+                            <div class="col-md-6"><label class="labels">Trip</label>
+                              <select class="form-select" aria-label="Default select example" name="trip_id">
+                          
+                                @foreach($trips as  $trip )
+                                          <option value="{{$trip->id}}"  @if( $trip->id == $driver->trip_id) selected @endif >{{$trip->geofence}}</option>
+                                @endforeach
+    
+                              </select>
+                              {{-- <input type="text"  name="trip_id" class="form-control" value="{{$driver->trip_id}}" > --}}
+                            
+                            
+                            </div>
                         </div>
                         {{-- <div class="row mt-2"> --}}
                             {{-- <div class="col-md-6"> --}}

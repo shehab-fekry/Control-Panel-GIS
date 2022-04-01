@@ -47,6 +47,7 @@ Route::resource('school',SchoolController::class)->middleware('verified');
 // Route For trip 
 Route::resource('trip',TripController::class )->middleware('verified');
 Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
+// Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
