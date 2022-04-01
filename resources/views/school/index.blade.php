@@ -52,7 +52,7 @@
           <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
           <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
           <div class="card-map" id="map"></div>
-          <div class="card-foot">
+          <div class="card-foot mt-2">
             {{-- <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -61,7 +61,7 @@
             <form action="{{route('school.left',$school->id)}}" method="POST">
                 @csrf
                 <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
-                    Left School
+                    Leave
                 </button>
             </form>
             <form action="{{route('school.destroy',$school->id)}}" method="POST">
@@ -83,52 +83,42 @@
     <script src=" {{ asset("js/school.js") }}"></script>
     <script>
         getLocation = () => {
-                navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
-                    // console.log([latitude, longitude])
-                    document.getElementById('hiddenInput').value = '' + [latitude, longitude]
-                    document.getElementById('location').style.backgroundColor = 'green'
-                    document.getElementById('location').innerHTML = 'Located'
-                    document.getElementById('location').setAttribute('disabled', true)
+            navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
+                // console.log([latitude, longitude])
+                document.getElementById('hiddenInput').value = '' + [latitude, longitude]
+                document.getElementById('location').style.backgroundColor = 'green'
+                document.getElementById('location').innerHTML = 'Located'
+                document.getElementById('location').setAttribute('disabled', true)
 
-                    let text1 = document.getElementById('SchoolName').value
-                    // let text2 = document.getElementById('schoolLevel').value
+                let text1 = document.getElementById('SchoolName').value
+                // let text2 = document.getElementById('schoolLevel').value
 
-                    if(text1 !== '')
-                    document.getElementById('submit').disabled = false;
-                }, 
-                (error) => {
-                    console.log(error)
-                },{timeout:10000})
-            }
+                if(text1 !== '')
+                document.getElementById('submit').disabled = false;
+            }, 
+            (error) => {
+                console.log(error)
+            },{timeout:10000})
+        }
 
 
-            verifyCode = () => {
-                let field = document.getElementById('SchoolCode').value
+        verifyCode = () => {
+            let field = document.getElementById('SchoolCode').value
 
-                if(field == '')
-                document.getElementById('joinSubmit').disabled = true
-                else
-                document.getElementById('joinSubmit').disabled = false 
-            }
+            if(field == '')
+            document.getElementById('joinSubmit').disabled = true
+            else
+            document.getElementById('joinSubmit').disabled = false 
+        }
  
-// let url = window.location.search
-//         let getQuery = url.split('?')[1] 
-//         let Query = getQuery.split('=')[1]
-//         console.log(Query)
 
+
+        let map = {}
         let url = window.location.search
         let tripId = url.split('?')[1]
-        console.log(tripId)
-
-        // let url = window.location.pathname
-        // let urlArray = url.split('/')
-        // let tripIndex = urlArray[urlArray.length-1]
-        
-        let map = {}
         fetch('http://localhost:8000/api/school/location/' + tripId )
         .then(schoolLocation => schoolLocation.json())
         .then(schoolLocation => {
-            console.log(schoolLocation.data);
 
             // Initializing the map 
             mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlaGFiLWZla3J5IiwiYSI6ImNrejhva3M4czFmMW0ybnVzbDd3eXE5YmYifQ.bHRGTKh_1pdTl1RmsGmLSw';
@@ -148,8 +138,6 @@
             marker.classList = 'school';
             new mapboxgl.Marker(marker).setLngLat(schoolLocation.data).addTo(map);
         })
-
-
     </script>
 </div>
 

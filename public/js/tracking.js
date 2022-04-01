@@ -25,7 +25,6 @@ let state = {
 pusher = new Pusher('d363addb971561dc7e96', {cluster: 'eu'});
 
 const initTrack = (tripIndex) => {
-    console.log(tripIndex)
     fetch('http://localhost:8000/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
@@ -60,7 +59,7 @@ const initTrack = (tripIndex) => {
         state.trackingMap = new mapboxgl.Map({
             container: document.getElementById('map'),
             style: 'mapbox://styles/shehab-fekry/cl0e4k50n002p14si2n2ctxy9',
-            center: schoolLocation,
+            center: [schoolLocation],
             zoom: 13
             });
 
@@ -214,14 +213,13 @@ const initPreview = (tripIndex) => {
     fetch('http://localhost:8000/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
-
         // Modifying data Object to the usable form
         let fathersArray = []
         let modifiedData = {}
-        Object.keys(data.fathers).forEach(key => {
-            fathersArray.push(data.fathers[key])
+        Object.keys(data.data.fathers).forEach(key => {
+            fathersArray.push(data.data.fathers[key])
         })
-        modifiedData.school = data.school
+        modifiedData.school = data.data.school
         modifiedData.fathers = fathersArray
 
         // changing flags

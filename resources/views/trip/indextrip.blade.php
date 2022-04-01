@@ -9,7 +9,7 @@
     <div class="table">
         <div class="roow head_row">
             <div class="head_data">#</div>
-            <div class="head_data">Driver</div>
+            <div class="head_data">Location</div>
             <div class="head_data">Status</div>
             <div class="head_data tdata-btns">Action</div>
         </div>
@@ -20,16 +20,15 @@
                 <div class="tdata">{{$trip->id}}</div>
                 <div class="tdata">{{$trip->geofence}}</div>
                 <div class="tdata">
-                    <div class="status"
-                        style="">
-                        active or Inactive
+                    <div class="status" style="<?php echo ($trip['status']=='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
+                        <?php echo ($trip['status']=='1') ? 'Active' : 'Inactive'; ?>
                     </div> 
                 </div>
                 <div class="tdata tdata-btns">
                     <a href="{{route('trip.show',$trip->id)}}" class="btn trackingBtn">
                         Details
                     </a>
-                    <button onclick="editTrip()" class="btn trackingBtn btn_live">
+                    <button onclick="editTrip({{$trip->id}})" class="btn trackingBtn btn_live">
                         Edit
                     </button>
                     <form style="display:inline-block; padding:0px; margin:0px" action="{{route('trip.destroy',$trip->id)}}" method="POST">

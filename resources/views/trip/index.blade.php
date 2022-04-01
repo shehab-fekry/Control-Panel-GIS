@@ -11,7 +11,7 @@
         <div class="table">
             <div class="roow head_row">
                 <div class="head_data">#</div>
-                <div class="head_data">Driver</div>
+                <div class="head_data">Location</div>
                 <div class="head_data">Status</div>
                 <div class="head_data">Route</div>
             </div>
@@ -22,10 +22,9 @@
                     <div class="tdata">{{$trip->id}}</div>
                     <div class="tdata">{{$trip->geofence}}</div>
                     <div class="tdata">
-                        {{-- <div class="status"
-                            style=""> --}}
-                            <div class="status"   style="<?php echo ($trip['status']=='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>"> <?php echo ($trip['status']=='1') ? 'Active' : 'Inactive'; ?> </div> 
-                        {{-- </div> --}}
+                        <div class="status" style="<?php echo ($trip['status']=='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
+                            <?php echo ($trip['status']=='1') ? 'Active' : 'Inactive'; ?>
+                        </div> 
                     </div>
                     {{-- <%= driver.status ? '' : 'disabled' %> --}}
                     <div class="tdata">
@@ -47,11 +46,11 @@
                 @endforeach
 
            
-            <div class="">
+            <!-- <div class="">
                 {{ $trips->links() }}
                 {{-- <button>Previous</button>
                 <button>Next </button> --}}
-            </div>
+            </div> -->
         </div>
 
         <div class="createTrip">
