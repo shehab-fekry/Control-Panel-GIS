@@ -43,9 +43,9 @@
         @endforeach
         
     </div>
-
+ 
     <div id="editTrip" style="display: none;" class="editTrip" data-before="dfefae">
-            <form class="editTripForm"  action="{{route('trip.update',$trip->id)}} " method="POST"  enctype="multipart/form-data">
+            <form class="editTripForm"  action="{{route('trip.update',1)}} " method="POST"  enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
             <input  name="geofence" id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location"> 

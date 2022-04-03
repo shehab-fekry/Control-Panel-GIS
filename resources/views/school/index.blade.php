@@ -28,8 +28,8 @@
                 {{ session('code') }}
             </div>
             @endif
-
-            <div class="createSchool"> 
+@if (Auth::user()->is_admin == 1)
+      <div class="createSchool"> 
                 <div class="createSchool-title">Add New School</div>
                 <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
                     @csrf
@@ -43,6 +43,10 @@
                     </div>
                 </form>
             </div> 
+
+    
+@endif
+          
     @else
 
 
@@ -64,6 +68,7 @@
                     Leave
                 </button>
             </form>
+            @if (Auth::user()->is_admin == 1)
             <form action="{{route('school.destroy',$school->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -71,9 +76,10 @@
                     Delete
                 </button>
             </form>
-            <form action="" method="GET">
+            @endif
+            {{-- <form action="" method="GET">
                 <button class="btn trackingBtn btnColor" type="submit" onclick="">Update</button>
-            </form>
+            </form> --}}
           </div>
         </div>
     </div>

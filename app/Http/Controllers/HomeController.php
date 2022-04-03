@@ -43,8 +43,15 @@ class HomeController extends Controller
         // } else {
         //     $father =$fathers->id ;  
         // }
+
         $admin1=Auth::user();
-        $School = $admin1->school()->withCount([ 'children' ])->first();
+        if ($admin == NULL) {
+            $School = 0;
+        } else {
+            $School = $admin1->school()->withCount([ 'children' ])->first()->children_count;
+        }
+        
+        
 
 
         // $School = School::first();
@@ -53,7 +60,7 @@ class HomeController extends Controller
         return view('home')
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  father::where("school_id",$admin)->count())
-        ->with('countchild',  $School->children_count)
+        ->with('countchild',  $School)
         ->with('countvehicle', vehicle::where("school_id",$admin)->count())
         ->with('tripstop', Trip::where('status',0)->where('school_id',$admin)->count())
         ->with('tripgs', Trip::where('status',1)->where('school_id',$admin)->count())

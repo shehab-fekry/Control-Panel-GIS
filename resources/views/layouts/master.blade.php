@@ -78,7 +78,12 @@
             <div class="sidebar-user">
                 <img src="{{asset('upload/admin/'.Auth::user()->image_path)}} "  class="sidebar-img">
                 <h2>   {{ Auth::user()->name }} </h3>
-                <h4> School Manager </h4>
+                    @if (Auth::user()->is_admin == 1)
+                    <h4> School Manager </h4>
+                    @else
+                    <h4> Clerk </h4>
+
+                    @endif
                
             </div>
         </div>
@@ -103,7 +108,8 @@
                     </ul>
                 </div>
             </a>
-            <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
+            @if (Auth::user()->is_admin == 1)
+                  <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
                 <i class="fa fa-id-card"></i> &nbsp;Drivers</li>
                 <div class="collapse" id="dashboard-collapse-1">
                     <ul class="btn-toggle-nav list-unstyled">
@@ -132,13 +138,20 @@
                   </ul>
                 </div>
             </a>
-
-
+                
+            @endif
+       
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-profile" aria-expanded="false">
-                <i class="fa fa-user-circle"></i> &nbsp;Admin </li>  
+                <i class="fa fa-user-circle"></i> &nbsp;
+                @if (Auth::user()->is_admin == 1)
+                Admin 
+                @else
+                Clerk
+                @endif
+            </li>  
                 <div class="collapse" id="dashboard-collapse-profile">
                   <ul class="btn-toggle-nav list-unstyled">
-                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Admin Profile</a></li>
+                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Profile</a></li>
                     <li><a href="{{route('admin.edit',Auth::user()->id)}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
