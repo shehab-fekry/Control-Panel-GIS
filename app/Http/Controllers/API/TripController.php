@@ -93,16 +93,20 @@ class TripController extends BaseController
         {
             return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
         }
-        if($trip->status==0){
-            return $this->sendError('please validate errors','the trip is not started yet please start trip first');
-        }elseif($trip->status==1){
-            return $this->sendError('please validate errors','the trip is not delivered to school yet');
-        }elseif($trip->status==3){
-            return $this->sendError('please validate errors','the trip is alredy backing from school');
+        switch($trip->status){
+            case 0:
+                return $this->sendError('please validate errors','the trip is not started yet please start trip first');
+            case 1:
+                return $this->sendError('please validate errors','the trip is not delivered to school yet');
+            case 2:
+                $trip->status=3;
+                $trip->save();
+                return $this-> sendResponse("",'the trip is backing to home');
+            case 3:
+                return $this->sendError('please validate errors','the trip is alredy backing from school');
+
         }
-        $trip->status=3;
-        $trip->save();
-        return $this-> sendResponse("",'the trip is backing to home');
+
     }
 
 
