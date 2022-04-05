@@ -59,9 +59,9 @@ class HomeController extends Controller
 
         return view('home')
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
-        ->with('countfather',  father::where("school_id",$admin)->count())
+        ->with('countfather',  Father::where("school_id",$admin)->count())
         ->with('countchild',  $School)
-        ->with('countvehicle', vehicle::where("school_id",$admin)->count())
+        ->with('countvehicle', Vehicle::where("school_id",$admin)->count())
         ->with('tripstop', Trip::where('status',0)->where('school_id',$admin)->count())
         ->with('tripgs', Trip::where('status',1)->where('school_id',$admin)->count())
         ->with('triprs', Trip::where('status',2)->where('school_id',$admin)->count())
