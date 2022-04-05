@@ -57,5 +57,11 @@ Route::middleware('auth:api-drivers')->group(function(){
         event(new showTrip($data));
     });
     Route::post('trip/start',"API\TripController@start");
-
+    Route::post('trip/delivered',"API\TripController@delivered");
+    Route::post('trip/backHome',"API\TripController@backHome");
+    Route::post('trip/end',"API\TripController@end");
     });
+
+    Route::get("trip/live/{id}","Web\TripController@live");
+    Route::get("school/location/{id}","Web\SchoolController@showLocation");
+

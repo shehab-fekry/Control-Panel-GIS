@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         Log in
-    </title>
+    </title> 
     <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
     <link rel="stylesheet" href="{{ asset("css/SignIn.css") }}">
     <!--   Fonts   -->
@@ -16,9 +16,19 @@
 </head>
 
 <body>
-    <!-- <div class="nav">
-        <div class="title">SchoolBusTracking</div>
-    </div> -->
+    <div class="nav">
+        <div class="nav_leftside">
+            <a href="{{ route('home') }}">
+                <div class="return">
+                    <img src="{{ asset("assets/images/arrowDark.png") }}" width="40px" height="40px">
+                </div>
+            </a>
+            <div class="title">SchoolBusTracking</div>
+        </div>
+        <!-- <div class="paths">
+            <a href=""><div>Sign In</div></a>
+        </div> -->
+    </div>
     <div class="sign_wrapper">
             <div class="svg">
                 <img src="{{ asset("assets/images/sginIn.svg") }}" width="500" height="500" alt="">
@@ -74,7 +84,7 @@
 
                         @if (Route::has('password.request'))
                         <div class="forget">
-                            <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                            <a href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
                         </div>
                         @endif
                     </div>

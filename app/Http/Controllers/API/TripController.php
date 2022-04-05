@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 class TripController extends BaseController
 {
     public function start(request $request){
-
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
@@ -63,6 +62,14 @@ class TripController extends BaseController
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
+        if($driver->confirmed==false)
+        {
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($driver->trip_id==null)
+        {
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+        }
         if($trip->status==0){
             return $this->sendError('please validate errors','the trip is not started yet please start trip first');
         }elseif($trip->status==2){
@@ -78,16 +85,28 @@ class TripController extends BaseController
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
-        if($trip->status==0){
-            return $this->sendError('please validate errors','the trip is not started yet please start trip first');
-        }elseif($trip->status==1){
-            return $this->sendError('please validate errors','the trip is not delivered to school yet');
-        }elseif($trip->status==3){
-            return $this->sendError('please validate errors','the trip is alredy backing from school');
+        if($driver->confirmed==false)
+        {
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($driver->trip_id==null)
+        {
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
         }
-        $trip->status=3;
-        $trip->save();
-        return $this-> sendResponse("",'the trip is backing to home');
+        switch($trip->status){
+            case 0:
+                return $this->sendError('please validate errors','the trip is not started yet please start trip first');
+            case 1:
+                return $this->sendError('please validate errors','the trip is not delivered to school yet');
+            case 2:
+                $trip->status=3;
+                $trip->save();
+                return $this-> sendResponse("",'the trip is backing to home');
+            case 3:
+                return $this->sendError('please validate errors','the trip is alredy backing from school');
+
+        }
+
     }
 
 
@@ -95,6 +114,14 @@ class TripController extends BaseController
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
+        if($driver->confirmed==false)
+        {
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($driver->trip_id==null)
+        {
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+        }
         if($trip->status==0){
             return $this->sendError('please validate errors','the trip is alredy ended');
         }elseif($trip->status==1){

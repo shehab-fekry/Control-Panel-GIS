@@ -16,9 +16,19 @@
 </head>
 
 <body>
-    <!-- <div class="nav">
-        <div class="title">SchoolBusTracking</div>
-    </div> -->
+    <div class="nav">
+        <div class="nav_leftside">
+            <a href="{{ route('home') }}">
+                <div class="return">
+                    <img src="{{ asset("assets/images/arrowDark.png") }}" width="40px" height="40px">
+                </div>
+            </a>
+            <div class="title">SchoolBusTracking</div>
+        </div>
+        <!-- <div class="paths">
+            <a href=""><div>Sign In</div></a>
+        </div> -->
+    </div>
     <div class="sign_wrapper">
             <div class="svg">
                 <img src="{{ asset("assets/images/registerDark.svg")}}" width="500" height="500" alt="">
@@ -68,7 +78,6 @@
                         {{-- <div id="passInvalid">{{ $message }}</div> --}}
                         @enderror
                     </div>
-
                     <div class="main_container">
                         <div class="input_container">
                             <div><img src="{{ asset("assets/images/lock.png")}}"></div>
@@ -76,6 +85,15 @@
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
                         </div>
                     </div>
+                    You are :
+                    <select class="form-select form-control @error('is_admin') is-invalid @enderror" name="is_admin" required autocomplete="is_admin" aria-label="is_admin" name="is_admin">
+                          
+                          
+                        <option value="1"  >Admin</option>
+                        <option value="0" >Clerk</option>
+           
+
+                     </select>
                     
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-end"></label>

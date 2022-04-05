@@ -89,7 +89,7 @@
 
 .createSchool{
   /* border: 1px solid black; */
-  width: 90%;
+  width: 50%;
   padding: 10px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 20px;
@@ -145,7 +145,7 @@ form{
 }
 
 .inputPart input{
-    width: 40%;
+    width: 70%;
     height: 40%;
     outline: none;
     border: 1px solid #ccc;
@@ -205,7 +205,7 @@ form{
   flex-flow: row;
   align-items: center;
   color: #384850;
-  height: 10%;
+  height: 15%;
   padding-left: 15px;
   /* border: 1px solid black; */
 }
@@ -224,9 +224,8 @@ form{
 }
 
 .card-map{
-  height: 55%;
+  height: 60%;
   /* border: 1px solid black; */
-  border: 1px solid black;
 }
 
 .card-foot{

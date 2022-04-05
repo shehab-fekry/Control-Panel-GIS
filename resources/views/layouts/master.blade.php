@@ -3,10 +3,16 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        
+        Dashboard
     </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="icon" href="{{ asset("assets/images/tracking.svg") }}">
     <!-- bootstarp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,6 +25,7 @@
     <link href="{{ asset("css/tracking.css") }}" rel="stylesheet">
     <link href="{{ asset("css/Drivers.css") }}" rel="stylesheet">
     <link href="{{ asset("css/Parents.css") }}" rel="stylesheet">
+    <link href="{{ asset("css/alerts.css") }}" rel="stylesheet">
     <link href="{{ asset("css/confirmEmail.css") }}" rel="stylesheet">
     <link href="{{ asset("css/home.css") }}" rel="stylesheet">
     <link href="{{ asset("css/adminProfile.css") }}" rel="stylesheet">
@@ -69,9 +76,14 @@
             </div>
 
             <div class="sidebar-user">
-                <img src="upload/admin/{{Auth::user()->image_path}}"  class="sidebar-img">
+                <img src="{{asset('upload/admin/'.Auth::user()->image_path)}} "  class="sidebar-img">
                 <h2>   {{ Auth::user()->name }} </h3>
-                <h4> School Manager </h4>
+                    @if (Auth::user()->is_admin == 1)
+                    <h4> School Manager </h4>
+                    @else
+                    <h4> Clerk </h4>
+
+                    @endif
                
             </div>
         </div>
@@ -80,19 +92,24 @@
             <a href="{{route('home')}}">     
                 <li class="list-group-item mt-2"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard</li>
             </a>
-            <a href="{{route('school.show', Auth::user()->school_id)}}">     
-                <li class="list-group-item mt-2"><i class="fa fa-university" aria-hidden="true"></i> &nbsp; School</li>
-            </a>
+            @if (Auth::user()->school_id == NULL)
+            <a href="{{route('school.index', Auth::user()->id)}}">     
+            @else
+               <a href="{{route('school.index', Auth::user()->school_id)}}">     
+            @endif
+            <li class="list-group-item mt-2"><i class="fa fa-university" aria-hidden="true"></i> &nbsp; School</li>
+            </a> 
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-trips" aria-expanded="false">
                 <i class="fa fa-subway"></i> &nbsp;Trips </li>
                 <div class="collapse" id="dashboard-collapse-trips">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="/dash/tracking" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
-                        <li><a href="/dash/editTrips" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
+                        <li><a href="{{route('trip.indextrip')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
                     </ul>
                 </div>
             </a>
-            <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
+            @if (Auth::user()->is_admin == 1)
+                  <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
                 <i class="fa fa-id-card"></i> &nbsp;Drivers</li>
                 <div class="collapse" id="dashboard-collapse-1">
                     <ul class="btn-toggle-nav list-unstyled">
@@ -121,14 +138,21 @@
                   </ul>
                 </div>
             </a>
-
-
+                
+            @endif
+       
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-profile" aria-expanded="false">
-                <i class="fa fa-user-circle"></i> &nbsp;Admin </li>  
+                <i class="fa fa-user-circle"></i> &nbsp;
+                @if (Auth::user()->is_admin == 1)
+                Admin 
+                @else
+                Clerk
+                @endif
+            </li>  
                 <div class="collapse" id="dashboard-collapse-profile">
                   <ul class="btn-toggle-nav list-unstyled">
-                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Admin Profile</a></li>
-                    <li><a href="#" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
+                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Profile</a></li>
+                    <li><a href="{{route('admin.edit',Auth::user()->id)}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
                          class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}
@@ -152,9 +176,11 @@
         <!-- content of other pages here... -->
         @yield("content")
     </div>
- 
+ <script src="{{ asset("js/alerts.js") }}"></script>
     <!-- index.js  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ asset("js/index.js") }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
 </html> 

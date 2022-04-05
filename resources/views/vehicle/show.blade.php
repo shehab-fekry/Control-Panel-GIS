@@ -52,7 +52,13 @@
                   <p class="mb-0">Driver:</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$vehicle->model}}</p>
+                  <p class="text-muted mb-0">
+                  @if ($driver == Null)
+                  driver is not assign yet.
+                  @else
+                  {{ $driver->name  }} 
+                  @endif
+                  </p>
                 </div>
               </div>
               <hr>

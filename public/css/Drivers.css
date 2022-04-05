@@ -2,8 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
-    
+
 }
 .plus{
     width: 70px;
@@ -63,9 +62,9 @@
 .container {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
+    overflow-y: scroll;
   }
-  
+
   .container::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
@@ -81,18 +80,18 @@
     padding-right: 30px;
     padding-top: 30px;
     padding-bottom: 40px;
-    
 
-} 
+
+}
 
 .box:hover{
     background-color: rgba(255, 255, 255, 0.822);
     border: rgb(241, 241, 241);
     box-shadow: 5px;
   }
-  
-  .box .links { position: relative;  
-} 
+
+  .box .links { position: relative;
+}
 
 .box .links :hover.icon span:nth-child(2) {width: 100%;}
 
@@ -100,23 +99,23 @@
                      display: flex;
                     flex-wrap: wrap;
                     justify-content: flex-end;
-                    margin-left: 150px;} 
+                    margin-left: 150px;}
 
  .box .links .icon span{ background-color: black;
                               margin-bottom: 5px;
                               height: 2px;
                               }
 
- .box .links .icon span:first-child{ 
+ .box .links .icon span:first-child{
           width: 100%;
- } 
+ }
  .box .links .icon span:nth-child(2){
-  
+
           width: 60%;
           transition: 0.3s;
 }
 .box .links .icon span:last-child{
- 
+
           width: 100%;}
  .box .links ul{
 list-style: none;
@@ -138,7 +137,7 @@ border-radius: 7px;
 border-color: transparent transparent #cdd0d1 transparent;
 position: absolute;
 right: 5px;
-top: -20px; 
+top: -20px;
   }
   .box .links ul li a {
     display: block;
@@ -181,9 +180,9 @@ top: -20px;
     height: 30px;
     display: inline-block;
     line-height: 20px;
-    color: rgba(39, 16, 16, 0); 
+    color: rgba(39, 16, 16, 0);
     font-size: xx-small;
-    
+
 }
 .but{
     height: 10%;
@@ -202,16 +201,16 @@ top: -20px;
 
 }
 .b:hover{
-    background: #546068;  
+    background: #546068;
 }
 
 .box .text{
     padding-top: 0px;
-} 
+}
 .box .text h4 {
     text-transform: uppercase;
-    
-    padding: auto; 
+
+    padding: auto;
     padding-top: 70%;
 }
 .box .text p {

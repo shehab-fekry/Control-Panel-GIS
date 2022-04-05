@@ -1,10 +1,10 @@
 <?php
 
+use Web\TripController;
 use Web\DriverController;
 use Web\FatherController;
 use Web\ChildController;
 use Web\VehicleController;
-use Web\BusController;
 use Web\AdminController;
 use Web\SchoolController;
 use App\Models\User;
@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,20 +31,29 @@ Auth::routes(['verify'=>true]);
 // Route For home 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
-
 // Route For Admin 
 Route::resource('admin',AdminController::class)->middleware('verified');
 
-// Route For Admin 
+// admin profile update
+Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
+Route::post('assignAdminToSchool', 'Web\SchoolController@assignAdminToSchool')->name('school.assignAdminToSchool')->middleware('verified');
+Route::post('left', 'Web\SchoolController@left')->name('school.left')->middleware('verified');
+
+
+// Route For school 
 Route::resource('school',SchoolController::class)->middleware('verified');
 
 
+// Route For trip 
+Route::resource('trip',TripController::class )->middleware('verified');
+Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
+// Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
+
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
-
-
-// Route For child 
-Route::resource('child',ChildController::class)->middleware('verified');
+Route::get('changeStatus', 'FatherController@changeStatus');
+// Add child 
+Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
 
 // Route For driver 
@@ -53,13 +63,6 @@ Route::resource('driver',DriverController::class)->middleware('verified');
 // Route For vehicle 
 Route::resource('vehicle',VehicleController::class)->middleware('verified');
 
-
-// Route For Bus 
-Route::resource('bus',BusController::class)->middleware('verified');
-// Route::get("bus.index","Web\BusController@index")->middleware('verified');
-// Route::get("bus.show","Web\BusController@show")->middleware('verified');
-// Route::put("bus.update","Web\BusController@update")->middleware('verified');
-// Route::delete("bus.delete","Web\BusController@Destroy")->middleware('verified');
 
 
 Route::get('send-mail', function () {

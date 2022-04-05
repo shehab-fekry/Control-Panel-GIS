@@ -1,6 +1,6 @@
-@extends('driver.layout')
-
+@extends('layouts.master')
 @section('content')
+
 <div class="profile-page">
       
     <div class="row gutters-sm">
@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
-              <img src="upload/admin/{{ Auth::user()->image_path }} " alt="Admin" class="rounded-circle" width="150">
+              <img src="{{asset('upload/admin/'.Auth::user()->image_path)}} " alt="Admin photo" class="rounded-circle" width="150">
               <div class="mt-3">
                 <h4>{{ Auth::user()->name }} </h4>
                 {{-- <p class="text-secondary mb-1">Full Stack Developer</p> --}}
@@ -57,7 +57,12 @@
                 <h6 class="mb-0">School Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ Auth::user()->school_id }} 
+                @if ($schools == Null)
+                  You don't join to  any school yet.
+                @else
+                {{ $schools->name  }} 
+                @endif
+                
               </div>
             </div>
             <hr>
@@ -66,7 +71,7 @@
                 <h6 class="mb-0">Created At</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ Auth::user()->created_at }} 
+                {{ Auth::user()->created_at->format('Y-m-d') }} 
               </div>
             </div>
             <hr>
@@ -75,7 +80,7 @@
                 <h6 class="mb-0">Updated At</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ Auth::user()->updated_at }} 
+                {{ Auth::user()->updated_at->format('Y-m-d')  }} 
               </div>
             </div>
           </div>
@@ -84,4 +89,13 @@
     </div>
 
 </div>
+@if (session('success'))
+<div class="alertg hide">
+<span class='fas fa-check-circle'></span>
+<span class="msg">{{ session('success') }}</span>
+<div class="close-btn">
+   <span class="fas fa-times"></span>
+</div>
+</div>
+@endif  
 @endsection

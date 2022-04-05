@@ -77,20 +77,22 @@ class FatherController extends BaseController
                     }else{
                        return $this->sendError('please validate errors','you do not have any child  going to school today and the trip is alredy started');
                     }
-        }elseif($trip->status==0){
-            return $this->sendError('please validate errors','the trip is not started yet');
-        }else{
-            if($trip->status==1){
-                 return $this-> sendResponse("the trip is started and going to school",$trip->id);
-            }elseif($trip->status==2){
+        }
+        switch($trip->status)
+        {
+            case 0:
+                return $this->sendError('please validate errors','the trip is not started yet');
+                break;
+            case 1:
+                return $this-> sendResponse("the trip is started and going to school",$trip->id);
+                break;
+            case 2:
                 return $this-> sendResponse("the trip is started and arrived to school",$trip->id);
-            }elseif($trip->status==3){
+                break;
+            case 3:
                 return $this-> sendResponse("the trip is started and back from school",$trip->id);
-            }
 
         }
-
-
 
     }
 
