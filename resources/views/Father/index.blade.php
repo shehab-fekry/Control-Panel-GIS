@@ -53,7 +53,7 @@
             @endforeach
 
             </div>
-
+            {{ $fathers->links() }}
             <!-- <button>Show Alert</button> -->
           {{-- <div class="alertw hide">
          <span class="fas fa-exclamation-circle"></span>

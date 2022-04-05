@@ -53,7 +53,7 @@
         </div>
         @endforeach
     </div>
-
+    {{ $driver->links() }}
     <!-- <button>Show Alert</button> -->
     @if (session('success'))
     <div class="alertg hide">

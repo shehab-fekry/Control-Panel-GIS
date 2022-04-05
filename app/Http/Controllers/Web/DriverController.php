@@ -22,7 +22,7 @@ class DriverController extends Controller
             return redirect()->route('school.index');
 
         }
-        $driver = Driver::where("school_id",$admin)->latest()->paginate(5);
+        $driver = Driver::where("school_id",$admin)->latest()->paginate(6);
       
         return view("driver.index",compact("driver"));
     }

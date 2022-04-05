@@ -22,7 +22,7 @@ class FatherController extends Controller
         if($admin ==null){
             return redirect()->route('school.index');
         }
-        $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
+        $fathers = Father::where("school_id",$admin)->latest()->paginate(6);
         return view("Father.index",compact("fathers"));
     }
 
