@@ -18,7 +18,7 @@ class BaseController extends Controller
      
 
 
-    public  static function sendError($error,$errorMessage=[],$code=404)
+    public  static function sendError($error,$errorMessage=[],$code=500)
 
     {
         $response=[
