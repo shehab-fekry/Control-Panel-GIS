@@ -40,8 +40,8 @@ class AuthController extends BaseController
         $input['school_id']=$school->id;
         $input['password']=Hash::make($input['password']);
         $father=Father::create($input);
-        $success['name']=$father->name;
-        return $this-> sendResponse('no data','father registered successfully');
+        $success['father_name']=$father->name;
+        return $this-> sendResponse($success,'father registered successfully');
     }
     public function fatherLogin(Request $request){
 
@@ -100,7 +100,7 @@ class AuthController extends BaseController
         $input['password']=Hash::make($input['password']);
         $driver=Driver::create($input);
         // $token=$driver->createToken('PassportExample@Section.io')->accessToken;;
-        $success['name']=$driver->name;
+        $success['driver_name']=$driver->name;
         $success['SchoolName']=$school->name;
         return $this-> sendResponse($success,'driver registered successfully');
     }
@@ -111,6 +111,7 @@ class AuthController extends BaseController
             $id =Auth::guard('driver')->id();
             $driver=Driver::find($id);
             $success['token']=$driver->createToken('driver')->accessToken;
+            
             $driver->api_token=$success['token'];
             $driver->save();
             $success['driver']=$driver;
