@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Driver;
 use App\Models\Father;
 use App\Models\Child;
-use App\Models\Vehicle;
+use App\Models\vehicle;
 use Illuminate\Validation\Rule;
 
 use App\Models\School;
@@ -61,7 +61,7 @@ class HomeController extends Controller
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  Father::where("school_id",$admin)->count())
         ->with('countchild',  $School)
-        ->with('countvehicle', Vehicle::where("school_id",$admin)->count())
+        ->with('countvehicle', vehicle::where("school_id",$admin)->count())
         ->with('tripstop', Trip::where('status',0)->where('school_id',$admin)->count())
         ->with('tripgs', Trip::where('status',1)->where('school_id',$admin)->count())
         ->with('triprs', Trip::where('status',2)->where('school_id',$admin)->count())
