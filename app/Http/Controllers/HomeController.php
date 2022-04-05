@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\driver;
-use App\Models\father;
-use App\Models\child;
-use App\Models\vehicle;
+use App\Models\Driver;
+use App\Models\Father;
+use App\Models\Child;
+use App\Models\Vehicle;
 use Illuminate\Validation\Rule;
 
 use App\Models\School;
