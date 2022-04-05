@@ -15,6 +15,8 @@ class BaseController extends Controller
         ];
         return response()->json($response,200);
     }
+     
+
 
     public  static function sendError($error,$errorMessage=[],$code=404)
 
