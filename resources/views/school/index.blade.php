@@ -122,7 +122,9 @@
         let map = {}
         let url = window.location.search
         let tripId = url.split('?')[1]
-        fetch('http://localhost:8000/api/school/location/' + tripId )
+        // reblace this line when you are local
+        //fetch('http://localhost:8000/api/school/location/' + tripId )
+        fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
         .then(schoolLocation => schoolLocation.json())
         .then(schoolLocation => {
 

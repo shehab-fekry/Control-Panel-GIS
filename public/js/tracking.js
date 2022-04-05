@@ -25,7 +25,9 @@ let state = {
 pusher = new Pusher('d363addb971561dc7e96', {cluster: 'eu'});
 
 const initTrack = (tripIndex) => {
-    fetch('http://localhost:8000/api/trip/live/' + tripIndex)
+    // reblace this line when you are local
+    // fetch('http://localhost:8000/api/trip/live/' + tripIndex)
+    fetch('http://bustrackingh.herokuapp.com/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
         // Modifying data Object to the usable form
