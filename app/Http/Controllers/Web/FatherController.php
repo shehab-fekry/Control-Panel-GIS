@@ -128,7 +128,7 @@ class FatherController extends Controller
         // $father=Auth::user()->school_id;
         // $childs=Child::latest();
         $childs=Child::get();
-        return view("father.show",compact('father'))->with('childs',$childs);
+        return view("Father.show",compact('father'))->with('childs',$childs);
     }
 
 
@@ -136,7 +136,7 @@ class FatherController extends Controller
     {
         $admin=Auth::user();
         $trips=Trip::where("school_id",$admin->school_id)->get();
-        return view("father.edit",compact('father'))->with('trips',$trips);
+        return view("Father.edit",compact('father'))->with('trips',$trips);
     }
 
 
@@ -169,7 +169,7 @@ public function update(Request $request, Father $father)
             $father->status=$input['status'];
             $father->image_path=$father->image_path;
             $father->save();
-            return redirect()->route("father.index")->with('success','father updated successfuly');
+            return redirect()->route("Father.index")->with('success','father updated successfuly');
 
         }
         else
@@ -190,12 +190,12 @@ public function update(Request $request, Father $father)
         // $father->lng=$input['lng'];
         // $father->lit=$input['lit'];
         $father->save();
-        return redirect()->route("father.index")->with('success','father updated successfuly');
+        return redirect()->route("Father.index")->with('success','father updated successfuly');
     }
     public function AssignFatherToTrip(Request $request, Father $father){
         $father->trip_id=$request->trip_id;
         $father->save();
-        return redirect()->route("father.index")->with('success','father assigned to trip successfuly');
+        return redirect()->route("Father.index")->with('success','father assigned to trip successfuly');
     }
     public function passwordReset(Request $request, Father $father)
     {
@@ -211,7 +211,7 @@ public function update(Request $request, Father $father)
 
         $father->password=Hash::make($request->password);
         $father->save();
-        return redirect()->route("father.index")->with('success',"father's password updated successfuly");
+        return redirect()->route("Father.index")->with('success',"father's password updated successfuly");
     }
 
     public function changeStatus(Request $request)
@@ -232,6 +232,6 @@ public function update(Request $request, Father $father)
         $School->children()->delete();
     
         $father->delete();
-        return redirect()->route("father.index")->with('success','father deleted successfuly');
+        return redirect()->route("Father.index")->with('success','father deleted successfuly');
     }
 }
