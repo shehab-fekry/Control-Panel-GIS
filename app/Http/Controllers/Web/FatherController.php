@@ -23,7 +23,7 @@ class FatherController extends Controller
             return redirect()->route('school.index');
         }
         $fathers = Father::where("school_id",$admin)->latest()->paginate(5);
-        return view("father.index",compact("fathers"));
+        return view("Father.index",compact("fathers"));
     }
 
 
@@ -34,7 +34,7 @@ class FatherController extends Controller
         if($admin ==null){
             return redirect()->route('school.index');
         }
-        return view("father.create");
+        return view("Father.create");
     }
 
     public function store_Child(Request  $request)
