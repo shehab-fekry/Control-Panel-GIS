@@ -106,10 +106,10 @@ class SchoolController extends Controller
     {
         $admin=Auth::user();
         if($admin->school_id==null){
-            return view("school.index");
+            return view("School.index");
         }
         $school=School::where('id',$admin->school_id);
-        return view("school.show",compact('school'));
+        return view("School.show",compact('school'));
     }
     public function showLocation($id)
     {
