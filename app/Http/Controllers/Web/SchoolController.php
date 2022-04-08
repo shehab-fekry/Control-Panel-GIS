@@ -6,7 +6,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Child;
 use App\Models\Father;
-use App\Models\driver;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use App\Models\School;
 use App\Models\Trip;
