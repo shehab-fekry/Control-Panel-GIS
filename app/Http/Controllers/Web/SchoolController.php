@@ -176,7 +176,7 @@ class SchoolController extends Controller
         $father = Father::where('school_id', $School->id);
         $father->delete();
 
-        $driver = driver::where('school_id',$School->id);
+        $driver = Driver::where('school_id',$School->id);
         $driver->delete();
 
         $vehicle = vehicle::where('school_id',$School->id);
