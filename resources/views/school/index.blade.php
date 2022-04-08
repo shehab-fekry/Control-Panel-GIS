@@ -104,7 +104,7 @@
             }, 
             (error) => {
                 console.log(error)
-            },{timeout:10000})
+            },{timeout:10000, enableHighAccuracy: true})
         }
 
 
