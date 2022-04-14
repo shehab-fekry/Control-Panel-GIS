@@ -29,7 +29,13 @@ Auth::routes(['verify'=>true]);
 
 
 // Route For home 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('verify/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
+Route::resource('verify', 'Auth\TwoFactorController')->only(['index', 'store']);
+
+
+Route::group(['namespace' => 'Admin', 'middleware' => 'twofactor'], function () {
+    // Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified'); });
 
 // Route For Admin 
 Route::resource('admin',AdminController::class)->middleware('verified');
