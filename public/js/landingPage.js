@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function(){
         strings: [
         "Live Bus Tracking",
         "Ensure students' safety ",
-        "Your Child Under Your Control"],
+        "Your Child Under Our Control"],
         stringsElement: null,
         // typing speed
         typeSpeed: 40,

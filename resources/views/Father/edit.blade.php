@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+
+<div class="bus-container ">
 <div class="app-main__outer">
     <div class="app-main__inner">
-        <div class="container bg-white">
+        <div class="container bg-white" style="height:575px;">
             <div class="row ">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/father/'.$father->image_path)}}"><span class="font-weight-bold">{{$father->name}}</span><span class="text-black-50">{{$father->email}}</span><span> </span></div>
@@ -82,6 +84,7 @@
         </div>
         </div>
 
+</div>
 </div>
 </div>
   @if ($message= session('error'))
