@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-
+<div class="bus-container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class=" mb-4 ">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
@@ -102,4 +102,5 @@
                
             </div>
         </div>
+  </div>
 @endsection

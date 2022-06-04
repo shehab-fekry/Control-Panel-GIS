@@ -103,8 +103,8 @@
                 <i class="fa fa-subway"></i> &nbsp;Trips </li>
                 <div class="collapse" id="dashboard-collapse-trips">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Tracking</a></li>
-                        <li><a href="{{route('trip.indextrip')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp; Update Trips </a></li>
+                        <li><a href="{{ route('trip.index') }}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-subway"></i> &nbsp;Tracking</a></li>
+                        <li><a href="{{route('trip.indextrip')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-pencil-square-o"></i> &nbsp; Update Trips </a></li>
                     </ul>
                 </div>
             </a>
@@ -113,8 +113,8 @@
                 <i class="fa fa-id-card"></i> &nbsp;Drivers</li>
                 <div class="collapse" id="dashboard-collapse-1">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="{{route('driver.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Drivers</a></li>
-                        <li><a href="{{route('driver.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;Add New Driver</a></li>
+                        <li><a href="{{route('driver.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-id-card"></i> &nbsp;Show Drivers</a></li>
+                        <li><a href="{{route('driver.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-plus-square-o"></i> &nbsp;Add New Driver</a></li>
                     </ul>
                 </div>
             </a>
@@ -123,8 +123,8 @@
                 <i class="fa fa fa-users"></i> &nbsp;Parents</li>
                 <div class="collapse" id="dashboard-collapse-2">
                     <ul class="btn-toggle-nav list-unstyled">
-                        <li><a href="{{route('father.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Parents</a></li>
-                        <li><a href="{{route('father.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;Add New Parent</a></li>
+                        <li><a href="{{route('father.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-users"></i> &nbsp;Show Parents</a></li>
+                        <li><a href="{{route('father.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-plus-square-o"></i> &nbsp;Add New Parent</a></li>
                     </ul>
                 </div>
             </a>
@@ -133,8 +133,8 @@
                 <i class="fa fa-bus"></i> &nbsp;Vehicles </li>  
                 <div class="collapse" id="dashboard-collapse-vehicles">
                   <ul class="btn-toggle-nav list-unstyled">
-                    <li><a href="{{route('vehicle.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Vehicles</a></li>
-                    <li><a href="{{route('vehicle.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;Add Vehicle</a></li>
+                    <li><a href="{{route('vehicle.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-bus"></i> &nbsp;Show Vehicles</a></li>
+                    <li><a href="{{route('vehicle.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-plus-square-o"></i> &nbsp;Add Vehicle</a></li>
                   </ul>
                 </div>
             </a>
@@ -151,8 +151,8 @@
             </li>  
                 <div class="collapse" id="dashboard-collapse-profile">
                   <ul class="btn-toggle-nav list-unstyled">
-                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Show Profile</a></li>
-                    <li><a href="{{route('admin.edit',Auth::user()->id)}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-cog"></i> &nbsp;Edit Profile</a></li>
+                    <li><a href="{{route('admin.index')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-user-circle"></i> &nbsp;Show Profile</a></li>
+                    <li><a href="{{route('admin.edit',Auth::user()->id)}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-pencil-square-o"></i> &nbsp;Edit Profile</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
                          class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}
@@ -180,7 +180,6 @@
     <!-- index.js  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ asset("js/index.js") }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
-</html> 
+</html>

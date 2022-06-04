@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')   
-
-<div class="container bg-white">
+<div class="bus-container">
+<div class="container bg-white" style="height:550px;">
     <div class="row ">
         {{-- <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
@@ -107,6 +107,8 @@
        
     </div>
 </div>
+</div>
+
 </div>
 @if ($message= session('error'))
   @foreach($message as $messages)
