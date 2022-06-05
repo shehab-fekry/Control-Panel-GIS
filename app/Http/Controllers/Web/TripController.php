@@ -30,7 +30,7 @@ class TripController extends Controller
     public function indexedit()
     {
         $admin=Auth::user();
-        if($admin->school_id==null){ 
+        if($admin->school_id==null){
             return redirect()->route('school.index');
         }
         $trips=Trip::where('school_id',$admin->school_id)->get();
@@ -123,30 +123,11 @@ return Basecontroller::sendResponse($response,'father information updated succes
     public function show(Trip $trip)
     {
 
-        // $childs=Child::get();
-        // return view("trip.show",compact('trip'))->with('trip',$childs);
+
         $driver=Driver::where('trip_id',$trip->id)->get();
         $father=father::where('trip_id',$trip->id)->get();
 
-        $father1=father::where('trip_id',$trip->id)->first();
-        $child =$father1->child()->get();
-        // dd($child);
-
-        // $fathers=father::where('trip_id',$trip->id)->get();
-
-        // $admin=Auth::user();
-        // $child = $admin->where('trip_id',$trip->id)->first();
-
-        // $child = School::first();
-        // $child->children()->get();
-        // dd($child->name);
-    
-        // $fathers=father::find($id);
-        // $fathers1 =father::where('trip_id',$trip->id)->get();
-        // $child =child::get();
-            // dd($child);
-        // $school=School::where("code",$user->code);
-        // $admin->school_id=$school->id;
+        $child=$trip->children()->get();
         return view("trip.show",compact('trip'))->with([
             'driver'=>$driver,
             'father'=>$father,
@@ -158,25 +139,27 @@ return Basecontroller::sendResponse($response,'father information updated succes
     public function edit(Trip $trip)
     {
         $admin=Auth::user();
-        // $trips=Trip::where("school_id",$admin->school_id)->get();
-        // return view("trip.edit",compact('trip'))->with('trips',$trips);
+
         return view("trip.edit",compact('trip'));
     }
 
 
-    public function update(Request $request, Trip $trip)
+    public function update(Request $request)
     {
-        $input=$request->all(); 
+
+        $input=$request->all();
+        $trip=Trip::where('id' ,$input['tripId'] )->first();
         $validator=Validator::make($input,[
             'geofence' => ['required', 'string', 'min:3'],
-         
+
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
         }
-       
+
         $trip->geofence=$input['geofence'];
         $trip->save();
+
         return redirect()->route("trip.index")->with('success','trip updated successfuly');
     }
 

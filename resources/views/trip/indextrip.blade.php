@@ -1,7 +1,7 @@
 
 @extends('layouts.master')
 
-@section('content') 
+@section('content')
 <head>
     <link rel="stylesheet" href="{{ asset("css/editTrips.css") }}">
 </head>
@@ -15,14 +15,14 @@
         </div>
 
         @foreach($trips as $trip )
-        
+
             <div class="roow">
                 <div class="tdata">{{$trip->id}}</div>
                 <div class="tdata">{{$trip->geofence}}</div>
                 <div class="tdata">
                     <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
                         <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
-                    </div> 
+                    </div>
                 </div>
                 <div class="tdata tdata-btns">
                     <a href="{{route('trip.show',$trip->id)}}" class="btn trackingBtn">
@@ -41,14 +41,14 @@
                 </div>
             </div>
         @endforeach
-        
+
     </div>
- 
+
     <div id="editTrip" style="display: none;" class="editTrip" data-before="dfefae">
             <form class="editTripForm"  action="{{route('trip.update',1)}} " method="POST"  enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-            <input  name="geofence" id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location"> 
+            <input  name="geofence" id="location" oninput="verifyEdit()" type="text" placeholder="GeoFence Location">
             <input  id="hiddenTripId" type="hidden" name="tripId">
             <button id="editTripSubmit" class="btn trackingBtn btnHover" disabled="true" type="submit">Edit</button>
             </form>
@@ -68,7 +68,7 @@
             if(field == '')
             document.getElementById('editTripSubmit').disabled = true
             else
-            document.getElementById('editTripSubmit').disabled = false 
+            document.getElementById('editTripSubmit').disabled = false
         }
     </script>
 </div>

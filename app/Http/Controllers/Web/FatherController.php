@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-  
+
 class FatherController extends Controller
 {
 
     public function index()
     {
         $admin=Auth::user()->school_id;
-        
+
         if($admin ==null){
             return redirect()->route('school.index');
         }
@@ -30,7 +30,7 @@ class FatherController extends Controller
     public function create()
     {
         $admin=Auth::user()->school_id;
-        
+
         if($admin ==null){
             return redirect()->route('school.index');
         }
@@ -45,18 +45,18 @@ class FatherController extends Controller
             'father_id' => ['required', 'string', 'max:255'],
             'image_path'=>'image'
         ]);
-        
+
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
         }
 
-        
+
         if ($request->image_path == Null){
             Child::create([
                 'name' => $request->input('name'),
                 'father_id' => $request->input('father_id'),
                 'image_path' => 'parent.png',
-            ]); 
+            ]);
             return redirect()->route("father.index")
             ->with('success','child added successfuly');
         }
@@ -84,11 +84,11 @@ class FatherController extends Controller
             'mobileNumber' => ['required', 'string', 'max:20'],
             'image'=>'image'
         ]);
-        
+
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
         }
-        
+
         if ($request->image == Null){
             Father::create([
                 'name' => $request->input('name'),
@@ -121,9 +121,9 @@ class FatherController extends Controller
 
     }
 
- 
+
     public function show(Father $father)
-    {       
+    {
         // $admin=Auth::user()->school_id;
         // $father=Auth::user()->school_id;
         // $childs=Child::latest();
@@ -142,9 +142,9 @@ class FatherController extends Controller
 
 public function update(Request $request, Father $father)
     {
-        $input=$request->all(); 
+        $input=$request->all();
         $validator=Validator::make($input,[
-            'name' => ['required', 'string', 'min:8'],
+            'name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],
             //'password' => ['required', 'string', 'min:8'],
 
@@ -166,7 +166,7 @@ public function update(Request $request, Father $father)
             $father->trip_id=$input['trip_id'];
             $father->confirmed=$input['confirmed'];
             $father->mobileNumber=$input['mobileNumber'];
-            $father->status=$input['status'];
+            // $father->status=$input['status'];
             $father->image_path=$father->image_path;
             $father->save();
             return redirect()->route("father.index")->with('success','father updated successfuly');
@@ -184,7 +184,7 @@ public function update(Request $request, Father $father)
         // $father->password=Hash::make($input['password']);
 
         $father->mobileNumber=$input['mobileNumber'];
-        $father->status=$input['status'];
+        // $father->status=$input['status'];
         $father->image_path=$newPhotoName;
         // $father->region=$input['region'];
         // $father->lng=$input['lng'];
@@ -219,7 +219,7 @@ public function update(Request $request, Father $father)
         $father = Father::find($request->id);
         $father->confirmed = $request->confirmed;
         $father->save();
-  
+
         return response()->json(['success'=>'Status change successfully.']);
     }
 
@@ -230,7 +230,7 @@ public function update(Request $request, Father $father)
     {
         $School = School::first();
         $School->children()->delete();
-    
+
         $father->delete();
         return redirect()->route("father.index")->with('success','father deleted successfuly');
     }

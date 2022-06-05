@@ -31,44 +31,44 @@
                             {{-- <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
                             <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div> --}}
                             <div class="col-md-12"><label class="labels">mobileNumber</label><input type="text" class="form-control"  name="mobileNumber"  value="{{$father->mobileNumber}}"></div>
-                            <div class="col-md-12"><label class="labels">Number Of childern</label><input type="text" class="form-control" name="status"  placeholder="enter address line 2" value="{{$father->status}}"></div>
+                            <!-- <div class="col-md-12"><label class="labels">Number Of childern</label><input type="text" class="form-control" name="status"  placeholder="enter address line 2" value="{{$father->status}}"></div> -->
                             <div class="col-md-12"><label class="labels">Trip</label>
                                 <select class="form-select" aria-label="Default select example" name="trip_id">
-                          
+
                                     @foreach($trips as  $trip )
                                               <option value="{{$trip->id}}"  @if( $trip->id == $father->trip_id) selected @endif >{{$trip->geofence}}</option>
                                     @endforeach
-        
+
                                   </select>
 
                                 {{-- <input type="text" class="form-control"  name="trip_id"  value="{{$father->trip_id}}"> --}}
-                            
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-4 d-flex align-items-center">
-              
+
                               <div class="form-outline datepicker w-100">
                                 <label for="image"  class="form-label">Photo</label>
-          
+
                                 <input
                                   type="file" name="image"
                                   class="form-control form-control-lg"
                                   id="image"
                                 />
                               </div>
-            
+
                             </div>
-      
+
                            </div>
                            <div class="row mt-2">
                             <select class="form-select" aria-label="Default select example" name="confirmed">
-                          
-                          
+
+
                                         <option value="1"  @if( $father->confirmed == 1) selected @endif >Confirmed</option>
                                         <option value="0"  @if( $father->confirmed == 0) selected @endif >Not Confirmed</option>
-                           
-   
+
+
                             </select>
                             {{-- <div class="col-md-6"><label class="labels">confirmed</label><input type="text" name="confirmed" class="form-control" placeholder="name" value="{{$driver->confirmed}}"></div> --}}
                         </div>
@@ -76,9 +76,9 @@
                         </form>
                         </div>
                     </div>
-               
+
                 </div>
-               
+
             </div>
         </div>
         </div>
@@ -95,7 +95,7 @@
     <div class="close-btn">
     <span class="fas fa-times"></span>
     </div>
-    </div> 
+    </div>
 @endforeach
-@endif  
+@endif
 @endsection

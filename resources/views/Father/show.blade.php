@@ -10,9 +10,9 @@
           {{-- <div class="card shadow-2-strong card-registration" style="border-radius: 5px;margin-bottom: 20px; border: none;"> --}}
             <div class="headingProfileParent card-body p-4 p-md-5" style="background-color:#fafafa; box-shadow: 0px 0px 5px #ccc; border-radius: 20px; border: none; ">
 
-          
-     
-  
+
+
+
       <div class="row" >
         <div class="col-lg">
           <div class="card mb-4"style="background-color: whitesmoke;">
@@ -21,10 +21,10 @@
               <h5 class="my-3">{{$father->name}}</h5>
               <p class="text-muted mb-1">Full Stack Developer</p>
               <p class="text-muted mb-4">lives in 6 october</p>
-            
+
             </div>
           </div>
-        
+
         </div>
         <div class="col-lg-8">
           <div class="card mb-4"style="background-color: whitesmoke;">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">
-                    <span  class="badge <?php echo ($father['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($father['confirmed']=='1') ? 'confirmed' : 'Not confirmed'; ?></span> 
+                    <span  class="badge <?php echo ($father['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($father['confirmed']=='1') ? 'confirmed' : 'Not confirmed'; ?></span>
                   </p>
                 </div>
               </div>
@@ -81,13 +81,13 @@
                   <p class="mb-0">Child</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"> {{$father->status}} child</p>
+                  <p class="text-muted mb-0"> {{$father->child()->count()}} child</p>
                 </div>
               </div>
-   
+
             </div>
           </div>
-      
+
         </div>
       </div>
       {{-- ---------------------------------------------------------------------------------- --}}
@@ -95,7 +95,7 @@
         <div class="col-lg-4">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
-           <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>    
+           <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>
            <form action="{{route('father.store_Child')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
             {{-- @method('PUT') --}}
@@ -108,7 +108,7 @@
            </form>
                 </div>
               </div>
-        
+
         </div>
         <div class="col-lg-8">
           <div class="card mb-8"style="background-color: whitesmoke;">
@@ -150,9 +150,9 @@
                     <label class="form-label" for="status" style="margin-left: 140px;">Status</label>
                     <label class="form-label" for="Confirmatiom" style="margin-left: 140px;">Confirmation</label>
                   </div>
-               
-                  
-                
+
+
+
             <div class="card p-3 mt-2" style="background-color: whitesmoke">
               <img src="/Public/assets/manager.png" width="30" class="user-img rounded-circle mr-2" style="margin-bottom: -30px;">
                 <span "><small class="font-weight-bold text-primary" style="margin-left: 50px; ">james_olesehhhhhhnn</small>
@@ -160,24 +160,24 @@
                  <div style="margin-left: 200px; margin-bottom: -25px;">
                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
                  </div>
-                  <div class="buttons" style="margin-left: 370px; "> <span class="badge bg-white d-flex flex-row align-items-center"> 
+                  <div class="buttons" style="margin-left: 370px; "> <span class="badge bg-white d-flex flex-row align-items-center">
                <div class="form-check form-switch" > <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
            </span>
           </div>
-      
-            
+
+
         </div>
-       
+
     </div>
     </div> --}}
               </div>
             </div>
           </div>
         </div>
-   
+
       </div>
    </div>
-      
+
   </div>
 </div>
 @if (session('success'))
@@ -188,6 +188,6 @@
    <span class="fas fa-times"></span>
 </div>
 </div>
-@endif  
+@endif
 
 @endsection
