@@ -25,7 +25,7 @@ class CreateFathersTable extends Migration
             $table->boolean('confirmed')->default(false);
             $table->string('mobileNumber', 11);
             $table->integer('status')->default(0);
-            $table->string('region',60)->nullable();
+            $table->longText('region')->nullable();
             $table->double('lng')->nullable();
             $table->double('lit')->nullable();
             $table->longText('api_token')->nullable();

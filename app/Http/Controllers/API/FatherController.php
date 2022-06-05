@@ -15,6 +15,22 @@ use App\Models\Trip;
 class FatherController extends BaseController
 {
 
+  public function showBusDriver()
+  {
+    $id=Auth::guard("api-fathers")->id();
+    $father=Father::where("id",$id)->first();
+    if($father->confirmed==false){
+        return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+    }
+    elseif($father->trip_id==null){
+
+      return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');}
+    $trip = Trip::where('id',$father->trip_id)->first();
+    $driver = $trip->driver()->first();
+    $vehicle = $trip->vehicle()->first();
+    $response = ['driver'=>$driver->all(),'vehicle'=>$vehicle->all()];
+     return $this->sendResponse(FatherResource::collection($response),'fathers retrived successfully');
+  }
 
     public function show()
     {

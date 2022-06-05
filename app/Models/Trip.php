@@ -26,9 +26,14 @@ class Trip extends Model
     {
         return $this->belongsTo(School::class);
     }
-    
+
     public function children()
     {
         return $this->hasManyThrough(Child::class, Father::class);
+
+    }
+    public function vehicle()
+    {
+        return $this->hasManyThrough(vehicle::class, Driver::class);
     }
 }

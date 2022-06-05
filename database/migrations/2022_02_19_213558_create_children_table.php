@@ -16,6 +16,9 @@ class CreateChildrenTable extends Migration
         Schema::create('children', function (Blueprint $table) {
             $table->id();
             $table->string('name',30);
+            $table->integer('age');
+            $table->string('class')->nullable();
+            $table->boolean('gender');
             $table->string('image_path')->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('status')->default(false);
