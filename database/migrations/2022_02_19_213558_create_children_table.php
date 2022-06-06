@@ -18,7 +18,7 @@ class CreateChildrenTable extends Migration
             $table->string('name',30);
             $table->integer('age');
             $table->string('class')->nullable();
-            $table->boolean('gender');
+            $table->string('gender');
             $table->string('image_path')->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('status')->default(false);

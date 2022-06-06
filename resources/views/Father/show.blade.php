@@ -91,7 +91,7 @@
         </div>
       </div>
       {{-- ---------------------------------------------------------------------------------- --}}
-      <div class="row" >
+      <!-- <div class="row" >
         <div class="col-lg-4">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
@@ -109,7 +109,7 @@
                 </div>
               </div>
 
-        </div>
+        </div> -->
         <div class="col-lg-8">
           <div class="card mb-8"style="background-color: whitesmoke;">
             <div class="card-body">
