@@ -53,7 +53,7 @@
     
       <div class="card" style="width: 90%;">
         <div class="card-body">
-          <h5 class="card-title" style="color: #384850">{{$school->name}}<span class="card-code">#{{$school->code}}</span></h5>
+          <h5 class="card-title" style="color: #384850">{{$school->name}} School<span class="card-code">#{{$school->code}}</span></h5>
           <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
           <div class="card-map" id="map"></div>
           <div class="card-foot mt-2">
@@ -122,9 +122,12 @@
         let map = {}
         let url = window.location.search
         let tripId = url.split('?')[1]
-        // reblace this line when you are local
-        //fetch('http://localhost:8000/api/school/location/' + tripId )
-        fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
+        // replace this line when you are local
+        // fetch('http://localhost:8000/api/school/location/' + tripId )
+        // replace this line when you are remote
+        // fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
+
+        fetch('http://localhost:8000/api/school/location/' + tripId )
         .then(schoolLocation => schoolLocation.json())
         .then(schoolLocation => {
 
