@@ -85,15 +85,16 @@
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
                         </div>
                     </div>
-                    You are :
-                    <select class="form-select form-control @error('is_admin') is-invalid @enderror" name="is_admin" required autocomplete="is_admin" aria-label="is_admin" name="is_admin">
-                          
-                          
-                        <option value="1"  >Admin</option>
-                        <option value="0" >Clerk</option>
-           
 
-                     </select>
+                    <div class="select_container">
+                        <div class="input_container">
+                            <div class="select_text">You are:</div>
+                            <select class="form-select form-control @error('is_admin') is-invalid @enderror" name="is_admin" required autocomplete="is_admin" aria-label="is_admin" name="is_admin">
+                                <option value="1">Admin</option>
+                                <option value="0">Clerk</option>
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-end"></label>

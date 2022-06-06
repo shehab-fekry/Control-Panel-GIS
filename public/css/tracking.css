@@ -128,7 +128,7 @@
 
   .table{
     width: 90%;
-    max-height: 40%;
+    max-height: 35%;
     display: block;
     display: flex;
     flex-flow: column;
