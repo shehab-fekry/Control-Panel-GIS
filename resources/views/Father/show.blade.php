@@ -17,7 +17,8 @@
         <div class="col-lg">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
-              <img src="{{asset('upload/father/'.$father->image_path)}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true">
+              {{-- <img src="{{asset('upload/father/'.$father->image_path)}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true"> --}}
+              <img src="{{$father->image_path}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true">
               <h5 class="my-3">{{$father->name}}</h5>
               <p class="text-muted mb-1">Full Stack Developer</p>
               <p class="text-muted mb-4">lives in 6 october</p>

@@ -38,6 +38,7 @@ class AuthController extends BaseController
         // $input['photo']=$new_photo;
         $school=School::where('code',$request->code)->first();
         $input['school_id']=$school->id;
+        $input['image_path']="https://cdn-icons-png.flaticon.com/512/3048/3048148.png";
         $input['password']=Hash::make($input['password']);
         $father=Father::create($input);
         $success['father_name']=$father->name;
