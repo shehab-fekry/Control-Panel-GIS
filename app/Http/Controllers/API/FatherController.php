@@ -56,6 +56,7 @@ class FatherController extends BaseController
             'name' => ['required','string', 'max:30',],
             'mobileNumber'=>['required',],
             'region' => ['required','string',],
+            'image_path' => ['required'],
             'lng' => ['required','numeric'],
             'lit' => ['required','numeric'],
             'email' => ['required','string', 'email', 'max:255',Rule::unique('fathers')->ignore($id),],
@@ -68,6 +69,7 @@ class FatherController extends BaseController
         $father->email=$input['email'];
         $father->mobileNumber=$input['mobileNumber'];
         $father->region=$input['region'];
+        $father->image_path=$input['image_path'];
         $father->lng=$input['lng'];
         $father->lit=$input['lit'];
         $father->save();

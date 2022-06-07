@@ -25,7 +25,8 @@
                             {{-- <input data-id="{{$parent->id}}" class="toggle-class" type="checkbox" data-bs-onstyle="success" data-bs-offstyle="danger" data-bs-toggle="toggle" data-bs-on="Active" data-bs-off="InActive" {{ $parent->confirmed ? 'checked' : '' }}>
                             <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                             <div class="user-image">
-                                <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
+                                {{-- <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image"> --}}
+                                <img src="{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
                             </div>
                             <h6 class="f-w-600 m-t-25 m-b-10">{{$parent->name}}</h6>
                             {{-- <p class="text-muted">Active | Male | Born 23.05.1992</p> --}}
