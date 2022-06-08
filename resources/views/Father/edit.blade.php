@@ -8,7 +8,8 @@
         <div class="container bg-white" style="height:575px;">
             <div class="row ">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/father/'.$father->image_path)}}"><span class="font-weight-bold">{{$father->name}}</span><span class="text-black-50">{{$father->email}}</span><span> </span></div>
+                    {{-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/father/'.$father->image_path)}}"><span class="font-weight-bold">{{$father->name}}</span><span class="text-black-50">{{$father->email}}</span><span> </span></div> --}}
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{$father->image_path}}"><span class="font-weight-bold">{{$father->name}}</span><span class="text-black-50">{{$father->email}}</span><span> </span></div>
                 </div>
                 <div class="col">
                     <div>
@@ -45,7 +46,7 @@
 
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12 mb-4 d-flex align-items-center">
 
                               <div class="form-outline datepicker w-100">
@@ -60,7 +61,7 @@
 
                             </div>
 
-                           </div>
+                           </div> --}}
                            <div class="row mt-2">
                             <select class="form-select" aria-label="Default select example" name="confirmed">
 

@@ -86,7 +86,7 @@
 
                         </div>
 
-                        <div class="col-md-6 mb-4 d-flex align-items-center">
+                        {{-- <div class="col-md-6 mb-4 d-flex align-items-center">
 
                           <div class="form-outline datepicker w-100">
 
@@ -100,7 +100,7 @@
                             />
                           </div>
 
-                        </div>
+                        </div> --}}
 
                       </div>
 

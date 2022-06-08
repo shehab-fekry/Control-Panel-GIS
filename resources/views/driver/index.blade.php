@@ -25,7 +25,8 @@
                             class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                     <span  class="badge <?php echo ($drivers['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($drivers['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> 
                     <div class="user-image">
-                        <img src="upload/driver/{{$drivers->image_path}}" class="img-radius" alt="User-Profile-Image">
+                        {{-- <img src="upload/driver/{{$drivers->image_path}}" class="img-radius" alt="User-Profile-Image"> --}}
+                        <img src="{{$drivers->image_path}}" class="img-radius" alt="User-Profile-Image">
                     </div>
                     <h6 class="f-w-600 m-t-25 m-b-10"> {{$drivers->name}}</h6>
                     {{-- <p class="text-muted">Active | Male | Born 23.05.1992</p> --}}

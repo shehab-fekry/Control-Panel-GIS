@@ -2,9 +2,16 @@
 @extends('layouts.master')
 
 @section('content')
-
+ 
 <head><link rel="stylesheet" href="{{ asset("css/tripDetails.css") }}"></head>
 
+@if( $driver->count() <1 )
+<!-- <div class="main"> -->
+    <img src="{{ asset("assets/images/parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
+    <center style="font-size:20px"> There are no registered <span style="color:#ffc017">parents</span> to show yet </center>
+<!-- </div> -->
+@endif
+@if( $driver->count() >= 1 )
 <div class="tripDetails-wrapper">
     <div class="card" style="width: 90%;">
         <div class="card-body">
@@ -67,7 +74,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <script>
   // let url = window.location.search
   // let getQuery = url.split('?')[1] 

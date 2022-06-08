@@ -23,7 +23,8 @@
         <div class="col-lg ">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
-              <img src="{{asset('upload/driver/'.$driver->image_path)}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px">
+              {{-- <img src="{{asset('upload/driver/'.$driver->image_path)}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"> --}}
+              <img src="{{$driver->image_path}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px">
               <h5 class="my-3">Captain: {{$driver->name}}</h5>
               <p class="text-muted mb-1">Driver</p>
             

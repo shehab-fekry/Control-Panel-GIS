@@ -54,7 +54,7 @@
                                 {{-- <input type="hidden" name="password" class="form-control"  value="{{$driver->password}}"></div> --}}
                             {{-- <div class="col-md-6"><label class="labels">Confirm Password</label><input type="Password"  name="password" class="form-control" value="" ></div> --}}
                         {{-- </div> --}}
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12 mb-4 d-flex align-items-center">
               
                               <div class="form-outline datepicker w-100">
@@ -69,7 +69,7 @@
             
                             </div>
       
-                           </div>
+                           </div> --}}
                            <div class="row mt-2">
                             <select class="form-select" aria-label="Default select example" name="confirmed">
                           
