@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\showTrip;
 use App\Models\driver;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,7 @@ class TripController extends BaseController
             $radius = 6371;
             $distance=($res*$radius)*1000;
             $data[$father->name]+=array('distance'=>$distance);
+            $data[$father->name]+=array('id'=>$father->id);
             $data[$father->name]+=array('lng'=>$father->lng);
             $data[$father->name]+=array('lit'=>$father->lit);
             foreach($children as $child)
@@ -56,6 +58,8 @@ class TripController extends BaseController
         }
         $collection = collect($data);
         $sorted = $collection->sortBy('distance');
+        event(new showTrip($data));
+        
         return $this-> sendResponse($sorted,'father information updated successfully');
     }
     public function delivered(){

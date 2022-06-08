@@ -46,7 +46,7 @@ class FatherController extends BaseController
 
 
 
-    public function update(Request $request,)
+    public function update(Request $request)
     {
         $id=Auth::guard('api-fathers')->id();
         $father=Father::get()->find($id);
@@ -113,6 +113,24 @@ class FatherController extends BaseController
         }
 
     }
+    public function showDriverBus()
+    {
+        $id=Auth::guard('api-fathers')->id();
+        $father=Father::get()->find($id);
+        if($father->confirmed==false){
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($father->trip_id==null){
+
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+
+        }
+        $trip=Trip::get()->find($father->trip_id);
+        
+
+    }
+
+
 
 
     public function destroy()

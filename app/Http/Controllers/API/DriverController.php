@@ -19,7 +19,7 @@ class DriverController extends BaseController
     {
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::where('id',$id)->get();
-        return $this->sendResponse(DriverResource::collection($driver),'driver information retrived successfully');
+        return $this->sendResponse($driver,'driver information retrived successfully');
     }
 
     public function update(Request $request)
