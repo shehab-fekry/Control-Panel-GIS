@@ -57,7 +57,7 @@ Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
-Route::get('changeStatus', 'FatherController@changeStatus');
+Route::get('changeStatus', 'web\FatherController@changeStatus')->name('changeStatus');
 // Add child 
 Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 

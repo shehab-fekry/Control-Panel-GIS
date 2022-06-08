@@ -3,6 +3,9 @@
 @section('content')
 <div class="app-main__outer">
     <div class="app-main__inner">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+          <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {{-- <section class="vh-100 gradient-custom" style="border-radius: 20px; border: none; overflow: scroll;">    --}}
     <div   style="background: url(k.jfif); background-size: cover;">
       <div class="row justify-content-center align-items-center"  >
@@ -131,14 +134,21 @@
                     <tr>
                       <th scope="row">{{$child->id}}</th>
                       <td>
-                        <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2">
+                        {{-- <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2"> --}}
+                           <img src="{{$child->image_path}}" width="30" class="user-img rounded-circle mr-2">
                       </td>
                       <td>{{$child->name}}</td>
                       <td>
                         <input class="form-check-input" type="checkbox" id="checkboxNoLabel" >
                     </td>
-                      <td>
-                        <div class="form-check form-switch" > <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                      <td> 
+                        <div class="form-check form-switch" >
+                           {{-- <input class="toggle-class" type="checkbox"  id="flexSwitchCheckChecked" data-id="{{ $child->id }}"  data-on="Active" data-off="Inactive" {{ $child->confirmed ? 'checked' : ''}}>  --}}
+                       <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Confirmed" data-off="NotConfirmed" {{ $child->confirmed ? 'checked' : '' }}> 
+                          </div>
+                      {{-- <input type="checkbox" class="custom-control-input"
+                            {{($child->confirmed) ? 'checked' : ''}}
+                              onclick="changeUserStatus(event.target, {{ $child->id }});"> --}}
                       </td>
                     </tr>
             @endif
@@ -190,5 +200,26 @@
 </div>
 </div>
 @endif
+
+<script>
+  $(function() {
+    $('.toggle-class').change(function() {
+        var confirmed = $(this).prop('checked') == true ? 1 : 0; 
+        var mid = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('changeStatus') }}',
+            data: {
+            
+              'confirmed': confirmed, 'mid': mid},
+            success: function(data){
+              console.log(data.success)
+            }
+        });
+    })
+  })
+</script>
 
 @endsection

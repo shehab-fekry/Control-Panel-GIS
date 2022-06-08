@@ -123,12 +123,11 @@ public function update(Request $request, Father $father)
         return redirect()->route("father.index")->with('success',"father's password updated successfuly");
     }
 
-    public function changeStatus(Request $request)
+    public function changeStatus(Request $request  )
     {
-        $father = Father::find($request->id);
-        $father->confirmed = $request->confirmed;
-        $father->save();
-
+        $child = Child::find($request->mid);
+        $child->confirmed = $request->confirmed;
+        $child->save();
         return response()->json(['success'=>'Status change successfully.']);
     }
 
