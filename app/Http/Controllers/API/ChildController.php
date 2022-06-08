@@ -38,6 +38,9 @@ class ChildController extends BaseController
         $input=$request->all();
         $validator= Validator::make($input, [
             'name' => ['required', 'string', 'max:30'],
+            'gender' => ['required', 'string'],
+            'class' => ['required', 'string'],
+            'age' => ['required', 'integer'],
             // 'photo'=>['required|image']
         ]);
         // $photo=$request->photo;//file
@@ -82,12 +85,18 @@ class ChildController extends BaseController
         $input=$request->all();
         $validator=Validator::make($input,[
             'name'=>'required',
+            'gender' => ['required', 'string'],
+            'class' => ['required', 'string'],
+            'age' => ['required', 'integer'],
 
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
         $child->name=$input['name'];
+        $child->gender=$input['gender'];
+        $child->class=$input['class'];
+        $child->age=$input['age'];
         $child->save();
         return $this-> sendResponse(new ChildResource($child),'child information updated successfully');
     }

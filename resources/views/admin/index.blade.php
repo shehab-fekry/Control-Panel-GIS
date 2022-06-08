@@ -89,4 +89,13 @@
     </div>
 
 </div>
+@if (session('success'))
+<div class="alertg hide">
+<span class='fas fa-check-circle'></span>
+<span class="msg">{{ session('success') }}</span>
+<div class="close-btn">
+   <span class="fas fa-times"></span>
+</div>
+</div>
+@endif  
 @endsection

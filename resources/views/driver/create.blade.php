@@ -1,4 +1,4 @@
-@extends('driver.layout')
+@extends('layouts.master')
 
 @section('content')
 <div class="app-main__outer bus-container">
@@ -99,7 +99,7 @@
 
                       </div>
 
-                     <div class="row">
+                     {{-- <div class="row">
                       <div class="col-md-12 mb-4 d-flex align-items-center">
         
                         <div class="form-outline datepicker w-100">
@@ -114,7 +114,7 @@
       
                       </div>
 
-                     </div>
+                     </div> --}}
                      
         
 
@@ -139,11 +139,18 @@
         {{-- </section> --}}
                     {{-- </div> --}}
 
-                    @if (session('error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('error') }}
-                    </div>
-                @endif
+                @if ($message = Session::get('error'))
+                @foreach($message as $messages)
+                <div class="alertr hide">
+                  <span class='fas fa-exclamation-triangle'></span>
+                  <span class="msg">{{$messages}}</span>
+                  <div class="close-btn">
+                     <span class="fas fa-times"></span>
+                  </div>
+                  </div> 
+                
+               @endforeach
+               @endif
     </div>
 </div>
 

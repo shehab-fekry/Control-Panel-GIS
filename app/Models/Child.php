@@ -9,7 +9,7 @@ class Child extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name','status','father_id'
+        'name','status','father_id','image_path','age','class','gender'
     ];
 
     public function father()

@@ -10,6 +10,11 @@ use App\Models\vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController;
+use App\Models\School;
+use Illuminate\Database\Eloquent\Builder;
+
+use Illuminate\Support\Facades\Validator;
+
 class TripController extends Controller
 {
     public function index()
@@ -18,14 +23,14 @@ class TripController extends Controller
         if($admin->school_id==null){
             return redirect()->route('school.index');
         }
-        $trips=Trip::where('school_id',$admin->school_id)->latest()->paginate(3);
+        $trips=Trip::where('school_id',$admin->school_id)->latest()->paginate(10);
         return view("trip.index",compact("trips"));
 
     }
     public function indexedit()
     {
         $admin=Auth::user();
-        if($admin->school_id==null){ 
+        if($admin->school_id==null){
             return redirect()->route('school.index');
         }
         $trips=Trip::where('school_id',$admin->school_id)->get();
@@ -55,7 +60,8 @@ class TripController extends Controller
 public function live($id){
 $trip =Trip::find($id)->first();
 if($trip->status==0){
-    return $this->sendError('please validate errors','the trip is not started yet');
+    return Basecontroller::sendResponse('please validate errors','the trip is not started yet');
+    // $this->sendError('please validate errors','the trip is not started yet');
 }
 $school=$trip->school()->first();
 
@@ -116,22 +122,16 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
     public function show(Trip $trip)
     {
-        // $childs=Child::get();
-        // return view("trip.show",compact('trip'))->with('trip',$childs);
+
+
         $driver=Driver::where('trip_id',$trip->id)->get();
         $father=father::where('trip_id',$trip->id)->get();
 
-
-        $fathers=father::where('trip_id',$trip->id)->get();
-        // $fathers=father::find($id);
-        // $fathers1= $fathers->select('id')->get() ;
-        // $child=child::where('father_id',$fathers1)->get();
-        // $school=School::where("code",$user->code);
-        // $admin->school_id=$school->id;
+        $child=$trip->children()->get();
         return view("trip.show",compact('trip'))->with([
             'driver'=>$driver,
             'father'=>$father,
-            // 'child'=>$child,
+            'child'=>$child,
         ]);
     }
 
@@ -139,16 +139,29 @@ return Basecontroller::sendResponse($response,'father information updated succes
     public function edit(Trip $trip)
     {
         $admin=Auth::user();
-        // $trips=Trip::where("school_id",$admin->school_id)->get();
-        // return view("trip.edit",compact('trip'))->with('trips',$trips);
+
         return view("trip.edit",compact('trip'));
     }
 
 
-    // public function update(Request $request, Trip $trip)
-    // {
-    //     //
-    // }
+    public function update(Request $request)
+    {
+
+        $input=$request->all();
+        $trip=Trip::where('id' ,$input['tripId'] )->first();
+        $validator=Validator::make($input,[
+            'geofence' => ['required', 'string', 'min:3'],
+
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
+        }
+
+        $trip->geofence=$input['geofence'];
+        $trip->save();
+
+        return redirect()->route("trip.index")->with('success','trip updated successfuly');
+    }
 
 
     public function destroy(Trip $trip)

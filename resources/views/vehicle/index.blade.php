@@ -16,6 +16,12 @@
 <div class="app-main__outer bus-container ">
     <div class="app-main__inner">
             <div class="row">
+                @if( $vehicle->count() <1 )
+                <!-- <div class="main"> -->
+                    <img src="{{ asset("assets/images/bus.svg") }}" width="100%" height="350px" style="margin-top:50px">
+                    <center style="font-size:20px"> There are no registered <span style="color:#ffc017">vehicles</span> to show yet </center>
+                <!-- </div> -->
+                @endif
                 @foreach($vehicle as $vehicles )
 
                 <div class="col-md-4">
@@ -60,4 +66,13 @@
             </div>
             </div>
             </div>
+            @if (session('success'))
+            <div class="alertg hide">
+            <span class='fas fa-check-circle'></span>
+            <span class="msg">{{ session('success') }}</span>
+            <div class="close-btn">
+               <span class="fas fa-times"></span>
+            </div>
+            </div>
+            @endif  
 @endsection

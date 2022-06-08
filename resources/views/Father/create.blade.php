@@ -1,4 +1,4 @@
-@extends('Father.layout')
+@extends('layouts.master')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
@@ -86,7 +86,7 @@
 
                         </div>
 
-                        <div class="col-md-6 mb-4 d-flex align-items-center">
+                        {{-- <div class="col-md-6 mb-4 d-flex align-items-center">
 
                           <div class="form-outline datepicker w-100">
 
@@ -100,7 +100,7 @@
                             />
                           </div>
 
-                        </div>
+                        </div> --}}
 
                       </div>
 
@@ -131,34 +131,14 @@
             <!-- <button>Show Alert</button> -->
             @if ($message = Session::get('error'))
             @foreach($message as $messages)
-            <div class="alert hide">
-              <span class="fas fa-exclamation-circle"></span>
-              <span class="msg">Warning:  {{$messages}}</span>
+            <div class="alertr hide">
+              <span class='fas fa-exclamation-triangle'></span>
+              <span class="msg">{{$messages}}</span>
               <div class="close-btn">
                  <span class="fas fa-times"></span>
               </div>
-           </div>
+              </div> 
+            
            @endforeach
-
            @endif
-           <script>
-             //  $('button').click(function(){
-             //    $('.alert').addClass("show");
-             //    $('.alert').removeClass("hide");
-             //    $('.alert').addClass("showAlert");
-              document.addEventListener("DOMContentLoaded", function() {
-               $('.alert').addClass("show");
-               $('.alert').removeClass("hide");
-               $('.alert').addClass("showAlert");
-                setTimeout(function(){
-                  $('.alert').removeClass("show");
-                  $('.alert').addClass("hide");
-                },5000);
-              });
-              $('.close-btn').click(function(){
-                $('.alert').removeClass("show");
-                $('.alert').addClass("hide");
-              });
-           </script>
-
 @endsection

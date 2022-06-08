@@ -30,6 +30,7 @@ Route::middleware('auth:api-fathers')->group(function(){
 Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
 Route::delete("father/delete","API\FatherController@destroy");
+Route::get("father/showBusDriver","API\FatherController@showBusDriver");
 
 
 Route::get("father/showTrip","API\FatherController@showTrip");
@@ -62,6 +63,6 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::post('trip/end',"API\TripController@end");
     });
 
-    Route::post("trip/live/{id}","Web\TripController@live");
-    Route::post("school/location","Web\SchoolController@showLocation")->middleware('verified');
-
+    Route::get("trip/live/{id}","Web\TripController@live");
+    Route::get("school/location/{id}","Web\SchoolController@showLocation");
+////////////////////////////////Drivers routes//////////////////////////////////

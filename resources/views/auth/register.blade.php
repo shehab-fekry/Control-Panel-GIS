@@ -16,9 +16,19 @@
 </head>
 
 <body>
-    <!-- <div class="nav">
-        <div class="title">SchoolBusTracking</div>
-    </div> -->
+    <div class="nav">
+        <div class="nav_leftside">
+            <a href="{{ route('home') }}">
+                <div class="return">
+                    <img src="{{ asset("assets/images/arrowDark.png") }}" width="40px" height="40px">
+                </div>
+            </a>
+            <div class="title">SchoolBusTracking</div>
+        </div>
+        <!-- <div class="paths">
+            <a href=""><div>Sign In</div></a>
+        </div> -->
+    </div>
     <div class="sign_wrapper">
             <div class="svg">
                 <img src="{{ asset("assets/images/registerDark.svg")}}" width="500" height="500" alt="">
@@ -68,12 +78,21 @@
                         {{-- <div id="passInvalid">{{ $message }}</div> --}}
                         @enderror
                     </div>
-
                     <div class="main_container">
                         <div class="input_container">
                             <div><img src="{{ asset("assets/images/lock.png")}}"></div>
                             <input class="input_field" id="confPassword"  type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                             <i class="bi bi-eye-slash" onclick="toggleConf(this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="select_container">
+                        <div class="input_container">
+                            <div class="select_text">You are:</div>
+                            <select class="form-select form-control @error('is_admin') is-invalid @enderror" name="is_admin" required autocomplete="is_admin" aria-label="is_admin" name="is_admin">
+                                <option value="1">Admin</option>
+                                <option value="0">Clerk</option>
+                            </select>
                         </div>
                     </div>
                     

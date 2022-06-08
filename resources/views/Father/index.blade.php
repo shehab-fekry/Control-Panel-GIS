@@ -5,6 +5,12 @@
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
 <div class="bus-container">
 
+    @if( $fathers->count() <1 )
+        <!-- <div class="main"> -->
+            <img src="{{ asset("assets/images/parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
+            <center style="font-size:20px"> There are no registered <span style="color:#ffc017">parents</span> to show yet </center>
+        <!-- </div> -->
+     @endif
             <div class="row">
                 @foreach($fathers as $parent )
                 <div class="col-md-4">
@@ -15,9 +21,12 @@
                             <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
                         </div>
                         <div class="card-block">
-                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                            <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> 
+                            {{-- <input data-id="{{$parent->id}}" class="toggle-class" type="checkbox" data-bs-onstyle="success" data-bs-offstyle="danger" data-bs-toggle="toggle" data-bs-on="Active" data-bs-off="InActive" {{ $parent->confirmed ? 'checked' : '' }}>
+                            <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                             <div class="user-image">
-                                <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
+                                {{-- <img src="upload/father/{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image"> --}}
+                                <img src="{{$parent->image_path}}" class="img-radius" alt="User-Profile-Image">
                             </div>
                             <h6 class="f-w-600 m-t-25 m-b-10">{{$parent->name}}</h6>
                             {{-- <p class="text-muted">Active | Male | Born 23.05.1992</p> --}}
@@ -33,9 +42,9 @@
                                 <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
                              </div>
 
-                                <div class="col-sm-4">
+                                {{-- <div class="col-sm-4">
                                 <button type="submit" class="btn btn-primary">ASSIGN</button>
-                             </div>
+                             </div> --}}
 
                             <div class="col-sm-4">
                                 <form action="{{route('father.destroy',$parent->id)}}" method="POST">
@@ -51,7 +60,7 @@
             @endforeach
 
             </div>
-
+            {{ $fathers->links() }}
             <!-- <button>Show Alert</button> -->
           {{-- <div class="alertw hide">
          <span class="fas fa-exclamation-circle"></span>
@@ -75,7 +84,28 @@
             <span class="fas fa-times"></span>
          </div>
          </div>
-         @endif    
+         @endif  
+
+
+         <script>
+              $(function() {
+    $('.toggle-class').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/changeStatus',
+            data: {'confirmed': confirmed, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+        });
+    })
+  })
+             
+        </script>  
         
 </div>  
 

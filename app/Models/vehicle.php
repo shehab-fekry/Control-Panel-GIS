@@ -15,4 +15,5 @@ class vehicle extends Model
     {
         return $this->belongsTo(Driver::class);
     }
+    
 }

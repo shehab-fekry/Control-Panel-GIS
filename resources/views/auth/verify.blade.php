@@ -70,7 +70,13 @@
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
         @endif
-       
+        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();"
+         class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}
+         <form id="logout-form" action="{{ route('logout') }}" method="POST"
+         class="d-none">
+         @csrf
+     </form>
 </div>
 
 <div class="need-help">

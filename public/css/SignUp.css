@@ -157,6 +157,7 @@ body{
     width: 100%;
     border: none;
     background-color:unset;
+    /* border: 1px solid blue; */
 }
 
 .input_container img{
@@ -194,6 +195,26 @@ body{
     width: 100px;
     height: 50px;
     background-color: #ccc;
+}
+
+.select_container{
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 7px;
+    margin-top: -10px;
+    /* border: 1px solid black;  */
+}
+
+.select_text{
+    width: 120px;
+    margin-left: 30px;
+    /* border: 1px solid black; */
+}
+
+.form-select{
+    margin-left: 5px;
+    width: 150px;
 }
 
 
@@ -269,6 +290,11 @@ body{
         margin-top: 5px;
         font-size: 10px;
     }
+
+    .select_text{
+        width: 80px;
+        margin-left: 5px;
+    }
 }
 
 @media only screen and (min-width: 620px) {
@@ -306,6 +332,11 @@ body{
         padding: 10px;
         margin-top: 5px;
         font-size: 12px;
+    }
+
+    .select_text{
+        width: 80px;
+        margin-left: 0px;
     }
 }
 
@@ -347,6 +378,11 @@ body{
         padding: 10px;
         font-size: 12px;
     }
+
+    .select_text{
+        width: 100px;
+        margin-left: 5px;
+    }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -380,5 +416,10 @@ body{
         padding: 10px;
         margin-top: 5px;
         font-size: medium;
+    }
+
+    .select_text{
+        width: 110px;
+        margin-left: 25px;
     }
 }

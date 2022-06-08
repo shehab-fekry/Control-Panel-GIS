@@ -1,4 +1,4 @@
-@extends('driver.layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -23,7 +23,8 @@
         <div class="col-lg ">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
-              <img src="{{asset('upload/driver/'.$driver->image_path)}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px">
+              {{-- <img src="{{asset('upload/driver/'.$driver->image_path)}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"> --}}
+              <img src="{{$driver->image_path}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px">
               <h5 class="my-3">Captain: {{$driver->name}}</h5>
               <p class="text-muted mb-1">Driver</p>
             
@@ -84,7 +85,11 @@
                   <p class="mb-0">Trip</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"> {{$driver->trip_id}}</p>
+                  @foreach($trips as  $trip )
+                  @if( $trip->id == $driver->trip_id) 
+                  <p class="text-muted mb-0"> {{$trip->geofence}}</p>
+                  @endif
+                  @endforeach
                 </div>
               </div>
    

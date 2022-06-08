@@ -32,6 +32,7 @@ class DriverController extends BaseController
             'name' => ['required','string', 'max:30',],
             'mobileNumber'=>['required',],
             'licenseNumber'=>['required',],
+            'image_path'=>['required',],
             'email' => ['required','string', 'email', 'max:255',Rule::unique('drivers')->ignore($id),],
 
         ]);
@@ -42,6 +43,7 @@ class DriverController extends BaseController
         $driver->email=$input['email'];
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
+        $driver->image_path=$input['image_path'];
         $driver->save();
 
 

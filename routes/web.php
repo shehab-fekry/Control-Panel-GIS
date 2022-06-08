@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,30 +29,35 @@ Auth::routes(['verify'=>true]);
 
 
 // Route For home 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('verify/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
+Route::resource('verify', 'Auth\TwoFactorController')->only(['index', 'store']);
+
+
+Route::group(['namespace' => 'Admin', 'middleware' => 'twofactor'], function () {
+    // Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified'); });
 
 // Route For Admin 
 Route::resource('admin',AdminController::class)->middleware('verified');
 
 // admin profile update
 Route::post('/home','HomeController@profileUpdate')->name('profileupdate')->middleware('verified');
+Route::post('assignAdminToSchool', 'Web\SchoolController@assignAdminToSchool')->name('school.assignAdminToSchool')->middleware('verified');
+Route::post('left', 'Web\SchoolController@left')->name('school.left')->middleware('verified');
+
 
 // Route For school 
 Route::resource('school',SchoolController::class)->middleware('verified');
-// Route::put("school/assignAdminToSchool/{admin}","web\SchoolController@assignAdminToSchool");
-// Route::get('admin/{id}', 'Web\AdminController@assignAdminToSchool')->name('admin.assignAdminToSchool');
-
-// assign adminn to school
-// Route::post('/home','HomeController@assignAdminToSchool')->name('assignAdminToSchool')->middleware('verified');
 
 
 // Route For trip 
 Route::resource('trip',TripController::class )->middleware('verified');
 Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
+// Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
 // Route For father 
 Route::resource('father',FatherController::class)->middleware('verified');
-
+Route::get('changeStatus', 'FatherController@changeStatus');
 // Add child 
 Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
