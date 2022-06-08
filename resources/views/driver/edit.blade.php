@@ -17,8 +17,10 @@
             
             <div class="row  mt-5">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/driver/'.$driver->image_path)}}"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div>
-                </div>
+                    {{-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/driver/'.$driver->image_path)}}"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div> --}}
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{$driver->image_path}}"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div>
+
+                  </div>
                 <div class="col">
                         
                         <form action="{{route('driver.update',$driver->id)}}" method="POST" class="row g-3" enctype="multipart/form-data">

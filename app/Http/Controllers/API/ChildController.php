@@ -41,7 +41,7 @@ class ChildController extends BaseController
             'gender' => ['required', 'string'],
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
-            // 'photo'=>['required|image']
+            'image_path'=>['required']
         ]);
         // $photo=$request->photo;//file
         // $new_photo=time().$photo->getClientOriginalName();//string
@@ -88,6 +88,8 @@ class ChildController extends BaseController
             'gender' => ['required', 'string'],
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
+            'image_path' => ['required'],
+            
 
         ]);
         if($validator->fails()){
@@ -97,6 +99,7 @@ class ChildController extends BaseController
         $child->gender=$input['gender'];
         $child->class=$input['class'];
         $child->age=$input['age'];
+        $child->image_path=$input['image_path'];
         $child->save();
         return $this-> sendResponse(new ChildResource($child),'child information updated successfully');
     }
