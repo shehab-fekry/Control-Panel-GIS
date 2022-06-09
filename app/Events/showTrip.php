@@ -19,6 +19,7 @@ class showTrip implements ShouldBroadcast
     {
         $this->lng=$data['lng'];
         $this->lit=$data['lit'];
+        $this->trip_id=$data['trip_id'];
     }
 
     /**

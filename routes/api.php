@@ -38,10 +38,10 @@ Route::get("father/showTrip","API\FatherController@showTrip");
 
 Route::get("childrens","API\ChildController@index");
 Route::post("child/create","API\ChildController@store");
-Route::get("child/{id}","API\ChildController@show");
+Route::get("child/show/{id}","API\ChildController@show");
 Route::put("child/update/{id}","API\ChildController@update");
 Route::put("child/updateStatus/{id}","API\ChildController@updateChildStatus");
-Route::delete("child/{id}","API\ChildController@destroy");
+Route::delete("child/delete/{id}","API\ChildController@destroy");
 
     });
 ////////////////////////////////Drivers routes//////////////////////////////////
