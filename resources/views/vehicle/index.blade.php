@@ -18,7 +18,7 @@
             <div class="row">
                 @if( $vehicle->count() <1 )
                 <!-- <div class="main"> -->
-                    <img src="{{ asset("assets/images/bus.svg") }}" width="100%" height="350px" style="margin-top:50px">
+                    <img src="{{ asset("assets/images/Bus.svg") }}" width="100%" height="350px" style="margin-top:50px">
                     <center style="font-size:20px"> There are no registered <span style="color:#ffc017">vehicles</span> to show yet </center>
                 <!-- </div> -->
                 @endif

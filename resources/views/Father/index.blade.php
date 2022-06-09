@@ -7,7 +7,7 @@
 
     @if( $fathers->count() <1 )
         <!-- <div class="main"> -->
-            <img src="{{ asset("assets/images/parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
+            <img src="{{ asset("assets/images/Parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
             <center style="font-size:20px"> There are no registered <span style="color:#ffc017">parents</span> to show yet </center>
         <!-- </div> -->
      @endif
