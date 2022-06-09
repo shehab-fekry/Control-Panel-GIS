@@ -20,7 +20,7 @@ class CreateChildrenTable extends Migration
             $table->string('class')->nullable();
             $table->string('gender');
             $table->string('image_path')->nullable();
-            $table->int('confirmed',1)->default(0);
+            $table->integer('confirmed',1)->default(0);
             $table->boolean('status')->default(false);
             $table->integer('father_id')->unsigned();
             $table->timestamps();
