@@ -115,7 +115,7 @@ class ChildController extends BaseController
         if($father->confirmed==false){
             return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
 
-        }elseif($child->confirmed==false){
+        }elseif($child->confirmed==0){
             return $this->sendError('please validate errors','your child do not confirmed yet please contact with one of school admins');
         }
         elseif($father->trip_id==null){
