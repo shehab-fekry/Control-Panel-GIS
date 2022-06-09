@@ -208,7 +208,7 @@
         var mid = $(this).data('id'); 
          
         $.ajax({
-            type: "GET",
+            type: "get",
             dataType: "json",
             url: '{{ route('changeStatus') }}',
             data: {
