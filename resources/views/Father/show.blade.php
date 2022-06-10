@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<div class="bus-container">
 <div class="app-main__outer">
     <div class="app-main__inner">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
@@ -114,18 +115,18 @@
               </div>
 
         </div> -->
-        <div class="col-lg-8">
-          <div class="card mb-8"style="background-color: whitesmoke;">
+        <div class="col-lg-12">
+          <div class="card mb-12"style="background-color: whitesmoke;">
             <div class="card-body">
               <div class="col">
-                <table class="table table-hover">
+                <table class="table table-hover parent-table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Child Photo</th>
-                      <th scope="col">Child Name</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Confirmation</th>
+                      <th scope="col" class="col-sm-2">#</th>
+                      <th scope="col" class="col-sm-3">Child Photo</th>
+                      <th scope="col" class="col-sm-3">Child Name</th>
+                      <th scope="col" class="col-sm-2">Status</th>
+                      <th scope="col" class="col-sm-2">Confirmation</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -141,10 +142,10 @@
                       <td>
                         <input class="form-check-input" type="checkbox" id="checkboxNoLabel" >
                     </td>
-                      <td> 
+                      <td>
                         <div class="form-check form-switch" >
                            {{-- <input class="toggle-class" type="checkbox"  id="flexSwitchCheckChecked" data-id="{{ $child->id }}"  data-on="Active" data-off="Inactive" {{ $child->confirmed ? 'checked' : ''}}>  --}}
-                       <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Confirmed" data-off="NotConfirmed" {{ $child->confirmed ? 'checked' : '' }}> 
+                       <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Confirmed" data-off="NotConfirmed" {{ $child->confirmed ? 'checked' : '' }}>
                           </div>
                       {{-- <input type="checkbox" class="custom-control-input"
                             {{($child->confirmed) ? 'checked' : ''}}
@@ -204,15 +205,15 @@
 <script>
   $(function() {
     $('.toggle-class').change(function() {
-        var confirmed = $(this).prop('checked') == true ? 1 : 0; 
-        var mid = $(this).data('id'); 
-         
+        var confirmed = $(this).prop('checked') == true ? 1 : 0;
+        var mid = $(this).data('id');
+
         $.ajax({
             type: "get",
             dataType: "json",
             url: '{{ route('changeStatus') }}',
             data: {
-            
+
               'confirmed': confirmed, 'mid': mid},
             success: function(data){
               console.log(data.success)
@@ -222,4 +223,5 @@
   })
 </script>
 
+</div>
 @endsection

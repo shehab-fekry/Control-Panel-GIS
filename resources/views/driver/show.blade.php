@@ -2,7 +2,8 @@
 
 @section('content')
 
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class=" mb-4 ">
+    <div class="bus-container">
+      <nav style="--bs-breadcrumb-divider: '>'; position: relative; top: -25px;" aria-label="breadcrumb" class=" mb-4 ">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="{{ route('driver.index') }}">Drivers</a></li>
@@ -16,9 +17,9 @@
           {{-- <div class="card shadow-2-strong card-registration" style="border-radius: 5px;margin-bottom: 20px; border: none;"> --}}
             <div class="headingProfileDriver card-body p-4 p-md-5" style="background-color:#fafafa; box-shadow: 0px 0px 5px #ccc; border-radius: 20px; border: none; ">
 
-          
-     
-  
+
+
+
       <div class="row" >
         <div class="col-lg ">
           <div class="card mb-4"style="background-color: whitesmoke;">
@@ -27,10 +28,10 @@
               <img src="{{$driver->image_path}}" alt="avatar" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px">
               <h5 class="my-3">Captain: {{$driver->name}}</h5>
               <p class="text-muted mb-1">Driver</p>
-            
+
             </div>
           </div>
-        
+
         </div>
         <div class="col-lg-8">
           <div class="card mb-4"style="background-color: whitesmoke;">
@@ -86,16 +87,16 @@
                 </div>
                 <div class="col-sm-9">
                   @foreach($trips as  $trip )
-                  @if( $trip->id == $driver->trip_id) 
+                  @if( $trip->id == $driver->trip_id)
                   <p class="text-muted mb-0"> {{$trip->geofence}}</p>
                   @endif
                   @endforeach
                 </div>
               </div>
-   
+
             </div>
           </div>
-      
+
         </div>
       </div>
       </div>
@@ -103,5 +104,5 @@
       </div>
       </div>
       </div>
-
+    </div>
       @endsection
