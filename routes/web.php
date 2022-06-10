@@ -55,18 +55,20 @@ Route::resource('trip',TripController::class )->middleware('verified');
 Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 // Route::get('tripedit', 'Web\TripController@indexedit')->name('trip.indextrip');
 
-// Route For father 
+///////////////////////////////////// Route For father ///////////////////////////////////////////////////////////////
 Route::resource('father',FatherController::class)->middleware('verified');
 Route::get('changeStatus', 'Web\FatherController@changeStatus')->name('changeStatus');
+//passwordReset
+Route::put('passwordReset', 'Web\FatherController@passwordReset')->name('passwordReset');
 // Add child 
 Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
 
 
-// Route For driver 
+//////////////////////////////////// Route For driver///////////////////////////////////////////////////////////////// 
 Route::resource('driver',DriverController::class)->middleware('verified');
+Route::put('DriverpasswordReset', 'Web\DriverController@DriverpasswordReset')->name('DriverpasswordReset');
 
-
-// Route For vehicle 
+////////////////////////////////// Route For vehicle ////////////////////////////////////////////////////////////////////////////////////////////////
 Route::resource('vehicle',VehicleController::class)->middleware('verified');
 
 

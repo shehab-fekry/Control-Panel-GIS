@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 
 class FatherController extends Controller
@@ -106,13 +107,13 @@ public function update(Request $request, Father $father)
         $father->save();
         return redirect()->route("father.index")->with('success','father assigned to trip successfuly');
     }
-    public function passwordReset(Request $request, Father $father)
+    public function passwordReset(Request $request)
     {
+        $father = Father::find($request->fid);
         $input=$request->all();
         $validator=Validator::make($input,[
-
-            'password' => ['required', 'string', 'min:8','confirmed','regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'],
-
+            'password' => ['required', 'string', 'min:8','confirmed'],
+            // 'password' => ['required', 'string', 'min:8','confirmed',Password::min(8)->mixedCase()->numbers()],
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
@@ -120,7 +121,7 @@ public function update(Request $request, Father $father)
 
         $father->password=Hash::make($request->password);
         $father->save();
-        return redirect()->route("father.index")->with('success',"father's password updated successfuly");
+        return redirect()->route("father.index")->with('success',"father password updated successfuly");
     }
 
     public function changeStatus(Request $request  )

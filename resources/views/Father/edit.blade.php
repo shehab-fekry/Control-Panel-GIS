@@ -89,12 +89,20 @@
     </div>
 
     <div class="container bg-white">
-        <form action="">
+    <form action="{{route('passwordReset',$father->id)}}" method="POST"  enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
             <div class="row">
-                <div class="col-md-12"><label class="labels">Reset Password</label><input type="password" name="reset-password" class="form-control" placeholder="Password"></div>
-                <div class="col-md-12"><label class="labels">Confirm Password</label><input name="licenseNumber" type="password"  class="form-control" placeholder="Reset Password"></div>
+                <input type="hidden" name="fid" value="{{$father->id}}">
+                <div class="col-md-12"><label class="labels">Reset Password</label><input type="password"  class="form-control @error('password') is-invalid @enderror" placeholder="Password"  name="password" required autocomplete="new-password" /></div>
+                  @error('password')
+                           <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
+                <div class="col-md-12"><label class="labels"  for="password-confirm">Confirm Password</label><input  type="password" id="password-confirm" placeholder="Reset Password" class="form-control"  name="password_confirmation"  required autocomplete="new-password"/></div>
             </div>
-            <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Reset Password</button>
+            <div class="my-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Reset Password"/>
 
         </form>
     </div>

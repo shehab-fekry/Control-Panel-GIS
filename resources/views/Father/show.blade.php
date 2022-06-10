@@ -96,14 +96,14 @@
         </div>
       </div>
       {{-- ---------------------------------------------------------------------------------- --}}
-      <!-- <div class="row" >
+      {{-- <div class="row" >
         <div class="col-lg-4">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
            <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>
            <form action="{{route('father.store_Child')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
-            {{-- @method('PUT') --}}
+            @method('PUT') 
                     <label class="form-label" for="Name" >Name</label>
                     <input type="text" name="name" id="Name" class="form-control form-control-lg"  />
                     <input type="hidden" name="father_id" id="father_id" value="{{$father->id}}" class="form-control form-control-lg"  />
@@ -114,7 +114,7 @@
                 </div>
               </div>
 
-        </div> -->
+        </div> --}}
         <div class="col-lg-12">
           <div class="card mb-12"style="background-color: whitesmoke;">
             <div class="card-body">
@@ -140,8 +140,7 @@
                       </td>
                       <td>{{$child->name}}</td>
                       <td>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" >
-                    </td>
+  <span  class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>                     </td>
                       <td>
                         <div class="form-check form-switch" >
                            {{-- <input class="toggle-class" type="checkbox"  id="flexSwitchCheckChecked" data-id="{{ $child->id }}"  data-on="Active" data-off="Inactive" {{ $child->confirmed ? 'checked' : ''}}>  --}}

@@ -110,21 +110,21 @@ class DriverController extends Controller
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver assigned to trip successfuly');
     }
-    public function passwordReset(Request $request, Driver $driver)
+   public function DriverpasswordReset(Request $request)
     {
+        $Driver = Driver::find($request->did);
         $input=$request->all();
         $validator=Validator::make($input,[
-
-            'password' => ['required', 'string', 'min:8','confirmed','regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'],
-
+            'password' => ['required', 'string', 'min:8','confirmed'],
+            // 'password' => ['required', 'string', 'min:8','confirmed',Password::min(8)->mixedCase()->numbers()],
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
 
-        $driver->password=Hash::make($request->password);
-        $driver->save();
-        return redirect()->route("driver.index")->with('success',"driver's password updated successfuly");
+        $Driver->password=Hash::make($request->password);
+        $Driver->save();
+        return redirect()->route("driver.index")->with('success',"driver password updated successfuly");
     }
 
     public function destroy(Driver $driver)

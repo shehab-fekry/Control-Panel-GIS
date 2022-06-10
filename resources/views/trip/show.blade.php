@@ -34,7 +34,7 @@
               @foreach ( $driver as $drivers)
               <div class="driver-table-row">
                 <div class="driver-table-data">
-                  <img src="{{ asset("upload/driver/".$drivers->image_path) }}">
+                  <img src="{{ asset($drivers->image_path) }}">
                 </div>
                     
                
