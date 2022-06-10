@@ -5,17 +5,15 @@ body{
 
 .card.user-card {
     border-top: none;
-    -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
-    box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 5px #ccc;
     -webkit-transition: all 150ms linear;
     transition: all 150ms linear;
- 
+
 }
 
 .card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
-    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border-radius: 30px;
+   box-shadow:  0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
     border: none;
     margin-bottom: 30px;
     -webkit-transition: all 0.3s ease-in-out;
@@ -26,6 +24,7 @@ body{
     background-color: transparent;
     border-bottom: none;
     padding: 25px;
+    display: inline-block;
 }
 
 .card .card-header h5 {
@@ -53,7 +52,7 @@ body{
 .user-card .card-block .user-image {
     position: relative;
     margin: 0 auto;
-    display: inline-block;
+    display: block;
     padding: 5px;
     width: 110px;
     height: 110px;
@@ -158,15 +157,6 @@ body{
     border-bottom-right-radius: 50px;
 }
 
-.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
-    content: "";
-    width: 100%;
-    height: 48%;
-    border: 2px solid #4099ff;
-    position: absolute;
-    left: 0;
-    z-index: 10;
-}
 
 .user-card .card-block .user-image:after {
     top: 0;
@@ -174,15 +164,7 @@ body{
     border-top-right-radius: 50px;
 }
 
-.user-card .card-block .user-image:after, .user-card .card-block .user-image:before {
-    content: "";
-    width: 100%;
-    height: 48%;
-    border: 2px solid #4099ff;
-    position: absolute;
-    left: 0;
-    z-index: 10;
-}
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 *{
   margin: 0;

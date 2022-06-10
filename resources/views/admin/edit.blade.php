@@ -2,6 +2,32 @@
 
 @section('content')
 
+<style>
+.bg-white::before{
+        content: 'Edit Profile';
+        background-color: unset;
+        color: #384850;
+        position: absolute;
+        margin-top: -400px;
+        left: 100px;
+        font-size: 28px;
+        font-weight: 900;
+        text-shadow: 0px 0px 5px #ccc;
+
+    }
+
+.mb-4{
+    margin-bottom: 0.7rem!important;
+}
+.bg-white{
+    height: 400px !important;
+}
+.upload-img{
+    width: 220px;
+}
+</style>
+
+
 <div class="app-main__outer bus-container">
     <div class="app-main__inner">
         <div class="container bg-white" style="height: 550px">
@@ -17,7 +43,7 @@
 
                      <form action="{{route('home')}}" method="POST" class="row g-3" enctype="multipart/form-data">
                                 @csrf
-                               
+
 
                             <div class="row">
                                 <div class="col-md-12 mb-4">
@@ -37,16 +63,16 @@
                                   <div class="form-outline">
 
                                     <label class="form-label" for="email">Email</label>
-              
+
                                     <input type="text" id="emailAddress" class="form-control form-control-lg "
                                     name="email" value="{{ $admin->email }}" required autocomplete="Model" />
                                   </div>
 
 
-                      
+
                                     <input type="hidden" id="emailAddress" class="form-control form-control-lg "
                                     name="password" value="{{ $admin->password }}" required autocomplete="Model" />
-                                 
+
 
                                   {{-- <span class="invalid-feedback" role="alert">
                                       <strong></strong>
@@ -61,7 +87,7 @@
                                   <div class="form-outline">
 
                                     {{-- <label class="form-label" for="school_id">School Name</label> --}}
-              
+
 
                                     <input type="hidden" type="text" id="color" class="form-control form-control-lg "
                                     name="school_id" value="{{ $admin->school_id }}" required autocomplete="School Name" />
@@ -84,9 +110,9 @@
 
                                   <div class="form-outline datepicker w-100">
 
-                                    
-              
-                                    <input type="file" name="image_path" id="file" class="inputfile" />
+
+
+                                    <input type="file" name="image_path" id="file" class="inputfile" class="upload-img" />
                                                 {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
 
                                   </div>
@@ -107,7 +133,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-               
+
                     </div>
 
                 </div>

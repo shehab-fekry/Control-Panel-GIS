@@ -14,7 +14,7 @@
         </div>
 
         <div class="container bg-white">
-            
+
             <div class="row  mt-5">
                 <div class="col-md-3 border-right">
                     {{-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/driver/'.$driver->image_path)}}"><span class="font-weight-bold">{{$driver->name}}</span><span class="text-black-50">{{$driver->email}}</span><span> </span></div> --}}
@@ -22,7 +22,7 @@
 
                   </div>
                 <div class="col">
-                        
+
                         <form action="{{route('driver.update',$driver->id)}}" method="POST" class="row g-3" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -39,50 +39,27 @@
                             <div class="col-md-6"><label class="labels  @error('email') is-invalid @enderror">Email</label><input type="text" name="email" class="form-control"  value="{{$driver->email}}"></div>
                             <div class="col-md-6"><label class="labels">Trip</label>
                               <select class="form-select" aria-label="Default select example" name="trip_id">
-                          
+
                                 @foreach($trips as  $trip )
                                           <option value="{{$trip->id}}"  @if( $trip->id == $driver->trip_id) selected @endif >{{$trip->geofence}}</option>
                                 @endforeach
-     
+
                               </select>
-                              {{-- <input type="text"  name="trip_id" class="form-control" value="{{$driver->trip_id}}" > --}}
-                            
-                            
+
+                            </div>
+                            <div class="col-sm-12">
+                            <div class="col-md-6"><label class="labels" style="margin-top: 10px">Status</label></div>
+                                <select class="form-select" aria-label="Default select example" name="confirmed">
+
+
+                                    <option value="1"  @if( $driver->confirmed == 1) selected @endif >Confirmed</option>
+                                            <option value="0"  @if( $driver->confirmed == 0) selected @endif >Not Confirmed</option>
+
+
+                                </select>
                             </div>
                         </div>
-                        {{-- <div class="row mt-2"> --}}
-                            {{-- <div class="col-md-6"> --}}
-                                {{-- <label class="labels">Password</label> --}}
-                                {{-- <input type="hidden" name="password" class="form-control"  value="{{$driver->password}}"></div> --}}
-                            {{-- <div class="col-md-6"><label class="labels">Confirm Password</label><input type="Password"  name="password" class="form-control" value="" ></div> --}}
-                        {{-- </div> --}}
-                        {{-- <div class="row">
-                            <div class="col-md-12 mb-4 d-flex align-items-center">
-              
-                              <div class="form-outline datepicker w-100">
-                                <label for="image"  class="form-label">Photo</label>
-          
-                                <input
-                                  type="file" name="image"
-                                  class="form-control form-control-lg"
-                                  id="image"
-                                />
-                              </div>
-            
-                            </div>
-      
-                           </div> --}}
-                           <div class="row mt-2">
-                            <select class="form-select" aria-label="Default select example" name="confirmed">
-                          
-                          
-                                        <option value="1"  @if( $driver->confirmed == 1) selected @endif >Confirmed</option>
-                                        <option value="0"  @if( $driver->confirmed == 0) selected @endif >Not Confirmed</option>
-                           
-   
-                            </select>
                             {{-- <div class="col-md-6"><label class="labels">confirmed</label><input type="text" name="confirmed" class="form-control" placeholder="name" value="{{$driver->confirmed}}"></div> --}}
-                        </div>
                         <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
                         </div>
@@ -94,15 +71,38 @@
                           <div class="close-btn">
                              <span class="fas fa-times"></span>
                           </div>
-                          </div> 
-                        
+                          </div>
+
                        @endforeach
                        @endif
-                       
-               
+
+
                 </div>
-               
+
             </div>
-        </div>
-  </div>
+
+
+</div>
+
+
+<!-- NEWWWWWWWWWWWWWWWWWWWW  -->
+
+<div class="reset-password">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-right"></h4>
+    </div>
+
+    <div class="container bg-white">
+        <form action="">
+            <div class="row">
+                <div class="col-md-12"><label class="labels">Reset Password</label><input type="password" name="reset-password" class="form-control" placeholder="Password"></div>
+                <div class="col-md-12"><label class="labels">Confirm Password</label><input name="licenseNumber" type="password"  class="form-control" placeholder="Reset Password"></div>
+            </div>
+            <div class="my-5 text-center"><button class="btn btn-primary profile-button" type="submit">Reset Password</button>
+
+        </form>
+    </div>
+</div>
+
+
 @endsection
