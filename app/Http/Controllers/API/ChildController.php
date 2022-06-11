@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Events\adminNotification;
 use App\Models\Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +9,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\ChildResource;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Father;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class ChildController extends BaseController
@@ -60,8 +61,15 @@ class ChildController extends BaseController
         $input['father_id']=$id;
         $child=Child::create($input);
         $child->get();
+        // admin notification 
+        $admin_id= User::where("school_id",$father->school_id)->where("is_admin",1)->first();
+        $message="Father:".$father->name ." added new child ".$child->name." to his childrens";
+        $data=array(
+            'message'=>$message,
+            'id'=>$admin_id
+        ); 
+        event(new adminNotification($data));
         return $this->sendResponse($child,'child added successfully');
-
     }
     public function show($id)
     {
