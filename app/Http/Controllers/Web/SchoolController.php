@@ -87,8 +87,6 @@ class SchoolController extends Controller
         $admin->school_id = $school->id ;
         $admin-> save();
 
-        // $school=School::where('id',$admin->school_id);
-        // return view("school.index",compact('school'))->with('success','driver added successfuly');
         return redirect()->route("home")->with([
             'success'=>'school added successfuly',
             'code'=>'Your school code is ' . $code

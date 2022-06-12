@@ -109,17 +109,6 @@ return Basecontroller::sendResponse($response,'father information updated succes
 }
 
 
-
-
-    // public function create()
-    // {
-    //     //
-    // }
-
-
-
-
-
     public function show(Trip $trip)
     {
 

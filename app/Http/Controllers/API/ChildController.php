@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Events\adminNotification;
 use App\Models\Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +9,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\ChildResource;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Father;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class ChildController extends BaseController
@@ -45,8 +46,7 @@ class ChildController extends BaseController
             'gender' => ['required', 'string'],
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
-            // 'photo'=>['required|image']
-           
+            'image_path'=>['required']
         ]);
         // $photo=$request->photo;//file
         // $new_photo=time().$photo->getClientOriginalName();//string
@@ -61,8 +61,15 @@ class ChildController extends BaseController
         $input['father_id']=$id;
         $child=Child::create($input);
         $child->get();
+        // admin notification
+        $admin_id= User::where("school_id",$father->school_id)->where("is_admin",1)->first();
+        $message="Father:".$father->name ." added new child ".$child->name." to his childrens";
+        $data=array(
+            'message'=>$message,
+            'id'=>$admin_id
+        );
+        event(new adminNotification($data));
         return $this->sendResponse($child,'child added successfully');
-
     }
     public function show($id)
     {
@@ -93,6 +100,8 @@ class ChildController extends BaseController
             'gender' => ['required', 'string'],
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
+            'image_path' => ['required'],
+
 
         ]);
         if($validator->fails()){
@@ -102,6 +111,7 @@ class ChildController extends BaseController
         $child->gender=$input['gender'];
         $child->class=$input['class'];
         $child->age=$input['age'];
+        $child->image_path=$input['image_path'];
         $child->save();
         return $this-> sendResponse(new ChildResource($child),'child information updated successfully');
     }
@@ -113,7 +123,7 @@ class ChildController extends BaseController
         if($father->confirmed==false){
             return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
 
-        }elseif($child->confirmed==false){
+        }elseif($child->confirmed==0){
             return $this->sendError('please validate errors','your child do not confirmed yet please contact with one of school admins');
         }
         elseif($father->trip_id==null){

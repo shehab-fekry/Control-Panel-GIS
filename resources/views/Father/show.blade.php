@@ -1,8 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+<div class="bus-container">
 <div class="app-main__outer">
     <div class="app-main__inner">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+          <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {{-- <section class="vh-100 gradient-custom" style="border-radius: 20px; border: none; overflow: scroll;">    --}}
     <div   style="background: url(k.jfif); background-size: cover;">
       <div class="row justify-content-center align-items-center"  >
@@ -92,14 +96,14 @@
         </div>
       </div>
       {{-- ---------------------------------------------------------------------------------- --}}
-      <!-- <div class="row" >
+      {{-- <div class="row" >
         <div class="col-lg-4">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
            <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>
            <form action="{{route('father.store_Child')}}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
-            {{-- @method('PUT') --}}
+            @method('PUT') 
                     <label class="form-label" for="Name" >Name</label>
                     <input type="text" name="name" id="Name" class="form-control form-control-lg"  />
                     <input type="hidden" name="father_id" id="father_id" value="{{$father->id}}" class="form-control form-control-lg"  />
@@ -110,19 +114,19 @@
                 </div>
               </div>
 
-        </div> -->
-        <div class="col-lg-8">
-          <div class="card mb-8"style="background-color: whitesmoke;">
+        </div> --}}
+        <div class="col-lg-12">
+          <div class="card mb-12"style="background-color: whitesmoke;">
             <div class="card-body">
               <div class="col">
-                <table class="table table-hover">
+                <table class="table table-hover parent-table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Child Photo</th>
-                      <th scope="col">Child Name</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Confirmation</th>
+                      <th scope="col" class="col-sm-2">#</th>
+                      <th scope="col" class="col-sm-3">Child Photo</th>
+                      <th scope="col" class="col-sm-3">Child Name</th>
+                      <th scope="col" class="col-sm-2">Status</th>
+                      <th scope="col" class="col-sm-2">Confirmation</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -131,14 +135,20 @@
                     <tr>
                       <th scope="row">{{$child->id}}</th>
                       <td>
-                        <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2">
+                        {{-- <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2"> --}}
+                           <img src="{{$child->image_path}}" width="30" class="user-img rounded-circle mr-2">
                       </td>
                       <td>{{$child->name}}</td>
                       <td>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" >
-                    </td>
+  <span  class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>                     </td>
                       <td>
-                        <div class="form-check form-switch" > <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                        <div class="form-check form-switch" >
+                           {{-- <input class="toggle-class" type="checkbox"  id="flexSwitchCheckChecked" data-id="{{ $child->id }}"  data-on="Active" data-off="Inactive" {{ $child->confirmed ? 'checked' : ''}}>  --}}
+                       <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Confirmed" data-off="NotConfirmed" {{ $child->confirmed ? 'checked' : '' }}>
+                          </div>
+                      {{-- <input type="checkbox" class="custom-control-input"
+                            {{($child->confirmed) ? 'checked' : ''}}
+                              onclick="changeUserStatus(event.target, {{ $child->id }});"> --}}
                       </td>
                     </tr>
             @endif
@@ -191,4 +201,26 @@
 </div>
 @endif
 
+<script>
+  $(function() {
+    $('.toggle-class').change(function() {
+        var confirmed = $(this).prop('checked') == true ? 1 : 0;
+        var mid = $(this).data('id');
+
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: '{{ route('changeStatus') }}',
+            data: {
+
+              'confirmed': confirmed, 'mid': mid},
+            success: function(data){
+              console.log(data.success)
+            }
+        });
+    })
+  })
+</script>
+
+</div>
 @endsection

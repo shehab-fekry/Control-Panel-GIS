@@ -11,7 +11,7 @@
           {{-- <div class="row justify-content-center align-items-center "  > --}}
             {{-- <div class="col-12 col-lg-9 col-xl-7"> --}}
               <div class="card shadow-2-strong card-registration">
-                <div class="headingParent card-body p-4 p-md-5" >
+                <div class="headingDriver card-body p-4 p-md-5" >
                     <form action="{{route('driver.store')}}" method="POST" class="row g-3" enctype="multipart/form-data">
                       @csrf
                       <div class="row">
@@ -74,7 +74,7 @@
                           <div class="form-outline">
 
                             <label class="form-label" for="mobileNumber">Phone Number</label>
-      
+
                             <input type="text" id="mobileNumber" class="form-control form-control-lg  @error('mobileNumber') is-invalid @enderror"
                             name="mobileNumber" required />
 
@@ -87,7 +87,7 @@
                           <div class="form-outline datepicker w-100">
 
                             <label for="licenseNumber"  class="form-label">licenseNumber</label>
-      
+
                             <input
                               type="text" name="licenseNumber"
                               class="form-control form-control-lg"
@@ -101,22 +101,22 @@
 
                      {{-- <div class="row">
                       <div class="col-md-12 mb-4 d-flex align-items-center">
-        
+
                         <div class="form-outline datepicker w-100">
                           <label for="image"  class="form-label">Photo</label>
-    
+
                           <input
                             type="file" name="image"
                             class="form-control form-control-lg"
                             id="image"
                           />
                         </div>
-      
+
                       </div>
 
                      </div> --}}
-                     
-        
+
+
 
                       <div class="row">
 
@@ -147,8 +147,8 @@
                   <div class="close-btn">
                      <span class="fas fa-times"></span>
                   </div>
-                  </div> 
-                
+                  </div>
+
                @endforeach
                @endif
     </div>
