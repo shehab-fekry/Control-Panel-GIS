@@ -248,7 +248,48 @@
   }
 
 
+/* Father Page Child Table */
+.father-child-table{
+    margin-top: 50px;
 
+}
+  .table .roow-father{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 0px;
+  }
+
+  .roow-father:hover{
+    background-color: rgba(255, 196, 0, 0.3);
+  }
+
+.toggle-off.btn, .toggle-on.btn {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .father-child-table::before{
+    content: 'Childs';
+    position:absolute ;
+    z-index: 2;
+    margin-top: -27px;
+    margin-left: 15px;
+    width:100px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #384850;
+    background-color: unset;
+    text-shadow: 0px 0px 10px #ccc;
+  }
+  .tdata{
+    vertical-align: middle;
+    text-align: center;
+    width: 25%;
+    padding: 5px;
+  }
   /* ------------------------------ Live button -------------------------------- */
 
   .trackingBtn{

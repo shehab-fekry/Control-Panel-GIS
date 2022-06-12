@@ -28,16 +28,32 @@
     border-radius: 10px;
     color: #FFF;
     font-weight: bold;
-    margin: 30px 0;
-
+    margin: 30px;
 }
 
+
 .need-help{
-    background-color: #ffc1076e;
+    background-color: #ffc1079d;
     width: 70%;
-    height: 100px;
-    margin:50px auto;
+    margin:100px auto;
     text-align: center;
     padding: 30px;
-    border-radius: 20px;
+    border-radius:20px;
+}
+
+.logout-btn{
+    width: 18%;
+    background-color: #384850;
+    padding: 6px 0;
+    margin: 25px 0;
+    border-radius: 10px;
+}
+
+.logout-btn a {
+    color: #FFF;
+    font-size: 18px;
+}
+
+.input-group-text{
+    padding:1rem .75rem;
 }
