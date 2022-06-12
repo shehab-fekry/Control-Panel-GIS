@@ -24,7 +24,8 @@ class FatherController extends BaseController
     }
     elseif($father->trip_id==null){
 
-      return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');}
+      return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+    }
     $trip = Trip::where('id',$father->trip_id)->first();
     $driver = $trip->driver()->first();
       if($driver->count()==0 ){
@@ -34,7 +35,7 @@ class FatherController extends BaseController
     if($vehicle->count()==0 ){
    return $this->sendError('please validate errors','your trip do not have any vehicle yet please contact with one of school admins');
  }
-    $response = ['driver'=>$driver->all(),'vehicle'=>$vehicle->all()];
+    $response = ['driver'=>$driver,'vehicle'=>$vehicle];
      return $this->sendResponse(FatherResource::collection($response),'fathers retrived successfully');
   }
 
