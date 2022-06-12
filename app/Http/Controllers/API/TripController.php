@@ -10,7 +10,7 @@ use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Events\tripNotification;
 class TripController extends BaseController
 {
     public function start(request $request){
@@ -58,9 +58,12 @@ class TripController extends BaseController
         }
         $collection = collect($data);
         $sorted = $collection->sortBy('distance');
-        event(new showTrip($data));
-        
+        // event(new showTrip($data));
+        $notification['trip_id']=$trip->id;
+        $notification['message']='the trip is started you will get a notification when it is get close to your home';
+        event(new tripNotification($notification));
         return $this-> sendResponse($sorted,'father information updated successfully');
+
     }
     public function delivered(){
         $id=Auth::guard('api-drivers')->id();
@@ -83,6 +86,9 @@ class TripController extends BaseController
         }
         $trip->status=2;
         $trip->save();
+        $notification['trip_id']=$trip->id;
+        $notification['message']='the bus is delivered to school you will get a notification when it is come back from school';
+        event(new tripNotification($notification));
         return $this-> sendResponse("",'the trip is delivered to school succefully you could start the back trip at any time');
     }
     public function backHome(){
@@ -105,6 +111,9 @@ class TripController extends BaseController
             case 2:
                 $trip->status=3;
                 $trip->save();
+                $notification['trip_id']=$trip->id;
+                $notification['message']='the bus is coming back to home';
+                event(new tripNotification($notification));
                 return $this-> sendResponse("",'the trip is backing to home');
             case 3:
                 return $this->sendError('please validate errors','the trip is alredy backing from school');

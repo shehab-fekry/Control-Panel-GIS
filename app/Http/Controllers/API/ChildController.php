@@ -61,13 +61,13 @@ class ChildController extends BaseController
         $input['father_id']=$id;
         $child=Child::create($input);
         $child->get();
-        // admin notification 
+        // admin notification
         $admin_id= User::where("school_id",$father->school_id)->where("is_admin",1)->first();
         $message="Father:".$father->name ." added new child ".$child->name." to his childrens";
         $data=array(
             'message'=>$message,
             'id'=>$admin_id
-        ); 
+        );
         event(new adminNotification($data));
         return $this->sendResponse($child,'child added successfully');
     }
@@ -101,7 +101,7 @@ class ChildController extends BaseController
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
             'image_path' => ['required'],
-            
+
 
         ]);
         if($validator->fails()){
