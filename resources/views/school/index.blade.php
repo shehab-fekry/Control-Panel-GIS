@@ -6,7 +6,7 @@
     <link href="{{ asset("css/school.css") }}" rel="stylesheet">
 </head>
 <div class="schools_wrapper">
-    @if ($school == NULL)
+    @if (Auth::user()->school_id == NULL && Auth::user()->is_admin == 0)
             <div class="joinSchool">
                 <div class="joinSchool-title">Join School</div>
                 <form class="joinShoolForm"  action="{{route('school.assignAdminToSchool')}} " method="POST"  enctype="multipart/form-data">
@@ -23,12 +23,14 @@
                     </div>
                 </form>
             </div>
+    @endif
             @if (session('code'))
             <div class="alert alert-danger" role="alert">
                 {{ session('code') }}
             </div>
-            @endif
-@if (Auth::user()->is_admin == 1)
+            
+             @endif
+@if (Auth::user()->is_admin == 1 && Auth::user()->school_id == NULL)
       <div class="createSchool"> 
                 <div class="createSchool-title">Add New School</div>
                 <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
@@ -43,15 +45,12 @@
                     </div>
                 </form>
             </div> 
-
-    
 @endif
           
-    @else
 
 
-    
-      <div class="card" style="width: 90%;">
+    @if (Auth::user()->school_id  ==! NULL)
+        <div class="card" style="width: 90%;">
         <div class="card-body">
           <h5 class="card-title" style="color: #384850">{{$school->name}} School<span class="card-code">#{{$school->code}}</span></h5>
           <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
@@ -62,12 +61,15 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">DELETE</button>
             </form> --}}
+            @if (Auth::user()->is_admin == 0)
             <form action="{{route('school.left',$school->id)}}" method="POST">
                 @csrf
                 <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
                     Leave
                 </button>
             </form>
+            @endif
+      
             @if (Auth::user()->is_admin == 1)
             <form action="{{route('school.destroy',$school->id)}}" method="POST">
                 @csrf
