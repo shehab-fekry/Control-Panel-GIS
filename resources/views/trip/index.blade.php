@@ -15,20 +15,20 @@
                 <div class="head_data">Status</div>
                 <div class="head_data">Route</div>
             </div>
-    
+
                 @foreach ($trips as $trip)
-                    
+
                 <div class="roow">
                     <div class="tdata">{{$trip->id}}</div>
                     <div class="tdata">{{$trip->geofence}}</div>
                     <div class="tdata">
                         <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
                             <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
-                        </div> 
+                        </div>
                     </div>
                     {{-- <%= driver.status ? '' : 'disabled' %> --}}
                     <div class="tdata">
-                        <button class="btn trackingBtn" 
+                        <button class="btn trackingBtn"
                         onclick="initPreview('{{$trip->id}}')">
                             <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
                             Preview
@@ -45,7 +45,7 @@
                 </div>
                 @endforeach
 
-           
+
             <!-- <div class="">
                 {{ $trips->links() }}
                 {{-- <button>Previous</button>
@@ -68,7 +68,7 @@
                 if(field == '')
                 document.getElementById('createTripSubmit').disabled = true
                 else
-                document.getElementById('createTripSubmit').disabled = false 
+                document.getElementById('createTripSubmit').disabled = false
             }
         </script>
 </div>
@@ -80,7 +80,7 @@
    <span class="fas fa-times"></span>
 </div>
 </div>
-@endif  
+@endif
 <!-- tracking.js  -->
 <script src="{{ asset("js/tracking.js") }}"></script>
 @endsection

@@ -24,9 +24,6 @@
               {{-- <img src="{{asset('upload/father/'.$father->image_path)}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true"> --}}
               <img src="{{$father->image_path}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true">
               <h5 class="my-3">{{$father->name}}</h5>
-              <p class="text-muted mb-1">Full Stack Developer</p>
-              <p class="text-muted mb-4">lives in 6 october</p>
-
             </div>
           </div>
 
@@ -95,98 +92,44 @@
 
         </div>
       </div>
-      {{-- ---------------------------------------------------------------------------------- --}}
-      {{-- <div class="row" >
-        <div class="col-lg-4">
-          <div class="card mb-4"style="background-color: whitesmoke;">
-            <div class="card-body text-center" >
-           <h5 class="mb-4 pb-2 pb-md-0 mb-md-3" style="margin-left: 20px; padding-top: 20px; font-weight: 700; font-size: 20px;">Add Child</h5>
-           <form action="{{route('father.store_Child')}}" method="POST" class="row g-3" enctype="multipart/form-data">
-            @csrf
-            @method('PUT') 
-                    <label class="form-label" for="Name" >Name</label>
-                    <input type="text" name="name" id="Name" class="form-control form-control-lg"  />
-                    <input type="hidden" name="father_id" id="father_id" value="{{$father->id}}" class="form-control form-control-lg"  />
-                    <label for="image_path" class="form-label" style="">Photo</label>
-                    <input type="file" name="image_path" class="form-control form-control-lg"  id="Photo"/>
-                  <input class="btn btn-primary btn-lg mt-2" style="background-color: #384850; color: aliceblue;" type="submit" value="ADD" />
-           </form>
-                </div>
-              </div>
 
-        </div> --}}
-        <div class="col-lg-12">
-          <div class="card mb-12"style="background-color: whitesmoke;">
-            <div class="card-body">
-              <div class="col">
-                <table class="table table-hover parent-table">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="col-sm-2">#</th>
-                      <th scope="col" class="col-sm-3">Child Photo</th>
-                      <th scope="col" class="col-sm-3">Child Name</th>
-                      <th scope="col" class="col-sm-2">Status</th>
-                      <th scope="col" class="col-sm-2">Confirmation</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-            @foreach($childs as $child )
-            @if ($child->father_id == $father->id)
-                    <tr>
-                      <th scope="row">{{$child->id}}</th>
-                      <td>
-                        {{-- <img src="{{asset('upload/child/'.$child->image_path)}}" width="30" class="user-img rounded-circle mr-2"> --}}
-                           <img src="{{$child->image_path}}" width="30" class="user-img rounded-circle mr-2">
-                      </td>
-                      <td>{{$child->name}}</td>
-                      <td>
-  <span  class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>                     </td>
-                      <td>
-                        <div class="form-check form-switch" >
-                           {{-- <input class="toggle-class" type="checkbox"  id="flexSwitchCheckChecked" data-id="{{ $child->id }}"  data-on="Active" data-off="Inactive" {{ $child->confirmed ? 'checked' : ''}}>  --}}
-                       <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Confirmed" data-off="NotConfirmed" {{ $child->confirmed ? 'checked' : '' }}>
-                          </div>
-                      {{-- <input type="checkbox" class="custom-control-input"
-                            {{($child->confirmed) ? 'checked' : ''}}
-                              onclick="changeUserStatus(event.target, {{ $child->id }});"> --}}
-                      </td>
-                    </tr>
-            @endif
-            @endforeach
-                  </tbody>
-                </table>
-                  {{-- <div class="d-flex justify-content-between align-items-center">
-                    <label class="form-label" for="status" style="margin-left: 10px;">Child</label>
 
-                    <label class="form-label" for="status" style="margin-left: 140px;">Status</label>
-                    <label class="form-label" for="Confirmatiom" style="margin-left: 140px;">Confirmation</label>
+      <div class="table father-child-table" style="width: 100%">
+        <div class="roow head_row">
+            <div class="head_data">ID</div>
+            <div class="head_data">Photo</div>
+            <div class="head_data">Name</div>
+            <div class="head_data tdata-btns">Age</div>
+            <div class="head_data tdata-btns">Class</div>
+            <div class="head_data tdata-btns">Gender</div>
+            <div class="head_data tdata-btns">Status</div>
+            <div class="head_data tdata-btns">Confirmation</div>
+
+        </div>
+
+        @foreach($childs as $child )
+        @if ($child->father_id == $father->id)
+                <div class="roow-father">
+                  <div class="tdata" scope="row">{{$child->id}}</div>
+                  <div class="tdata">
+                       <img src="{{$child->image_path}}" width="30" class="user-img rounded-circle mr-2">
                   </div>
+                  <div class="tdata">{{$child->name}}</div>
+                  <div class="tdata">This Age</div>
+                  <div class="tdata"> This Class </div>
+                  <div class="tdata"> This Gender </div>
+                  <div class="tdata"> This Status </div>
 
-
-
-            <div class="card p-3 mt-2" style="background-color: whitesmoke">
-              <img src="/Public/assets/manager.png" width="30" class="user-img rounded-circle mr-2" style="margin-bottom: -30px;">
-                <span "><small class="font-weight-bold text-primary" style="margin-left: 50px; ">james_olesehhhhhhnn</small>
-
-                 <div style="margin-left: 200px; margin-bottom: -25px;">
-                   <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                 </div>
-                  <div class="buttons" style="margin-left: 370px; "> <span class="badge bg-white d-flex flex-row align-items-center">
-               <div class="form-check form-switch" > <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
-           </span>
-          </div>
-
-
-        </div>
-
+                  <div class="tdata">
+                        <div class="form-check form-switch" >
+                            <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $child->confirmed ? 'checked' : '' }}>
+                        </div>
+                </div>
+                </div>
+        @endif
+        @endforeach
     </div>
-    </div> --}}
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    </div>
    </div>
 
   </div>
@@ -223,4 +166,5 @@
 </script>
 
 </div>
+
 @endsection
