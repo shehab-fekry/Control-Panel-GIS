@@ -7,7 +7,7 @@
 
     @if( $fathers->count() <1 )
         <!-- <div class="main"> -->
-            <img src="{{ asset("assets/images/parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
+            <img src="{{ asset("assets/images/Parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
             <center style="font-size:20px"> There are no registered <span style="color:#ffc017">parents</span> to show yet </center>
         <!-- </div> -->
      @endif
@@ -15,13 +15,18 @@
                 @foreach($fathers as $parent )
                 <div class="col-md-4">
 
-
                     <div class="card user-card" >
                         <div class="card-header">
-                            <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-block">
-                            <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> 
                             {{-- <input data-id="{{$parent->id}}" class="toggle-class" type="checkbox" data-bs-onstyle="success" data-bs-offstyle="danger" data-bs-toggle="toggle" data-bs-on="Active" data-bs-off="InActive" {{ $parent->confirmed ? 'checked' : '' }}>
                             <div class="form-check form-switch" style="margin-top: -25px; margin-bottom: 16px;"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div> --}}
                             <div class="user-image">
@@ -38,15 +43,15 @@
                             <hr>
                             <div class="row">
 
-                            <div class="col-sm-4">
-                                <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary">UPDATE</a>
+                            <div class="col-sm-6">
+                                <a href="{{route('father.edit',$parent->id)}}" type="submit" class="btn btn-primary update-btn">UPDATE</a>
                              </div>
 
                                 {{-- <div class="col-sm-4">
                                 <button type="submit" class="btn btn-primary">ASSIGN</button>
                              </div> --}}
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <form action="{{route('father.destroy',$parent->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -84,15 +89,15 @@
             <span class="fas fa-times"></span>
          </div>
          </div>
-         @endif  
+         @endif
 
 
          <script>
               $(function() {
     $('.toggle-class').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0; 
-        var user_id = $(this).data('id'); 
-         
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var user_id = $(this).data('id');
+
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -104,9 +109,8 @@
         });
     })
   })
-             
-        </script>  
-        
-</div>  
 
+        </script>
+
+</div>
 @endsection

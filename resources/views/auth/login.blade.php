@@ -18,7 +18,7 @@
 <body>
     <div class="nav">
         <div class="nav_leftside">
-            <a href="{{ route('home') }}">
+            <a href="/">
                 <div class="return">
                     <img src="{{ asset("assets/images/arrowDark.png") }}" width="40px" height="40px">
                 </div>

@@ -54,8 +54,9 @@ Route::middleware('auth:api-drivers')->group(function(){
     Route::put("driver/update","API\DriverController@update");
     Route::delete("driver/delete","API\DriverController@Destroy");
 ///trip operations///////
-    Route::put("changeLocation",function($data){
-        event(new showTrip($data));
+    Route::put("changeLocation",function(request $request ){
+        event(new showTrip($request));
+        return response()->json(["message"=>"location changed"]);
     });
     Route::post('trip/start',"API\TripController@start");
     Route::post('trip/delivered',"API\TripController@delivered");

@@ -86,13 +86,13 @@ class AuthController extends BaseController
             'mobileNumber'=>['required','min:11','max:11'],
             'licenseNumber' => ['required','string',"unique:drivers,licenseNumber"],
             'code'=>['required','string','exists:schools,code'],
-            // 'photo'=>['required|image']
+
         ]);
         if($validator->fails()){
             return $this->sendError('please validate errors',$validator->errors());
         }
         $school=School::where('code',$request->code)->first();
-
+         $input['image_path']="https://cdn-icons-png.flaticon.com/512/3048/3048148.png";
          $input['school_id']=$school->id;
         // $photo=$request->photo;
         // $new_photo=time().$photo->getClientOriginalName();

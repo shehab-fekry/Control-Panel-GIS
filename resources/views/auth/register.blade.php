@@ -74,7 +74,16 @@
                         </div>
                         <!-- message -->
                         @error('password')
-                        <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}</div>
+                     <div style="padding:2px; font-size:12px; color:red; margin-left:21px">{{ $message }}
+                        {{-- @if ($message == "The password format is invalid.")
+                        The password must be contains :
+                        Require at least 8 characters
+                        English uppercase characters (A – Z)
+                        English lowercase characters (a – z)
+                        at least one number (0 – 9)
+                        @endif   --}}
+
+                        </div>
                         {{-- <div id="passInvalid">{{ $message }}</div> --}}
                         @enderror
                     </div>

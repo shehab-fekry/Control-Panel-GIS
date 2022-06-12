@@ -2,10 +2,23 @@
 
 @section('content')
 
+<style>
+.update-parent::before{
+    content: 'Update Parent';
+    background-color: unset;
+    color: #384850;
+    position: absolute;
+    margin-top: -575px;
+    left: 80px;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0px 0px 5px #ccc
+}
+</style>
 <div class="bus-container ">
 <div class="app-main__outer">
     <div class="app-main__inner">
-        <div class="container bg-white" style="height:575px;">
+        <div class="container bg-white update-parent" style="height:575px;">
             <div class="row ">
                 <div class="col-md-3 border-right">
                     {{-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{asset('upload/father/'.$father->image_path)}}"><span class="font-weight-bold">{{$father->name}}</span><span class="text-black-50">{{$father->email}}</span><span> </span></div> --}}
@@ -45,33 +58,17 @@
                                 {{-- <input type="text" class="form-control"  name="trip_id"  value="{{$father->trip_id}}"> --}}
 
                             </div>
-                        </div>
-                        {{-- <div class="row">
-                            <div class="col-md-12 mb-4 d-flex align-items-center">
+                            <div class="col-sm-12">
+                            <div class="col-md-6"><label class="labels" style="margin-top: 10px">Status</label></div>
+                                <select class="form-select" aria-label="Default select example" name="confirmed">
 
-                              <div class="form-outline datepicker w-100">
-                                <label for="image"  class="form-label">Photo</label>
 
-                                <input
-                                  type="file" name="image"
-                                  class="form-control form-control-lg"
-                                  id="image"
-                                />
-                              </div>
+                                    <option value="1"  @if( $father->confirmed == 1) selected @endif >Confirmed</option>
+                                    <option value="0"  @if( $father->confirmed == 0) selected @endif >Not Confirmed</option>
 
+
+                        </select>
                             </div>
-
-                           </div> --}}
-                           <div class="row mt-2">
-                            <select class="form-select" aria-label="Default select example" name="confirmed">
-
-
-                                        <option value="1"  @if( $father->confirmed == 1) selected @endif >Confirmed</option>
-                                        <option value="0"  @if( $father->confirmed == 0) selected @endif >Not Confirmed</option>
-
-
-                            </select>
-                            {{-- <div class="col-md-6"><label class="labels">confirmed</label><input type="text" name="confirmed" class="form-control" placeholder="name" value="{{$driver->confirmed}}"></div> --}}
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
                         </form>
@@ -84,10 +81,38 @@
         </div>
         </div>
         </div>
+<!-- NEWWWWWWWWWWWWWWWWWWWW  -->
 
+<div class="reset-password">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-right"></h4>
+    </div>
+
+    <div class="container bg-white">
+    <form action="{{route('passwordReset',$father->id)}}" method="POST"  enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <input type="hidden" name="fid" value="{{$father->id}}">
+                <div class="col-md-12"><label class="labels">Reset Password</label><input type="password"  class="form-control @error('password') is-invalid @enderror" placeholder="Password"  name="password" required autocomplete="new-password" /></div>
+                  @error('password')
+                           <span class="invalid-feedback" role="alert">
+                           <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
+                <div class="col-md-12"><label class="labels"  for="password-confirm">Confirm Password</label><input  type="password" id="password-confirm" placeholder="Reset Password" class="form-control"  name="password_confirmation"  required autocomplete="new-password"/></div>
+            </div>
+            <div class="my-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Reset Password"/>
+
+        </form>
+    </div>
 </div>
 </div>
 </div>
+</div>
+
+
+
   @if ($message= session('error'))
   @foreach($message as $messages)
     <div class="alertr hide">

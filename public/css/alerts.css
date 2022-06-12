@@ -38,7 +38,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 2s, opacity 2s linear;
-  
+
   }
    @keyframes hide_slide {
     0%{
@@ -54,7 +54,7 @@
       transform: translateX(100%);
     }
   } */
-  
+
   .alertw .fa-exclamation-circle{
     position: absolute;
     left: 20px;
@@ -125,7 +125,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 2s, opacity 2s linear;
-  
+
   }
    @keyframes hide_slide {
     0%{
@@ -141,7 +141,7 @@
       transform: translateX(100%);
     }
   } */
-  
+
   .alertr .fa-exclamation-triangle{
     position: absolute;
     left: 20px;
@@ -180,7 +180,7 @@
     position: absolute;
     right: 0;
     top: 10px;
-    border-radius: 4px;
+    border-radius: 10px;
     border-left: 8px solid #02ffb3;
     overflow: hidden;
     opacity: 0;
@@ -196,7 +196,7 @@
   @keyframes show_slide {
     0%{
       transform: translateX(100%);
-    }  
+    }
     40%{
       transform: translateX(-10%);
     }
@@ -212,7 +212,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 2s, opacity 2s linear;
-  
+
   }
    @keyframes hide_slide {
     0%{
@@ -228,7 +228,7 @@
       transform: translateX(100%);
     }
   } */
-  
+
   .alertg .fa-check-circle{
     position: absolute;
     left: 20px;
