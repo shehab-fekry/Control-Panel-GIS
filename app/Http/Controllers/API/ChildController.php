@@ -46,6 +46,7 @@ class ChildController extends BaseController
             'class' => ['required', 'string'],
             'age' => ['required', 'integer'],
             // 'photo'=>['required|image']
+           
         ]);
         // $photo=$request->photo;//file
         // $new_photo=time().$photo->getClientOriginalName();//string
