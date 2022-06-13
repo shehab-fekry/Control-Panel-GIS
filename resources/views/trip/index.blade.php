@@ -16,34 +16,40 @@
                 <div class="head_data">Route</div>
             </div>
 
-                @foreach ($trips as $trip)
-
-                <div class="roow">
-                    <div class="tdata">{{$trip->id}}</div>
-                    <div class="tdata">{{$trip->geofence}}</div>
-                    <div class="tdata">
-                        <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
-                            <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
-                        </div>
-                    </div>
-                    {{-- <%= driver.status ? '' : 'disabled' %> --}}
-                    <div class="tdata">
-                        <button class="btn trackingBtn"
-                        onclick="initPreview('{{$trip->id}}')">
-                            <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
-                            Preview
-                        </button>
-                        <button class="btn trackingBtn btn_live"  <?php echo ($trip['status']>='1') ? '' : 'disabled' ; ?>
-                        onclick="initTrack('{{$trip->id}}')">
-                            <img src="{{ asset("assets/images/tracking.png") }}" width="25px" height="25px">
-                            <div class="text">
-                                Live
-                                <span class=" <?php echo ($trip['status']>='1') ? 'live-on' : 'live-off' ; ?> "></span>
-                            </div>
-                        </button>
+            @if($trips)
+            @foreach ($trips as $trip)
+            <div class="roow">
+                <div class="tdata">{{$trip->id}}</div>
+                <div class="tdata">{{$trip->geofence}}</div>
+                <div class="tdata">
+                    <div class="status" style="<?php echo ($trip['status']>='1') ? 'background-color: #ffc017' : 'background-color: #384850'?>">
+                        <?php echo ($trip['status']>='1') ? 'Active' : 'Inactive'; ?>
                     </div>
                 </div>
-                @endforeach
+                <div class="tdata">
+                    <button class="btn trackingBtn"
+                    onclick="initPreview('{{$trip->id}}')">
+                        <img src="{{ asset("assets/images/preview.png") }}" width="25px" height="25px">
+                        Preview
+                    </button>
+                    <button class="btn trackingBtn btn_live"  <?php echo ($trip['status']>='1') ? '' : 'disabled' ; ?>
+                    onclick="initTrack('{{$trip->id}}')">
+                        <img src="{{ asset("assets/images/tracking.png") }}" width="25px" height="25px">
+                        <div class="text">
+                            Live
+                            <span class=" <?php echo ($trip['status']>='1') ? 'live-on' : 'live-off' ; ?> "></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            @endforeach
+            @endif
+
+            @if($trips->count() <1)
+            <div class="roow">
+            <center style="font-size:20px; padding:10px">There are no created<span style="color:#ffc017">trips</span>to show yet </center>
+            </div>
+            @endif
 
 
             <!-- <div class="">

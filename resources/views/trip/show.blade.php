@@ -5,76 +5,75 @@
  
 <head><link rel="stylesheet" href="{{ asset("css/tripDetails.css") }}"></head>
 
-@if( $driver->count() <1 )
-<!-- <div class="main"> -->
-    <img src="{{ asset("assets/images/parents.svg") }}" width="100%" height="350px" style="margin-top:50px">
-    <center style="font-size:20px"> There are no registered <span style="color:#ffc017">parents</span> to show yet </center>
-<!-- </div> -->
-@endif
 @if( $driver->count() >= 1 )
 <div class="tripDetails-wrapper">
     <div class="card" style="width: 90%;">
         <div class="card-body">
-          <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#{{$trip->id}}</span></h5>
-          <div id="map" class="card-map mb-3"></div>
+            <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#{{$trip->id}}</span></h5>
+            
+            <div id="map" class="card-map mb-2"></div>
 
-          <div class="card-driver mb-4">
-            <div class="driver-icon">
-                <img src="{{ asset("assets/images/user.png") }}">
-                Driver
-            </div>
-            <div class="driver-table">
-              <div class="driver-table-header">
-                <div class="driver-table-data">Identity</div>
-                <div class="driver-table-data">Name</div>
-                <div class="driver-table-data">Email</div>
-                <div class="driver-table-data">License</div>
-                <div class="driver-table-data">Phone</div>
-              </div>
-              @foreach ( $driver as $drivers)
-              <div class="driver-table-row">
-                <div class="driver-table-data">
-                  <img src="{{ asset($drivers->image_path) }}">
+            <div class="card-driver mb-3">
+                <div class="driver-icon">
+                    <img src="{{ asset("assets/images/user.png") }}">
+                    Driver
                 </div>
+                <div class="driver-table">
+                    <div class="driver-table-header">
+                        <div class="driver-table-data">Identity</div>
+                        <div class="driver-table-data">Name</div>
+                        <div class="driver-table-data">Email</div>
+                        <div class="driver-table-data">License</div>
+                        <div class="driver-table-data">Phone</div>
+                    </div>
                     
-               
-                <div class="driver-table-data info">{{$drivers->name}}</div>
-                <div class="driver-table-data">{{$drivers->email}}</div>
-                <div class="driver-table-data">#{{$drivers->licenseNumber}}</div>
-                <div class="driver-table-data">{{$drivers->mobileNumber}}</div>
+                    @foreach ( $driver as $drivers)
+                    <div class="driver-table-row">
+                        <div class="driver-table-data">
+                            <img src="{{ asset($drivers->image_path) }}">
+                        </div>
+                        <div class="driver-table-data info">{{$drivers->name}}</div>
+                        <div class="driver-table-data">{{$drivers->email}}</div>
+                        <div class="driver-table-data">#{{$drivers->licenseNumber}}</div>
+                        <div class="driver-table-data">{{$drivers->mobileNumber}}</div>
+                    </div>
+                    @endforeach
+                </div>  
+            </div>
 
-              </div>
-              @endforeach
-            </div>  
-          </div>
-
-          <div class="card-parents mb-4">
-              <div class="parent-icon">
-                  <img src="{{ asset("assets/images/user.png") }}">
-                  Parents
+            <div class="card-parents mb-3">
+                <div class="parent-icon">
+                    <img src="{{ asset("assets/images/user.png") }}">
+                    Parents
                 </div>
-              <div class="parent-names">
-              @foreach ( $father as $fathers)
-                  <div class="name-bubble">{{$fathers->name}}</div>
-              @endforeach
-              </div>
-          </div>
+                <div class="parent-names">
+                    @foreach ( $father as $fathers)
+                        <div class="name-bubble">{{$fathers->name}}</div>
+                    @endforeach
+                </div>
+            </div>
 
-          <div class="card-childs">
-            <div class="child-icon">
-                <img src="{{ asset("assets/images/user.png") }}">
-                Children
+            <div class="card-childs">
+                <div class="child-icon">
+                    <img src="{{ asset("assets/images/user.png") }}">
+                    Children
+                </div>
+                <div class="child-names">
+                    @foreach ( $child as $childs)
+                    <div class="name-bubble">{{$childs->name}}</div>
+                    @endforeach
+                </div>
             </div>
-            <div class="child-names">
-                @foreach ( $child as $childs)
-                <div class="name-bubble">{{$childs->name}}</div>
-                @endforeach
-            </div>
-          </div>
         </div>
     </div>
 </div>
 @endif
+
+@if( $driver->count() <1 )
+    <img src="{{ asset("assets/images/Documents.svg") }}" width="100%" height="350px" style="margin-top:100px">
+    <center style="font-size:20px"> There are no enough <span style="color:#ffc017">trip details</span> to show </center>
+@endif
+
 <script>
   // let url = window.location.search
   // let getQuery = url.split('?')[1] 

@@ -2,90 +2,105 @@
 @extends('layouts.master')
 
 @section('content') 
-<head>
-    <link href="{{ asset("css/school.css") }}" rel="stylesheet">
-</head>
+<head><link href="{{ asset("css/school.css")}}" rel="stylesheet"></head>
+
 <div class="schools_wrapper">
     @if (Auth::user()->school_id == NULL && Auth::user()->is_admin == 0)
-            <div class="joinSchool">
-                <div class="joinSchool-title">Join School</div>
-                <form class="joinShoolForm"  action="{{route('school.assignAdminToSchool')}} " method="POST"  enctype="multipart/form-data">
-                    @csrf
+        <!-- Join School Card -->
+        <div class="joinSchool">
+            <div class="joinSchool-title">Join School</div>
+            <form class="joinShoolForm"  action="{{route('school.assignAdminToSchool')}} " method="POST"  enctype="multipart/form-data">
+                @csrf
+                {{-- @method('PUT') --}}
+            {{-- <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
+                    @csrf --}}
                     {{-- @method('PUT') --}}
-                {{-- <form class="joinShoolForm"  action="{{route('home')}}" method="POST" >
-                        @csrf --}}
-                        {{-- @method('PUT') --}}
-                    <div class="inputPart">
-                        <input oninput="verifyCode()" id="SchoolCode" type="text" name="code" placeholder="#Code">
-                    </div>
-                    <div class="submitPart">
-                        <button class="btn trackingBtn btnColor" id="joinSubmit" disabled="true" type="submit">Join</button>
-                    </div>
-                </form>
-            </div>
+                <div class="inputPart">
+                    <input oninput="verifyCode()" id="SchoolCode" type="text" name="code" placeholder="#Code">
+                </div>
+                <div class="submitPart">
+                    <button class="btn trackingBtn btnColor" id="joinSubmit" disabled="true" type="submit">Join</button>
+                </div>
+            </form>
+        </div>
     @endif
-            @if (session('code'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('code') }}
-            </div>
-            
-             @endif
-@if (Auth::user()->is_admin == 1 && Auth::user()->school_id == NULL)
-      <div class="createSchool"> 
-                <div class="createSchool-title">Add New School</div>
-                <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
-                    @csrf
-                    <div class="inputPart">
-                        <input id="SchoolName" type="text" name="name" placeholder="School Name">
-                        <input type="hidden" name="location" id="hiddenInput" value="">
-                        <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
-                    </div>
-                    <div class="submitPart">
-                        <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
-                    </div>
-                </form>
-            </div> 
-@endif
-          
+
+    @if (session('code'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('code') }}
+    </div>
+    @endif
+
+    @if (Auth::user()->is_admin == 1 && Auth::user()->school_id == NULL)
+        <!-- Create School Card -->
+        <div class="createSchool"> 
+            <div class="createSchool-title">Add New School</div>
+            <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
+                @csrf
+                <div class="inputPart">
+                    <input id="SchoolName" type="text" name="name" placeholder="School Name">
+                    <input type="hidden" name="location" id="hiddenInput" value="">
+                    <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
+                </div>
+                <div class="submitPart">
+                    <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
+                </div>
+            </form>
+        </div> 
+    @endif         
 
 
     @if (Auth::user()->school_id  ==! NULL)
-        <div class="card" style="width: 90%;">
+        <!-- School Main Card -->
+        <div class="card" style="width: 90%;" id="schoolCard">
         <div class="card-body">
-          <h5 class="card-title" style="color: #384850">{{$school->name}} School<span class="card-code">#{{$school->code}}</span></h5>
-          <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
-          <div class="card-map" id="map"></div>
-          <div class="card-foot mt-2">
-            {{-- <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">DELETE</button>
-            </form> --}}
-            @if (Auth::user()->is_admin == 0)
-            <form action="{{route('school.left',$school->id)}}" method="POST">
-                @csrf
-                <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
-                    Leave
-                </button>
-            </form>
-            @endif
-      
-            @if (Auth::user()->is_admin == 1)
-            <form action="{{route('school.destroy',$school->id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
-                    Delete
-                </button>
-            </form>
-            @endif
-            {{-- <form action="" method="GET">
-                <button class="btn trackingBtn btnColor" type="submit" onclick="">Update</button>
-            </form> --}}
-          </div>
+            <h5 class="card-title" style="color: #384850">{{$school->name}} School<span class="card-code">#{{$school->code}}</span></h5>
+            <!-- <h6 class="card-subtitle mb-2" style="color: #ffc107;">Secondary Schools</h6> -->
+            <div class="card-map" id="map"></div>
+            <div class="card-foot mt-2">
+                {{-- <form action="{{route('driver.destroy',$drivers->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form> --}}
+                @if (Auth::user()->is_admin == 0)
+                <form action="{{route('school.left',$school->id)}}" method="POST">
+                    @csrf
+                    <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
+                        Leave
+                    </button>
+                </form>
+                @endif
+
+                @if (Auth::user()->is_admin == 1)
+                <button class="btn trackingBtn btnColor" onclick="confirmDelete()">Delete</button>
+                <!-- <form action="{{route('school.destroy',$school->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
+                        Delete
+                    </button>
+                </form> -->
+                @endif
+                {{-- <form action="" method="GET">
+                    <button class="btn trackingBtn btnColor" type="submit" onclick="">Update</button>
+                </form> --}}
+            </div>
         </div>
     </div>
     @endif
+    
+    <!-- Confirm Deletion Modal -->
+    <div class="delete-modal" id="delete-modal">
+        <div class="delete-modal-header">Are you sure you want to delete school?</div>
+        <div class="delete-modal-body">
+            this operation will also include deletion of all school related data...   
+        </div>
+        <div class="delete-modal-footer">
+            <button class="btn trackingBtn btnColor" style="margin-right: 10px" onclick="Cancel()">Cancel</button>
+            <button class="btn red">Delete</button>
+        </div>
+    </div>
 
     <!-- tracking.js  -->
     <script src=" {{ asset("js/school.js") }}"></script>
@@ -118,7 +133,16 @@
             else
             document.getElementById('joinSubmit').disabled = false 
         }
- 
+
+        confirmDelete = () => {
+            document.getElementById('schoolCard').style.display = 'none'
+            document.getElementById('delete-modal').style.display = 'block'
+        }
+
+        Cancel = () => {
+            document.getElementById('schoolCard').style.display = 'flex'
+            document.getElementById('delete-modal').style.display = 'none'
+        }
 
 
         let map = {}
@@ -128,7 +152,7 @@
         // fetch('http://localhost:8000/api/school/location/' + tripId )
         // replace this line when you are remote
         // fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
-        fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
+        fetch('http://localhost:8000/api/school/location/' + tripId )
         .then(schoolLocation => schoolLocation.json())
         .then(schoolLocation => {
 
