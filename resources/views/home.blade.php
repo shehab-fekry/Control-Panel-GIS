@@ -7,11 +7,13 @@
 </head>
 <div class="home_wrapper">
     <div class="info_section">
+
         <div class="typing">
             <div class="text">
                 <span class="cursor type"></span>
             </div>
         </div>
+
         <div class="statistics">
             <div class="drivers" >
                 <div class="number">
@@ -68,6 +70,7 @@
         </div>
     </div>
 </div>
+
 @if (session('success'))
 <div class="alertg hide">
 <span class='fas fa-check-circle'></span>
@@ -76,7 +79,8 @@
    <span class="fas fa-times"></span>
 </div>
 </div>
-@endif  
+@endif
+
 <!-- landingPage.js  -->
 <script src="{{ asset("js/landingPage.js") }}"></script>
 <script>

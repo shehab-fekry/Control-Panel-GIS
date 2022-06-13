@@ -32,6 +32,7 @@
     <link href="{{ asset("css/home.css")         }}" rel="stylesheet">
     <link href="{{ asset("css/adminProfile.css") }}" rel="stylesheet">
     <link href="{{ asset("css/parentDriver.css") }}" rel="stylesheet">
+    <link href="{{ asset("css/deleteModal.css")  }}" rel="stylesheet">
     <!--   mapbox  -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
@@ -88,7 +89,7 @@
                 </div>
             </a>
             @if (Auth::user()->is_admin == 1)
-                  <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
+            <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-1" aria-expanded="false">
                 <i class="fa fa-id-card"></i> &nbsp;Drivers</li>
                 <div class="collapse" id="dashboard-collapse-1">
                     <ul class="btn-toggle-nav list-unstyled">
@@ -116,8 +117,7 @@
                     <li><a href="{{route('vehicle.create')}}" class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-plus-square-o"></i> &nbsp;Add Vehicle</a></li>
                   </ul>
                 </div>
-            </a>
-                
+            </a>  
             @endif
        
             <a><li class="list-group-item mt-2" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-profile" aria-expanded="false">

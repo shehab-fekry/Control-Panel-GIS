@@ -107,6 +107,7 @@
 
         </div>
 
+        @if($childs)
         @foreach($childs as $child )
         @if ($child->father_id == $father->id)
                 <div class="roow-father">
@@ -119,17 +120,24 @@
                   <div class="tdata"> {{$child->class}} </div>
                   <div class="tdata"> {{$child->gender}} </div>
                   <div class="tdata"> 
-                  <span  class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>   
+                  <span class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>   
                   </div>
 
                   <div class="tdata">
-                        <div class="form-check form-switch" >
-                            <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $child->confirmed ? 'checked' : '' }}>
-                        </div>
-                </div>
+                    <div class="form-check form-switch" >
+                        <input data-id="{{$child->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $child->confirmed ? 'checked' : '' }}>
+                    </div>
+                  </div>
                 </div>
         @endif
         @endforeach
+        @endif
+
+        @if($childs->count() <1)
+        <div class="roow-father">
+        <center style="font-size:20px; padding:10px">There are no added<span style="color:#ffc017">children</span>to show yet </center>
+        </div>
+        @endif
     </div>
     </div>
    </div>
