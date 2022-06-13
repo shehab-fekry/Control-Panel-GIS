@@ -21,7 +21,6 @@
         <div class="col-lg">
           <div class="card mb-4"style="background-color: whitesmoke;">
             <div class="card-body text-center" >
-              {{-- <img src="{{asset('upload/father/'.$father->image_path)}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true"> --}}
               <img src="{{$father->image_path}}" alt="100*100" class="rounded-circle img-fluid" style="width: 125px; hieght: 125px"  data-bs-rendered="true">
               <h5 class="my-3">{{$father->name}}</h5>
             </div>
@@ -94,6 +93,7 @@
       </div>
 
 
+      @if($father->child()->count() >=1) {{-- if there childs --}}
       <div class="table father-child-table" style="width: 100%">
         <div class="roow head_row">
             <div class="head_data">ID</div>
@@ -107,9 +107,8 @@
 
         </div>
 
-        @if($childs)
         @foreach($childs as $child )
-        @if ($child->father_id == $father->id)
+        @if ($child->father_id == $father->id) {{-- if child belongs to this father --}}
                 <div class="roow-father">
                   <div class="tdata" scope="row">{{$child->id}}</div>
                   <div class="tdata">
@@ -131,13 +130,12 @@
                 </div>
         @endif
         @endforeach
-        @endif
-
-        @if($childs->count() <1)
+      @endif
+      @if($father->child()->count() <1) {{-- if there is no childs --}}
         <div class="roow-father">
-        <center style="font-size:20px; padding:10px">There are no added<span style="color:#ffc017">children</span>to show yet </center>
+        <center style="font-size:20px; padding:10px">There are no added <span style="color:#ffc017">children</span> to show yet </center>
         </div>
-        @endif
+      @endif
     </div>
     </div>
    </div>

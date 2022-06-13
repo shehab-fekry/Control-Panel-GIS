@@ -15,8 +15,7 @@
                 <div class="head_data">Status</div>
                 <div class="head_data">Route</div>
             </div>
-
-            @if($trips)
+            
             @foreach ($trips as $trip)
             <div class="roow">
                 <div class="tdata">{{$trip->id}}</div>
@@ -43,9 +42,8 @@
                 </div>
             </div>
             @endforeach
-            @endif
 
-            @if($trips->count() <1)
+            @if($trips->count()<1) {{-- if no trips --}}
             <div class="roow">
             <center style="font-size:20px; padding:10px">There are no created<span style="color:#ffc017">trips</span>to show yet </center>
             </div>

@@ -5,7 +5,7 @@
  
 <head><link rel="stylesheet" href="{{ asset("css/tripDetails.css") }}"></head>
 
-@if( $driver->count() >= 1 )
+@if( $driver->count()>= 1) {{-- if there is at least one driver --}}
 <div class="tripDetails-wrapper">
     <div class="card" style="width: 90%;">
         <div class="card-body">
@@ -69,7 +69,7 @@
 </div>
 @endif
 
-@if( $driver->count() <1 )
+@if( $driver->count()<1) {{-- if no drivers --}}
     <img src="{{ asset("assets/images/Documents.svg") }}" width="100%" height="350px" style="margin-top:100px">
     <center style="font-size:20px"> There are no enough <span style="color:#ffc017">trip details</span> to show </center>
 @endif
