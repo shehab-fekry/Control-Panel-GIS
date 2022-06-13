@@ -115,10 +115,12 @@
                        <img src="{{$child->image_path}}" width="30" class="user-img rounded-circle mr-2">
                   </div>
                   <div class="tdata">{{$child->name}}</div>
-                  <div class="tdata">This Age</div>
-                  <div class="tdata"> This Class </div>
-                  <div class="tdata"> This Gender </div>
-                  <div class="tdata"> This Status </div>
+                  <div class="tdata"> {{$child->age}}</div>
+                  <div class="tdata"> {{$child->class}} </div>
+                  <div class="tdata"> {{$child->gender}} </div>
+                  <div class="tdata"> 
+                  <span  class="badge <?php echo ($child['status']=='1' || $child['status']=='true') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($child['status']=='1' || $child['status']=='true') ? 'Active' : 'Inactive'; ?></span>   
+                  </div>
 
                   <div class="tdata">
                         <div class="form-check form-switch" >

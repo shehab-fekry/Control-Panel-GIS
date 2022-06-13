@@ -65,7 +65,7 @@
 <div class="need-help">
     <div class="col-sm-12">
         <div class="row">
-                <h3>Need Help? Please <strong><a href="mailto:bustrackingV2@gmail.com">Contact US</a></strong></h4>
+                <h3>Need Help? Please <strong><a href="mailto:bustracking.v0@gmail.com">Contact US</a></strong></h4>
         </div>
     </div>
 </div>

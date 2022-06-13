@@ -128,8 +128,7 @@
         // fetch('http://localhost:8000/api/school/location/' + tripId )
         // replace this line when you are remote
         // fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
-
-        fetch('http://localhost:8000/api/school/location/' + tripId )
+        fetch('http://bustrackingh.herokuapp.com/api/school/location/' + tripId )
         .then(schoolLocation => schoolLocation.json())
         .then(schoolLocation => {
 
