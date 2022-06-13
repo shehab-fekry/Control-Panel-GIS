@@ -84,10 +84,10 @@ public function update(Request $request, Father $father)
     {
         $input=$request->all();
         $validator=Validator::make($input,[
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string','min:4','max:255'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('fathers')->ignore($father->id)],
             'mobileNumber' => ['required', 'string', 'max:25' , 'min:5'],
-            'trip_id' => ['int', 'max:20'],
+            'trip_id' => ['int'],
             'confirmed' => [ 'string', 'max:20'],
         ]);
         if($validator->fails()){

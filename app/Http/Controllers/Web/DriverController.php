@@ -84,12 +84,12 @@ class DriverController extends Controller
     {
         $input=$request->all();
         $validator=Validator::make($input,[
-            'name' => ['required', 'string', 'min:2'],
+            'name' => ['required', 'string', 'min:4'],
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5',Rule::unique('drivers')->ignore($driver->id)],
             'confirmed' => ['required', 'int', 'max:20'],
-            'trip_id' => ['required', 'int', 'max:20'],
-            'school_id' => ['required', 'int', 'max:20'],
+            'trip_id' => ['required', 'int'],
+            'school_id' => ['required', 'int'],
             'mobileNumber' => ['required', 'string', 'max:20'],
         ]);
         if($validator->fails()){
