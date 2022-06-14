@@ -9,7 +9,8 @@
 }
 .user-card{
     margin: 15px 0;
-    border-radius: 15px
+    border-radius: 15px;
+    padding: 15px
 }
 .card-header{
     border-radius: 15px !important ;

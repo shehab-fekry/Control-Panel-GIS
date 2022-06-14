@@ -32,7 +32,7 @@ class tripNotification implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'Gizawy';
+        return 'tripNotify';
     }
 
 }

@@ -14,7 +14,7 @@ class adminNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $message,$id;
+    public $message,$id;
 
     /**
      * Create a new event instance.
@@ -39,7 +39,7 @@ class adminNotification implements ShouldBroadcast
         return new Channel('admin_notify.'.$this->id);
     }  public function broadcastAs()
     {
-        return 'Gizawy2';
+        return 'AdminNotify';
     }
 
 

@@ -33,7 +33,7 @@ class showTrip implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'Gizawy';
+        return 'triplocation';
     }
 
 }

@@ -1,30 +1,4 @@
-{{-- 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,7 +27,7 @@
 
 <body>
 <div class="top-back">
-    
+
 </div>
 
 <div class="confirm-email">
@@ -64,24 +38,37 @@
         @csrf
         <button type="submit" class="confirm-btn">{{ __('request another') }}</button>
     </form>
-    
+
         @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
         @endif
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();"
-         class="list-group-item mt-2 sidebar-dropdown-item" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}
-         <form id="logout-form" action="{{ route('logout') }}" method="POST"
-         class="d-none">
-         @csrf
-     </form>
+
+
+        <div class="col-sm-12">
+            <button class="btn logout-btn">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                    class="" ><i class="fa fa-sign-out"></i> &nbsp;{{ __('Logout') }}
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                    class="d-none"></a>
+             @csrf
+            </button>
+        </div>
+    </form>
+
+
 </div>
 
+
 <div class="need-help">
-    <h3>Need Help? Please <strong><a href="#">Contact US</a></strong></h4>
+    <div class="col-sm-12">
+        <div class="row">
+                <h3>Need Help? Please <strong><a href="mailto:bustracking.v0@gmail.com">Contact US</a></strong></h4>
+        </div>
+    </div>
 </div>
 
 </body>
-</html> 
+</html>

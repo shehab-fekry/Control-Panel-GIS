@@ -70,8 +70,8 @@ class ChildController extends Controller
         $input=$request->all();
         $validator=Validator::make($input,[
             'name' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'string', 'email', 'max:255'],
-            'father_id' => ['required', 'string', 'max:20'],
+            'status' => ['required', 'string', 'max:255'],
+            'father_id' => ['required', 'int'],
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());

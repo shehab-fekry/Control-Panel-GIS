@@ -21,14 +21,14 @@
         <!--   Axios   -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://use.fontawesome.com/e8ca812c5b.js"></script>
-    
-    </head>
-    
 
-<div class="row justify-content-center">
+    </head>
+
+
+<div class="row justify-content-center" style="margin-top:100px;">
     <div class="col-md-8">
         <div class="card-group">
-            <div class="card p-4">
+            <div class="card p-4" style=" border-radius:20px;">
                 <div class="card-body">
                     @if(session()->has('message'))
                         <p class="alert alert-info">
@@ -58,12 +58,12 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary px-4">
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-warning px-4">
                                     Verify
                                 </button>
                             </div>
-                            <div class="col-6 text-right">
+                            <div class="col-2 text-right">
                                 <a class="btn btn-danger px-4" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                                     {{ trans('logout') }}
                                 </a>

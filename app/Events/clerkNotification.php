@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class clerkNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    protected $message,$id;
+    public $message,$id;
 
     /**
      * Create a new event instance.
@@ -35,10 +35,10 @@ class clerkNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('school.'.$this->id);
+        return new Channel('school.'.$this->id);
     }  public function broadcastAs()
     {
-        return 'Gizawy2';
+        return 'ClerkNotify';
     }
 
 

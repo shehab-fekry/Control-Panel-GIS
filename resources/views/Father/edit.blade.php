@@ -70,7 +70,7 @@
                         </select>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button update-btn" type="submit">Save Profile</button>
                         </form>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                            @enderror
                 <div class="col-md-12"><label class="labels"  for="password-confirm">Confirm Password</label><input  type="password" id="password-confirm" placeholder="Reset Password" class="form-control"  name="password_confirmation"  required autocomplete="new-password"/></div>
             </div>
-            <div class="my-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Reset Password"/>
+            <div class="my-5 text-center"><input class="btn btn-primary profile-button update-btn" type="submit" value="Reset Password"/>
 
         </form>
     </div>
