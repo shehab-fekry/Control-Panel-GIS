@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class notification implements ShouldBroadcast
+class clerkNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     protected $message,$id;
@@ -23,8 +23,8 @@ class notification implements ShouldBroadcast
 
     public function __construct($data)
     {
-        $this->message=$data->message;
-        $this->id=$data->id;
+        $this->message=$data['message'];
+        $this->id=$data['school_id'];
 
     }
 
@@ -35,7 +35,7 @@ class notification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('trip_notify.'.$this->id);
+        return new PrivateChannel('school.'.$this->id);
     }  public function broadcastAs()
     {
         return 'Gizawy2';

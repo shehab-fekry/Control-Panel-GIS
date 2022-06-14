@@ -11,6 +11,10 @@ use App\Models\Father;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Events\tripNotification;
+use App\Events\clerkNotification;
+use App\Http\Resources\FatherResource;
+use Illuminate\Database\Eloquent\Collection;
+
 class TripController extends BaseController
 {
     public function start(request $request){
@@ -33,36 +37,54 @@ class TripController extends BaseController
         $data=array();
          $request_lat=deg2rad($request->lit);
          $request_lon=deg2rad($request->lng);
+         $collection=new Collection();
+
         foreach($fathers as $father)
         {
+            $arr=array();
             $father_lat=deg2rad($father->lit);
             $father_lon=deg2rad($father->lng);
             $count=1;
             $children=Child::where("father_id",$father->id)->where('status',true)->get();
-            $data[$father->name]=array();
+
             $ln=$father_lon-$request_lon;
             $li=$father_lat-$request_lat;
             $val = pow(sin($li/2),2)+cos($request_lat)*cos($father_lat)*pow(sin($ln/2),2);
             $res = 2 * asin(sqrt($val));
             $radius = 6371;
             $distance=($res*$radius)*1000;
-            $data[$father->name]+=array('distance'=>$distance);
-            $data[$father->name]+=array('id'=>$father->id);
-            $data[$father->name]+=array('lng'=>$father->lng);
-            $data[$father->name]+=array('lit'=>$father->lit);
+            $arr+=array('distance'=>$distance);
+            $arr+=array('name'=>$father->name);
+            $arr+=array('id'=>$father->id);
+            $arr+=array('lng'=>$father->lng);
+            $arr+=array('lit'=>$father->lit);
             foreach($children as $child)
             {
-                $data[$father->name]+=array($count=>$child->name);
+                $arr+=array($count=>$child->name);
                 $count++;
             }
+
+            // $data+=array(array($arr));
+        //     $collection2 = collect($arr);
+        //   array_push($data,$collection2);
+        $collection->push($arr);
         }
-        $collection = collect($data);
+
+
         $sorted = $collection->sortBy('distance');
-        // event(new showTrip($data));
+
+        // $fathers=new FatherResource($sorted);
+        // notification fo parents
         $notification['trip_id']=$trip->id;
         $notification['message']='the trip is started you will get a notification when it is get close to your home';
+
         event(new tripNotification($notification));
-        return $this-> sendResponse($sorted,'father information updated successfully');
+
+        //notifications fot clerk and admin
+        $notification2['school_id']=$driver->school_id;
+        $notification2['message']="driver:".$driver->name." start trip:".$trip->name;
+        event(new clerkNotification($notification2));
+        return $this->sendResponse(new FatherResource($sorted),'trip information retrived successfully');
 
     }
     public function delivered(){
@@ -86,9 +108,15 @@ class TripController extends BaseController
         }
         $trip->status=2;
         $trip->save();
-        $notification['trip_id']=$trip->id;
+        //notifications for parents
+        $notification['trip_id']=$driver->trip_id;
         $notification['message']='the bus is delivered to school you will get a notification when it is come back from school';
         event(new tripNotification($notification));
+         //notifications fot clerk and admin
+         $notification2['school_id']=$driver->school_id;
+         $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."delivered to school";
+         event(new clerkNotification($notification2));
+
         return $this-> sendResponse("",'the trip is delivered to school succefully you could start the back trip at any time');
     }
     public function backHome(){
@@ -111,9 +139,14 @@ class TripController extends BaseController
             case 2:
                 $trip->status=3;
                 $trip->save();
+                //parents notification
                 $notification['trip_id']=$trip->id;
                 $notification['message']='the bus is coming back to home';
                 event(new tripNotification($notification));
+                 //notifications fot clerk and admin
+        $notification2['school_id']=$driver->school_id;
+        $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."backing to home";
+        event(new clerkNotification($notification2));
                 return $this-> sendResponse("",'the trip is backing to home');
             case 3:
                 return $this->sendError('please validate errors','the trip is alredy backing from school');
@@ -144,6 +177,10 @@ class TripController extends BaseController
         }
         $trip->status=0;
         $trip->save();
+         //notifications fot clerk and admin
+         $notification2['school_id']=$driver->school_id;
+         $notification2['message']="driver:".$driver->name." end the trip:".$trip->name."successfully";
+         event(new clerkNotification($notification2));
         return $this-> sendResponse("",'the trip is ended successfully');
 
     }
