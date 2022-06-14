@@ -81,11 +81,12 @@ class AuthController extends BaseController
         $validator= Validator::make($input, [
             'name' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255','unique:drivers',],
+              'code'=>['required','string','exists:schools,code'],
              'password' => ['required', 'string', 'min:8','confirmed'],
             //'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'],
             'mobileNumber'=>['required','min:11','max:11'],
             'licenseNumber' => ['required','string',"unique:drivers,licenseNumber"],
-            'code'=>['required','string','exists:schools,code'],
+
 
         ]);
         if($validator->fails()){
@@ -112,7 +113,7 @@ class AuthController extends BaseController
             $id =Auth::guard('driver')->id();
             $driver=Driver::find($id);
             $success['token']=$driver->createToken('driver')->accessToken;
-            
+
             $driver->api_token=$success['token'];
             $driver->save();
             $success['driver']=$driver;

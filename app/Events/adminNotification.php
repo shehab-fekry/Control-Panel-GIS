@@ -36,7 +36,7 @@ class adminNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('trip_notify.'.$this->id);
+        return new Channel('admin_notify.'.$this->id);
     }  public function broadcastAs()
     {
         return 'Gizawy2';
