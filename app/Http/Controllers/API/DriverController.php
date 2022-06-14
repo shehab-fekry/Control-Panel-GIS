@@ -52,7 +52,7 @@ class DriverController extends BaseController
 
     }
 
-    public function destroy(Driver $driver)
+    public function destroy()
     {
         $id=Auth::guard('api-drivers')->id();
        Driver::find($id)->delete();

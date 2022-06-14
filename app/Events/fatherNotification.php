@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class father implements ShouldBroadcast
+class fatherNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $father_id;
@@ -32,7 +32,7 @@ class father implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'Gizawy';
+        return 'fatherNotify';
     }
 
 }

@@ -82,7 +82,7 @@ class TripController extends BaseController
 
         //notifications fot clerk and admin
         $notification2['school_id']=$driver->school_id;
-        $notification2['message']="driver:".$driver->name." start trip:".$trip->name;
+        $notification2['message']="driver:".$driver->name." start trip:".$trip->geofence;
         event(new clerkNotification($notification2));
         return $this->sendResponse(new FatherResource($sorted),'trip information retrived successfully');
 

@@ -157,7 +157,6 @@
     $('.toggle-class').change(function() {
         var confirmed = $(this).prop('checked') == true ? 1 : 0;
         var mid = $(this).data('id');
-
         $.ajax({
             type: "get",
             dataType: "json",
