@@ -12,7 +12,8 @@ use App\Models\Trip;
 use App\Http\Resources\DriverResource;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use App\Models\User;
+use App\Events\adminNotification;
 class DriverController extends BaseController
 {
     public function show()
@@ -25,8 +26,7 @@ class DriverController extends BaseController
     public function update(Request $request)
     {
         $id=Auth::guard('api-drivers')->id();
-        $driver=driver::get()->find($id);
-
+        $driver=driver::find($id);
         $input=$request->all();
         $validator=Validator::make($input,[
             'name' => ['required','string', 'max:30',],
@@ -44,10 +44,13 @@ class DriverController extends BaseController
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
         $driver->image_path=$input['image_path'];
+        $driver->confirmed=0;
         $driver->save();
-
-
-
+          //admin notification
+          $admin=User::where('school_id',$driver->school_id)->where('is_admin',1)->first();
+          $notification['id']=$admin->id;
+          $notification['message']='driver:'.$driver->name."update his information";
+          event(new adminNotification($notification));
         return $this-> sendResponse(new driverResource($driver),'driver information updated successfully');
 
     }
@@ -55,8 +58,13 @@ class DriverController extends BaseController
     public function destroy()
     {
         $id=Auth::guard('api-drivers')->id();
-       Driver::find($id)->delete();
-
+       $driver=Driver::find($id);
+        //admin notification
+        $admin=User::where('school_id',$driver->school_id)->where('is_admin',1)->first();
+        $notification['id']=$admin->id;
+        $notification['message']='driver:'.$driver->name."update his information";
+        event(new adminNotification($notification));
+        $driver->delete();
         return $this-> sendResponse("you are logged out",'Account deleted successfully');
     }
 }
