@@ -144,11 +144,11 @@ class TripController extends BaseController
                 $notification['message']='the bus is coming back to home';
                 event(new tripNotification($notification));
                  //notifications fot clerk and admin
-        $notification2['school_id']=$driver->school_id;
-        $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."backing to home";
-        event(new clerkNotification($notification2));
+                $notification2['school_id']=$driver->school_id;
+                $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."backing to home";
+                event(new clerkNotification($notification2));
                 return $this-> sendResponse("",'the trip is backing to home');
-            case 3:
+                 case 3:
                 return $this->sendError('please validate errors','the trip is alredy backing from school');
 
         }

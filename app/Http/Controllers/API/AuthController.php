@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\School;
+use App\Models\User;
+Use App\Events\adminNotification;
 class AuthController extends BaseController
 {
 
@@ -42,6 +44,11 @@ class AuthController extends BaseController
         $input['password']=Hash::make($input['password']);
         $father=Father::create($input);
         $success['father_name']=$father->name;
+         //admin notification
+         $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+         $notification['id']=$admin->id;
+         $notification['message']='new parent account registered with name:'.$father->name;
+         event(new adminNotification($notification));
         return $this-> sendResponse($success,'father registered successfully');
     }
     public function fatherLogin(Request $request){
@@ -104,6 +111,11 @@ class AuthController extends BaseController
         // $token=$driver->createToken('PassportExample@Section.io')->accessToken;;
         $success['driver_name']=$driver->name;
         $success['SchoolName']=$school->name;
+         //admin notification
+         $admin=User::where('school_id',$driver->school_id)->where('is_admin',1)->first();
+         $notification['id']=$admin->id;
+         $notification['message']='new driver account registered with name:'.$driver->name;
+         event(new adminNotification($notification));
         return $this-> sendResponse($success,'driver registered successfully');
     }
     public function driverLogin(Request $request){

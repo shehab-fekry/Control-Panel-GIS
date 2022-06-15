@@ -62,13 +62,10 @@ class ChildController extends BaseController
         $child=Child::create($input);
         $child->get();
         // admin notification
-        $admin_id= User::where("school_id",$father->school_id)->where("is_admin",1)->first();
-        $message="Father:".$father->name ." added new child ".$child->name." to his childrens";
-        $data=array(
-            'message'=>$message,
-            'id'=>$admin_id
-        );
-        event(new adminNotification($data));
+        $admin=User::where("school_id",$father->school_id)->where("is_admin",1)->first();
+       $notification['id']=$admin->id;
+        $notification['message']="Father:".$father->name ." added new child ".$child->name." to his childrens";
+        event(new adminNotification($notification));
         return $this->sendResponse($child,'child added successfully');
     }
     public function show($id)
@@ -89,9 +86,11 @@ class ChildController extends BaseController
 
     public function update(Request $request,$id)
     {
+        $id=Auth::guard('api-fathers')->id();
+        $father=Father::find($id);
         $child=Child::get()->find($id);
 
-        if(Auth::guard('api-fathers')->id()!==$child->father_id){
+        if($id!==$child->father_id){
         return $this->sendError('please validate errors',"you are not authorized to do this action");
         }
         $input=$request->all();
@@ -112,7 +111,13 @@ class ChildController extends BaseController
         $child->class=$input['class'];
         $child->age=$input['age'];
         $child->image_path=$input['image_path'];
+        $child->confirmed=0;
         $child->save();
+           //admin notification
+           $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+           $notification['id']=$admin->id;
+           $notification['message']='parent:'.$father->name."update his child information";
+           event(new adminNotification($notification));
         return $this-> sendResponse(new ChildResource($child),'child information updated successfully');
     }
 
@@ -138,12 +143,24 @@ class ChildController extends BaseController
             $father->status=$father->status+1;
             $child->save();
             $father->save();
+               //admin notification
+        $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+        $notification['id']=$admin->id;
+        $notification['message']='parent:'.$father->name."update his child status to true";
+        event(new adminNotification($notification));
+
             return $this-> sendResponse(new ChildResource($child),'child status updated to true successfully');
          }else{
             $child->status=false;
             $father->status=$father->status-1;
             $child->save();
             $father->save();
+            //admin notification
+            $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+            $notification['id']=$admin->id;
+            $notification['message']='parent:'.$father->name."update his child status to false";
+            event(new adminNotification($notification));
+
             return $this-> sendResponse(new ChildResource($child),'child status updated to false successfully');
          }
     }
@@ -160,6 +177,12 @@ class ChildController extends BaseController
             $father->save();
         }
         $child->delete();
+           //admin notification
+           $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+           $notification['id']=$admin->id;
+           $notification['message']='parent:'.$father->name."delete one of his childrens";
+           event(new adminNotification($notification));
+
         return $this-> sendResponse(new ChildResource($child),'child information deleted successfully');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\adminNotification;
 use App\Models\Child;
 use App\Models\Father;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Http\Resources\FatherResource;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Trip;
+use App\Models\User;
 
 class FatherController extends BaseController
 {
@@ -79,8 +81,13 @@ class FatherController extends BaseController
         $father->image_path=$input['image_path'];
         $father->lng=$input['lng'];
         $father->lit=$input['lit'];
+        $father->confirmed=0;
         $father->save();
-
+        //admin notification
+        $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+        $notification['id']=$admin->id;
+        $notification['message']='parent:'.$father->name."update his information";
+        event(new adminNotification($notification));
 
 
         return $this-> sendResponse(new fatherResource($father),'father information updated successfully');
@@ -128,8 +135,14 @@ class FatherController extends BaseController
         if(count($children)>0){
           $children->delete();
         }
-        Father::find($id)->delete();
 
+        $father=Father::find($id);
+        //admin notification
+        $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
+        $notification['id']=$admin->id;
+        $notification['message']='parent:'.$father->name."deleted his account!";
+        event(new adminNotification($notification));
+        $father->delete();
         return $this-> sendResponse("you are logged out",'Account deleted successfully');
     }
 
