@@ -1,0 +1,185 @@
+/* Admin styles */
+
+.adminNotify{
+    background: #ffc107;
+    padding: 20px 40px;
+    min-width: 420px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    border-radius: 4px;
+    border-left: 8px solid #384850;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .adminNotify.showAlert{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .adminNotify.show{
+    animation: show_slide 1s ease forwards;
+  }
+  @keyframes show_slide {
+    0%{
+      transform: translateX(100%);
+    }
+    40%{
+      transform: translateX(-10%);
+    }
+    80%{
+      transform: translateX(0%);
+    }
+    100%{
+      transform: translateX(-10px);
+    }
+  }
+  .adminNotify.hide{
+    animation: hide_slide 1s ease forwards;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s linear;
+  
+  }
+   @keyframes hide_slide {
+    0%{
+      transform: translateX(-10px);}
+    }
+    /*}
+    40%{
+      transform: translateX(0%);
+    }
+    80%{
+      transform: translateX(-10%);
+    }
+    100%{
+      transform: translateX(100%);
+    }
+  } */
+  
+  .adminNotify .fa-exclamation-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #384850;
+    font-size: 30px;
+  }
+  .adminNotify .admin-msg{
+    padding: 0 20px;
+    font-size: 18px;
+    color: #384850;
+  }
+  .adminNotify .admin-close-btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #384850;
+    padding: 20px 18px;
+    cursor: pointer;
+  }
+  .adminNotify .admin-close-btn:hover{
+    background: #ffc766;
+  }
+  .adminNotify .admin-close-btn .fas{
+    color: #ffc107;
+    font-size: 22px;
+    line-height: 40px;
+  }
+
+
+
+
+
+
+
+/* Clerk Styles */
+
+  .clerkNotify{
+    background: #ffc107;
+    padding: 20px 40px;
+    min-width: 420px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    border-radius: 4px;
+    border-left: 8px solid #384850;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .clerkNotify.showAlert{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .clerkNotify.show{
+    animation: show_slide 1s ease forwards;
+  }
+  @keyframes show_slide {
+    0%{
+      transform: translateX(100%);
+    }
+    40%{
+      transform: translateX(-10%);
+    }
+    80%{
+      transform: translateX(0%);
+    }
+    100%{
+      transform: translateX(-10px);
+    }
+  }
+  .clerkNotify.hide{
+    animation: hide_slide 1s ease forwards;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s linear;
+  
+  }
+   @keyframes hide_slide {
+    0%{
+      transform: translateX(-10px);}
+    }
+    /*}
+    40%{
+      transform: translateX(0%);
+    }
+    80%{
+      transform: translateX(-10%);
+    }
+    100%{
+      transform: translateX(100%);
+    }
+  } */
+  
+  .clerkNotify .fa-exclamation-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #384850;
+    font-size: 30px;
+  }
+  .clerkNotify .clerk-msg{
+    padding: 0 20px;
+    font-size: 18px;
+    color: #384850;
+  }
+  .clerkNotify .clerk-close-btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #384850;
+    padding: 20px 18px;
+    cursor: pointer;
+  }
+  .clerkNotify .clerk-close-btn:hover{
+    background: #ffc766;
+  }
+  .clerkNotify .clerk-close-btn .fas{
+    color: #ffc107;
+    font-size: 22px;
+    line-height: 40px;
+  }
