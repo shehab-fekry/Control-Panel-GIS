@@ -6,23 +6,21 @@
 
 
 let state = {
-    pusher: {},
     channel: {},
     previewMap: {},
     trackingMap: {},
     marker: {},
-    prevDiv: {},
+    prevStep: {},
     currentStep: {},
     mapLoaded: false,
     locationIndex: 0,
     action: '',
-    APITrips: {},
 }
  
 
 // ----------------------------------------------- Live Track -----------------------------------------------------
 
-pusher = new Pusher('d363addb971561dc7e96', {cluster: 'eu'});
+let pusher = new Pusher('a7171d09fe99b7303a96', {cluster: 'eu'});
 
 const initTrack = (tripIndex) => {
     // reblace this line when you are local
@@ -147,8 +145,8 @@ const initTrack = (tripIndex) => {
 
 const changeChannel = () => {
     Pusher.logToConsole = false;
-    state.channel = pusher.subscribe('new_notify.' + state.driverID);
-    state.channel.bind("Gizawy", async (data) => {
+    state.channel = pusher.subscribe('trip.' + state.driverID);
+    state.channel.bind("triplocation", async (data) => {
         if (!state.mapLoaded) return
 
         let langLong = [data.latitude, data.longitude]
@@ -156,8 +154,8 @@ const changeChannel = () => {
         // Styling the previous steps
         if(state.locationIndex !== 0)
         {
-            state.prevDiv = state.marker.getElement()
-            state.prevDiv.className = 'prevStep mapboxgl-marker mapboxgl-marker-anchor-center'
+            state.prevStep = state.marker.getElement()
+            state.prevStep.className = 'prevStep mapboxgl-marker mapboxgl-marker-anchor-center'
         }
 
         // Drawing the current step

@@ -28,43 +28,43 @@
     @endif
 
     @if (Auth::user()->is_admin == 1 && Auth::user()->school_id == NULL) {{-- if user is a admin & if user is a school admin and not assigned to a school --}} 
-        <!-- Create School Card -->
-        <div class="createSchool"> 
-            <div class="createSchool-title">Add New School</div>
-            <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
-                @csrf
-                <div class="inputPart">
-                    <input id="SchoolName" type="text" name="name" placeholder="School Name">
-                    <input type="hidden" name="location" id="hiddenInput" value="">
-                    <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
-                </div>
-                <div class="submitPart">
-                    <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
-                </div>
-            </form>
-        </div> 
+    <!-- Create School Card -->
+    <div class="createSchool"> 
+        <div class="createSchool-title">Add New School</div>
+        <form action="{{route('school.store')}}" method="POST" class="createShoolForm" enctype="multipart/form-data">
+            @csrf
+            <div class="inputPart">
+                <input id="SchoolName" type="text" name="name" placeholder="School Name">
+                <input type="hidden" name="location" id="hiddenInput" value="">
+                <div id="location" name="location" class="btn red" onclick="getLocation()">Location</div>
+            </div>
+            <div class="submitPart">
+                <button class="btn trackingBtn btnColor" id="submit" disabled="true" type="submit">Create</button>
+            </div>
+        </form>
+    </div> 
     @endif         
 
 
     @if (Auth::user()->school_id  ==! NULL)  {{-- if user is assigned to a school --}}
-        <!-- School Main Card -->
-        <div class="card" style="width: 90%;" id="schoolCard">
+    <!-- School Main Card -->
+    <div class="card" style="width: 90%;" id="schoolCard">
         <div class="card-body">
             <h5 class="card-title" style="color: #384850">{{$school->name}} School<span class="card-code">#{{$school->code}}</span></h5>
             <div class="card-map" id="map"></div>
             <div class="card-foot mt-2">
-    @if (Auth::user()->is_admin == 0) {{-- if user is a clerk --}}
+            @if (Auth::user()->is_admin == 0) {{-- if user is a clerk --}}
                 <form action="{{route('school.left',$school->id)}}" method="POST">
                     @csrf
                     <button class="btn trackingBtn btnColor" style="margin-right: 10px" type="submit">
                         Leave
                     </button>
                 </form>
-    @endif
+            @endif
 
-    @if (Auth::user()->is_admin == 1) {{-- if user is a admin --}}
-                <button class="btn trackingBtn btnColor" onclick="confirmDelete()">Delete</button>
-    @endif
+            @if (Auth::user()->is_admin == 1) {{-- if user is a admin --}}
+            <button class="btn trackingBtn btnColor" onclick="confirmDelete()">Delete</button>
+            @endif
             </div>
         </div>
     </div>
@@ -74,21 +74,20 @@
     <div class="delete-modal" id="delete-modal">
         <div class="delete-modal-header">Are you sure you want to delete school?</div>
         <div class="delete-modal-body">
-            this operation will also include deletion of all school related data...   
+            this operation will also include deletion of all school related data.   
         </div>
-@if (Auth::user()->school_id  ==! NULL) {{-- if user is assigned to a school --}}
-    <div class="delete-modal-footer">
+        @if (Auth::user()->school_id  ==! NULL) {{-- if user is assigned to a school --}}
+        <div class="delete-modal-footer">
             <button class="btn trackingBtn btnColor" style="margin-right: 10px" onclick="Cancel()">Cancel</button>
-                <form action="{{route('school.destroy',$school->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn red" style="margin-right: 10px" type="submit">
-                        Delete
-                    </button>
-                </form> 
+            <form action="{{route('school.destroy',$school->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn red" style="margin-right: 10px" type="submit">
+                    Delete
+                </button>
+            </form> 
         </div>
-@endif
-        
+        @endif
     </div>
 
     <!-- tracking.js  -->
