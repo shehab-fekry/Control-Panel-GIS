@@ -1,8 +1,8 @@
 @extends('layouts.master')
-
 @section('content')
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
-
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <div class="bus-container">
     <div class="row">
         @if( $driver->count() <1 )
@@ -23,7 +23,12 @@
                             <a type="submit" class="btn btn-light" href="{{route('driver.show',$drivers->id)}}">Profile</a>
                         </div>
                         <div class="col-sm-4">
-                            <span  class="badge <?php echo ($drivers['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($drivers['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span>
+                            {{-- /////////////////////////////////////////////////////// --}}
+                                <span class="badge" >
+                                    <input data-id="{{$drivers->id}}" class="toggle-class " type="checkbox"  data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $drivers->confirmed ? 'checked' : '' }}>
+                                </span>
+                            {{-- /////////////////////////////////////////////////////// --}}
+                            {{-- <span  class="badge <?php echo ($drivers['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($drivers['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> --}}
                         </div>
                     </div>
                 </div>
@@ -78,6 +83,25 @@
     </div>
     @endif
 
+    <script>
+        $(function() {
+          $('.toggle-class').change(function() {
+              var confirmed = $(this).prop('checked') == 1 ? 1 : 0;
+              var mid = $(this).data('id');
+              $.ajax({
+                  type: "get",
+                  dataType: "json",
+                  url: '{{ route('changeDriverStatus') }}',
+                  data: {
+      
+                    'confirmed': confirmed, 'mid': mid},
+                  success: function(data){
+                    console.log(data.success)
+                  }
+              });
+          })
+        })
+      </script>
 
 
     @endsection
