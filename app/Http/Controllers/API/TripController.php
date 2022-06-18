@@ -19,22 +19,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TripController extends BaseController
 {
-    public function start(request $request){
+
+    public static function tripparents($request){
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
-        if($driver->confirmed==false)
-        {
-            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
-
-        }elseif($driver->trip_id==null)
-        {
-            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
-        }elseif($trip->status>0){
-            return $this->sendError('please validate errors','the trip is alredy started');
-        }
-        $trip->status=1;
-         $trip->save();
         $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
         $data=array();
          $request_lat=deg2rad($request->lit);
@@ -69,6 +58,25 @@ class TripController extends BaseController
         }
 
         $sorted = $collection->sortBy('distance');
+        return $sorted;
+    }
+    public function start(request $request){
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::get()->find($id);
+        $trip=Trip::get()->find($driver->trip_id);
+        if($driver->confirmed==false)
+        {
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($driver->trip_id==null)
+        {
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+        }elseif($trip->status>0){
+            return $this->sendError('please validate errors','the trip is alredy started');
+        }
+        $trip->status=1;
+         $trip->save();
+       $sorted= TripController::tripparents($request);
         $data['fathers']=new FatherResource($sorted);
         $data['school']=School::where('id',$driver->school_id)->first();
         $data['trip']=$trip;
@@ -137,39 +145,7 @@ class TripController extends BaseController
             case 2:
                 $trip->status=3;
                 $trip->save();
-                $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
-                $data=array();
-                 $request_lat=deg2rad($request->lit);
-                 $request_lon=deg2rad($request->lng);
-                 $collection=new Collection();
-
-                foreach($fathers as $father)
-                {
-                    $arr=array();
-                    $father_lat=deg2rad($father->lit);
-                    $father_lon=deg2rad($father->lng);
-                    $count=1;
-                    $children=Child::where("father_id",$father->id)->where('status',true)->get();
-
-                    $ln=$father_lon-$request_lon;
-                    $li=$father_lat-$request_lat;
-                    $val = pow(sin($li/2),2)+cos($request_lat)*cos($father_lat)*pow(sin($ln/2),2);
-                    $res = 2 * asin(sqrt($val));
-                    $radius = 6371;
-                    $distance=($res*$radius)*1000;
-                    $arr+=array('distance'=>$distance);
-                    $arr+=array('name'=>$father->name);
-                    $arr+=array('id'=>$father->id);
-                    $arr+=array('lng'=>$father->lng);
-                    $arr+=array('lit'=>$father->lit);
-                    foreach($children as $child)
-                    {
-                        $arr+=array($count=>$child->name);
-                        $count++;
-                    }
-                $collection->push($arr);
-                }
-                $sorted = $collection->sortBy('distance');
+                $sorted= TripController::tripparents($request);
                 $data['fathers']=new FatherResource($sorted);
                 // $data['school']=School::where('id',$driver->school_id)->first();
                 $data['trip']=$trip;

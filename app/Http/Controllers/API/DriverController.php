@@ -46,6 +46,9 @@ class DriverController extends BaseController
         $driver->image_path=$input['image_path'];
         $driver->confirmed=false;
         $driver->save();
+        if($driver->trip_id==null){
+            $driver->trip_id=-1;
+            }
           //admin notification
           $admin=User::where('school_id',$driver->school_id)->where('is_admin',1)->first();
           $notification['id']=$admin->id;
