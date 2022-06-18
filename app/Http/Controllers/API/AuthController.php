@@ -58,11 +58,12 @@ class AuthController extends BaseController
 
             $id =Auth::guard('father')->id();
             $father=Father::find($id);
-
             $success['token']=$father->createToken('ahmed')->accessToken;
             $father->api_token=$success['token'];
             $father->save();
-
+            if($father->trip_id==null){
+                $father->trip_id=-1;
+            }
             $success['father']=$father;
             $school=$father->school()->first();
             $success['schoolName']=$school->name;
@@ -128,6 +129,9 @@ class AuthController extends BaseController
 
             $driver->api_token=$success['token'];
             $driver->save();
+            if($driver->trip_id==null){
+                $driver->trip_id=-1;
+            }
             $success['driver']=$driver;
             return $this-> sendResponse($success,'driver login successfully');
         }

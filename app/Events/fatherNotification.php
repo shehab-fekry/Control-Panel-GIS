@@ -13,11 +13,12 @@ use Illuminate\Queue\SerializesModels;
 class fatherNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $father_id;
+    public $father_id,$message;
 
-    public function __construct($data)
+    public function __construct($id)
     {
-        $this->father_id=$data['father_id'];
+        $this->father_id=$id;
+        $this->message='the bus has get closer to your house!get ready';
 
     }
 

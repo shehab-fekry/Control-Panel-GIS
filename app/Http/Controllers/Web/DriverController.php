@@ -14,23 +14,23 @@ use Illuminate\Validation\Rule;
 class DriverController extends Controller
 {
 
-    public function index() 
+    public function index()
     {
         $admin=Auth::user()->school_id;
-        
+
         if($admin ==null){
             return redirect()->route('school.index');
 
         }
         $driver = Driver::where("school_id",$admin)->latest()->paginate(6);
-      
+
         return view("driver.index",compact("driver"));
     }
 
     public function create()
     {
         $admin=Auth::user()->school_id;
-        
+
         if($admin ==null){
             return redirect()->route('school.index');
         }
@@ -52,7 +52,7 @@ class DriverController extends Controller
         }
         Driver::create([
             'name' => $data['name'],
-            'email' => $data['email'], 
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'licenseNumber' => $data['licenseNumber'],
             'mobileNumber' => $data['mobileNumber'],
@@ -93,6 +93,7 @@ class DriverController extends Controller
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
+            
         }
         $driver->name=$input['name'];
         $driver->email=$input['email'];

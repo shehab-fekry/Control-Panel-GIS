@@ -81,7 +81,7 @@ class FatherController extends BaseController
         $father->image_path=$input['image_path'];
         $father->lng=$input['lng'];
         $father->lit=$input['lit'];
-        $father->confirmed=0;
+        $father->confirmed=false;
         $father->save();
         //admin notification
         $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
@@ -107,7 +107,7 @@ class FatherController extends BaseController
                  if($trip->status==0){
                       return $this->sendError('please validate errors','you do not have any child  going to school today please update your children status before the trip is start');
                     }else{
-                       return $this->sendError('please validate errors','you do not have any child  going to school today and the trip is alredy started');
+                       return $this->sendError('please validate errors','you do not have any child  going to school today and the trip is alredy started!');
                     }
         }
         switch($trip->status)

@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class vehicle extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillabxwle=[
         'licensePlate','model','color','driver_id','model','school_id'
     ];
     public function driver()
     {
         return $this->belongsTo(Driver::class);
     }
-    
+
 }
