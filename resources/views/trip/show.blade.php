@@ -9,7 +9,7 @@
 <div class="tripDetails-wrapper">
     <div class="card" style="width: 90%;">
         <div class="card-body">
-            <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#{{$trip->id}}</span></h5>
+            <h5 class="details-card-title" style="color: #384850">Trip Details<span class="card-code">#{{$trip->id}}  {{$trip->geofence}}</span></h5>
             
             <div id="map" class="card-map mb-2"></div>
 

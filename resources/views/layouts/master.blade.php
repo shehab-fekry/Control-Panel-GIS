@@ -62,9 +62,9 @@
                 <img src="{{asset('upload/admin/'.Auth::user()->image_path)}} "  class="sidebar-img">
                 <h2>   {{ Auth::user()->name }} </h3>
                     @if (Auth::user()->is_admin == 1)
-                    <h4> School Manager </h4>
+                    <h4> School Admin </h4>
                     @else
-                    <h4> Clerk </h4>
+                    <h4> School Clerk </h4>
                     @endif
             </div>
         </div>
@@ -176,7 +176,7 @@
     Pusher.logToConsole = false;
 
     // Admin notification
-    let channelAdmin = pusher.subscribe('new_notify.' + state.driverID);
+    let channelAdmin = pusher.subscribe('admin.' + {{Auth::user()->id}});
     channelAdmin.bind("adminNotify", async (data) => {
         console.log(data)
         document.getElementById('admin-msg').innerText = data
@@ -192,8 +192,8 @@
         },3000);
     })
     // Clerk notification
-    let channelClerk = pusher.subscribe('new_notify.' + state.driverID);
-    channelClerk.bind("klerkNotify", async (data) => {
+    let channelClerk = pusher.subscribe('school.' + {{Auth::user()->school_id}});
+    channelClerk.bind("clerkNotify", async (data) => {
         console.log(data)
         document.getElementById('clerk-msg').innerText = data
         

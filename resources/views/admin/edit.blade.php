@@ -103,7 +103,7 @@
 
                                 </div>
                               </div>
-                              <div class="row">
+                              {{-- <div class="row">
 
 
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
@@ -113,13 +113,13 @@
 
 
                                     <input type="file" name="image_path" id="file" class="inputfile" class="upload-img" />
-                                                {{-- <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label> --}}
+                                               <label for="image_path" style="margin-left: -1px; margin-top: -10px;">Choose a file</label>
 
                                   </div>
 
                                 </div>
 
-                              </div>
+                              </div> --}}
 
 
 

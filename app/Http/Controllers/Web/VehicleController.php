@@ -44,13 +44,16 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $admin=Auth::user();
-        $request->validate([
-            'licensePlate' => ['required', 'string', 'max:10', 'unique:vehicles'],
+        $input=$request->all();
+        $validator=Validator::make($input,[
+            'licensePlate' => ['required', 'string', 'max:10',Rule::unique('vehicles')],
             'model' => ['string', 'max:20'],
-            'driver_id' => ['required','string', 'max:20'],
+            'driver_id' => ['string', 'max:20',Rule::unique('vehicles')],
             'color' => ['string', 'max:20'],
         ]);
-       
+        if($validator->fails()){
+            return redirect()->back()->with('error',$validator->errors()->all());
+        }       
         vehicle::create([
             'licensePlate' => $request['licensePlate'],
             'model' => $request['model'],
