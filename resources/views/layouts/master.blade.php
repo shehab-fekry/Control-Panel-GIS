@@ -22,17 +22,18 @@
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
     <!-- CSS Files -->
-    <link href="{{ asset("css/layout.css")       }}" rel="stylesheet">
-    <link href="{{ asset("css/landingPage.css")  }}" rel="stylesheet">
-    <link href="{{ asset("css/tracking.css")     }}" rel="stylesheet">
-    <link href="{{ asset("css/Drivers.css")      }}" rel="stylesheet">
-    <link href="{{ asset("css/Parents.css")      }}" rel="stylesheet">
-    <link href="{{ asset("css/alerts.css")       }}" rel="stylesheet">
-    <link href="{{ asset("css/confirmEmail.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/home.css")         }}" rel="stylesheet">
-    <link href="{{ asset("css/adminProfile.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/parentDriver.css") }}" rel="stylesheet">
-    <link href="{{ asset("css/deleteModal.css")  }}" rel="stylesheet">
+    <link href="{{ asset("css/layout.css")        }}" rel="stylesheet">
+    <link href="{{ asset("css/landingPage.css")   }}" rel="stylesheet">
+    <link href="{{ asset("css/tracking.css")      }}" rel="stylesheet">
+    <link href="{{ asset("css/Drivers.css")       }}" rel="stylesheet">
+    <link href="{{ asset("css/Parents.css")       }}" rel="stylesheet">
+    <link href="{{ asset("css/alerts.css")        }}" rel="stylesheet">
+    <link href="{{ asset("css/confirmEmail.css")  }}" rel="stylesheet">
+    <link href="{{ asset("css/home.css")          }}" rel="stylesheet">
+    <link href="{{ asset("css/adminProfile.css")  }}" rel="stylesheet">
+    <link href="{{ asset("css/parentDriver.css")  }}" rel="stylesheet">
+    <link href="{{ asset("css/deleteModal.css")   }}" rel="stylesheet">
+    <link href="{{ asset("css/notifications.css") }}" rel="stylesheet">
     <!--   mapbox  -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
@@ -152,6 +153,61 @@
         @yield("content")
     </div>
 
+    <!-- Admin Notification -->
+    <div class="adminNotify hide">
+        <span class='fas fa-exclamation-circle'></span>
+        <span id="admin-msg" class="admin-msg"></span>
+        <div class="admin-close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+    </div>
+    <!-- Clerk Notification -->
+    <div class="clerkNotify hide">
+        <span class='fas fa-exclamation-circle'></span>
+        <span id="clerk-msg" class="clerk-msg"></span>
+        <div class="clerk-close-btn">
+            <span class="fas fa-times"></span>
+        </div>
+    </div>
+
+
+<script>
+    pusher = new Pusher('a7171d09fe99b7303a96', {cluster: 'eu'});
+    Pusher.logToConsole = false;
+
+    // Admin notification
+    let channelAdmin = pusher.subscribe('new_notify.' + state.driverID);
+    channelAdmin.bind("adminNotify", async (data) => {
+        console.log(data)
+        document.getElementById('admin-msg').innerText = data
+        
+        $('.adminNotify').addClass("show");
+        $('.adminNotify').removeClass("hide");
+        $('.adminNotify').addClass("showAlert");
+            
+        setTimeout(function(){
+            $('.adminNotify').removeClass("show");
+            $('.adminNotify').addClass("hide");
+            $('.adminNotify').removeClass("showAlert");
+        },3000);
+    })
+    // Clerk notification
+    let channelClerk = pusher.subscribe('new_notify.' + state.driverID);
+    channelClerk.bind("klerkNotify", async (data) => {
+        console.log(data)
+        document.getElementById('clerk-msg').innerText = data
+        
+        $('.clerkNotify').addClass("show");
+        $('.clerkNotify').removeClass("hide");
+        $('.clerkNotify').addClass("showAlert");
+            
+        setTimeout(function(){
+            $('.clerkNotify').removeClass("show");
+            $('.clerkNotify').addClass("hide");
+            $('.clerkNotify').removeClass("showAlert");
+        },3000);
+    })
+</script>
 <!-- alerts.js -->
  <script src="{{ asset("js/alerts.js") }}"></script>
 <!-- index.js  -->

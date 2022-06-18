@@ -89,7 +89,6 @@ class DriverController extends Controller
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5',Rule::unique('drivers')->ignore($driver->id)],
             'confirmed' => ['required', 'int', 'max:20'],
             'trip_id' => ['required', 'int'],
-            'school_id' => ['required', 'int'],
             'mobileNumber' => ['required', 'string', 'max:20'],
         ]);
         if($validator->fails()){
@@ -102,7 +101,6 @@ class DriverController extends Controller
         $driver->licenseNumber=$input['licenseNumber'];
         $driver->confirmed=$input['confirmed'];
         $driver->trip_id=$input['trip_id'];
-        $driver->school_id=$input['school_id'];
         $driver->save();
         return redirect()->route("driver.index")->with('success','driver updated successfuly');
     }
@@ -132,6 +130,14 @@ class DriverController extends Controller
     {
         $driver->delete();
         return redirect()->route("driver.index")->with('success','driver deleted successfuly');
+    }
+
+    public function changeDriverStatus(Request $request )
+    {
+        $driver = Driver::find($request->mid);
+        $driver->confirmed = $request->confirmed;
+        $driver->save();
+        return response()->json(['success'=>'Status change successfully.']);
     }
 
 }

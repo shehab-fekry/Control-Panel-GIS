@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <link rel="stylesheet" href="{{ asset("css/Findex.css") }}">
 <div class="bus-container">
 
@@ -22,7 +23,12 @@
                                     <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
                                 </div>
                                 <div class="col-sm-4">
-                                    <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span>
+                                     {{-- /////////////////////////////////////////////////////// --}}
+                                <span class="badge" >
+                                    <input data-id="{{$parent->id}}" class="toggle-class " type="checkbox"  data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $parent->confirmed ? 'checked' : '' }}>
+                                </span>
+                            {{-- /////////////////////////////////////////////////////// --}}
+                                    {{-- <span  class="badge <?php echo ($parent['confirmed']=='1') ? 'bg-success' : 'bg-danger'; ?> "><?php echo ($parent['confirmed']=='1') ? 'Active' : 'Inactive'; ?></span> --}}
                                 </div>
                             </div>
                         </div>
@@ -93,24 +99,24 @@
 
 
          <script>
-              $(function() {
-    $('.toggle-class').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0;
-        var user_id = $(this).data('id');
-
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/changeStatus',
-            data: {'confirmed': confirmed, 'id': id},
-            success: function(data){
-              console.log(data.success)
-            }
-        });
-    })
-  })
-
-        </script>
+            $(function() {
+              $('.toggle-class').change(function() {
+                  var confirmed = $(this).prop('checked') == 1 ? 1 : 0;
+                  var mid = $(this).data('id');
+                  $.ajax({
+                      type: "get",
+                      dataType: "json",
+                      url: '{{ route('changeFatherStatus') }}',
+                      data: {
+          
+                        'confirmed': confirmed, 'mid': mid},
+                      success: function(data){
+                        console.log(data.success)
+                      }
+                  });
+              })
+            })
+          </script>
 
 </div>
 @endsection

@@ -7,7 +7,6 @@ use App\Models\Father;
 use App\Models\Child;
 use App\Models\vehicle;
 use Illuminate\Validation\Rule;
-
 use App\Models\School;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
@@ -47,19 +46,20 @@ class HomeController extends Controller
         $admin1=Auth::user();
         if ($admin == NULL) {
             $School = 0;
+            $childgoing = 0;
+            $childnotgoing = 0;
         } else {
-            $School = $admin1->school()->withCount([ 'children' ])->first()->children_count;
+            $School = $admin1->school()->withCount([ 'children' ])->first()->children_count;    
+            $childgoing  = Father::where("school_id",$admin)->sum('status');
+            $childnotgoing = $School - $childgoing;
         }
-        
-        
 
-
-        // $School = School::first();
-        // $School->children()->get();
 
         return view('home')
         ->with('countdriver',  Driver::where("school_id",$admin)->count())
         ->with('countfather',  Father::where("school_id",$admin)->count())
+        ->with('childgoing',  $childgoing)
+        ->with('childnotgoing',  $childnotgoing)
         ->with('countchild',  $School)
         ->with('countvehicle', vehicle::where("school_id",$admin)->count())
         ->with('tripstop', Trip::where('status',0)->where('school_id',$admin)->count())

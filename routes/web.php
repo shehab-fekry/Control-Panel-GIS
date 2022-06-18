@@ -62,10 +62,10 @@ Route::get('changeStatus', 'Web\FatherController@changeStatus')->name('changeSta
 Route::put('passwordReset', 'Web\FatherController@passwordReset')->name('passwordReset');
 // Add child 
 Route::post('store_Child', 'Web\FatherController@store_Child')->name('father.store_Child');
-
-
+Route::get('changeFatherStatus', 'Web\FatherController@changeFatherStatus')->name('changeFatherStatus');
 //////////////////////////////////// Route For driver///////////////////////////////////////////////////////////////// 
 Route::resource('driver',DriverController::class)->middleware('verified');
+Route::get('changeDriverStatus', 'Web\DriverController@changeDriverStatus')->name('changeDriverStatus');
 Route::put('DriverpasswordReset', 'Web\DriverController@DriverpasswordReset')->name('DriverpasswordReset');
 
 ////////////////////////////////// Route For vehicle ////////////////////////////////////////////////////////////////////////////////////////////////

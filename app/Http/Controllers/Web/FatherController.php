@@ -143,4 +143,11 @@ public function update(Request $request, Father $father)
         $father->delete();
         return redirect()->route("father.index")->with('success','father deleted successfuly');
     }
+    public function changeFatherStatus(Request $request )
+    {
+        $father = Father::find($request->mid);
+        $father->confirmed = $request->confirmed;
+        $father->save();
+        return response()->json(['success'=>'Status change successfully.']);
+    }
 }
