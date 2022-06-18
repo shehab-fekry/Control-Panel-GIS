@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Events\showTrip;
-use App\Events\notification;
+use App\Events\fatherNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +31,6 @@ Route::get("father/show","API\FatherController@show");
 Route::put("father/update","API\FatherController@update");
 Route::delete("father/delete","API\FatherController@destroy");
 Route::get("father/showBusDriver","API\FatherController@showBusDriver");
-
-
 Route::get("father/showTrip","API\FatherController@showTrip");
 ////////child operations//////////////
 
@@ -58,10 +56,15 @@ Route::middleware('auth:api-drivers')->group(function(){
         event(new showTrip($request));
         return response()->json(["message"=>"location changed"]);
     });
+    Route::put("fatherNotification/{id}",function($id){
+        event(new fatherNotification($id));
+        return response()->json(["message"=>"parent notified"]);
+    });
     Route::post('trip/start',"API\TripController@start");
     Route::post('trip/delivered',"API\TripController@delivered");
     Route::post('trip/backHome',"API\TripController@backHome");
     Route::post('trip/end',"API\TripController@end");
+    Route::get('trip/attendence',"API\TripController@attendence");
     });
 
     Route::get("trip/live/{id}","Web\TripController@live");

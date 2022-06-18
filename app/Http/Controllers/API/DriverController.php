@@ -44,7 +44,7 @@ class DriverController extends BaseController
         $driver->mobileNumber=$input['mobileNumber'];
         $driver->licenseNumber=$input['licenseNumber'];
         $driver->image_path=$input['image_path'];
-        $driver->confirmed=0;
+        $driver->confirmed=false;
         $driver->save();
           //admin notification
           $admin=User::where('school_id',$driver->school_id)->where('is_admin',1)->first();

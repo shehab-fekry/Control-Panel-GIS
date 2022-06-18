@@ -36,10 +36,10 @@ class adminNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('admin_notify.'.$this->id);
+        return new Channel('admin.'.$this->id);
     }  public function broadcastAs()
     {
-        return 'AdminNotify';
+        return 'adminNotify';
     }
 
 

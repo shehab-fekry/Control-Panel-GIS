@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\tripNotification;
 use App\Events\clerkNotification;
 use App\Http\Resources\FatherResource;
+use App\Http\Resources\ChildResource;
+use App\Models\School;
 use Illuminate\Database\Eloquent\Collection;
 
 class TripController extends BaseController
@@ -31,8 +33,8 @@ class TripController extends BaseController
         }elseif($trip->status>0){
             return $this->sendError('please validate errors','the trip is alredy started');
         }
-        // $trip->status=1;
-        // $trip->save();
+        $trip->status=1;
+         $trip->save();
         $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
         $data=array();
          $request_lat=deg2rad($request->lit);
@@ -63,17 +65,13 @@ class TripController extends BaseController
                 $arr+=array($count=>$child->name);
                 $count++;
             }
-
-            // $data+=array(array($arr));
-        //     $collection2 = collect($arr);
-        //   array_push($data,$collection2);
         $collection->push($arr);
         }
 
-
         $sorted = $collection->sortBy('distance');
-
-        // $fathers=new FatherResource($sorted);
+        $data['fathers']=new FatherResource($sorted);
+        $data['school']=School::where('id',$driver->school_id)->first();
+        $data['trip']=$trip;
         // notification fo parents
         $notification['trip_id']=$trip->id;
         $notification['message']='the trip is started you will get a notification when it is get close to your home';
@@ -84,7 +82,7 @@ class TripController extends BaseController
         $notification2['school_id']=$driver->school_id;
         $notification2['message']="driver:".$driver->name." start trip:".$trip->geofence;
         event(new clerkNotification($notification2));
-        return $this->sendResponse(new FatherResource($sorted),'trip information retrived successfully');
+        return $this->sendResponse($data,'trip information retrived successfully');
 
     }
     public function delivered(){
@@ -119,7 +117,7 @@ class TripController extends BaseController
 
         return $this-> sendResponse("",'the trip is delivered to school succefully you could start the back trip at any time');
     }
-    public function backHome(){
+    public function backHome(request $request){
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
@@ -139,6 +137,42 @@ class TripController extends BaseController
             case 2:
                 $trip->status=3;
                 $trip->save();
+                $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
+                $data=array();
+                 $request_lat=deg2rad($request->lit);
+                 $request_lon=deg2rad($request->lng);
+                 $collection=new Collection();
+
+                foreach($fathers as $father)
+                {
+                    $arr=array();
+                    $father_lat=deg2rad($father->lit);
+                    $father_lon=deg2rad($father->lng);
+                    $count=1;
+                    $children=Child::where("father_id",$father->id)->where('status',true)->get();
+
+                    $ln=$father_lon-$request_lon;
+                    $li=$father_lat-$request_lat;
+                    $val = pow(sin($li/2),2)+cos($request_lat)*cos($father_lat)*pow(sin($ln/2),2);
+                    $res = 2 * asin(sqrt($val));
+                    $radius = 6371;
+                    $distance=($res*$radius)*1000;
+                    $arr+=array('distance'=>$distance);
+                    $arr+=array('name'=>$father->name);
+                    $arr+=array('id'=>$father->id);
+                    $arr+=array('lng'=>$father->lng);
+                    $arr+=array('lit'=>$father->lit);
+                    foreach($children as $child)
+                    {
+                        $arr+=array($count=>$child->name);
+                        $count++;
+                    }
+                $collection->push($arr);
+                }
+                $sorted = $collection->sortBy('distance');
+                $data['fathers']=new FatherResource($sorted);
+                // $data['school']=School::where('id',$driver->school_id)->first();
+                $data['trip']=$trip;
                 //parents notification
                 $notification['trip_id']=$trip->id;
                 $notification['message']='the bus is coming back to home';
@@ -147,7 +181,7 @@ class TripController extends BaseController
                 $notification2['school_id']=$driver->school_id;
                 $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."backing to home";
                 event(new clerkNotification($notification2));
-                return $this-> sendResponse("",'the trip is backing to home');
+                return $this-> sendResponse($data,'the trip is backing to home');
                  case 3:
                 return $this->sendError('please validate errors','the trip is alredy backing from school');
 
@@ -183,6 +217,41 @@ class TripController extends BaseController
          event(new clerkNotification($notification2));
         return $this-> sendResponse("",'the trip is ended successfully');
 
+    }
+    public function attendence(){
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::get()->find($id);
+        $trip=Trip::get()->find($driver->trip_id);
+        if($driver->confirmed==false)
+        {
+            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+
+        }elseif($driver->trip_id==null)
+        {
+            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
+        }
+        $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
+        $data=array();
+        $collection=new Collection();
+       foreach($fathers as $father)
+       {
+           $arr=array();
+           $count=1;
+           $children=Child::where("father_id",$father->id)->where('status',true)->get();
+           $arr+=array('name'=>$father->name);
+           $arr+=array('id'=>$father->id);
+           $arr+=array('lng'=>$father->lng);
+           $arr+=array('lit'=>$father->lit);
+           $arr+=array('children'=>new ChildResource($children));
+        //    foreach($children as $child)
+        //    {
+        //        $arr+=array($count=>$child->name);
+        //        $count++;
+        //    }
+       $collection->push($arr);
+       }
+       $data=new FatherResource($collection);
+       return $this->sendResponse($data,'attendence list retrived successfully');
     }
 
 }

@@ -28,7 +28,7 @@ class tripNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('trip.'.$this->trip_id);
+        return new Channel ('trip.'.$this->trip_id);
     }
     public function broadcastAs()
     {
