@@ -89,7 +89,7 @@
                 <div class="col-sm-9">
                   @foreach($trips as  $trip )
                   @if( $trip->id == $driver->trip_id)
-                  <p class="text-muted mb-0"> {{$trip->geofence}}</p>
+                  <a href="{{route('trip.show',$trip->id)}}" class="text-muted mb-0">{{$trip->geofence}}
                   @endif
                   @endforeach
                 </div>

@@ -24,17 +24,16 @@ class FatherController extends BaseController
     if($father->confirmed==false){
         return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
     }
-    elseif($father->trip_id==null){
-
+    elseif($father->trip_id==null){ 
       return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
     }
     $trip = Trip::where('id',$father->trip_id)->first();
     $driver = $trip->driver()->first();
-      if($driver->count()==0 ){
+      if($driver == NUll){
       return $this->sendError('please validate errors','your trip do not have any driver yet please contact with one of school admins');
     }
     $vehicle = $trip->vehicle()->first();
-    if($vehicle->count()==0 ){
+    if($vehicle == NULL ){
    return $this->sendError('please validate errors','your trip do not have any vehicle yet please contact with one of school admins');
  }
     $response = ['driver'=>$driver,'vehicle'=>$vehicle];
@@ -104,8 +103,8 @@ class FatherController extends BaseController
 
         }elseif($father->trip_id==null){
 
-            return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
-        }elseif($father->status==0){
+            return $this->sendError('please validate errors','your account do not assigned to anytrip yet please contact with one of school admins');
+        }elseif($father->status==0){ 
 
                  if($trip->status==0){
                       return $this->sendError('please validate errors','you do not have any child  going to school today please update your children status before the trip is start');
