@@ -83,6 +83,9 @@ class FatherController extends BaseController
         $father->lit=$input['lit'];
         $father->confirmed=false;
         $father->save();
+        if($father->trip_id==null){
+        $father->trip_id=-1;
+        }
         //admin notification
         $admin=User::where('school_id',$father->school_id)->where('is_admin',1)->first();
         $notification['id']=$admin->id;
