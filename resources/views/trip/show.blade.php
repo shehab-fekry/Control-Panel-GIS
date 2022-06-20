@@ -53,13 +53,13 @@
                 </div>
             </div>
 
-            <div class="card-childs">
+            <div class="card-childs"> 
                 <div class="child-icon">
                     <img src="{{ asset("assets/images/user.png") }}">
                     Children
                 </div>
-                <div class="child-names">
-                    @foreach ( $child as $childs)
+                <div class="child-names"> 
+                    @foreach ( $child->where('status',1) as $childs)
                     <div class="name-bubble">{{$childs->name}}</div>
                     @endforeach
                 </div>

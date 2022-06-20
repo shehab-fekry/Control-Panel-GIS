@@ -115,7 +115,6 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
         $driver=Driver::where('trip_id',$trip->id)->get();
         $father=father::where('trip_id',$trip->id)->get();
-
         $child=$trip->children()->get();
         return view("trip.show",compact('trip'))->with([
             'driver'=>$driver,

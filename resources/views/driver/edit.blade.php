@@ -40,8 +40,10 @@
                             <div class="col-md-6"><label class="labels">Trip</label>
                               <select class="form-select" aria-label="Default select example" name="trip_id">
 
-                                @foreach($trips as  $trip )
-                                          <option value="{{$trip->id}}"  @if( $trip->id == $driver->trip_id) selected @endif >{{$trip->geofence}}</option>
+                                @foreach($trips as  $trip ) 
+                                {{-- @if ($trip->driver() == null)  --}}
+                                <option value="{{$trip->id}}"  @if( $trip->id == $driver->trip_id) selected @endif >{{$trip->geofence}}</option>
+                                {{-- @endif --}}
                                 @endforeach
 
                               </select>

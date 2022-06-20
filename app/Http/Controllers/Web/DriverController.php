@@ -88,12 +88,11 @@ class DriverController extends Controller
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('drivers')->ignore($driver->id)],
             'licenseNumber' => ['required', 'string', 'max:25' , 'min:5',Rule::unique('drivers')->ignore($driver->id)],
             'confirmed' => ['required', 'int', 'max:20'],
-            'trip_id' => ['required', 'int'],
+            'trip_id' => ['required', 'int',Rule::unique('drivers')->ignore($driver->id)],
             'mobileNumber' => ['required', 'string', 'max:20'],
         ]);
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors()->all());
-            
         }
         $driver->name=$input['name'];
         $driver->email=$input['email'];

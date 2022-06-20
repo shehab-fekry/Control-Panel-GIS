@@ -72,32 +72,8 @@
                             @endforeach
 
                           </select>
-                            {{-- <div class="form-outline">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Choose a Driver
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      @foreach($driver as  $drivers )
-                                      <option class="dropdown-item" value="{{$drivers->id}}" @if(old('drivers') ==$drivers->id) selected @endif>{{$drivers->name}}</option>
-                                      @endforeach
-                                    </ul>
-                                  
-                              </div> --}}
-                     
         
                         </div>
-
-                        {{-- <div class="col-md-6 mb-4 d-flex align-items-center">
-        
-                          <div class="form-outline datepicker w-100">
-                            
-      
-                            <input type="file" name="file" id="file" class="inputfile" />
-                                        <label for="file" style="margin-left: -180px; margin-top: -10px;">Choose a file</label>
-                          </div>
-        
-                        </div> --}}
-                       
                       </div>
         
                      

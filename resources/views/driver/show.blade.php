@@ -77,7 +77,8 @@
                   <p class="mb-0">School</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ $schools->name }}  </p>
+                  <a type="submit" class="text-muted mb-0" href="{{route('school.index',$schools->id)}}">{{ $schools->name }}  </a>
+                  {{-- <p class=""></p> --}}
                 </div>
               </div>
               <hr>

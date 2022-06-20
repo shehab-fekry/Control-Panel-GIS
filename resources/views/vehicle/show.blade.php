@@ -44,13 +44,13 @@
                   <p class="mb-0">Driver:</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">
                   @if ($driver == Null)
+                  <p class="text-muetd mb-0">
                   driver is not assign yet.
-                  @else
-                  {{ $driver->name  }}
-                  @endif
                   </p>
+                  @else 
+                  <a type="submit" class="text-muetd mb-0" href="{{route('driver.show',$driver->id)}}">{{ $driver->name }}</a>
+                  @endif
                 </div>
               </div>
               <hr>

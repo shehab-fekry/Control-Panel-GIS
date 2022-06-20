@@ -33,8 +33,8 @@ class VehicleController extends Controller
         }
         
         $admin=Auth::user();
-        $driver=Driver::where("school_id",$admin->school_id)->get();
-        $selectedID = 2;
+        $driver=Driver::where("school_id",$admin->school_id)->where("confirmed",1)->get();
+        // $selectedID = 2;
         return view("vehicle.create")
         ->with('driver',$driver);
         
@@ -98,7 +98,7 @@ class VehicleController extends Controller
         $vehicle->licensePlate=$input['licensePlate'];
         $vehicle->model=$input['model'];
         $vehicle->driver_id=$input['driver_id'];
-        $vehicle->color=$input['color'];
+        $vehicle->color=$input['color']; 
         $vehicle->save();
         return redirect()->route("vehicle.index")->with('success','vehicle updated successfuly');
     }
