@@ -79,8 +79,6 @@ class ChildController extends BaseController
             return $this->sendError('please validate errors',"you are not authorized to do this action");
         }
          return $this->sendResponse(new childResource($child),'child retrived successfully');
-
-
     }
 
 

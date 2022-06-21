@@ -33,7 +33,7 @@ class FatherController extends BaseController
       return $this->sendError('please validate errors','your trip do not have any driver yet please contact with one of school admins');
     }
     $vehicle = $trip->vehicle()->first();
-    if($vehicle == NULL ){
+   if($vehicle == NULL ){
    return $this->sendError('please validate errors','your trip do not have any vehicle yet please contact with one of school admins');
  }
     $response = ['driver'=>$driver,'vehicle'=>$vehicle];

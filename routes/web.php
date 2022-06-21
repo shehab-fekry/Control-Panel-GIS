@@ -77,8 +77,8 @@ Route::get('send-mail', function () {
 
     // Email data details
     $details = [
-        'title' => 'Email to Multiple Users',
-        'body' => 'This is sample content we have added for this test mail sending to multiple users.'
+        'title' => 'school is closed now',
+        'body' => 'hossam ali.'
     ];
 
     // Email to users

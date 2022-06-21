@@ -227,7 +227,7 @@ class TripController extends BaseController
        $collection->push($arr);
        }
        $data=new FatherResource($collection);
-       return $this->sendResponse($data,'attendence list retrived successfully');
+       return $this->sendResponse($data,'attendance list retrieved successfully');
     }
 
 }

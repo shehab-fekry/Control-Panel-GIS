@@ -210,7 +210,7 @@ const changeChannel = () => {
 // ----------------------------------------------- Preview -----------------------------------------------------
 
 const initPreview = (tripIndex) => {
-    fetch('http://localhost:8000/api/trip/live/' + tripIndex)
+    fetch('http://bustrackingh.herokuapp.com/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
         // Modifying data Object to the usable form
@@ -232,7 +232,6 @@ const initPreview = (tripIndex) => {
         
         // converting (wayPoints) to string and repeating (curb;) as many as wayPoints for API porposes
         let [curbString, wayPointString] = optinmizeAPI(waypts)
-
         // Initializing the map 
         mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlaGFiLWZla3J5IiwiYSI6ImNrejhva3M4czFmMW0ybnVzbDd3eXE5YmYifQ.bHRGTKh_1pdTl1RmsGmLSw';
         state.previewMap = new mapboxgl.Map({
