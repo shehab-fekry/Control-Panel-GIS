@@ -64,16 +64,23 @@ class TripController extends BaseController
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
+        $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
         if($driver->confirmed==false)
         {
-            return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
-
-        }elseif($driver->trip_id==null)
+        return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
+        }
+        elseif($fathers->count() == 0 )
+        {
+          return $this->sendError('please validate errors','There is no parents in this trip');
+        }
+        elseif($driver->trip_id==null)
         {
             return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
-        }elseif($trip->status>0){
+        }
+        elseif($trip->status >=1){
             return $this->sendError('please validate errors','the trip is alredy started');
         }
+        
         $trip->status=1;
          $trip->save();
        $sorted= TripController::tripparents($request);
@@ -166,7 +173,7 @@ class TripController extends BaseController
     }
 
 
-    public function end($id){
+    public function end(){
         $id=Auth::guard('api-drivers')->id();
         $driver=Driver::get()->find($id);
         $trip=Trip::get()->find($driver->trip_id);
@@ -216,6 +223,7 @@ class TripController extends BaseController
            $children=Child::where("father_id",$father->id)->where('status',true)->get();
            $arr+=array('name'=>$father->name);
            $arr+=array('id'=>$father->id);
+           $arr+=array('image_path'=>$father->image_path);
            $arr+=array('lng'=>$father->lng);
            $arr+=array('lit'=>$father->lit);
            $arr+=array('children'=>new ChildResource($children));
