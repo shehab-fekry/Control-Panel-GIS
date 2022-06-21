@@ -59,7 +59,7 @@ const initTrack = (tripIndex) => {
         state.trackingMap = new mapboxgl.Map({
             container: document.getElementById('map'),
             style: 'mapbox://styles/shehab-fekry/cl0e4k50n002p14si2n2ctxy9',
-            center: [schoolLocation],
+            center: schoolLocation,
             zoom: 13
             });
 
