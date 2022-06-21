@@ -90,7 +90,7 @@
 
 
   let map = {}
-  fetch('/dash/wayPoints/' + tripIndex)
+  fetch('/api/trip/live/' + tripIndex)
   .then(data => data.json())
   .then(data => {
 

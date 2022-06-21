@@ -5,7 +5,7 @@
     <title>
        reset
     </title>
-    <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
+    <link rel="icon" href="{{ asset("assets/images/Logo-modified.png")}}">
     <link rel="stylesheet" href="{{ asset("css/newPassword.css")}}">
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">
