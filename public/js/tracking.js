@@ -57,7 +57,9 @@ const initTrack = (tripIndex) => {
         
         // converting (wayPoints) to string and repeating (curb;) as many as wayPoints for API porposes
         let [curbString, wayPointString] = optinmizeAPI(waypts)
-
+        
+        console.log('from tracking API (wayPoints): ', waypts)
+        console.log('from tracking API (wayPointString): ', wayPointString)
         
         // Initializing the map 
         mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlaGFiLWZla3J5IiwiYSI6ImNrejhva3M4czFmMW0ybnVzbDd3eXE5YmYifQ.bHRGTKh_1pdTl1RmsGmLSw';
