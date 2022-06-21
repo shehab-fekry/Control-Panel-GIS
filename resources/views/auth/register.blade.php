@@ -5,7 +5,7 @@
     <title>
         Sign Up
     </title>
-    <link rel="icon" href="{{ asset("assets/images/school-bus.png")}}">
+    <link rel="icon" href="{{ asset("assets/images/Logo-modified.png")}}">
     <link rel="stylesheet" href="{{ asset("css/SignUp.css")}}">
     <!--   Fonts   -->
     <link href="http://fonts.cdnfonts.com/css/cera-round-pro" rel="stylesheet">

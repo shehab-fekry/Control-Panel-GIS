@@ -10,7 +10,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <!-- Tab Icon  -->
-    <link rel="icon" href="{{ asset("assets/images/tracking.svg") }}">
+    <link rel="icon" href="{{ asset("assets/images/Logo-modified.png") }}">
     <!--  JQuery   -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- Font Awesome -->
