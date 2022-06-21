@@ -49,6 +49,9 @@
                 <div class="parent-names">
                     @foreach ( $father as $fathers)
                         <div class="name-bubble">{{$fathers->name}}</div>
+                        @foreach ($fathers->child()->where('status',1)->get()  as $childs )
+                        <div class="name-bubble">{{$childs->name}}</div>
+                    @endforeach
                     @endforeach
                 </div>
             </div>
