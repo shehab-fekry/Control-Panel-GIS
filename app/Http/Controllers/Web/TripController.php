@@ -65,7 +65,7 @@ if($trip->status >=1){
 }
 $school=$trip->school()->first();
 
-$fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
+$fathers=Father::where('trip_id',$trip->id)->where('status','>=',1)->get();
 $data=array();
 $response=array();
 $response['school']=array('location'=>[$school->lit,$school->lng]);

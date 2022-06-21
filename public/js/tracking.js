@@ -89,7 +89,7 @@ const initTrack = (tripIndex) => {
 
                 const marker = document.createElement('div');
                 marker.classList = className;
-                new mapboxgl.Marker(marker).setLngLat(location).setPopup(popup).addTo(state.trackingMap);
+                new mapboxgl.Marker(marker).setLngLat([location[1],location[0]]).setPopup(popup).addTo(state.trackingMap);
             }
         )
         
