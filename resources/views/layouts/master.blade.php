@@ -172,11 +172,11 @@
 
 
 <script>
-    pusher = new Pusher('a7171d09fe99b7303a96', {cluster: 'eu'});
-    Pusher.logToConsole = false;
+    let pusher2 = new Pusher('a7171d09fe99b7303a96', {cluster: 'eu'});
+    // Pusher.logToConsole = false;
 
     // Admin notification
-    let channelAdmin = pusher.subscribe('admin.' + {{Auth::user()->id}});
+    let channelAdmin = pusher2.subscribe('admin.' + {{Auth::user()->id}});
     channelAdmin.bind("adminNotify", async (data) => {
         console.log(data)
         document.getElementById('admin-msg').innerText = data.data
@@ -192,7 +192,7 @@
         },3000);
     })
     // Clerk notification
-    let channelClerk = pusher.subscribe('school.' + {{Auth::user()->school_id}});
+    let channelClerk = pusher2.subscribe('school.' + {{Auth::user()->school_id}});
     channelClerk.bind("clerkNotify", async (data) => {
         console.log(data)
         document.getElementById('clerk-msg').innerText = data.data
