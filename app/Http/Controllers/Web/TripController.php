@@ -76,7 +76,7 @@ foreach($fathers as $father)
 {
     $father_lat=deg2rad($father->lit);
     $father_lon=deg2rad($father->lng);
-    $children=Child::where("father_id",$father->id)->where('status',true)->get();
+    $children=Child::where("father_id",$father->id)->where('status',1)->get();
 
     $ln=$father_lon-$school_lon;
     $li=$father_lat-$school_lat;
