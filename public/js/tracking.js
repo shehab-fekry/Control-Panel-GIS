@@ -15,6 +15,7 @@ let state = {
     mapLoaded: false,
     locationIndex: 0,
     action: '',
+    tripID: 0,
 }
  
 
@@ -28,6 +29,9 @@ const initTrack = (tripIndex) => {
     fetch('http://bustrackingh.herokuapp.com/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
+
+        console.log('from tracking API: ', data)
+
         // Modifying data Object to the usable form
         let fathersArray = []
         let modifiedData = {}
@@ -40,6 +44,7 @@ const initTrack = (tripIndex) => {
 
         // changing flags and channel
         state.mapLoaded = false
+        state.tripID = tripIndex
         state.locationIndex = 0
         state.action = 'tracking'
         changeChannel()
@@ -144,11 +149,12 @@ const initTrack = (tripIndex) => {
 
 
 const changeChannel = () => {
-    Pusher.logToConsole = false;
-    state.channel = pusher.subscribe('trip.' + state.driverID);
+    Pusher.logToConsole = true;
+    state.channel = pusher.subscribe('trip.' + state.tripID);
     state.channel.bind("triplocation", async (data) => {
         if (!state.mapLoaded) return
 
+        console.log('from pusher map channel: ', data)
         let langLong = [data.latitude, data.longitude]
 
         // Styling the previous steps
@@ -213,6 +219,9 @@ const initPreview = (tripIndex) => {
     fetch('http://localhost:8000/api/trip/live/' + tripIndex)
     .then(data => data.json())
     .then(data => {
+
+        console.log('from preview API: ', data)
+
         // Modifying data Object to the usable form
         let fathersArray = []
         let modifiedData = {}
