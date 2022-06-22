@@ -76,14 +76,15 @@ class HomeController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('admins')->ignore($admin->id)],
             'school_id' => ['required', 'string', 'max:25' ],
         ]);
+        // if the validation fails 
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
+        // update the admin
         $admin->name=$input['name'];
         $admin->email=$input['email']; 
         $admin->school_id=$input['school_id'];
         $admin->save();
         return redirect()->route("admin.index")->with('success','admin updated successfuly');
- 
 }
 }

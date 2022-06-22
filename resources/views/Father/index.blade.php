@@ -19,10 +19,10 @@
                     <div class="card user-card" >
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     <a type="submit" class="btn btn-light" href="{{route('father.show',$parent->id)}}">Profile</a>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                      {{-- /////////////////////////////////////////////////////// --}}
                                 <span class="badge" >
                                     <input data-id="{{$parent->id}}" class="toggle-class " type="checkbox"  data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $parent->confirmed ? 'checked' : '' }}>

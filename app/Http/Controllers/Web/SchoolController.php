@@ -63,35 +63,34 @@ class SchoolController extends Controller
      */
     public function store(Request $data)
     {
-          $admin=Auth::user();
+        $admin=Auth::user();
+        // generate code for school
         $code = Str::random(3) .substr( time() , 6, 9);
         $input=$data->all();
+        // validation for the input data
         $validator=Validator::make($input,[
-            // 'code' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string',  'max:255'],
             'location' => ['required', 'string'],
         ]);
-
+        // if the validation fails
         if($validator->fails()){
             return redirect()->back()->with('error',$validator->errors());
         }
+        // create the school
         $school= School::create([
-            // 'code' => $data['code'],
             'code' => $code,
             'name' => $data['name'] ,
-            // 'lng' =>  $data['location'] ,
             $location= explode (",", $data['location'])  ,
             'lng' =>$location[1],
             'lit' =>$location[0],
         ]);
         $admin->school_id = $school->id ;
         $admin-> save();
-
+        // redirect to the school page
         return redirect()->route("home")->with([
             'success'=>'school added successfuly',
             'code'=>'Your school code is ' . $code
         ]);
-
     }
 
     /**
@@ -168,25 +167,24 @@ class SchoolController extends Controller
     public function destroy(School $School)
     {
         $admin=Auth::user();
-
+        // delete the school children
         $School->children()->delete();
-
+        // delete the school fathers
         $father = Father::where('school_id', $School->id);
         $father->delete();
-
+        // delete the school drivers
         $driver = Driver::where('school_id',$School->id);
         $driver->delete();
-
+        // delete the school vehicles
         $vehicle = vehicle::where('school_id',$School->id);
         $vehicle->delete();
-
+        // delete the school trips
         $Trip = Trip::where('school_id',$School->id);
         $Trip->delete();
-
+        // delete the school
         $School->delete();
-
+        // delete the school from the admin
         $admin->school_id = NULL;
-        
         $admin->save();
         return redirect()->route("school.index")->with('success','school deleted successfuly');
     }
