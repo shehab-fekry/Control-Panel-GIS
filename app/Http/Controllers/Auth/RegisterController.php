@@ -49,6 +49,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    // Register validation  
     protected function validator(array $data)
     {
         // validate the data before creating the user

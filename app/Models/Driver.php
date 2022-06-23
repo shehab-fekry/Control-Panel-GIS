@@ -23,4 +23,8 @@ class Driver extends Authenticatable
     {
         return $this->belongsTo(Trip::class);
     }
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

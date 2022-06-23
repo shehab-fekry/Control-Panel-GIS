@@ -50,6 +50,7 @@ Route::post("driver/login","API\AuthController@driverLogin");
 Route::middleware('auth:api-drivers')->group(function(){
     Route::get("driver/show","API\DriverController@show");
     Route::put("driver/update","API\DriverController@update");
+    Route::get("driver/count_childs","API\DriverController@count_childs");
     Route::delete("driver/delete","API\DriverController@Destroy");
 ///trip operations///////
     Route::put("changeLocation",function(request $request ){

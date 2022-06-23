@@ -9,6 +9,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Resources\ChildResource;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Father;
+use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -130,10 +131,13 @@ class ChildController extends BaseController
             return $this->sendError('please validate errors','your child do not confirmed yet please contact with one of school admins');
         }
         elseif($father->trip_id==null){
-
-
             return $this->sendError('please validate errors','your account  not assigned to trip yet please contact with one of school admins');
-        }elseif(Auth::guard('api-fathers')->id()!==$child->father_id){
+        }
+        $trip=trip::get()->find($father->trip_id);
+        if($trip->status>=1){
+            return $this->sendError('please validate errors','you can not update child status the trip is started');
+        }
+        elseif(Auth::guard('api-fathers')->id()!==$child->father_id){
             return $this->sendError('please validate errors',"you are not authorized to do this action");
         }elseif($child->status==false){
 

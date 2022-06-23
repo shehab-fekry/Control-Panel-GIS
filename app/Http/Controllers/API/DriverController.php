@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Events\adminNotification;
+use App\Models\School;
+
 class DriverController extends BaseController
 {
     public function show()
     {
         $id=Auth::guard('api-drivers')->id();
-        $driver=Driver::where('id',$id)->get();
+        $driver=Driver::where('id',$id)->first();
+        $school = School::find($driver->school_id);
+        $driver->school_code = $school->code;
         return $this->sendResponse($driver,'driver information retrived successfully');
     }
 
@@ -57,6 +61,31 @@ class DriverController extends BaseController
         return $this-> sendResponse(new driverResource($driver),'driver information updated successfully');
 
     }
+    public function count_childs(){
+        $id=Auth::guard('api-drivers')->id();
+        $driver=Driver::find($id);
+        if ($driver->trip_id == Null){
+            $response ['total_childern'] = 0;
+            $response ['childern'] = 0;
+            $response ['school_name'] = $driver->school->name;
+            return $this->sendResponse('please validate errors',"you are not assigned to any trip");
+        }
+        $trip = Trip::find($driver->trip_id);
+        $response ['total_childern'] = 0;
+        $response ['childern'] = 0;
+        $response ['school_name'] = $driver->school->name;
+        if($trip->children()->get() != null){
+            $response ['total_childern'] = $trip->children()->count();
+        }
+
+        if($trip->children()->get()->where('status',1) != null){
+            $response ['childern'] = $trip->children()->where('status',1)->count();
+        };
+
+        return $this->sendResponse($response,'childern count retrived successfully');
+
+    }
+
 
     public function destroy()
     {

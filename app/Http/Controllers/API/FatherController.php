@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\FatherResource;
+use App\Models\School;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Trip;
@@ -98,6 +99,8 @@ class FatherController extends BaseController
         $id=Auth::guard('api-fathers')->id();
         $father=Father::get()->find($id);
         $trip=Trip::get()->find($father->trip_id);
+        $school = School::get()->find($father->school_id);
+        $response = ['trip'=>$trip,'school'=>$school];
         if($father->confirmed==false){
             return $this->sendError('please validate errors','your account do not confirmed yet please contact with one of school admins');
 
@@ -118,13 +121,13 @@ class FatherController extends BaseController
                 return $this->sendError('please validate errors','the trip is not started yet');
                 break;
             case 1:
-                return $this-> sendResponse("the trip is started and going to school",$trip->id);
+                return $this-> sendResponse("the trip is started and going to school",$response);
                 break;
             case 2:
-                return $this-> sendResponse("the trip is started and arrived to school",$trip->id);
+                return $this-> sendResponse("the trip is started and arrived to school",$response);
                 break;
             case 3:
-                return $this-> sendResponse("the trip is started and back from school",$trip->id);
+                return $this-> sendResponse("the trip is started and back from school",$response);
 
         }
 
