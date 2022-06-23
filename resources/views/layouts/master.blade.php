@@ -179,7 +179,7 @@
     let channelAdmin = pusher2.subscribe('admin.' + {{Auth::user()->id}});
     channelAdmin.bind("adminNotify", async (data) => {
         console.log(data)
-        document.getElementById('admin-msg').innerText = data.data
+        document.getElementById('admin-msg').innerText = data.massage
         
         $('.adminNotify').addClass("show");
         $('.adminNotify').removeClass("hide");
@@ -195,7 +195,7 @@
     let channelClerk = pusher2.subscribe('school.' + {{Auth::user()->school_id}});
     channelClerk.bind("clerkNotify", async (data) => {
         console.log(data)
-        document.getElementById('clerk-msg').innerText = data.data
+        document.getElementById('clerk-msg').innerText = data.massage
         
         $('.clerkNotify').addClass("show");
         $('.clerkNotify').removeClass("hide");
