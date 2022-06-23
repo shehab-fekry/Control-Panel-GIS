@@ -127,7 +127,7 @@ class TripController extends BaseController
         event(new tripNotification($notification));
          //notifications fot clerk and admin
          $notification2['school_id']=$driver->school_id;
-         $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."delivered to school";
+         $notification2['message']="driver:".$driver->name." of the trip:".$trip->geofence."delivered to school";
          event(new clerkNotification($notification2));
 
         return $this-> sendResponse("",'the trip is delivered to school succefully you could start the back trip at any time');
@@ -162,7 +162,7 @@ class TripController extends BaseController
                 event(new tripNotification($notification));
                  //notifications fot clerk and admin
                 $notification2['school_id']=$driver->school_id;
-                $notification2['message']="driver:".$driver->name." of the trip:".$trip->name."backing to home";
+                $notification2['message']="driver:".$driver->name." of the trip:".$trip->geofence."backing to home";
                 event(new clerkNotification($notification2));
                 return $this-> sendResponse($data,'the trip is backing to home');
                  case 3:
@@ -196,7 +196,7 @@ class TripController extends BaseController
         $trip->save();
          //notifications fot clerk and admin
          $notification2['school_id']=$driver->school_id;
-         $notification2['message']="driver:".$driver->name." end the trip:".$trip->name."successfully";
+         $notification2['message']="driver:".$driver->name." end the trip:".$trip->geofence."successfully";
          event(new clerkNotification($notification2));
         return $this-> sendResponse("",'the trip is ended successfully');
 
