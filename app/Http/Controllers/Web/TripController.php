@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-use App\Models\child;
+use App\Models\Child;
 use App\Models\Father;
 use App\Models\Driver;
 use App\Models\Trip;
