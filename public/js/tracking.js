@@ -50,9 +50,10 @@ const initTrack = (tripIndex) => {
         changeChannel()
         
         // creating (wayPoints) array for API porposes and specifying school location
-        const {school, fathers} = modifiedData
-        const waypts = [school.location, ...fathers.map(father => father.location)];
-        const schoolLocation = waypts[0]
+        let {school, fathers} = modifiedData
+        school.location = [school.location[1], school.location[0]]
+        let waypts = [school.location, ...fathers.map(father => father.location)];
+        let schoolLocation = waypts[0]
 
         
         // converting (wayPoints) to string and repeating (curb;) as many as wayPoints for API porposes
@@ -89,7 +90,7 @@ const initTrack = (tripIndex) => {
 
                 const marker = document.createElement('div');
                 marker.classList = className;
-                new mapboxgl.Marker(marker).setLngLat([location[1],location[0]]).setPopup(popup).addTo(state.trackingMap);
+                new mapboxgl.Marker(marker).setLngLat(location).setPopup(popup).addTo(state.trackingMap);
             }
         )
         
@@ -237,9 +238,10 @@ const initPreview = (tripIndex) => {
         state.action = 'preview'
 
         // creating (wayPoints) array for API porposes and specifying school location
-        const {school, fathers} = modifiedData
-        const waypts = [school.location, ...fathers.map(father => father.location)];
-        const schoolLocation = waypts[0]
+        let {school, fathers} = modifiedData
+        school.location = [school.location[1], school.location[0]]
+        let waypts = [school.location, ...fathers.map(father => father.location)];
+        let schoolLocation = waypts[0]
         
         // converting (wayPoints) to string and repeating (curb;) as many as wayPoints for API porposes
         let [curbString, wayPointString] = optinmizeAPI(waypts)
