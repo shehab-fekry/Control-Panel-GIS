@@ -160,6 +160,8 @@ const changeChannel = () => {
         console.log('from pusher map channel: ', data)
         let langLong = [data.latitude, data.longitude]
 
+        console.log('langLong', langLong)
+
         // Styling the previous steps
         if(state.locationIndex !== 0)
         {
@@ -170,7 +172,7 @@ const changeChannel = () => {
         // Drawing the current step
         state.currentStep = document.createElement('div');
         state.currentStep.classList = 'currentStep';
-        state.marker = new mapboxgl.Marker(state.currentStep).setLngLat(langLong).addTo(state.trackingMap);
+        state.marker = new mapboxgl.Marker(state.currentStep).setLngLat([langLong[1],langLong[0]]).addTo(state.trackingMap);
 
         // Drwing the new current step
         state.trackingMap.flyTo({
@@ -219,7 +221,7 @@ const changeChannel = () => {
 // ----------------------------------------------- Preview -----------------------------------------------------
 
 const initPreview = (tripIndex) => {
-    fetch('http://bustrackingh.herokuapp.com/api/trip/live/' + tripIndex)
+    fetch('http://bustrackingh.herokuapp.com/api/trip/preview/' + tripIndex)
     .then(data => data.json())
     .then(data => {
 

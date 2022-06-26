@@ -93,7 +93,7 @@
 
 
   let map = {}
-  fetch('/api/trip/live/' + tripIndex)
+  fetch('http://bustrackingh.herokuapp.com/api/trip/preview/' + tripIndex)
   .then(data => data.json())
   .then(data => {
 
