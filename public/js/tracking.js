@@ -178,7 +178,7 @@ const changeChannel = () => {
         state.trackingMap.flyTo({
             // These options control the ending camera position: centered at
             // the target, at zoom level 9, and north up.
-            center: langLong,
+            center: [langLong[1],langLong[0]],
             zoom: 13,
             bearing: 0,
             
