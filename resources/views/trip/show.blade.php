@@ -97,6 +97,8 @@
   .then(data => data.json())
   .then(data => {
 
+    console.log('tripDetails API: 'data)
+
     // Modifying data Object to the usable form
     let fathersArray = []
         let modifiedData = {}
@@ -107,12 +109,16 @@
         modifiedData.fathers = fathersArray
 
     // creating (wayPoints) array for API porposes and specifying school location
-    const {school, fathers} = modifiedData
-    const waypts = [school.location, ...fathers.map(father => father.location)];
-    const schoolLocation = waypts[0]
+    let {school, fathers} = modifiedData
+    school.location = [school.location[1], school.location[0]]
+    let waypts = [school.location, ...fathers.map(father => father.location)];
+    let schoolLocation = waypts[0]
     
     // converting (wayPoints) to string and repeating (curb;) as many as wayPoints for API porposes
     let [curbString, wayPointString] = optinmizeAPI(waypts)
+
+    console.log('from tracking API (wayPoints): ', waypts)
+    console.log('from tracking API (wayPointString): ', wayPointString)
 
     // Initializing the map 
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlaGFiLWZla3J5IiwiYSI6ImNrejhva3M4czFmMW0ybnVzbDd3eXE5YmYifQ.bHRGTKh_1pdTl1RmsGmLSw';
