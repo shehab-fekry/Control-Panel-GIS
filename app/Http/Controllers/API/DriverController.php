@@ -78,9 +78,17 @@ class DriverController extends BaseController
             $response ['total_childern'] = $trip->children()->count();
         }
 
-        if($trip->children()->get()->where('status',1) != null){
-            $response ['childern'] = $trip->children()->where('status',1)->count();
-        };
+        if($fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get() != null){
+
+            $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get(); 
+            foreach($fathers as $father)
+            {
+            $children=Child::where("father_id",$father->id)->where('status',1)->get();
+            }
+            $response ['childern'] = $children->count();
+
+            // $response ['childern'] = $trip->children()->where('status',1)->count();
+        }; 
 
         return $this->sendResponse($response,'childern count retrived successfully');
 

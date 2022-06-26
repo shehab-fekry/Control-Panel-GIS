@@ -213,7 +213,7 @@ class TripController extends BaseController
         {
             return $this->sendError('please validate errors','your account do not assigned to any trip yet please contact with one of school admins');
         }
-        $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get();
+        $fathers=Father::where('trip_id',$trip->id)->where('status','>',0)->get(); 
         $data=array();
         $collection=new Collection();
        foreach($fathers as $father)

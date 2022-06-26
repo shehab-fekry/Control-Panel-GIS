@@ -13,13 +13,14 @@ use Illuminate\Queue\SerializesModels;
 class showTrip implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $lng,$lit,$trip_id;
+    public $lng,$lit,$trip_id,$parent_id;
 
     public function __construct($data)
     {
         $this->lng=$data['lng'];
         $this->lit=$data['lit'];
         $this->trip_id=$data['trip_id'];
+        $this->parent_id=$data['parent_id'];
     }
 
     /**

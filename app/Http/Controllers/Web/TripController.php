@@ -107,6 +107,45 @@ return Basecontroller::sendResponse($response,'father information updated succes
 
 }
 
+public function preview($id){
+    $trip =Trip::find($id);
+    $school=$trip->school()->first();
+    $fathers=Father::where('trip_id',$id)->where('status','>=',1)->get();
+    $data=array();
+    $response=array();
+    $response['school']=array('location'=>[$school->lit,$school->lng]);
+     $school_lat=deg2rad($school->lit);
+     $school_lon=deg2rad($school->lng);
+    foreach($fathers as $father)
+    {
+        $father_lat=deg2rad($father->lit);
+        $father_lon=deg2rad($father->lng);
+        $children=Child::where("father_id",$father->id)->where('status',1)->get();
+    
+        $ln=$father_lon-$school_lon;
+        $li=$father_lat-$school_lat;
+        $val = pow(sin($li/2),2)+cos($school_lat)*cos($father_lat)*pow(sin($ln/2),2);
+        $res = 2 * asin(sqrt($val));
+        $radius = 6371; //radius of earth
+        $distance=($res*$radius)*1000;
+        $data[$father->name]=array();
+        $data[$father->name]+=array('distance'=>$distance);
+        $data[$father->name]+=array('name'=>$father->name);
+        $data[$father->name]+=array('location'=>[$father->lng,$father->lit]);
+        $childrens=array();
+        $count=1;
+        foreach($children as $child)
+        {
+            array_push($childrens,$child->name);
+        }
+        $data[$father->name]+=array('children'=>$childrens);
+    }
+    $collection=collect($data);
+    $sorted = $collection->sortBy('distance');
+    
+    $response['fathers']=$sorted;
+    return Basecontroller::sendResponse($response,'father information updated successfully');
+    }
 
     public function show(Trip $trip)
     {

@@ -69,5 +69,6 @@ Route::middleware('auth:api-drivers')->group(function(){
     });
 
     Route::get("trip/live/{id}","Web\TripController@live");
+    Route::get("trip/preview/{id}","Web\TripController@preview");
     Route::get("school/location/{id}","Web\SchoolController@showLocation");
 ////////////////////////////////Drivers routes//////////////////////////////////
