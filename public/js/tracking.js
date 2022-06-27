@@ -158,7 +158,7 @@ const changeChannel = () => {
         if (!state.mapLoaded) return
 
         console.log('from pusher map channel: ', data)
-        let langLong = [data.lit, data.lng]
+        let langLong = [data.lng, data.lit]
 
         console.log('langLong', langLong)
 
