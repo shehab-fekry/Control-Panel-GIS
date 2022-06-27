@@ -102,10 +102,10 @@
     // Modifying data Object to the usable form
     let fathersArray = []
         let modifiedData = {}
-        Object.keys(data.fathers).forEach(key => {
-            fathersArray.push(data.fathers[key])
+        Object.keys(data.data.fathers).forEach(key => {
+            fathersArray.push(data.data.fathers[key])
         })
-        modifiedData.school = data.school
+        modifiedData.school = data.data.school
         modifiedData.fathers = fathersArray
 
     // creating (wayPoints) array for API porposes and specifying school location
