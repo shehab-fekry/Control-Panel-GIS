@@ -97,7 +97,7 @@
   .then(data => data.json())
   .then(data => {
 
-    console.log('tripDetails API: 'data)
+    console.log('tripDetails API: ', data)
 
     // Modifying data Object to the usable form
     let fathersArray = []
