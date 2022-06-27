@@ -94,6 +94,19 @@
                   <p class="text-muted mb-0"> {{$father->child()->count()}} child</p>
                 </div>
               </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Trip</p>
+                </div>
+                <div class="col-sm-9">
+                    @foreach($trips as  $trip )
+                    @if( $trip->id == $father->trip_id)
+                    <a href="{{route('trip.show',$trip->id)}}" class="text-muted mb-0">{{$trip->geofence}}
+                    @endif
+                    @endforeach
+                </div>
+              </div>
 
             </div>
           </div>

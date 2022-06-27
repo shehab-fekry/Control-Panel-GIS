@@ -71,7 +71,9 @@ class FatherController extends Controller
     public function show(Father $father)
     {
         $childs=Child::get();
-        return view("Father.show",compact('father'))->with('childs',$childs);
+        $admin1=Auth::user();
+        $trips=Trip::where("school_id",$admin1->school_id)->get(); //get all trips of the school
+        return view("Father.show",compact('father'))->with('childs',$childs)->with('trips' ,$trips);
     }
     public function edit(Father $father)
     {
