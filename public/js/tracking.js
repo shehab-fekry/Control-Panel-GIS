@@ -158,7 +158,7 @@ const changeChannel = () => {
         if (!state.mapLoaded) return
 
         console.log('from pusher map channel: ', data)
-        let langLong = [data.latitude, data.longitude]
+        let langLong = [data.lit, data.lng]
 
         console.log('langLong', langLong)
 
@@ -172,13 +172,13 @@ const changeChannel = () => {
         // Drawing the current step
         state.currentStep = document.createElement('div');
         state.currentStep.classList = 'currentStep';
-        state.marker = new mapboxgl.Marker(state.currentStep).setLngLat([langLong[1],langLong[0]]).addTo(state.trackingMap);
+        state.marker = new mapboxgl.Marker(state.currentStep).setLngLat(langLong).addTo(state.trackingMap);
 
         // Drwing the new current step
         state.trackingMap.flyTo({
             // These options control the ending camera position: centered at
             // the target, at zoom level 9, and north up.
-            center: [langLong[1],langLong[0]],
+            center: langLong,
             zoom: 13,
             bearing: 0,
             
